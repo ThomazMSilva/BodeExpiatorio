@@ -172,6 +172,8 @@ GameObject:
   - component: {fileID: 83774178}
   - component: {fileID: 83774177}
   - component: {fileID: 83774176}
+  - component: {fileID: 83774182}
+  - component: {fileID: 83774183}
   m_Layer: 0
   m_Name: Jogador
   m_TagString: Untagged
@@ -319,6 +321,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &83774182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83774175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8137c588755519645bf07ca6f97454bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseMaxHealth: 10
+  currentMaxHealth: 0
+  currentHealth: 0
+--- !u!114 &83774183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83774175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 618293a7b4bf96048a6170428de64b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTime: 100
+  countDownMultiplier: 2
+  recoveryMultiplier: 10
+  currentTime: 0
+  isCountDownActive: 1
 --- !u!1 &215508416
 GameObject:
   m_ObjectHideFlags: 0
