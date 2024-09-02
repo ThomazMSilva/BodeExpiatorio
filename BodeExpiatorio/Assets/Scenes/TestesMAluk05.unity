@@ -193,19 +193,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37216690e068c9241bc46295800db36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpForce: 11
-  coyoteTimeMax: 0.3
+  moveSpeed: 10
+  jumpForce: 15
+  coyoteTimeMax: 0.15
   jumpBufferTimeMax: 0.25
-  fallGravityMultiplier: 2.5
-  jumpFallMultiplier: 2
-  raycastDistance: 1
   shortJumpDelta: 2.5
+  fallGravityMultiplier: 3
+  jumpFallMultiplier: 3
+  raycastDistance: 0.75
+  dashForce: 200
+  dashCooldown: 1.75
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
   isGrounded: 0
   jumpKeyHeld: 0
+  willJump: 0
+  isLookingRight: 1
+  isDashing: 0
+  canDash: 1
+  jumpBufferTimeCurrent: 0
+  coyoteTimeCurrent: 0
+  dashTimeCurrent: 0
+  moveInput: 0
 --- !u!54 &83774177
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -232,7 +242,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!136 &83774178
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -753,15 +763,25 @@ MonoBehaviour:
   jumpForce: 9
   coyoteTimeMax: 0.3
   jumpBufferTimeMax: 0.25
+  shortJumpDelta: 0.2
   fallGravityMultiplier: 2.5
   jumpFallMultiplier: 2
   raycastDistance: 1
-  shortJumpDelta: 0.2
+  dashForce: 5
+  dashCooldown: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
   isGrounded: 0
   jumpKeyHeld: 0
+  willJump: 0
+  isLookingRight: 0
+  isDashing: 0
+  canDash: 1
+  jumpBufferTimeCurrent: 0
+  coyoteTimeCurrent: 0
+  dashTimeCurrent: 0
+  moveInput: 0
 --- !u!1 &898072456
 GameObject:
   m_ObjectHideFlags: 0

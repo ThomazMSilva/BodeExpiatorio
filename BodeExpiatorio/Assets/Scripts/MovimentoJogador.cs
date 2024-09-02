@@ -1,35 +1,62 @@
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class MovimentoJogador : MonoBehaviour
 {
-    [Header("Movement Settings"), SerializeField] float moveSpeed = 5f;
-    [SerializeField]
-    float
-        jumpForce = 11f,
-        coyoteTimeMax = 0.3f, //Um tempinho que da pra pular depois de cair de alguma plataforma
-        jumpBufferTimeMax = 0.25f, //Um tempinho que se apertar o botao de pular antes de estar no chao, ainda conta qnd chegar no chão
-        fallGravityMultiplier = 2.5f, //"Gravidade" caindo (é um addforce)
-        jumpFallMultiplier = 2f, //"Gravidade" qnd dá pulo grande,
-        raycastDistance = .75f, //Checagem de chão;
-        shortJumpDelta = 2.5f;
-        
+    [Header("Configurações de Movimento")]
+    
+    [SerializeField] private float moveSpeed = 5f;
+
+        [Space(5f)]
+
+    [Header("Configurações de Pulo")]
+    
+    [SerializeField] private float jumpForce = 11f;
+
+    [SerializeField] private float coyoteTimeMax = 0.3f; //Um tempinho que da pra pular depois de cair de alguma plataforma
+    
+    [SerializeField] private float jumpBufferTimeMax = 0.25f; //Um tempinho que se apertar o botao de pular antes de estar no chao, ainda conta qnd chegar no chão
+    
+    [SerializeField] private float shortJumpDelta = 2.5f;
+    
+        [Space(5f)]
+
+    [Header("Configurações de Gravidade")]
+
+    [SerializeField] private float fallGravityMultiplier = 2.5f; //"Gravidade" caindo (é um addforce)
+    
+    [SerializeField] private float jumpFallMultiplier = 2f; //"Gravidade" qnd dá pulo grande,
+    
+    [SerializeField] private float raycastDistance = .75f; //Checagem de chão;
+
+        [Space(5f)]
+    
+    [Header("Configurações de Arrancada")]
+
+    [SerializeField] private float dashForce = 100f;
+
+    [SerializeField] private float dashCooldown = 1f;
 
     [SerializeField] LayerMask groundLayer; // Layer for ground detection
 
-    private Vector3 gravity;
-
     [SerializeField] //tirar dps
     private bool
-        isGrounded,
-        jumpKeyHeld;
+        isGrounded = true,
+        jumpKeyHeld = false,
+        willJump,
+        isLookingRight,
+        isDashing = false,
+        canDash = true;
 
-    //[SerializeField] //tirar dps
+    [SerializeField] //tirar dps
     private float
         jumpBufferTimeCurrent,
         coyoteTimeCurrent,
+        dashTimeCurrent = 0,
         moveInput;
+
+    private Vector3 gravity;
 
     private Rigidbody rb;
 
@@ -48,6 +75,9 @@ public class MovimentoJogador : MonoBehaviour
         ApplyGravity();
         Move();
         HandleJump();
+        HandleDash();
+
+        Debug.Log(rb.velocity);
     }
 
     private void CheckGrounded()
@@ -55,7 +85,7 @@ public class MovimentoJogador : MonoBehaviour
         isGrounded = Physics.Raycast(transform.position, -Vector3.up, raycastDistance, groundLayer);
         Debug.DrawRay(transform.position, -Vector3.up * raycastDistance, Color.red);
 
-        coyoteTimeCurrent = isGrounded? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
+        coyoteTimeCurrent = isGrounded ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
     }
 
     private void ApplyGravity()
@@ -74,15 +104,15 @@ public class MovimentoJogador : MonoBehaviour
     {
         moveInput = Input.GetAxis("Horizontal");
 
+        if (moveInput > 0) isLookingRight = true;
+
+        if (moveInput < 0) isLookingRight = false;
+
         if (Input.GetButtonDown("Jump"))
         {
-            jumpBufferTimeCurrent = jumpBufferTimeMax;
+            StopAllCoroutines();
+            StartCoroutine(JumpBuffer());
             jumpKeyHeld = true;
-        }
-
-        else
-        {
-            jumpBufferTimeCurrent -= Time.deltaTime;
         }
 
         if (Input.GetButtonUp("Jump"))
@@ -90,6 +120,22 @@ public class MovimentoJogador : MonoBehaviour
             jumpKeyHeld = false;
         }
 
+        if (Input.GetButtonDown("Fire3") && canDash)
+        {
+            isDashing = true;
+        }
+    }
+
+    IEnumerator JumpBuffer()
+    {
+        jumpBufferTimeCurrent = 0;
+        while (jumpBufferTimeCurrent < jumpBufferTimeMax)
+        {
+            willJump = true;
+            jumpBufferTimeCurrent += Time.deltaTime;
+            yield return null;
+        }
+        willJump = false;
     }
 
     private void Move()
@@ -100,7 +146,7 @@ public class MovimentoJogador : MonoBehaviour
 
     private void HandleJump()
     {
-        if (jumpBufferTimeCurrent > 0f && coyoteTimeCurrent > 0f)
+        if (isGrounded && willJump && coyoteTimeCurrent > 0f)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             jumpBufferTimeCurrent = 0f;
@@ -112,4 +158,21 @@ public class MovimentoJogador : MonoBehaviour
             rb.AddForce(fallGravityMultiplier * shortJumpDelta * gravity, ForceMode.Acceleration);
         }
     }
+
+    private void HandleDash()
+    {
+        if (!canDash)
+        {
+            dashTimeCurrent += Time.fixedDeltaTime;
+            if (dashTimeCurrent >= dashCooldown) canDash = true;
+        }
+
+        if (isDashing)
+        {
+            rb.AddForce((isLookingRight ? Vector3.right : -Vector3.right) * dashForce, ForceMode.Impulse);
+            isDashing = false;
+            canDash = false;
+        }
+    }
+
 }
