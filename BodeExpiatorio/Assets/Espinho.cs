@@ -30,7 +30,7 @@ public class Espinho : MonoBehaviour
             MovimentoJogador movimentoJogador = collision.gameObject.GetComponent<MovimentoJogador>();
             if (movimentoJogador != null)
             {
-                movimentoJogador.DisableJump(); 
+                movimentoJogador.Ragdoll(); 
             }
         }
     }

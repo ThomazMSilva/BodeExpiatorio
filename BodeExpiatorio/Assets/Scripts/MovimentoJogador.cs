@@ -14,9 +14,9 @@ public class MovimentoJogador : MonoBehaviour
     
     [SerializeField] private float jumpForce = 11f;
 
-    [SerializeField] private float coyoteTimeMax = 0.3f; //Um tempinho que da pra pular depois de cair de alguma plataforma
+    [SerializeField] private float coyoteTimeMax = 0.1f; //Um tempinho que da pra pular depois de cair de alguma plataforma
     
-    [SerializeField] private float jumpBufferTimeMax = 0.25f; //Um tempinho que se apertar o botao de pular antes de estar no chao, ainda conta qnd chegar no chão
+    [SerializeField] private float jumpBufferTimeMax = 0.2f; //Um tempinho que se apertar o botao de pular antes de estar no chao, ainda conta qnd chegar no chão
     
     [SerializeField] private float shortJumpDelta = 2.5f;
     
@@ -24,9 +24,11 @@ public class MovimentoJogador : MonoBehaviour
 
     [Header("Configurações de Gravidade")]
 
-    [SerializeField] private float fallGravityMultiplier = 2.5f; //"Gravidade" caindo (é um addforce)
+    [SerializeField] private float fallGravityMultiplier = 5f; //"Gravidade" caindo (é um addforce)
     
-    [SerializeField] private float jumpFallMultiplier = 2f; //"Gravidade" qnd dá pulo grande,
+    [SerializeField] private float jumpGravityMultiplier = 3f; //"Gravidade" qnd dá pulo grande
+
+    [SerializeField] private float ragdollGravityMultiplier = 6f; //"Gravidade" pulando em armadilha
     
     [SerializeField] private float raycastDistance = .75f; //Checagem de chão;
 
@@ -38,26 +40,24 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField] private float dashCooldown = 1f;
 
-    [SerializeField] LayerMask groundLayer; // Layer for ground detection
+    [SerializeField] LayerMask groundLayer;
 
-    [SerializeField] //tirar dps
+    [SerializeField] //tirar o SField dps
     private bool
         isGrounded = true,
         jumpKeyHeld = false,
         willJump,
         isLookingRight,
         isDashing = false,
-        canDash = true;
+        canDash = true,
+        inRagdoll = false;
 
-    [SerializeField] //tirar dps
+    //[SerializeField] //tirar o SField dps
     private float
         jumpBufferTimeCurrent,
         coyoteTimeCurrent,
         dashTimeCurrent = 0,
         moveInput;
-
- 
-    private bool canJump = true;
 
     private Vector3 gravity;
 
@@ -80,32 +80,7 @@ public class MovimentoJogador : MonoBehaviour
         HandleJump();
         HandleDash();
 
-        Debug.Log(rb.velocity);
-    }
-
-    private void CheckGrounded()
-    {
-        isGrounded = Physics.Raycast(transform.position, -Vector3.up, raycastDistance, groundLayer);
-        Debug.DrawRay(transform.position, -Vector3.up * raycastDistance, Color.red);
-
-        coyoteTimeCurrent = isGrounded ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
-
-        if (isGrounded)
-        {
-            canJump = true; // Reativa o pulo ao tocar o chão
-        }
-    }
-
-    private void ApplyGravity()
-    {
-        if (isGrounded)
-        {
-            //rb.velocity = new Vector3(rb.velocity.x, Mathf.Max(rb.velocity.y, 0), rb.velocity.z);
-            return;
-        }
-
-        float gravityScale = rb.velocity.y < 0 ? fallGravityMultiplier : jumpFallMultiplier;
-        rb.AddForce(gravity * (gravityScale - 1f), ForceMode.Acceleration);
+        //Debug.Log(rb.velocity);
     }
 
     private void HandleInput()
@@ -134,6 +109,57 @@ public class MovimentoJogador : MonoBehaviour
         }
     }
 
+    public void Ragdoll() => inRagdoll = true;
+
+    private void CheckGrounded()
+    {
+        isGrounded = Physics.Raycast(transform.position, -Vector3.up, raycastDistance, groundLayer);
+        Debug.DrawRay(transform.position, -Vector3.up * raycastDistance, Color.red);
+
+        coyoteTimeCurrent = isGrounded ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
+
+        if (inRagdoll && isGrounded) 
+            inRagdoll = false; //Reativa a gravidade de pulo
+    }
+
+    private void ApplyGravity()
+    {
+        if (isGrounded)
+            return;
+        
+        float gravityScale = rb.velocity.y < 0 ? fallGravityMultiplier : jumpGravityMultiplier;
+        rb.AddForce(gravity * (gravityScale - 1f), ForceMode.Acceleration);
+
+        //Gravidade específica de pulo curto e ragdoll
+        if (rb.velocity.y > 0)
+        {
+            if (inRagdoll)
+            {
+                rb.AddForce(ragdollGravityMultiplier * gravity, ForceMode.Acceleration);
+                return;
+            }
+
+            if (!jumpKeyHeld)
+                rb.AddForce(fallGravityMultiplier * shortJumpDelta * gravity, ForceMode.Acceleration);
+        }
+    }
+
+
+    private void Move()
+    {
+        Vector3 moveForce = new(moveInput * moveSpeed - rb.velocity.x, 0, 0);
+        rb.AddForce(moveForce, ForceMode.VelocityChange);
+    }
+
+    private void HandleJump()
+    {
+        if (willJump && (isGrounded || coyoteTimeCurrent > 0f))
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            jumpBufferTimeCurrent = 0f;
+            coyoteTimeCurrent = 0f;
+        }
+    }
     IEnumerator JumpBuffer()
     {
         jumpBufferTimeCurrent = 0;
@@ -144,27 +170,6 @@ public class MovimentoJogador : MonoBehaviour
             yield return null;
         }
         willJump = false;
-    }
-
-    private void Move()
-    {
-        Vector3 moveForce = new(moveInput * moveSpeed - rb.velocity.x, 0, 0);
-        rb.AddForce(moveForce, ForceMode.VelocityChange);
-    }
-
-    private void HandleJump()
-    {
-        if (isGrounded && willJump && coyoteTimeCurrent > 0f)
-        {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            jumpBufferTimeCurrent = 0f;
-            coyoteTimeCurrent = 0f;
-        }
-
-        if (!jumpKeyHeld && rb.velocity.y > 0)
-        {
-            rb.AddForce(fallGravityMultiplier * shortJumpDelta * gravity, ForceMode.Acceleration);
-        }
     }
 
     private void HandleDash()
@@ -181,10 +186,6 @@ public class MovimentoJogador : MonoBehaviour
             isDashing = false;
             canDash = false;
         }
-    }
-    public void DisableJump()
-    {
-        canJump = false;
     }
 
 }
