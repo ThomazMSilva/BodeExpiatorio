@@ -49,4 +49,5 @@ public class ContagemRegressivaVidaJogador : MonoBehaviour
         currentTime = Mathf.Clamp(currentTime, 0, maxTime);
         OnCountUp?.Invoke(currentTime);
     }
+
 }   

@@ -56,6 +56,9 @@ public class MovimentoJogador : MonoBehaviour
         dashTimeCurrent = 0,
         moveInput;
 
+ 
+    private bool canJump = true;
+
     private Vector3 gravity;
 
     private Rigidbody rb;
@@ -86,6 +89,11 @@ public class MovimentoJogador : MonoBehaviour
         Debug.DrawRay(transform.position, -Vector3.up * raycastDistance, Color.red);
 
         coyoteTimeCurrent = isGrounded ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
+
+        if (isGrounded)
+        {
+            canJump = true; // Reativa o pulo ao tocar o chão
+        }
     }
 
     private void ApplyGravity()
@@ -173,6 +181,10 @@ public class MovimentoJogador : MonoBehaviour
             isDashing = false;
             canDash = false;
         }
+    }
+    public void DisableJump()
+    {
+        canJump = false;
     }
 
 }
