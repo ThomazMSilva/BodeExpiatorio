@@ -42,7 +42,7 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField] LayerMask groundLayer;
 
-    [SerializeField] //tirar o SField dps
+    //[SerializeField] //tirar o SField dps
     private bool
         isGrounded = true,
         jumpKeyHeld = false,
@@ -65,6 +65,9 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField] bool canSpikeJump = true;
     [SerializeField] float spikeGravityMultiplier = 0.5f;
+
+    public delegate void PlayerFlipped();
+    public event PlayerFlipped OnPlayerTurned;
 
     private void Start()
     {
@@ -90,9 +93,8 @@ public class MovimentoJogador : MonoBehaviour
     {
         moveInput = Input.GetAxis("Horizontal");
 
-        if (moveInput > 0) isLookingRight = true;
-
-        if (moveInput < 0) isLookingRight = false;
+        if ((moveInput > 0 && !isLookingRight) || (moveInput < 0 && isLookingRight)) 
+            FlipSprite();
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -110,6 +112,12 @@ public class MovimentoJogador : MonoBehaviour
         {
             isDashing = true;
         }
+    }
+
+    private void FlipSprite()
+    {
+        isLookingRight = !isLookingRight;
+        OnPlayerTurned?.Invoke();
     }
 
     public void Ragdoll() => inRagdoll = true;
@@ -195,4 +203,8 @@ public class MovimentoJogador : MonoBehaviour
         }
     }
 
+    public void ApplyForce(Vector3 force, ForceMode forceMode)
+    {
+        rb.AddForce(force, forceMode);
+    }
 }

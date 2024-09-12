@@ -8,6 +8,7 @@ public class VidaJogador : MonoBehaviour
 {
     [SerializeField]
     private float baseMaxHealth = 10f;
+    public float BaseHealth { get { return baseMaxHealth; } private set { baseMaxHealth = value; } } 
 
     [SerializeField]
     private float currentMaxHealth;

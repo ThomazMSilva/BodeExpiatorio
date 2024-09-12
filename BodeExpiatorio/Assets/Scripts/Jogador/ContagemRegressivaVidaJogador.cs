@@ -9,13 +9,15 @@ public class ContagemRegressivaVidaJogador : MonoBehaviour
         countDownMultiplier = 2,
         recoveryMultiplier = 10,
         currentTime;
+    public float BaseTime { get { return maxTime; } private set { maxTime = value; } }
+    public float CurrentTime { get { return currentTime; } private set { currentTime = value; } }
 
     public bool isCountDownActive = true;
 
     private VidaJogador vida;
 
-    public delegate void CountDownHandler(float currentTime);
-    public CountDownHandler OnCountUp;
+    /*public delegate void CountDownHandler(float currentTime);
+    public CountDownHandler OnCountUp;*/
     
     private void OnEnable() => vida.OnHealthChanged += RecoverTimeOnCD;
     
@@ -47,7 +49,7 @@ public class ContagemRegressivaVidaJogador : MonoBehaviour
         float recoveryAmount = Mathf.Abs(newHealth - oldHealth) * recoveryMultiplier;
         currentTime += recoveryAmount;
         currentTime = Mathf.Clamp(currentTime, 0, maxTime);
-        OnCountUp?.Invoke(currentTime);
+        //OnCountUp?.Invoke(currentTime);
     }
 
 }   
