@@ -1,4 +1,6 @@
 using UnityEngine;
+using Assets.Scripts.Camera;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -50,13 +52,16 @@ public class VidaJogador : MonoBehaviour
     public event PlayerDeathHandler OnPlayerDeath;
     public event PlayerDeathHandler OnPlayerTrueDeath;
 
-    private void Awake()
+    private void Start()
     {
         currentMaxHealth = baseMaxHealth;
         currentHealth = currentMaxHealth;
     }
-
-    public void DamageHealth(float damageAmount) => CurrentHealth -= damageAmount;
+        
+    public void DamageHealth(float damageAmount)
+    {
+        CurrentHealth -= damageAmount;
+    }
     public void CureHealth(float cureAmount) => CurrentHealth += cureAmount;
 
     public void FullyRecoverMaxHealth() => CurrentMaxHealth = baseMaxHealth;
@@ -69,6 +74,7 @@ public class VidaJogador : MonoBehaviour
 [CustomEditor(typeof(VidaJogador))]
 public class VidaJogadorEditor : Editor
 {
+    float customDamage;
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
@@ -82,10 +88,21 @@ public class VidaJogadorEditor : Editor
         {
             vidaJogador.CureHealth(5f);
         }
-
-        if (GUILayout.Button("Damage Health by 1"))
+        if (GUILayout.Button("Damage Health by 5"))
         {
-            vidaJogador.DamageHealth(1f);
+            vidaJogador.DamageHealth(5f);
+        } 
+
+        if (GUILayout.Button("Full Heal"))
+        {
+            vidaJogador.CureHealth(25f);
+        }
+
+        customDamage = EditorGUILayout.FloatField(customDamage);
+        
+        if (GUILayout.Button("DamagePersonalized"))
+        {
+            vidaJogador.DamageHealth(customDamage);
         }
 
         EditorGUILayout.Space();

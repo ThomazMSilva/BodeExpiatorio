@@ -8,7 +8,7 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField] private string horizontalAxis = "Horizontal";
 
-    [SerializeField] private string verticalAxis = "Vertical";
+    //[SerializeField] private string verticalAxis = "Vertical";
 
     [SerializeField] private string jumpAxis = "Jump";
 
@@ -34,7 +34,7 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField] float spikeKneelGravityMultiplier = 2f;
 
-    [SerializeField] private bool canSpikeJump = true;
+    public bool isSpikeJumpUnlocked = true;
 
         [Space(8f)]
 
@@ -61,6 +61,8 @@ public class MovimentoJogador : MonoBehaviour
     [SerializeField] private float dashForce = 100f;
 
     [SerializeField] private float dashCooldown = 1f;
+
+    public bool isDashUnlocked = false;
 
         [Space(5f)]
 
@@ -93,7 +95,9 @@ public class MovimentoJogador : MonoBehaviour
     private Vector3 
         gravity,
         colliderBaseSize,
-        colliderKneelingSize;
+        colliderKneelingSize,
+        colliderBaseCenter,
+        colliderKneelingCenter;
 
     private BoxCollider playerCollider;
 
@@ -107,8 +111,14 @@ public class MovimentoJogador : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         playerCollider = GetComponent<BoxCollider>();
+        
         colliderBaseSize = playerCollider.size;
-        colliderKneelingSize = new(colliderBaseSize.x, colliderBaseSize.y * kneelHeightMultiplier, colliderBaseSize.z);
+        colliderKneelingSize = 
+            new(colliderBaseSize.x, colliderBaseSize.y * kneelHeightMultiplier, colliderBaseSize.z);
+        
+        colliderBaseCenter = playerCollider.center;
+        colliderKneelingCenter = 
+            new(colliderBaseCenter.x, colliderBaseCenter.y - (colliderKneelingSize.y * 0.5f), colliderBaseCenter.z);
 
         gravity = Physics.gravity;
         //raycastDistance = transform.localScale.y + 0.05f;
@@ -131,7 +141,7 @@ public class MovimentoJogador : MonoBehaviour
     {
         horizontalInput = Input.GetAxis(horizontalAxis);
 
-        if (Input.GetButtonDown(jumpAxis) && !isKneeling)
+        if (Input.GetButtonDown(jumpAxis))
         {
             StopAllCoroutines();
             StartCoroutine(JumpBuffer());
@@ -153,7 +163,7 @@ public class MovimentoJogador : MonoBehaviour
             HandleKneel(isKneeling);
         }
 
-        if (Input.GetButtonDown(dashAxis) && canDash)
+        if (isDashUnlocked && Input.GetButtonDown(dashAxis) && canDash)
             isDashing = true;
         
         //Determinações de entrada
@@ -174,7 +184,11 @@ public class MovimentoJogador : MonoBehaviour
 
     private void CheckGrounded()
     {
-        isGrounded = Physics.Raycast(transform.position, -Vector3.up, raycastDistance, groundLayer);
+        isGrounded = Physics.Raycast(transform.position, -Vector3.up,out RaycastHit hit, raycastDistance, groundLayer);
+        
+        //Tentando fazer oq o felipe de prog  comentou na aula
+        transform.parent = hit.transform;
+
         Debug.DrawRay(transform.position, -Vector3.up * raycastDistance, Color.red);
 
         coyoteTimeCurrent = isGrounded ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
@@ -201,10 +215,10 @@ public class MovimentoJogador : MonoBehaviour
             float forceMultiplier = ragdollGravityMultiplier;
 
             if (!isKneeling)
-                forceMultiplier *= jumpKeyHeld && canSpikeJump ? spikeJumpGravityMultiplier : 1f;
+                forceMultiplier *= jumpKeyHeld && isSpikeJumpUnlocked ? spikeJumpGravityMultiplier : 1f;
 
             else 
-                forceMultiplier *= canSpikeJump ? spikeKneelGravityMultiplier : 1f;
+                forceMultiplier *= isSpikeJumpUnlocked ? spikeKneelGravityMultiplier : 1f;
 
             rb.AddForce( forceMultiplier * gravity, ForceMode.Acceleration );
             return;
@@ -225,7 +239,7 @@ public class MovimentoJogador : MonoBehaviour
 
     private void HandleJump()
     {
-        if (willJump && (isGrounded || coyoteTimeCurrent > 0f))
+        if (willJump && (isGrounded || coyoteTimeCurrent > 0f) && !isKneeling)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             jumpBufferTimeCurrent = 0f;
@@ -261,7 +275,14 @@ public class MovimentoJogador : MonoBehaviour
         }
     }
 
-    private void HandleKneel(bool willKneel) => playerCollider.size = willKneel ? colliderKneelingSize : colliderBaseSize;
+    private void HandleKneel(bool willKneel)
+    {
+        Vector3 size = willKneel ? colliderKneelingSize : colliderBaseSize;
+        Vector3 center  = willKneel ? colliderKneelingCenter : colliderBaseCenter;
+
+        playerCollider.size = size;
+        playerCollider.center = center;
+    }
 
     public void ApplyForce(Vector3 force, ForceMode forceMode)
     {

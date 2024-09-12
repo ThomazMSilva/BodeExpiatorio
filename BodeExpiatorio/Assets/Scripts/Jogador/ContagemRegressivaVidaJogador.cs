@@ -5,8 +5,9 @@ public class ContagemRegressivaVidaJogador : MonoBehaviour
 {
     [SerializeField]
     private float
-        maxTime = 100,
-        countDownMultiplier = 2,
+        damageAmount = 10,
+        maxTime = 50,
+        countDownMultiplier = 5,
         recoveryMultiplier = 10,
         currentTime;
     public float BaseTime { get { return maxTime; } private set { maxTime = value; } }
@@ -39,7 +40,7 @@ public class ContagemRegressivaVidaJogador : MonoBehaviour
 
         if (currentTime <= 0)
         {
-            vida.DamageMaxHealth(1);
+            vida.DamageMaxHealth(damageAmount);
             currentTime = maxTime;
         }
     }
