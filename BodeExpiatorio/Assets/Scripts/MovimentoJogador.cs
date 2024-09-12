@@ -63,6 +63,9 @@ public class MovimentoJogador : MonoBehaviour
 
     private Rigidbody rb;
 
+    [SerializeField] bool canSpikeJump = true;
+    [SerializeField] float spikeGravityMultiplier = 0.5f;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -135,7 +138,11 @@ public class MovimentoJogador : MonoBehaviour
         {
             if (inRagdoll)
             {
-                rb.AddForce(ragdollGravityMultiplier * gravity, ForceMode.Acceleration);
+                rb.AddForce
+                (
+                    (jumpKeyHeld && canSpikeJump ? ragdollGravityMultiplier * spikeGravityMultiplier : ragdollGravityMultiplier) * gravity, 
+                    ForceMode.Acceleration
+                );
                 return;
             }
 
