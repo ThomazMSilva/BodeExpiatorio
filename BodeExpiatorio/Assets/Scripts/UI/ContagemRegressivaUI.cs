@@ -4,17 +4,14 @@ using UnityEngine.UI;
 public class ContagemRegressivaUI : MonoBehaviour
 {
     private ContagemRegressivaVidaJogador countdown;
-    private float countdownMultiplier;
+    private float fillMultiplier;
     [SerializeField] private Image countdownIMG;
 
-    void Awake()
+    private void Awake()
     {
         countdown = FindAnyObjectByType<ContagemRegressivaVidaJogador>();
-        countdownMultiplier = 1 / countdown.BaseTime;
+        fillMultiplier = 1 / countdown.BaseTime;
     }
 
-    void Update()
-    {
-        countdownIMG.fillAmount = countdown.CurrentTime * countdownMultiplier;
-    }
+    private void Update() => countdownIMG.fillAmount = countdown.CurrentTime * fillMultiplier;
 }

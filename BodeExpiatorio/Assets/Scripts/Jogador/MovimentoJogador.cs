@@ -4,67 +4,100 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class MovimentoJogador : MonoBehaviour
 {
-    [Header("Configurações de Movimento")]
-    
+    [Header("Configurações de Movimento"), Space(8f)]
+
+    [SerializeField] private string horizontalAxis = "Horizontal";
+
+    [SerializeField] private string verticalAxis = "Vertical";
+
+    [SerializeField] private string jumpAxis = "Jump";
+
+    [SerializeField] private string kneelAxis = "Fire3";
+
+    [SerializeField] private string dashAxis = "Fire1";
+
     [SerializeField] private float moveSpeed = 5f;
-
-        [Space(5f)]
-
-    [Header("Configurações de Pulo")]
-    
-    [SerializeField] private float jumpForce = 11f;
-
-    [SerializeField] private float coyoteTimeMax = 0.1f; //Um tempinho que da pra pular depois de cair de alguma plataforma
-    
-    [SerializeField] private float jumpBufferTimeMax = 0.2f; //Um tempinho que se apertar o botao de pular antes de estar no chao, ainda conta qnd chegar no chão
-    
-    [SerializeField] private float shortJumpDelta = 2.5f;
     
         [Space(5f)]
 
-    [Header("Configurações de Gravidade")]
+    [Header("Configurações de Gravidade"), Space(8f)]
 
     [SerializeField] private float fallGravityMultiplier = 5f; //"Gravidade" caindo (é um addforce)
     
     [SerializeField] private float jumpGravityMultiplier = 3f; //"Gravidade" qnd dá pulo grande
 
     [SerializeField] private float ragdollGravityMultiplier = 6f; //"Gravidade" pulando em armadilha
-    
+
+        [Space(8f)]
+
+    [SerializeField] float spikeJumpGravityMultiplier = 0.5f;
+
+    [SerializeField] float spikeKneelGravityMultiplier = 2f;
+
+    [SerializeField] private bool canSpikeJump = true;
+
+        [Space(8f)]
+
     [SerializeField] private float raycastDistance = .75f; //Checagem de chão;
+
+    [SerializeField] LayerMask groundLayer;
+
+        [Space(5f)]
+
+    [Header("Configurações de Pulo"), Space(8f)]
+
+    [SerializeField] private float jumpForce = 11f;
+
+    [SerializeField] private float coyoteTimeMax = 0.1f; //Um tempinho que da pra pular depois de cair de alguma plataforma
+
+    [SerializeField] private float jumpBufferTimeMax = 0.2f; //Um tempinho que se apertar o botao de pular antes de estar no chao, ainda conta qnd chegar no chão
+
+    [SerializeField] private float shortJumpDelta = 2.5f;
 
         [Space(5f)]
     
-    [Header("Configurações de Arrancada")]
+    [Header("Configurações de Arrancada"), Space(8f)]
 
     [SerializeField] private float dashForce = 100f;
 
     [SerializeField] private float dashCooldown = 1f;
 
-    [SerializeField] LayerMask groundLayer;
+        [Space(5f)]
+
+    [Header("Configurações de Prostração"), Space(8f)]
+
+    [SerializeField, Range(0, 1)] private float kneelHeightMultiplier = 0.5f;
+
+    [SerializeField, Range(0, 1)] private float kneelSpeedMultiplier = 0.7f;
 
     //[SerializeField] //tirar o SField dps
     private bool
         isGrounded = true,
         jumpKeyHeld = false,
-        willJump,
+        willJump = false,
         isLookingRight,
         isDashing = false,
         canDash = true,
-        inRagdoll = false;
+        inRagdoll = false,
+        //isClimbing = false,
+        isKneeling;
 
     //[SerializeField] //tirar o SField dps
     private float
+        horizontalInput,
+        //verticalInput,
         jumpBufferTimeCurrent,
         coyoteTimeCurrent,
-        dashTimeCurrent = 0,
-        moveInput;
+        dashTimeCurrent = 0;
 
-    private Vector3 gravity;
+    private Vector3 
+        gravity,
+        colliderBaseSize,
+        colliderKneelingSize;
+
+    private BoxCollider playerCollider;
 
     private Rigidbody rb;
-
-    [SerializeField] bool canSpikeJump = true;
-    [SerializeField] float spikeGravityMultiplier = 0.5f;
 
     public delegate void PlayerFlipped();
     public event PlayerFlipped OnPlayerTurned;
@@ -72,8 +105,13 @@ public class MovimentoJogador : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        playerCollider = GetComponent<BoxCollider>();
+        colliderBaseSize = playerCollider.size;
+        colliderKneelingSize = new(colliderBaseSize.x, colliderBaseSize.y * kneelHeightMultiplier, colliderBaseSize.z);
+
         gravity = Physics.gravity;
-        raycastDistance = transform.localScale.y + 0.05f;
+        //raycastDistance = transform.localScale.y + 0.05f;
     }
 
     private void Update() => HandleInput();
@@ -91,27 +129,39 @@ public class MovimentoJogador : MonoBehaviour
 
     private void HandleInput()
     {
-        moveInput = Input.GetAxis("Horizontal");
+        horizontalInput = Input.GetAxis(horizontalAxis);
 
-        if ((moveInput > 0 && !isLookingRight) || (moveInput < 0 && isLookingRight)) 
-            FlipSprite();
-
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown(jumpAxis) && !isKneeling)
         {
             StopAllCoroutines();
             StartCoroutine(JumpBuffer());
             jumpKeyHeld = true;
         }
 
-        if (Input.GetButtonUp("Jump"))
-        {
+        if (Input.GetButtonUp(jumpAxis))
             jumpKeyHeld = false;
+
+        if (Input.GetButtonDown(kneelAxis))
+        {
+            isKneeling = true;
+            HandleKneel(isKneeling);
         }
 
-        if (Input.GetButtonDown("Fire3") && canDash)
+        if (Input.GetButtonUp(kneelAxis))
         {
-            isDashing = true;
+            isKneeling = false;
+            HandleKneel(isKneeling);
         }
+
+        if (Input.GetButtonDown(dashAxis) && canDash)
+            isDashing = true;
+        
+        //Determinações de entrada
+        if ((horizontalInput > 0 && !isLookingRight) || (horizontalInput < 0 && isLookingRight))
+            FlipSprite();
+
+        //verticalInput = Input.GetAxisRaw("Vertical");
+        //isKneeling = verticalInput < 0 && !isClimbing;
     }
 
     private void FlipSprite()
@@ -138,31 +188,38 @@ public class MovimentoJogador : MonoBehaviour
         if (isGrounded)
             return;
         
+        //Pulando e caindo
         float gravityScale = rb.velocity.y < 0 ? fallGravityMultiplier : jumpGravityMultiplier;
         rb.AddForce(gravity * (gravityScale - 1f), ForceMode.Acceleration);
 
-        //Gravidade específica de pulo curto e ragdoll
-        if (rb.velocity.y > 0)
+        if (rb.velocity.y <= 0)
+            return;
+
+        //Em armadilha
+        if (inRagdoll)
         {
-            if (inRagdoll)
-            {
-                rb.AddForce
-                (
-                    (jumpKeyHeld && canSpikeJump ? ragdollGravityMultiplier * spikeGravityMultiplier : ragdollGravityMultiplier) * gravity, 
-                    ForceMode.Acceleration
-                );
-                return;
-            }
+            float forceMultiplier = ragdollGravityMultiplier;
 
-            if (!jumpKeyHeld)
-                rb.AddForce(fallGravityMultiplier * shortJumpDelta * gravity, ForceMode.Acceleration);
+            if (!isKneeling)
+                forceMultiplier *= jumpKeyHeld && canSpikeJump ? spikeJumpGravityMultiplier : 1f;
+
+            else 
+                forceMultiplier *= canSpikeJump ? spikeKneelGravityMultiplier : 1f;
+
+            rb.AddForce( forceMultiplier * gravity, ForceMode.Acceleration );
+            return;
         }
-    }
 
+        //Pulo curto
+        if (!jumpKeyHeld)
+            rb.AddForce(fallGravityMultiplier * shortJumpDelta * gravity, ForceMode.Acceleration);
+        
+    }
 
     private void Move()
     {
-        Vector3 moveForce = new(moveInput * moveSpeed - rb.velocity.x, 0, 0);
+        float speed = isKneeling ? moveSpeed * kneelSpeedMultiplier : moveSpeed;
+        Vector3 moveForce = new(horizontalInput * speed - rb.velocity.x, 0, 0);
         rb.AddForce(moveForce, ForceMode.VelocityChange);
     }
 
@@ -175,6 +232,7 @@ public class MovimentoJogador : MonoBehaviour
             coyoteTimeCurrent = 0f;
         }
     }
+    
     IEnumerator JumpBuffer()
     {
         jumpBufferTimeCurrent = 0;
@@ -202,6 +260,8 @@ public class MovimentoJogador : MonoBehaviour
             canDash = false;
         }
     }
+
+    private void HandleKneel(bool willKneel) => playerCollider.size = willKneel ? colliderKneelingSize : colliderBaseSize;
 
     public void ApplyForce(Vector3 force, ForceMode forceMode)
     {
