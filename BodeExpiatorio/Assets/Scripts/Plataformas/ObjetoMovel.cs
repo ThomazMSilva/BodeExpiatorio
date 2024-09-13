@@ -11,10 +11,11 @@ public class ObjetoMovel : MonoBehaviour
         {
             Vector3 transformPos = transform.position;
             Vector3[] nPath = new Vector3[path.Length];
-            for (int i = 0; i < path.Length; i++) { Path[i] = transformPos + path[i]; }
+            for (int i = 0; i < path.Length; i++) { nPath[i] = transformPos + path[i]; }
             return nPath;
         }
     }
+    
     [SerializeField] private float duration;
     [SerializeField] private LoopType loopType;
     [SerializeField] private Ease animEase;
@@ -23,7 +24,7 @@ public class ObjetoMovel : MonoBehaviour
     [SerializeField] bool isCoiso = false;
     [SerializeField] private PathType pathType;
     [SerializeField] private PathMode pathMode;
-    [SerializeField] bool autoKill = false;
+    [SerializeField, Tooltip("Para de se mover depois de terminar o caminho.")] bool autoKill = false;
 
     void Start()
     {   
@@ -35,16 +36,6 @@ public class ObjetoMovel : MonoBehaviour
 
         DoPath();
     }
-
-    /*private void Update()
-    {
-        if (isCoiso) return;
-     
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            autoKill = !autoKill;
-        }
-    }*/
 
     private void DoPath()
     {

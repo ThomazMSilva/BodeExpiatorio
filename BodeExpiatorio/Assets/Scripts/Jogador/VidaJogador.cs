@@ -44,6 +44,11 @@ public class VidaJogador : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.P)) CureHealth(25f);
+    }
+
     public delegate void HealthChangedHandler(object sender, float oldHealth, float newHealth);
     public event HealthChangedHandler OnHealthChanged;
     public event HealthChangedHandler OnMaxHealthChanged;

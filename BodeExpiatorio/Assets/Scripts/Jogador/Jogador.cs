@@ -19,11 +19,12 @@ public class Jogador : MonoBehaviour
         vida.DamageHealth(damageAmount);
     }
 
-    public void ApplyDamageEffect(float damageAmount, Vector3 force, ForceMode forceMode = ForceMode.Impulse)
+    public void ApplyDamageEffect(float damageAmount, Vector3 force, float stunSeconds, ForceMode forceMode = ForceMode.Impulse)
     {
         vida.DamageHealth(damageAmount);
         movimento.ApplyForce(force, forceMode);
-        movimento.Ragdoll();
+        movimento.Ragdoll(stunSeconds);
+        Debug.Log($"Dano: {damageAmount} Forca: {force} Stun: {stunSeconds}sec");
     }    
 
 }

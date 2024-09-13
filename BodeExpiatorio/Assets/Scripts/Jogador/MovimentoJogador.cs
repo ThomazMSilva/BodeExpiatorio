@@ -17,6 +17,21 @@ public class MovimentoJogador : MonoBehaviour
     [SerializeField] private string dashAxis = "Fire1";
 
     [SerializeField] private float moveSpeed = 5f;
+
+    [Tooltip("Se ativo, a velocidade maxima que o Jogador pode se mover tem um limite.")]
+    [SerializeField] private bool clampVelocity = true;
+
+    [Tooltip("A velocidade maxima, em unidades/segundo, que o Jogador podera se mover pra qualquer direcao.")]
+    [SerializeField] private float terminalVelocity = 30f;
+
+    [Tooltip("Se ativo, o Jogador pode mudar de direcao no ar imediatamente com o Input Horizontal.\nSe inativo, ele vai acelerar gradualmente para a direcao do input.")]
+    [SerializeField] private bool airControl = true;
+
+    [Tooltip("So usar caso Air Control esteja INATIVO. \nA aceleracao com que ele muda de direcao no ar")]
+    [SerializeField] private float airAccelerationMultiplier = 3;
+
+    [Tooltip("Se ATIVO, o Jogador não tem nenhum controle de sua velocidade horizontal enquanto estiver em ragdoll.")]
+    [SerializeField] private bool ragdollFollowThrough = false;
     
         [Space(5f)]
 
@@ -30,10 +45,11 @@ public class MovimentoJogador : MonoBehaviour
 
         [Space(8f)]
 
-    [SerializeField] float spikeJumpGravityMultiplier = 0.5f;
+    [SerializeField] private float spikeJumpGravityMultiplier = 0.5f;
 
-    [SerializeField] float spikeKneelGravityMultiplier = 2f;
+    [SerializeField] private float spikeKneelGravityMultiplier = 2f;
 
+    [Tooltip("Se ativo, o Jogador pode controlar a altura que e lancado pelas armadilhas com seu pulo e prostracao.")]
     public bool isSpikeJumpUnlocked = true;
 
         [Space(8f)]
@@ -81,10 +97,10 @@ public class MovimentoJogador : MonoBehaviour
         isDashing = false,
         canDash = true,
         inRagdoll = false,
+        isStunned = false,
         //isClimbing = false,
         isKneeling;
 
-    //[SerializeField] //tirar o SField dps
     private float
         horizontalInput,
         //verticalInput,
@@ -97,11 +113,19 @@ public class MovimentoJogador : MonoBehaviour
         colliderBaseSize,
         colliderKneelingSize,
         colliderBaseCenter,
-        colliderKneelingCenter;
+        colliderKneelingCenter,
+        moveForce = Vector3.zero,  
+        gravityForce = Vector3.zero;
+
+    private WaitForSeconds dashCooldownWait;
+
+    private WaitForSeconds stunWait;
 
     private BoxCollider playerCollider;
 
     private Rigidbody rb;
+
+    private RaycastHit hit;
 
     public delegate void PlayerFlipped();
     public event PlayerFlipped OnPlayerTurned;
@@ -113,33 +137,22 @@ public class MovimentoJogador : MonoBehaviour
         playerCollider = GetComponent<BoxCollider>();
         
         colliderBaseSize = playerCollider.size;
-        colliderKneelingSize = 
-            new(colliderBaseSize.x, colliderBaseSize.y * kneelHeightMultiplier, colliderBaseSize.z);
+        colliderKneelingSize.Set(colliderBaseSize.x, colliderBaseSize.y * kneelHeightMultiplier, colliderBaseSize.z);
         
         colliderBaseCenter = playerCollider.center;
-        colliderKneelingCenter = 
-            new(colliderBaseCenter.x, colliderBaseCenter.y - (colliderKneelingSize.y * 0.5f), colliderBaseCenter.z);
+        colliderKneelingCenter.Set(colliderBaseCenter.x, colliderBaseCenter.y - (colliderKneelingSize.y * 0.5f), colliderBaseCenter.z);
 
         gravity = Physics.gravity;
+
+        dashCooldownWait = new WaitForSeconds(dashCooldown);
         //raycastDistance = transform.localScale.y + 0.05f;
     }
 
     private void Update() => HandleInput();
-
-    private void FixedUpdate()
-    {
-        CheckGrounded();
-        ApplyGravity();
-        Move();
-        HandleJump();
-        HandleDash();
-
-        //Debug.Log(rb.velocity);
-    }
-
+    
     private void HandleInput()
     {
-        horizontalInput = Input.GetAxis(horizontalAxis);
+        horizontalInput = !ragdollFollowThrough && isStunned ? 0 : Input.GetAxis(horizontalAxis); 
 
         if (Input.GetButtonDown(jumpAxis))
         {
@@ -171,20 +184,23 @@ public class MovimentoJogador : MonoBehaviour
             FlipSprite();
 
         //verticalInput = Input.GetAxisRaw("Vertical");
-        //isKneeling = verticalInput < 0 && !isClimbing;
     }
 
-    private void FlipSprite()
+    private void FixedUpdate()
     {
-        isLookingRight = !isLookingRight;
-        OnPlayerTurned?.Invoke();
-    }
+        CheckGrounded();
+        ApplyGravity();
+        Move();
+        HandleJump();
+        HandleDash();
 
-    public void Ragdoll() => inRagdoll = true;
+        if(clampVelocity) rb.velocity = Vector3.ClampMagnitude(rb.velocity, terminalVelocity);
+        //Debug.Log(rb.velocity);
+    }
 
     private void CheckGrounded()
     {
-        isGrounded = Physics.Raycast(transform.position, -Vector3.up,out RaycastHit hit, raycastDistance, groundLayer);
+        isGrounded = Physics.Raycast(transform.position, -Vector3.up,out hit, raycastDistance, groundLayer);
         
         //Tentando fazer oq o felipe de prog  comentou na aula
         transform.parent = hit.transform;
@@ -195,6 +211,8 @@ public class MovimentoJogador : MonoBehaviour
 
         if (inRagdoll && isGrounded) 
             inRagdoll = false; //Reativa a gravidade de pulo
+        if (isStunned && isGrounded)
+            isStunned = false; //Reativa o movimento horizontal
     }
 
     private void ApplyGravity()
@@ -204,7 +222,8 @@ public class MovimentoJogador : MonoBehaviour
         
         //Pulando e caindo
         float gravityScale = rb.velocity.y < 0 ? fallGravityMultiplier : jumpGravityMultiplier;
-        rb.AddForce(gravity * (gravityScale - 1f), ForceMode.Acceleration);
+        gravityForce = gravity * (gravityScale - 1f);
+        rb.AddForce(gravityForce, ForceMode.Acceleration);
 
         if (rb.velocity.y <= 0)
             return;
@@ -232,9 +251,21 @@ public class MovimentoJogador : MonoBehaviour
 
     private void Move()
     {
+        if (ragdollFollowThrough && isStunned) return;
+
         float speed = isKneeling ? moveSpeed * kneelSpeedMultiplier : moveSpeed;
-        Vector3 moveForce = new(horizontalInput * speed - rb.velocity.x, 0, 0);
-        rb.AddForce(moveForce, ForceMode.VelocityChange);
+        moveForce.Set(horizontalInput * speed - rb.velocity.x, 0, 0);
+
+        if (airControl)
+        {
+            rb.AddForce(moveForce, ForceMode.VelocityChange);
+            return;
+        }
+        rb.AddForce
+            (
+            isGrounded ? moveForce : moveForce * airAccelerationMultiplier, 
+            isGrounded ? ForceMode.VelocityChange : ForceMode.Acceleration
+            );
     }
 
     private void HandleJump()
@@ -245,18 +276,15 @@ public class MovimentoJogador : MonoBehaviour
             jumpBufferTimeCurrent = 0f;
             coyoteTimeCurrent = 0f;
         }
-    }
-    
-    IEnumerator JumpBuffer()
+    }    
+
+    private void HandleKneel(bool willKneel)
     {
-        jumpBufferTimeCurrent = 0;
-        while (jumpBufferTimeCurrent < jumpBufferTimeMax)
-        {
-            willJump = true;
-            jumpBufferTimeCurrent += Time.deltaTime;
-            yield return null;
-        }
-        willJump = false;
+        Vector3 size = willKneel ? colliderKneelingSize : colliderBaseSize;
+        Vector3 center  = willKneel ? colliderKneelingCenter : colliderBaseCenter;
+
+        playerCollider.size = size;
+        playerCollider.center = center;
     }
 
     private void HandleDash()
@@ -275,17 +303,42 @@ public class MovimentoJogador : MonoBehaviour
         }
     }
 
-    private void HandleKneel(bool willKneel)
+    public void Ragdoll(float stunTimeSecs)
     {
-        Vector3 size = willKneel ? colliderKneelingSize : colliderBaseSize;
-        Vector3 center  = willKneel ? colliderKneelingCenter : colliderBaseCenter;
-
-        playerCollider.size = size;
-        playerCollider.center = center;
+        inRagdoll = true;
+        stunWait = new WaitForSeconds(stunTimeSecs);
+        StartCoroutine(Stun(stunTimeSecs));
     }
 
+    private void FlipSprite()
+    {
+        isLookingRight = !isLookingRight;
+        OnPlayerTurned?.Invoke();
+    }
+   
     public void ApplyForce(Vector3 force, ForceMode forceMode)
     {
         rb.AddForce(force, forceMode);
+    }
+
+    private IEnumerator JumpBuffer()
+    {
+        jumpBufferTimeCurrent = 0;
+        while (jumpBufferTimeCurrent < jumpBufferTimeMax)
+        {
+            willJump = true;
+            jumpBufferTimeCurrent += Time.deltaTime;
+            yield return null;
+        }
+        willJump = false;
+    }
+
+    private IEnumerator Stun(float stunTime)
+    {
+        isStunned = true;
+
+        yield return stunWait;
+
+        isStunned = false;
     }
 }

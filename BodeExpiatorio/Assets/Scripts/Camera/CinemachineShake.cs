@@ -79,7 +79,7 @@ namespace Assets.Scripts.Camera
 
         public void ShakeOnDamage(object sender, float oldHealth, float newHealth)
         {
-            if (newHealth > oldHealth) return;
+            if (newHealth >= oldHealth) return;
 
             float damageDone = oldHealth - newHealth;
             float prctRelativeToMax = Mathf.Clamp01(damageDone / baseHealth);
