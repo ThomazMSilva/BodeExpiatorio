@@ -9,11 +9,13 @@ public class Espinho : MonoBehaviour
     [SerializeField] private int damageAmount = 1;
     [Tooltip("O tempo que o Jogador fica sem controlar o input horizontal quando colide. Essencial pra armadilhas horizontais.")]
     [SerializeField] private float timeStunned = .3f;
-    
-    [Tooltip("Se a velocidade de colisao vai afetar a forca de lancamento")]
-    [SerializeField] private bool isVelocityRelevant;
+
+    [Tooltip("Se a direcao do impacto da colisao vai afetar a forca de lancamento.")]
+    [SerializeField] private bool isDirectionRelevant = false;
+    [Tooltip("Se a velocidade de impacto da colisao vai afetar a forca de lancamento.")]
+    [SerializeField] private bool isVelocityRelevant = false;
     [SerializeField, Range(1f,3f)] private float minVelMultiplier = 1f;
-    [SerializeField, Range(1f, 3f)] private float maxVelMultiplier = 3f;
+    [SerializeField, Range(1f, 10f)] private float maxVelMultiplier = 3f;
     [SerializeField] private float terminalVelocity = 30f;
 
 
@@ -26,14 +28,18 @@ public class Espinho : MonoBehaviour
         if (!go.TryGetComponent<Jogador>(out Jogador player)) return;
 
         Vector3 relativeVel = collision.relativeVelocity;
-        float colVelToUp = Vector3.Dot(relativeVel, -transform.up); //Produto vetorial do quão de frente foi a colisão
+        float colDotToUp = Vector3.Dot(relativeVel, -transform.up); //Produto vetorial do quão de frente foi a colisão
 
-        if (colVelToUp <= 0) return;
+        if (colDotToUp <= 0) return;
 
-        float velPrctRelativeToTerminal = Mathf.Clamp01(colVelToUp / terminalVelocity);//Quao proxima a velocidade de colisao com a velocidade maxima do jogador
+        float velPrctRelativeToTerminal = Mathf.Clamp01(colDotToUp / terminalVelocity);//Quao proxima a velocidade de colisao com a velocidade maxima do jogador
         float forceMultiplier = Mathf.Lerp(minVelMultiplier, maxVelMultiplier, velPrctRelativeToTerminal);
-        
-        float forceRelativeToUp = launchForce * Mathf.Clamp01(colVelToUp);
+
+        float colDirMultiplier = Mathf.Clamp01(colDotToUp);
+        if(!isDirectionRelevant) colDirMultiplier = colDirMultiplier > 0 ? 1 : 0; //So checa se a colisao veio de frente, ou nao, sem gradual
+
+        float forceRelativeToUp = launchForce * colDirMultiplier;
+        Debug.Log("Force reltive to up (0 - 1): " + forceRelativeToUp);
         float finalForce = !isVelocityRelevant ? forceRelativeToUp : forceRelativeToUp * forceMultiplier;
         float damage = !isVelocityRelevant ? damageAmount : damageAmount + (damageAmount * velPrctRelativeToTerminal);
 

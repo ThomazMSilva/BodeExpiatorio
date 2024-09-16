@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -31,7 +32,7 @@ public class MovimentoJogador : MonoBehaviour
     [SerializeField] private float airAccelerationMultiplier = 3;
 
     [Tooltip("Se ATIVO, o Jogador não tem nenhum controle de sua velocidade horizontal enquanto estiver em ragdoll.")]
-    [SerializeField] private bool ragdollFollowThrough = false;
+    [SerializeField] private bool allowRagdollMomentum = false;
     
         [Space(5f)]
 
@@ -88,7 +89,7 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField, Range(0, 1)] private float kneelSpeedMultiplier = 0.7f;
 
-    //[SerializeField] //tirar o SField dps
+    //[SerializeField]
     private bool
         isGrounded = true,
         jumpKeyHeld = false,
@@ -101,12 +102,13 @@ public class MovimentoJogador : MonoBehaviour
         //isClimbing = false,
         isKneeling;
 
+    //[SerializeField]
     private float
         horizontalInput,
         //verticalInput,
         jumpBufferTimeCurrent,
         coyoteTimeCurrent,
-        dashTimeCurrent = 0;
+        stunTimeRemaining;
 
     private Vector3 
         gravity,
@@ -119,7 +121,7 @@ public class MovimentoJogador : MonoBehaviour
 
     private WaitForSeconds dashCooldownWait;
 
-    private WaitForSeconds stunWait;
+    private Coroutine stunCoroutine;
 
     private BoxCollider playerCollider;
 
@@ -130,6 +132,7 @@ public class MovimentoJogador : MonoBehaviour
     public delegate void PlayerFlipped();
     public event PlayerFlipped OnPlayerTurned;
 
+    //Private methods
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -145,52 +148,65 @@ public class MovimentoJogador : MonoBehaviour
         gravity = Physics.gravity;
 
         dashCooldownWait = new WaitForSeconds(dashCooldown);
-        //raycastDistance = transform.localScale.y + 0.05f;
     }
 
     private void Update() => HandleInput();
     
     private void HandleInput()
     {
-        horizontalInput = !ragdollFollowThrough && isStunned ? 0 : Input.GetAxis(horizontalAxis); 
+        horizontalInput = Input.GetAxis(horizontalAxis); 
 
         if (Input.GetButtonDown(jumpAxis))
         {
-            StopAllCoroutines();
+            StopCoroutine(JumpBuffer());
             StartCoroutine(JumpBuffer());
             jumpKeyHeld = true;
         }
-
         if (Input.GetButtonUp(jumpAxis))
+        {
             jumpKeyHeld = false;
+        }
+
 
         if (Input.GetButtonDown(kneelAxis))
         {
             isKneeling = true;
             HandleKneel(isKneeling);
         }
-
         if (Input.GetButtonUp(kneelAxis))
         {
             isKneeling = false;
             HandleKneel(isKneeling);
         }
-
-        if (isDashUnlocked && Input.GetButtonDown(dashAxis) && canDash)
-            isDashing = true;
         
-        //Determinações de entrada
+
+        if (Input.GetButtonDown(dashAxis))
+        {
+            if(isDashUnlocked && canDash)
+            {
+                isDashing = true;
+
+                StartCoroutine(DashCooldown());
+            }
+        }
+        
         if ((horizontalInput > 0 && !isLookingRight) || (horizontalInput < 0 && isLookingRight))
             FlipSprite();
 
         //verticalInput = Input.GetAxisRaw("Vertical");
     }
 
+    private void FlipSprite()
+    {
+        isLookingRight = !isLookingRight;
+        OnPlayerTurned?.Invoke();
+    }
+
     private void FixedUpdate()
     {
         CheckGrounded();
         ApplyGravity();
-        Move();
+        HandleHorizontalMovement();
         HandleJump();
         HandleDash();
 
@@ -211,8 +227,12 @@ public class MovimentoJogador : MonoBehaviour
 
         if (inRagdoll && isGrounded) 
             inRagdoll = false; //Reativa a gravidade de pulo
+
         if (isStunned && isGrounded)
+        {
             isStunned = false; //Reativa o movimento horizontal
+            stunTimeRemaining = 0;
+        }
     }
 
     private void ApplyGravity()
@@ -249,28 +269,31 @@ public class MovimentoJogador : MonoBehaviour
         
     }
 
-    private void Move()
+    private void HandleHorizontalMovement()
     {
-        if (ragdollFollowThrough && isStunned) return;
+        if (allowRagdollMomentum && isStunned) return;
 
         float speed = isKneeling ? moveSpeed * kneelSpeedMultiplier : moveSpeed;
         moveForce.Set(horizontalInput * speed - rb.velocity.x, 0, 0);
-
-        if (airControl)
+        
+        if (airControl) //Muda velocidade horizontal no ar instantaneamente
         {
             rb.AddForce(moveForce, ForceMode.VelocityChange);
             return;
         }
-        rb.AddForce
-            (
+        
+        rb.AddForce //Muda velocidade horizontal no ar gradualmente
+        (
             isGrounded ? moveForce : moveForce * airAccelerationMultiplier, 
             isGrounded ? ForceMode.VelocityChange : ForceMode.Acceleration
-            );
+        );
     }
 
     private void HandleJump()
     {
-        if (willJump && (isGrounded || coyoteTimeCurrent > 0f) && !isKneeling)
+        if (isKneeling) return;
+
+        if (willJump && (coyoteTimeCurrent > 0f))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             jumpBufferTimeCurrent = 0f;
@@ -289,36 +312,20 @@ public class MovimentoJogador : MonoBehaviour
 
     private void HandleDash()
     {
-        if (!canDash)
-        {
-            dashTimeCurrent += Time.fixedDeltaTime;
-            if (dashTimeCurrent >= dashCooldown) canDash = true;
-        }
-
         if (isDashing)
         {
             rb.AddForce((isLookingRight ? Vector3.right : -Vector3.right) * dashForce, ForceMode.Impulse);
             isDashing = false;
-            canDash = false;
         }
     }
 
-    public void Ragdoll(float stunTimeSecs)
+    private IEnumerator DashCooldown()
     {
-        inRagdoll = true;
-        stunWait = new WaitForSeconds(stunTimeSecs);
-        StartCoroutine(Stun(stunTimeSecs));
-    }
+        canDash = false;
 
-    private void FlipSprite()
-    {
-        isLookingRight = !isLookingRight;
-        OnPlayerTurned?.Invoke();
-    }
-   
-    public void ApplyForce(Vector3 force, ForceMode forceMode)
-    {
-        rb.AddForce(force, forceMode);
+        yield return dashCooldownWait;
+
+        canDash = true;
     }
 
     private IEnumerator JumpBuffer()
@@ -333,12 +340,32 @@ public class MovimentoJogador : MonoBehaviour
         willJump = false;
     }
 
-    private IEnumerator Stun(float stunTime)
+    private IEnumerator Stun()
     {
         isStunned = true;
-
-        yield return stunWait;
-
+        
+        while(stunTimeRemaining > 0)
+        {
+            stunTimeRemaining -= Time.deltaTime;
+            yield return null;
+        }
         isStunned = false;
+        stunCoroutine = null;
     }
+
+    //Public methods
+    public void Ragdoll(float stunTimeSecs)
+    {
+        inRagdoll = true;
+
+        stunTimeRemaining += stunTimeSecs;
+
+        stunCoroutine ??= StartCoroutine(Stun());
+    }
+   
+    public void ApplyForce(Vector3 force, ForceMode forceMode)
+    {
+        rb.AddForce(force, forceMode);
+    }
+
 }
