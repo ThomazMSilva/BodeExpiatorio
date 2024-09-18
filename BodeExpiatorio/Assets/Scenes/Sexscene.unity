@@ -205,12 +205,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e0f9506c248924bb6f2c6cc0fb82a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchForce: 300
+  launchForce: 15
   damageAmount: 1
-  timeStunned: 15
+  timeStunned: 2
   isDirectionRelevant: 0
   isVelocityRelevant: 1
-  minVelMultiplier: 2
+  minVelMultiplier: 1
   maxVelMultiplier: 10
   terminalVelocity: 30
 --- !u!65 &60274143
@@ -939,7 +939,7 @@ Transform:
   m_GameObject: {fileID: 207161573}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17, y: 16, z: 0}
+  m_LocalPosition: {x: 17, y: 16.5, z: 0}
   m_LocalScale: {x: 5, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3902,13 +3902,17 @@ PrefabInstance:
       propertyPath: clampVelocity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 55350483955099054, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
+      propertyPath: allowRagdollMomentum
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1285180426386494445, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.3
       objectReference: {fileID: 0}
     - target: {fileID: 1285180426386494445, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.91
+      value: 18.56
       objectReference: {fileID: 0}
     - target: {fileID: 1285180426386494445, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5320,7 +5324,7 @@ Transform:
   m_GameObject: {fileID: 1952264640}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.3, y: 3.91, z: -10}
+  m_LocalPosition: {x: 13.3, y: 18.56, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5917,7 +5921,7 @@ Transform:
   m_GameObject: {fileID: 2146377648}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.3, y: 3.91, z: -10}
+  m_LocalPosition: {x: 13.3, y: 18.56, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
