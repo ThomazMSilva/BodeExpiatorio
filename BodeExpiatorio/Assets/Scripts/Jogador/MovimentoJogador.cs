@@ -33,8 +33,10 @@ public class MovimentoJogador : MonoBehaviour
 
     [Tooltip("Se ATIVO, o Jogador não tem nenhum controle de sua velocidade horizontal enquanto estiver em ragdoll.")]
     [SerializeField] private bool allowRagdollMomentum = false;
-    
-        [Space(5f)]
+
+    [SerializeField] private float maxStunTime = 4f;
+
+    [Space(5f)]
 
     [Header("Configurações de Gravidade"), Space(8f)]
 
@@ -89,11 +91,10 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField, Range(0, 1)] private float kneelSpeedMultiplier = 0.7f;
 
-    //[SerializeField]
+    [SerializeField]
     private bool
         isGrounded = true,
         jumpKeyHeld = false,
-        willJump = false,
         isLookingRight,
         isDashing = false,
         canDash = true,
@@ -101,8 +102,10 @@ public class MovimentoJogador : MonoBehaviour
         isStunned = false,
         //isClimbing = false,
         isKneeling;
+    public bool willJump { get; private set; }
+    public bool isStuckInWire = false;
 
-    //[SerializeField]
+    [SerializeField]
     private float
         horizontalInput,
         //verticalInput,
@@ -117,7 +120,8 @@ public class MovimentoJogador : MonoBehaviour
         colliderBaseCenter,
         colliderKneelingCenter,
         moveForce = Vector3.zero,  
-        gravityForce = Vector3.zero;
+        gravityForce = Vector3.zero,
+        sideForce = Vector3.zero;
 
     private WaitForSeconds dashCooldownWait;
 
@@ -129,8 +133,9 @@ public class MovimentoJogador : MonoBehaviour
 
     private RaycastHit hit;
 
-    public delegate void PlayerFlipped();
-    public event PlayerFlipped OnPlayerTurned;
+    public delegate void EventHandler();
+    public event EventHandler OnPlayerTurned;
+    public event EventHandler OnPlayerJumpInput;
 
     //Private methods
     private void Start()
@@ -160,6 +165,8 @@ public class MovimentoJogador : MonoBehaviour
         {
             StopCoroutine(JumpBuffer());
             StartCoroutine(JumpBuffer());
+
+            OnPlayerJumpInput?.Invoke();
             jumpKeyHeld = true;
         }
         if (Input.GetButtonUp(jumpAxis))
@@ -191,7 +198,7 @@ public class MovimentoJogador : MonoBehaviour
         }
         
         if ((horizontalInput > 0 && !isLookingRight) || (horizontalInput < 0 && isLookingRight))
-            FlipSprite();
+            if(!isStuckInWire)FlipSprite();
 
         //verticalInput = Input.GetAxisRaw("Vertical");
     }
@@ -237,9 +244,17 @@ public class MovimentoJogador : MonoBehaviour
 
     private void ApplyGravity()
     {
+        if (isStuckInWire)
+        {
+            rb.useGravity = false;
+            rb.velocity = Vector3.zero;
+            return;
+        }
+        rb.useGravity = true;
+
         if (isGrounded)
             return;
-        
+
         //Pulando e caindo
         float gravityScale = rb.velocity.y < 0 ? fallGravityMultiplier : jumpGravityMultiplier;
         gravityForce = gravity * (gravityScale - 1f);
@@ -272,6 +287,7 @@ public class MovimentoJogador : MonoBehaviour
     private void HandleHorizontalMovement()
     {
         if (allowRagdollMomentum && isStunned) return;
+        if (isStuckInWire) return;
 
         float speed = isKneeling ? moveSpeed * kneelSpeedMultiplier : moveSpeed;
         moveForce.Set(horizontalInput * speed - rb.velocity.x, 0, 0);
@@ -291,9 +307,9 @@ public class MovimentoJogador : MonoBehaviour
 
     private void HandleJump()
     {
-        if (isKneeling) return;
+        if (isKneeling || isStuckInWire) return;
 
-        if (willJump && (coyoteTimeCurrent > 0f))
+        if (willJump && coyoteTimeCurrent > 0f)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             jumpBufferTimeCurrent = 0f;
@@ -308,6 +324,8 @@ public class MovimentoJogador : MonoBehaviour
 
         playerCollider.size = size;
         playerCollider.center = center;
+
+        if (isStuckInWire) SetPlayerWired(false, isLookingRight);
     }
 
     private void HandleDash()
@@ -359,13 +377,16 @@ public class MovimentoJogador : MonoBehaviour
         inRagdoll = true;
 
         stunTimeRemaining += stunTimeSecs;
+        stunTimeRemaining = Mathf.Clamp(stunTimeRemaining, 0, maxStunTime);
 
         stunCoroutine ??= StartCoroutine(Stun());
     }
-   
-    public void ApplyForce(Vector3 force, ForceMode forceMode)
-    {
-        rb.AddForce(force, forceMode);
-    }
 
+    public void ApplyForce(Vector3 force, ForceMode forceMode) => rb.AddForce(force, forceMode);
+
+    public void SetPlayerWired(bool isWired, bool lookingRight)
+    {
+        isStuckInWire = isWired;
+        if (lookingRight != isLookingRight) FlipSprite();
+    }
 }

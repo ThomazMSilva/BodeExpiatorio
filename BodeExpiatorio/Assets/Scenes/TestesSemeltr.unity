@@ -2102,22 +2102,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 55350483955099054, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
-      propertyPath: airControl
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 55350483955099054, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
-      propertyPath: dashCooldown
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 55350483955099054, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
-      propertyPath: isDashUnlocked
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 55350483955099054, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
-      propertyPath: allowRagdollMomentum
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1285180426386494445, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.8
@@ -2126,87 +2110,39 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 4.6
       objectReference: {fileID: 0}
-    - target: {fileID: 1421667424700068788, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
-      propertyPath: baseMaxHealth
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2321935916222869200, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2450134588375341002, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
-      propertyPath: isCountDownActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3129625987159940218, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.49
-      objectReference: {fileID: 0}
-    - target: {fileID: 3129625987159940218, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5.85
-      objectReference: {fileID: 0}
-    - target: {fileID: 3129625987159940218, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
+    - target: {fileID: 1285180426386494445, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.000047564507
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3129625987159940218, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
+    - target: {fileID: 1285180426386494445, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3129625987159940218, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
+    - target: {fileID: 1285180426386494445, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3129625987159940218, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
+    - target: {fileID: 1285180426386494445, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3129625987159940218, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
+    - target: {fileID: 1285180426386494445, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3129625987159940218, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
+    - target: {fileID: 1285180426386494445, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3129625987159940218, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
+    - target: {fileID: 1285180426386494445, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3129625987159940218, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
+    - target: {fileID: 1285180426386494445, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5929497162563460951, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
-      propertyPath: airControl
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5929497162563460951, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
-      propertyPath: clampVelocity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5929497162563460951, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
-      propertyPath: isSpikeJumpUnlocked
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5929497162563460951, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
-      propertyPath: ragdollFollowThrough
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5929497162563460951, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
-      propertyPath: airAccelerationMultiplier
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5929497162563460951, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
-      propertyPath: spikeKneelGravityMultiplier
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7122345557502850977, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
-      propertyPath: goprefab
-      value: 
-      objectReference: {fileID: 8385181900767351869, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
-    - target: {fileID: 8385181900767351869, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
+    - target: {fileID: 2282366166164952403, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: m_Name
       value: Jogador
       objectReference: {fileID: 0}
@@ -2635,6 +2571,7 @@ MonoBehaviour:
   airControl: 1
   airAccelerationMultiplier: 3
   allowRagdollMomentum: 0
+  maxStunTime: 4
   fallGravityMultiplier: 2.5
   jumpGravityMultiplier: 3
   ragdollGravityMultiplier: 3
@@ -2654,6 +2591,7 @@ MonoBehaviour:
   isDashUnlocked: 0
   kneelHeightMultiplier: 0.5
   kneelSpeedMultiplier: 0.7
+  isStuckInWire: 0
 --- !u!1 &678177978
 GameObject:
   m_ObjectHideFlags: 0

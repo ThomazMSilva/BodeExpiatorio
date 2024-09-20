@@ -23,18 +23,18 @@ namespace Assets.Scripts.Camera
 
         [Tooltip("Literalmente pausa o jogo por esse tanto de segundos quando leva dano.")]
         [SerializeField] bool canHitStop = true;
-        [SerializeField, Range(0,0.09f)] private float minHitStopTime = 0.035f;
-        [SerializeField, Range(0,0.09f)] private float maxHitStopTime = 0.07f;
+        [SerializeField, Range(0, 0.09f)] private float minHitStopTime = 0.035f;
+        [SerializeField, Range(0, 0.09f)] private float maxHitStopTime = 0.07f;
 
         private float baseHealth;
 
-        private bool isTimeFrozen;
+        private float origTimeScale = 1;
 
         // Use this for initialization
         private void Awake()
         {
             instance = this;
-            cam = GetComponent<CinemachineVirtualCamera>(); 
+            cam = GetComponent<CinemachineVirtualCamera>();
             perlin = cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
             vida = FindAnyObjectByType<VidaJogador>();
             baseHealth = vida.BaseHealth;
@@ -45,8 +45,8 @@ namespace Assets.Scripts.Camera
 
         public void ShakeCamera(float intensity, float time)
         {
-            StopAllCoroutines();
-            StartCoroutine(ShakeTimer(intensity, time));
+            //if (Shake != null) return;
+            Shake = StartCoroutine(ShakeTimer(intensity, time));
         }
 
 
@@ -62,20 +62,22 @@ namespace Assets.Scripts.Camera
                 yield return null;
             }
             perlin.m_AmplitudeGain = 0;
+            Shake = null;
         }
 
         IEnumerator HitStop(float time)
         {
-            var orgTime = Time.timeScale;
+            origTimeScale = Time.timeScale;
             Time.timeScale = 0;
-         
-            isTimeFrozen = true;
 
             yield return new WaitForSecondsRealtime(time);
-            Time.timeScale = orgTime;
-            
-            isTimeFrozen = false;
+            Time.timeScale = origTimeScale;
+
+            FreezeTime = null;
         }
+
+        private Coroutine FreezeTime;
+        private Coroutine Shake;
 
         public void ShakeOnDamage(object sender, float oldHealth, float newHealth)
         {
@@ -86,16 +88,21 @@ namespace Assets.Scripts.Camera
 
             float damageSeverity = Mathf.Lerp(minShakeIntensity, maxShakeIntensity, prctRelativeToMax);
             float shakeTime = Mathf.Lerp(minShakeTime, maxShakeTime, prctRelativeToMax);
-            
+
             ShakeCamera(damageSeverity, shakeTime);
 
             if (!canHitStop) return;
 
             float hitStopTime = Mathf.Lerp(minHitStopTime, maxHitStopTime, prctRelativeToMax);
 
-            if (!isTimeFrozen)
-                StartCoroutine(HitStop(hitStopTime));
-            
+            if (FreezeTime != null)
+            {
+                StopCoroutine(FreezeTime);
+                Time.timeScale = origTimeScale;
+            }
+
+            FreezeTime = StartCoroutine(HitStop(hitStopTime));
+
         }
     }
 }

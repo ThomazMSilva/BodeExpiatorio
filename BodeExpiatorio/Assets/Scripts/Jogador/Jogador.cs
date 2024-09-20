@@ -24,7 +24,11 @@ public class Jogador : MonoBehaviour
         vida.DamageHealth(damageAmount);
         movimento.ApplyForce(force, forceMode);
         movimento.Ragdoll(stunSeconds);
-        Debug.Log($"Dano: {damageAmount} Forca: {force} Stun: {stunSeconds}sec");
+        //Debug.Log($"Dano: {damageAmount} Forca: {force} Stun: {stunSeconds}sec");
     }    
 
+    public void SetPlayerWired(bool wiredState, bool shouldLookRight)
+    {
+        movimento.SetPlayerWired(wiredState, shouldLookRight);
+    }
 }
