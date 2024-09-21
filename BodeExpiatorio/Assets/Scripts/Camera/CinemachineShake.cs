@@ -45,8 +45,7 @@ namespace Assets.Scripts.Camera
 
         public void ShakeCamera(float intensity, float time)
         {
-            //if (Shake != null) return;
-            Shake = StartCoroutine(ShakeTimer(intensity, time));
+            StartCoroutine(ShakeTimer(intensity, time));
         }
 
 
@@ -62,7 +61,6 @@ namespace Assets.Scripts.Camera
                 yield return null;
             }
             perlin.m_AmplitudeGain = 0;
-            Shake = null;
         }
 
         IEnumerator HitStop(float time)
@@ -77,7 +75,6 @@ namespace Assets.Scripts.Camera
         }
 
         private Coroutine FreezeTime;
-        private Coroutine Shake;
 
         public void ShakeOnDamage(object sender, float oldHealth, float newHealth)
         {

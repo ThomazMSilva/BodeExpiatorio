@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -36,7 +35,7 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField] private float maxStunTime = 4f;
 
-    [Space(5f)]
+        [Space(5f)]
 
     [Header("Configurações de Gravidade"), Space(8f)]
 
@@ -44,13 +43,13 @@ public class MovimentoJogador : MonoBehaviour
     
     [SerializeField] private float jumpGravityMultiplier = 3f; //"Gravidade" qnd dá pulo grande
 
-    [SerializeField] private float ragdollGravityMultiplier = 6f; //"Gravidade" pulando em armadilha
-
         [Space(8f)]
 
-    [SerializeField] private float spikeJumpGravityMultiplier = 0.5f;
+    [SerializeField] private float ragdollGravityMultiplier = 6f; //"Gravidade" pulando em armadilha
 
-    [SerializeField] private float spikeKneelGravityMultiplier = 2f;
+    [SerializeField] private float ragdollJumpGravityMultiplier = 0.5f;
+
+    [SerializeField] private float ragdollKneelGravityMultiplier = 2f;
 
     [Tooltip("Se ativo, o Jogador pode controlar a altura que e lancado pelas armadilhas com seu pulo e prostracao.")]
     public bool isSpikeJumpUnlocked = true;
@@ -71,17 +70,7 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField] private float jumpBufferTimeMax = 0.2f; //Um tempinho que se apertar o botao de pular antes de estar no chao, ainda conta qnd chegar no chão
 
-    [SerializeField] private float shortJumpDelta = 2.5f;
-
-        [Space(5f)]
-    
-    [Header("Configurações de Arrancada"), Space(8f)]
-
-    [SerializeField] private float dashForce = 100f;
-
-    [SerializeField] private float dashCooldown = 1f;
-
-    public bool isDashUnlocked = false;
+    [SerializeField] private float shortJumpDelta = 2.5f; //Multiplicador pra uma "gravidade" extra que permite um pulo curto
 
         [Space(5f)]
 
@@ -93,17 +82,15 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField]
     private bool
-        isGrounded = true,
-        jumpKeyHeld = false,
         isLookingRight,
-        isDashing = false,
-        canDash = true,
+        isGrounded = true,
+        //isClimbing = false,
+        jumpKeyHeld = false,
+        willJump = false,
+        isKneeling = false,
         inRagdoll = false,
         isStunned = false,
-        //isClimbing = false,
-        isKneeling;
-    public bool willJump { get; private set; }
-    public bool isStuckInWire = false;
+        isStuckInWire = false;
 
     [SerializeField]
     private float
@@ -113,17 +100,14 @@ public class MovimentoJogador : MonoBehaviour
         coyoteTimeCurrent,
         stunTimeRemaining;
 
-    private Vector3 
+    private Vector3
         gravity,
         colliderBaseSize,
         colliderKneelingSize,
         colliderBaseCenter,
         colliderKneelingCenter,
-        moveForce = Vector3.zero,  
-        gravityForce = Vector3.zero,
-        sideForce = Vector3.zero;
-
-    private WaitForSeconds dashCooldownWait;
+        moveForce = Vector3.zero,
+        gravityForce = Vector3.zero;
 
     private Coroutine stunCoroutine;
 
@@ -151,15 +135,30 @@ public class MovimentoJogador : MonoBehaviour
         colliderKneelingCenter.Set(colliderBaseCenter.x, colliderBaseCenter.y - (colliderKneelingSize.y * 0.5f), colliderBaseCenter.z);
 
         gravity = Physics.gravity;
-
-        dashCooldownWait = new WaitForSeconds(dashCooldown);
     }
 
-    private void Update() => HandleInput();
+    private void Update()
+    {
+        HandleInput();
+        FlipCheck();
+    }
     
+    private void FixedUpdate()
+    {
+        CheckGrounded();
+        ApplyGravity();
+        HandleHorizontal();
+        HandleJump();
+
+        if(clampVelocity) rb.velocity = Vector3.ClampMagnitude(rb.velocity, terminalVelocity);
+        //Debug.Log(rb.velocity);
+    }
+
+    //Input related
     private void HandleInput()
     {
         horizontalInput = Input.GetAxis(horizontalAxis); 
+        //verticalInput = Input.GetAxisRaw(verticalAxis);
 
         if (Input.GetButtonDown(jumpAxis))
         {
@@ -169,38 +168,17 @@ public class MovimentoJogador : MonoBehaviour
             OnPlayerJumpInput?.Invoke();
             jumpKeyHeld = true;
         }
-        if (Input.GetButtonUp(jumpAxis))
-        {
-            jumpKeyHeld = false;
-        }
+        if (Input.GetButtonUp(jumpAxis)) jumpKeyHeld = false;
 
+        if (Input.GetButtonDown(kneelAxis)) HandleKneel(true);
+        if (Input.GetButtonUp(kneelAxis)) HandleKneel(false);
+       
+    }
 
-        if (Input.GetButtonDown(kneelAxis))
-        {
-            isKneeling = true;
-            HandleKneel(isKneeling);
-        }
-        if (Input.GetButtonUp(kneelAxis))
-        {
-            isKneeling = false;
-            HandleKneel(isKneeling);
-        }
-        
-
-        if (Input.GetButtonDown(dashAxis))
-        {
-            if(isDashUnlocked && canDash)
-            {
-                isDashing = true;
-
-                StartCoroutine(DashCooldown());
-            }
-        }
-        
+    private void FlipCheck()
+    {
         if ((horizontalInput > 0 && !isLookingRight) || (horizontalInput < 0 && isLookingRight))
-            if(!isStuckInWire)FlipSprite();
-
-        //verticalInput = Input.GetAxisRaw("Vertical");
+            if (!isStuckInWire) FlipSprite();
     }
 
     private void FlipSprite()
@@ -209,71 +187,44 @@ public class MovimentoJogador : MonoBehaviour
         OnPlayerTurned?.Invoke();
     }
 
-    private void FixedUpdate()
-    {
-        CheckGrounded();
-        ApplyGravity();
-        HandleHorizontalMovement();
-        HandleJump();
-        HandleDash();
-
-        if(clampVelocity) rb.velocity = Vector3.ClampMagnitude(rb.velocity, terminalVelocity);
-        //Debug.Log(rb.velocity);
-    }
-
+    //Physics operations
     private void CheckGrounded()
     {
         isGrounded = Physics.Raycast(transform.position, -Vector3.up,out hit, raycastDistance, groundLayer);
         
-        //Tentando fazer oq o felipe de prog  comentou na aula
         transform.parent = hit.transform;
-
-        Debug.DrawRay(transform.position, -Vector3.up * raycastDistance, Color.red);
 
         coyoteTimeCurrent = isGrounded ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
 
-        if (inRagdoll && isGrounded) 
-            inRagdoll = false; //Reativa a gravidade de pulo
+        if (inRagdoll && isGrounded) inRagdoll = false; //Reativa a gravidade de pulo
 
-        if (isStunned && isGrounded)
-        {
-            isStunned = false; //Reativa o movimento horizontal
-            stunTimeRemaining = 0;
-        }
+        if (isStunned && isGrounded) EndStun(); //Reativa controle do movimento horizontal
     }
 
     private void ApplyGravity()
     {
+        //Desativa ou ativa a gravidade do rb com os Arames
         if (isStuckInWire)
         {
             rb.useGravity = false;
             rb.velocity = Vector3.zero;
             return;
         }
-        rb.useGravity = true;
+        if(!rb.useGravity) rb.useGravity = true;
 
-        if (isGrounded)
-            return;
+        if (isGrounded) return;
 
         //Pulando e caindo
         float gravityScale = rb.velocity.y < 0 ? fallGravityMultiplier : jumpGravityMultiplier;
         gravityForce = gravity * (gravityScale - 1f);
         rb.AddForce(gravityForce, ForceMode.Acceleration);
 
-        if (rb.velocity.y <= 0)
-            return;
+        if (rb.velocity.y <= 0) return;
 
         //Em armadilha
         if (inRagdoll)
         {
-            float forceMultiplier = ragdollGravityMultiplier;
-
-            if (!isKneeling)
-                forceMultiplier *= jumpKeyHeld && isSpikeJumpUnlocked ? spikeJumpGravityMultiplier : 1f;
-
-            else 
-                forceMultiplier *= isSpikeJumpUnlocked ? spikeKneelGravityMultiplier : 1f;
-
+            float forceMultiplier = ragdollGravityMultiplier * (isKneeling ? ragdollKneelGravityMultiplier : ragdollJumpGravityMultiplier);
             rb.AddForce( forceMultiplier * gravity, ForceMode.Acceleration );
             return;
         }
@@ -284,21 +235,18 @@ public class MovimentoJogador : MonoBehaviour
         
     }
 
-    private void HandleHorizontalMovement()
+    private void HandleHorizontal()
     {
-        if (allowRagdollMomentum && isStunned) return;
-        if (isStuckInWire) return;
+        if (allowRagdollMomentum && isStunned || isStuckInWire) return;
 
         float speed = isKneeling ? moveSpeed * kneelSpeedMultiplier : moveSpeed;
         moveForce.Set(horizontalInput * speed - rb.velocity.x, 0, 0);
-        
-        if (airControl) //Muda velocidade horizontal no ar instantaneamente
-        {
-            rb.AddForce(moveForce, ForceMode.VelocityChange);
-            return;
-        }
-        
-        rb.AddForce //Muda velocidade horizontal no ar gradualmente
+
+        //Instantanea
+        if (airControl) rb.AddForce(moveForce, ForceMode.VelocityChange);
+
+        //Gradual
+        else rb.AddForce 
         (
             isGrounded ? moveForce : moveForce * airAccelerationMultiplier, 
             isGrounded ? ForceMode.VelocityChange : ForceMode.Acceleration
@@ -307,52 +255,30 @@ public class MovimentoJogador : MonoBehaviour
 
     private void HandleJump()
     {
-        if (isKneeling || isStuckInWire) return;
-
-        if (willJump && coyoteTimeCurrent > 0f)
-        {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            jumpBufferTimeCurrent = 0f;
-            coyoteTimeCurrent = 0f;
-        }
-    }    
+        if (!willJump || isKneeling || isStuckInWire || coyoteTimeCurrent <= 0) return;
+     
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        jumpBufferTimeCurrent = 0f;
+        coyoteTimeCurrent = 0f;
+    }
 
     private void HandleKneel(bool willKneel)
     {
-        Vector3 size = willKneel ? colliderKneelingSize : colliderBaseSize;
-        Vector3 center  = willKneel ? colliderKneelingCenter : colliderBaseCenter;
+        playerCollider.size = willKneel ? colliderKneelingSize : colliderBaseSize;
+        playerCollider.center = willKneel ? colliderKneelingCenter : colliderBaseCenter;
+        isKneeling = willKneel;
 
-        playerCollider.size = size;
-        playerCollider.center = center;
-
-        if (isStuckInWire) SetPlayerWired(false, isLookingRight);
+        if (isStuckInWire) SetWiredState(false, isLookingRight);
     }
 
-    private void HandleDash()
-    {
-        if (isDashing)
-        {
-            rb.AddForce((isLookingRight ? Vector3.right : -Vector3.right) * dashForce, ForceMode.Impulse);
-            isDashing = false;
-        }
-    }
-
-    private IEnumerator DashCooldown()
-    {
-        canDash = false;
-
-        yield return dashCooldownWait;
-
-        canDash = true;
-    }
-
+    //Coroutines
     private IEnumerator JumpBuffer()
     {
-        jumpBufferTimeCurrent = 0;
-        while (jumpBufferTimeCurrent < jumpBufferTimeMax)
+        jumpBufferTimeCurrent = jumpBufferTimeMax;
+        willJump = true;
+        while (jumpBufferTimeCurrent > 0)
         {
-            willJump = true;
-            jumpBufferTimeCurrent += Time.deltaTime;
+            jumpBufferTimeCurrent -= Time.deltaTime;
             yield return null;
         }
         willJump = false;
@@ -367,24 +293,29 @@ public class MovimentoJogador : MonoBehaviour
             stunTimeRemaining -= Time.deltaTime;
             yield return null;
         }
+        EndStun();
+    }
+
+    private void EndStun()
+    {
+        stunTimeRemaining = 0;
         isStunned = false;
         stunCoroutine = null;
     }
 
     //Public methods
+    public void ApplyForce(Vector3 force, ForceMode forceMode) => rb.AddForce(force, forceMode);
+
     public void Ragdoll(float stunTimeSecs)
     {
         inRagdoll = true;
 
-        stunTimeRemaining += stunTimeSecs;
-        stunTimeRemaining = Mathf.Clamp(stunTimeRemaining, 0, maxStunTime);
+        stunTimeRemaining = Mathf.Clamp(stunTimeRemaining + stunTimeSecs, 0, maxStunTime);
 
         stunCoroutine ??= StartCoroutine(Stun());
     }
 
-    public void ApplyForce(Vector3 force, ForceMode forceMode) => rb.AddForce(force, forceMode);
-
-    public void SetPlayerWired(bool isWired, bool lookingRight)
+    public void SetWiredState(bool isWired, bool lookingRight)
     {
         isStuckInWire = isWired;
         if (lookingRight != isLookingRight) FlipSprite();

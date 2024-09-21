@@ -29,6 +29,6 @@ public class Jogador : MonoBehaviour
 
     public void SetPlayerWired(bool wiredState, bool shouldLookRight)
     {
-        movimento.SetPlayerWired(wiredState, shouldLookRight);
+        movimento.SetWiredState(wiredState, shouldLookRight);
     }
 }
