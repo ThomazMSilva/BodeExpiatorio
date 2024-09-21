@@ -14,8 +14,6 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField] private string kneelAxis = "Fire3";
 
-    [SerializeField] private string dashAxis = "Fire1";
-
     [SerializeField] private float moveSpeed = 5f;
 
     [Tooltip("Se ativo, a velocidade maxima que o Jogador pode se mover tem um limite.")]
@@ -258,7 +256,7 @@ public class MovimentoJogador : MonoBehaviour
         if (!willJump || isKneeling || isStuckInWire || coyoteTimeCurrent <= 0) return;
      
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        jumpBufferTimeCurrent = 0f;
+        jumpBufferTimeCurrent = jumpBufferTimeMax;
         coyoteTimeCurrent = 0f;
     }
 
@@ -275,9 +273,9 @@ public class MovimentoJogador : MonoBehaviour
     private IEnumerator JumpBuffer()
     {
         jumpBufferTimeCurrent = jumpBufferTimeMax;
-        willJump = true;
         while (jumpBufferTimeCurrent > 0)
         {
+            willJump = true;
             jumpBufferTimeCurrent -= Time.deltaTime;
             yield return null;
         }
