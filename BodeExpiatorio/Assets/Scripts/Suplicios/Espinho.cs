@@ -21,11 +21,7 @@ public class Espinho : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        GameObject go = collision.gameObject;
-        
-        if (!go.CompareTag("Player")) return;
-        
-        if (!go.TryGetComponent<Jogador>(out Jogador player)) return;
+        if (!collision.gameObject.TryGetComponent<Jogador>(out Jogador _player)) return;
 
         Vector3 relativeVel = collision.relativeVelocity;
         float colDotToUp = Vector3.Dot(relativeVel, -transform.up); //Produto vetorial do quão de frente foi a colisão
@@ -39,13 +35,12 @@ public class Espinho : MonoBehaviour
         if(!isDirectionRelevant) colDirMultiplier = colDirMultiplier > 0 ? 1 : 0; //So checa se a colisao veio de frente, ou nao, sem gradual
 
         float forceRelativeToUp = launchForce * colDirMultiplier;
-        Debug.Log("Force reltive to up (0 - 1): " + forceRelativeToUp);
         float finalForce = !isVelocityRelevant ? forceRelativeToUp : forceRelativeToUp * forceMultiplier;
         float damage = !isVelocityRelevant ? damageAmount : damageAmount + (damageAmount * velPrctRelativeToTerminal);
 
         //Debug.Log($"velPrct: {velPrctRelativeToTerminal} forceMultiplier: {finalForce}");
 
-        player.ApplyDamageEffect(damage, finalForce * transform.up, timeStunned);
+        _player.ApplyDamageEffect(damage, finalForce * transform.up, timeStunned);
     }
 
 }

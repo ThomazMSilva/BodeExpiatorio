@@ -2146,6 +2146,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jogador
       objectReference: {fileID: 0}
+    - target: {fileID: 2317804128188777539, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
+      propertyPath: isCountDownActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2317804128188777539, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
+      propertyPath: countDownMultiplier
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2564,7 +2572,6 @@ MonoBehaviour:
   horizontalAxis: Horizontal
   jumpAxis: Jump
   kneelAxis: Fire3
-  dashAxis: Fire1
   moveSpeed: 5
   clampVelocity: 1
   terminalVelocity: 30
@@ -2575,9 +2582,9 @@ MonoBehaviour:
   fallGravityMultiplier: 2.5
   jumpGravityMultiplier: 3
   ragdollGravityMultiplier: 3
-  spikeJumpGravityMultiplier: 0.5
-  spikeKneelGravityMultiplier: 1.25
-  isSpikeJumpUnlocked: 1
+  ragdollJumpGravityMultiplier: 0.5
+  ragdollKneelGravityMultiplier: 2
+  isRagdollJumpUnlocked: 1
   raycastDistance: 1
   groundLayer:
     serializedVersion: 2
@@ -2586,12 +2593,20 @@ MonoBehaviour:
   coyoteTimeMax: 0.3
   jumpBufferTimeMax: 0.25
   shortJumpDelta: 0.2
-  dashForce: 5
-  dashCooldown: 1
-  isDashUnlocked: 0
   kneelHeightMultiplier: 0.5
   kneelSpeedMultiplier: 0.7
+  isLookingRight: 0
+  isGrounded: 1
+  jumpKeyHeld: 0
+  willJump: 0
+  isKneeling: 0
+  inRagdoll: 0
+  isStunned: 0
   isStuckInWire: 0
+  horizontalInput: 0
+  jumpBufferTimeCurrent: 0
+  coyoteTimeCurrent: 0
+  stunTimeRemaining: 0
 --- !u!1 &678177978
 GameObject:
   m_ObjectHideFlags: 0
@@ -5214,6 +5229,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1710900457}
   m_CullTransparentMesh: 1
+--- !u!1 &1713755061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1713755062}
+  - component: {fileID: 1713755063}
+  m_Layer: 0
+  m_Name: Confessionario
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1713755062
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713755061}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.8, y: 4.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1713755063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713755061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18c368781a8bdc34980d74976157d5ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnPoint: {fileID: 1713755062}
 --- !u!1 &1714732676
 GameObject:
   m_ObjectHideFlags: 0
@@ -6204,6 +6264,7 @@ SceneRoots:
   - {fileID: 1198482503}
   - {fileID: 349541996}
   - {fileID: 676575116}
+  - {fileID: 1713755062}
   - {fileID: 535666101}
   - {fileID: 2690204}
   - {fileID: 1170800107}

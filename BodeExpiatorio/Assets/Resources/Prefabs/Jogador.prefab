@@ -149,6 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b70f1695bbd2b64f8857238a8791aca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movimento: {fileID: 55350483955099054}
+  vida: {fileID: 1652553025521689414}
 --- !u!114 &1652553025521689414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,7 +181,6 @@ MonoBehaviour:
   horizontalAxis: Horizontal
   jumpAxis: Jump
   kneelAxis: Fire3
-  dashAxis: Fire1
   moveSpeed: 10
   clampVelocity: 1
   terminalVelocity: 30
@@ -190,9 +191,9 @@ MonoBehaviour:
   fallGravityMultiplier: 5
   jumpGravityMultiplier: 3
   ragdollGravityMultiplier: 6
-  spikeJumpGravityMultiplier: 0.5
-  spikeKneelGravityMultiplier: 2.5
-  isSpikeJumpUnlocked: 1
+  ragdollJumpGravityMultiplier: 0.5
+  ragdollKneelGravityMultiplier: 2
+  isRagdollJumpUnlocked: 1
   raycastDistance: 0.75
   groundLayer:
     serializedVersion: 2
@@ -201,19 +202,15 @@ MonoBehaviour:
   coyoteTimeMax: 0.1
   jumpBufferTimeMax: 0.15
   shortJumpDelta: 1.5
-  dashForce: 200
-  dashCooldown: 1.5
-  isDashUnlocked: 0
   kneelHeightMultiplier: 0.5
   kneelSpeedMultiplier: 0.7
+  isLookingRight: 0
   isGrounded: 1
   jumpKeyHeld: 0
-  isLookingRight: 0
-  isDashing: 0
-  canDash: 1
+  willJump: 0
+  isKneeling: 0
   inRagdoll: 0
   isStunned: 0
-  isKneeling: 0
   isStuckInWire: 0
   horizontalInput: 0
   jumpBufferTimeCurrent: 0

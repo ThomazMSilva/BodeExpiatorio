@@ -50,7 +50,7 @@ public class MovimentoJogador : MonoBehaviour
     [SerializeField] private float ragdollKneelGravityMultiplier = 2f;
 
     [Tooltip("Se ativo, o Jogador pode controlar a altura que e lancado pelas armadilhas com seu pulo e prostracao.")]
-    public bool isSpikeJumpUnlocked = true;
+    public bool isRagdollJumpUnlocked = true;
 
         [Space(8f)]
 
@@ -219,10 +219,15 @@ public class MovimentoJogador : MonoBehaviour
 
         if (rb.velocity.y <= 0) return;
 
-        //Em armadilha
+        //Forca de armadilha
         if (inRagdoll)
         {
-            float forceMultiplier = ragdollGravityMultiplier * (isKneeling ? ragdollKneelGravityMultiplier : ragdollJumpGravityMultiplier);
+            float forceMultiplier = ragdollGravityMultiplier;
+
+            if (isRagdollJumpUnlocked)
+                forceMultiplier *= isKneeling ? ragdollKneelGravityMultiplier :
+                                  jumpKeyHeld ? ragdollJumpGravityMultiplier  : 1f;
+
             rb.AddForce( forceMultiplier * gravity, ForceMode.Acceleration );
             return;
         }
@@ -256,8 +261,19 @@ public class MovimentoJogador : MonoBehaviour
         if (!willJump || isKneeling || isStuckInWire || coyoteTimeCurrent <= 0) return;
      
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        jumpBufferTimeCurrent = jumpBufferTimeMax;
         coyoteTimeCurrent = 0f;
+    }
+
+    private IEnumerator JumpBuffer()
+    {
+        jumpBufferTimeCurrent = jumpBufferTimeMax;
+        while (jumpBufferTimeCurrent > 0)
+        {
+            willJump = true;
+            jumpBufferTimeCurrent -= Time.deltaTime;
+            yield return null;
+        }
+        willJump = false;
     }
 
     private void HandleKneel(bool willKneel)
@@ -269,17 +285,16 @@ public class MovimentoJogador : MonoBehaviour
         if (isStuckInWire) SetWiredState(false, isLookingRight);
     }
 
-    //Coroutines
-    private IEnumerator JumpBuffer()
+    //Public methods
+    public void ApplyForce(Vector3 force, ForceMode forceMode) => rb.AddForce(force, forceMode);
+
+    public void Ragdoll(float stunTimeSecs)
     {
-        jumpBufferTimeCurrent = jumpBufferTimeMax;
-        while (jumpBufferTimeCurrent > 0)
-        {
-            willJump = true;
-            jumpBufferTimeCurrent -= Time.deltaTime;
-            yield return null;
-        }
-        willJump = false;
+        inRagdoll = true;
+
+        stunTimeRemaining = Mathf.Clamp(stunTimeRemaining + stunTimeSecs, 0, maxStunTime);
+
+        stunCoroutine ??= StartCoroutine(Stun());
     }
 
     private IEnumerator Stun()
@@ -301,16 +316,22 @@ public class MovimentoJogador : MonoBehaviour
         stunCoroutine = null;
     }
 
-    //Public methods
-    public void ApplyForce(Vector3 force, ForceMode forceMode) => rb.AddForce(force, forceMode);
-
-    public void Ragdoll(float stunTimeSecs)
+    public void EnterWarp(Vector3 position)
     {
-        inRagdoll = true;
+        rb.velocity = Vector3.zero;
 
-        stunTimeRemaining = Mathf.Clamp(stunTimeRemaining + stunTimeSecs, 0, maxStunTime);
+        rb.isKinematic = true;
 
-        stunCoroutine ??= StartCoroutine(Stun());
+        position.Set(position.x, position.y, rb.position.z);
+        rb.position = position;
+
+        StartCoroutine(ExitWarp());
+    }
+
+    private IEnumerator ExitWarp()
+    {
+        yield return new WaitForFixedUpdate();
+        rb.isKinematic = false;
     }
 
     public void SetWiredState(bool isWired, bool lookingRight)

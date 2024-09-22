@@ -30,6 +30,7 @@ public class ContagemRegressivaVidaJogador : MonoBehaviour
 
     private void Update() 
     {
+        if (Input.GetKeyDown(KeyCode.K)) isCountDownActive = !isCountDownActive;
         if (isCountDownActive) 
             CountDown(); 
     }
