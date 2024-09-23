@@ -1,25 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class AbirPause : MonoBehaviour
+public class AbrirPause : MonoBehaviour
 {
-    public GameObject menu;
-    public bool Pausado;
+    public GameObject menu; 
+    public bool Pausado;    
 
     void Start()
     {
-        menu.SetActive(false);
+        menu.SetActive(false); 
     }
 
-    void update()
+    void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             if (Pausado)
             {
-                ResumeGame();
+                ResumeGame(); 
             }
             else
             {
@@ -31,14 +29,17 @@ public class AbirPause : MonoBehaviour
     public void PauseGame()
     {
         menu.SetActive(true);
-        Time.timeScale = 0f;
+        Time.timeScale = 0f; 
         Pausado = true;
+
+      
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void ResumeGame()
     {
         menu.SetActive(false);
-        Time.timeScale = 1f;
+        Time.timeScale = 1f;   
         Pausado = false;
     }
 }
