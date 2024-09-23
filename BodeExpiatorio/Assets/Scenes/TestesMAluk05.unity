@@ -367,19 +367,19 @@ MonoBehaviour:
   horizontalAxis: Horizontal
   jumpAxis: Jump
   kneelAxis: Fire3
-  dashAxis: Fire1
   moveSpeed: 10
   clampVelocity: 1
   terminalVelocity: 30
   airControl: 1
   airAccelerationMultiplier: 3
   allowRagdollMomentum: 0
+  maxStunTime: 4
   fallGravityMultiplier: 3
   jumpGravityMultiplier: 3
   ragdollGravityMultiplier: 6
-  spikeJumpGravityMultiplier: 0.5
-  spikeKneelGravityMultiplier: 2
-  isSpikeJumpUnlocked: 1
+  ragdollJumpGravityMultiplier: 0.5
+  ragdollKneelGravityMultiplier: 2
+  isRagdollJumpUnlocked: 1
   raycastDistance: 0.75
   groundLayer:
     serializedVersion: 2
@@ -388,11 +388,20 @@ MonoBehaviour:
   coyoteTimeMax: 0.15
   jumpBufferTimeMax: 0.25
   shortJumpDelta: 2.5
-  dashForce: 200
-  dashCooldown: 1.75
-  isDashUnlocked: 0
   kneelHeightMultiplier: 0.5
   kneelSpeedMultiplier: 0.7
+  isLookingRight: 0
+  isGrounded: 1
+  jumpKeyHeld: 0
+  willJump: 0
+  isKneeling: 0
+  inRagdoll: 0
+  isStunned: 0
+  isStuckInWire: 0
+  horizontalInput: 0
+  jumpBufferTimeCurrent: 0
+  coyoteTimeCurrent: 0
+  stunTimeRemaining: 0
 --- !u!54 &83774177
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -500,6 +509,14 @@ MonoBehaviour:
   baseMaxHealth: 10
   currentMaxHealth: 10
   currentHealth: 10
+  isIgnoreFirstDamageActive: 0
+  isIgnoreLethalDamageActive: 0
+  isReducedDamageActive: 0
+  reducedDamageMultiplier: 0.5
+  isCreepingDamageActive: 0
+  stopCreepingDamageAtFront: 0
+  creepingDamagePerSecond: 1
+  currentDamageToCreep: 0
 --- !u!114 &83774183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,7 +534,11 @@ MonoBehaviour:
   countDownMultiplier: 2
   recoveryMultiplier: 10
   currentTime: 0
+  countDownPauseTime: 10
+  currentPauseTime: 10
   isCountDownActive: 1
+  isDoubleFervorActive: 0
+  isCountDownPauseActive: 0
 --- !u!65 &83774184
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -672,6 +693,111 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 113867369}
   m_CullTransparentMesh: 1
+--- !u!1 &161396565
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 161396569}
+  - component: {fileID: 161396568}
+  - component: {fileID: 161396567}
+  - component: {fileID: 161396566}
+  m_Layer: 0
+  m_Name: Sensor Cima
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &161396566
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161396565}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &161396567
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161396565}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &161396568
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161396565}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &161396569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161396565}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 25.45, y: 8.37, z: 0.36490726}
+  m_LocalScale: {x: 5.0917835, y: 3.0334618, z: 2.392978}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &215508416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1707,7 +1833,7 @@ Transform:
   m_GameObject: {fileID: 577284143}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.38, z: 0.000000029802}
+  m_LocalPosition: {x: 0, y: -0.506, z: 0.000000029802}
   m_LocalScale: {x: 1.0621198, y: 0.30173, z: 1.0866807}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1730,7 +1856,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -2079,19 +2205,19 @@ MonoBehaviour:
   horizontalAxis: Horizontal
   jumpAxis: Jump
   kneelAxis: Fire3
-  dashAxis: Fire1
   moveSpeed: 5
   clampVelocity: 1
   terminalVelocity: 30
   airControl: 1
   airAccelerationMultiplier: 3
   allowRagdollMomentum: 0
+  maxStunTime: 4
   fallGravityMultiplier: 2.5
   jumpGravityMultiplier: 3
   ragdollGravityMultiplier: 6
-  spikeJumpGravityMultiplier: 0.5
-  spikeKneelGravityMultiplier: 2
-  isSpikeJumpUnlocked: 1
+  ragdollJumpGravityMultiplier: 0.5
+  ragdollKneelGravityMultiplier: 2
+  isRagdollJumpUnlocked: 1
   raycastDistance: 1
   groundLayer:
     serializedVersion: 2
@@ -2100,11 +2226,20 @@ MonoBehaviour:
   coyoteTimeMax: 0.3
   jumpBufferTimeMax: 0.25
   shortJumpDelta: 0.2
-  dashForce: 5
-  dashCooldown: 1
-  isDashUnlocked: 0
   kneelHeightMultiplier: 0.5
   kneelSpeedMultiplier: 0.7
+  isLookingRight: 0
+  isGrounded: 1
+  jumpKeyHeld: 0
+  willJump: 0
+  isKneeling: 0
+  inRagdoll: 0
+  isStunned: 0
+  isStuckInWire: 0
+  horizontalInput: 0
+  jumpBufferTimeCurrent: 0
+  coyoteTimeCurrent: 0
+  stunTimeRemaining: 0
 --- !u!1 &788231253
 GameObject:
   m_ObjectHideFlags: 0
@@ -2238,6 +2373,111 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788231253}
   m_CullTransparentMesh: 1
+--- !u!1 &855923342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 855923346}
+  - component: {fileID: 855923345}
+  - component: {fileID: 855923344}
+  - component: {fileID: 855923343}
+  m_Layer: 0
+  m_Name: Sensor Baixo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &855923343
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855923342}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &855923344
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855923342}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &855923345
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855923342}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &855923346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855923342}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 25.45, y: -2.84, z: 0.36490726}
+  m_LocalScale: {x: 4.621705, y: 2.220238, z: 2.172056}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &863846194
 GameObject:
   m_ObjectHideFlags: 0
@@ -2642,7 +2882,7 @@ Transform:
   m_GameObject: {fileID: 958815836}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.39, z: 0.000000029802}
+  m_LocalPosition: {x: 0, y: 1.08, z: 0.000000029802}
   m_LocalScale: {x: 1.0621198, y: 0.30173, z: 1.0866807}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2665,7 +2905,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -3207,11 +3447,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c5b14cab2e5ce740a21289f92e32bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallSpeed: 30
-  riseSpeed: 5
+  fallSpeed: 20
+  riseSpeed: 2
   waitTimeBeforeFall: 2
+  detectionSize: {x: 2.16, y: 0.02, z: 1}
+  detectionRadius: 0.1
   bottomSensor: {fileID: 577284144}
   topSensor: {fileID: 958815837}
+  ceilingSensor: {fileID: 0}
+  floorSensor: {fileID: 0}
 --- !u!1 &1289998998
 GameObject:
   m_ObjectHideFlags: 0
@@ -4344,3 +4588,5 @@ SceneRoots:
   - {fileID: 596468041}
   - {fileID: 1840134566}
   - {fileID: 1239841716}
+  - {fileID: 161396569}
+  - {fileID: 855923346}

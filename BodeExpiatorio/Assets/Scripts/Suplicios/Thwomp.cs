@@ -3,19 +3,19 @@ using UnityEngine;
 
 public class Thwomp : MonoBehaviour
 {
-    public float fallSpeed = 20f; 
+    public float fallSpeed = 20f;
     public float riseSpeed = 2f;
-    public float waitTimeBeforeFall = 2f; 
+    public float waitTimeBeforeFall = 2f;
+    public Vector3 detectionSize = new Vector3(1f, 0.1f, 1f);
+    public float detectionRadius = 0.5f;
+    public Transform bottomSensor;
+    public Transform topSensor;
+
+    public Transform ceilingSensor;
+    public Transform floorSensor;
+
     private bool isFalling = true;
     private bool isRising = false;
-    public Transform bottomSensor; 
-    public Transform topSensor; 
-
-    private void Start()
-    {
-
-        isFalling = true;
-    }
 
     private void Update()
     {
@@ -29,63 +29,114 @@ public class Thwomp : MonoBehaviour
         }
     }
 
-
     private void Fall()
     {
+
         transform.position += Vector3.down * fallSpeed * Time.deltaTime;
 
 
-        RaycastHit hit;
-        if (Physics.Raycast(bottomSensor.position, Vector3.down, out hit, 0.1f))
-        {
-            if (hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Player"))
-            {
-                if (hit.collider.CompareTag("Player"))
-                {
-     
-                    VidaJogador vidaJogador = hit.collider.GetComponent<VidaJogador>();
-                    if (vidaJogador != null)
-                    {
-                        vidaJogador.DamageHealth(vidaJogador.CurrentHealth);
-                    }
-                }
+        Collider[] bottomColliders = Physics.OverlapBox(bottomSensor.position, detectionSize / 2, Quaternion.identity);
 
-        
-                StartCoroutine(RiseAfterDelay());
+        bool hitGround = false;
+        bool hitPlayer = false;
+
+        foreach (var collider in bottomColliders)
+        {
+            if (collider.CompareTag("Ground"))
+            {
+                hitGround = true;
+            }
+            else if (collider.CompareTag("Player"))
+            {
+                hitPlayer = true;
             }
         }
-    }
 
+
+        if (hitGround)
+        {
+
+            if (hitPlayer)
+            {
+                DamagePlayer(bottomColliders);
+            }
+
+            StartCoroutine(RiseAfterDelay());
+        }
+    }
 
     private void Rise()
     {
+
         transform.position += Vector3.up * riseSpeed * Time.deltaTime;
 
-        
-        RaycastHit hit;
-        if (Physics.Raycast(topSensor.position, Vector3.up, out hit, 0.1f))
+
+        Collider[] topColliders = Physics.OverlapBox(topSensor.position, detectionSize / 2, Quaternion.identity);
+
+        bool hitCeiling = false;
+        bool hitPlayer = false;
+
+        foreach (var collider in topColliders)
         {
-            if (hit.collider.CompareTag("Ground"))
+            if (collider.CompareTag("Ground"))
             {
-              
-                StartCoroutine(WaitBeforeFall());
+                hitCeiling = true;
             }
+            else if (collider.CompareTag("Player"))
+            {
+                hitPlayer = true;
+            }
+        }
+
+
+        if (hitCeiling)
+        {
+
+            if (hitPlayer)
+            {
+                DamagePlayer(topColliders);
+            }
+
+            StartCoroutine(WaitBeforeFall());
         }
     }
 
+    private void DamagePlayer(Collider[] colliders)
+    {
+        foreach (var collider in colliders)
+        {
+            if (collider.CompareTag("Player"))
+            {
+                VidaJogador vidaJogador = collider.GetComponent<VidaJogador>();
+                if (vidaJogador != null)
+                {
+                    vidaJogador.DamageHealth(vidaJogador.CurrentHealth);
+                }
+            }
+        }
+    }
 
     private IEnumerator RiseAfterDelay()
     {
         isFalling = false;
-        yield return new WaitForSeconds(0.5f); 
+        yield return new WaitForSeconds(0.5f);
         isRising = true;
     }
-
 
     private IEnumerator WaitBeforeFall()
     {
         isRising = false;
-        yield return new WaitForSeconds(waitTimeBeforeFall); 
+        yield return new WaitForSeconds(waitTimeBeforeFall);
         isFalling = true;
     }
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(bottomSensor.position, detectionSize);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(topSensor.position, detectionSize);
+    }
+
 }
