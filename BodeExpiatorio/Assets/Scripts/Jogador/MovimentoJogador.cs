@@ -148,7 +148,7 @@ public class MovimentoJogador : MonoBehaviour
         HandleHorizontal();
         HandleJump();
 
-        if(clampVelocity) rb.velocity = Vector3.ClampMagnitude(rb.velocity, terminalVelocity);
+        if(clampVelocity && !rb.isKinematic) rb.velocity = Vector3.ClampMagnitude(rb.velocity, terminalVelocity);
         //Debug.Log(rb.velocity);
     }
 

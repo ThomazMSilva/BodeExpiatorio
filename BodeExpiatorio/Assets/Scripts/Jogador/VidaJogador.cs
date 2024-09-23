@@ -1,5 +1,7 @@
 using UnityEngine;
 using Assets.Scripts.Camera;
+using System.Collections;
+
 
 
 #if UNITY_EDITOR
@@ -39,40 +41,124 @@ public class VidaJogador : MonoBehaviour
             float oldValue = currentHealth;
             currentHealth = Mathf.Clamp(value, 0, currentMaxHealth);
             OnHealthChanged?.Invoke(this, oldValue, currentHealth);
-            if (currentHealth <= 0)
-                OnPlayerDeath?.Invoke();
+
+            if (currentHealth <= 0) OnPlayerDeath?.Invoke();
+
+            if (isCreepingDamageActive && currentHealth > CurrentFrontHealth) return;
+
+            if (stopCreepingDamageAtFront) currentDamageToCreep = 0;
+
+            CurrentFrontHealth = currentHealth;
         }
     }
+    private float currentFrontHealth;
+    public float CurrentFrontHealth
+    {
+        get => currentFrontHealth;
+        private set
+        {
+            float oldHealth = currentFrontHealth;
+            currentFrontHealth = Mathf.Clamp(value, 0, currentMaxHealth);
+            OnFrontHealthChanged?.Invoke(this, oldHealth, currentFrontHealth);
+
+            if (currentFrontHealth > currentHealth) CurrentHealth = currentFrontHealth;
+        }
+    }
+    [Header("Buffs"), Space(8f)]
+
+    public bool isIgnoreFirstDamageActive = false;
+    public bool isIgnoreLethalDamageActive = false;
+
+    [Space(8f)]
+
+    public bool isReducedDamageActive = false;
+    [SerializeField, Range(0, 1)] private float reducedDamageMultiplier = .5f;
+
+    [Space(8f)]
+
+    public bool isCreepingDamageActive = false;
+    [Tooltip("Para de diminuir a Vida Real (cinza) quando chega na Fachada (vermelha). Se habilitado, curar pode parar o dano contínuo.")]
+    [SerializeField] bool stopCreepingDamageAtFront = false;
+    [SerializeField] private float creepingDamagePerSecond = 1f;
+    [SerializeField] private float currentDamageToCreep;
+    private Coroutine creeping;
+
+    public delegate void HealthChangedHandler(object sender, float oldHealth, float newHealth);
+
+    public delegate void PlayerDeathHandler();
 
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.P)) CureHealth(25f);
     }
-
-    public delegate void HealthChangedHandler(object sender, float oldHealth, float newHealth);
-    public event HealthChangedHandler OnHealthChanged;
-    public event HealthChangedHandler OnMaxHealthChanged;
-
-    public delegate void PlayerDeathHandler();
-    public event PlayerDeathHandler OnPlayerDeath;
-    public event PlayerDeathHandler OnPlayerTrueDeath;
-
+   
     private void Start()
     {
         currentMaxHealth = baseMaxHealth;
         currentHealth = currentMaxHealth;
+        currentFrontHealth = currentHealth;
+
+        OnPlayerSaved += () => Debug.Log("Se safou de dano, por um fio!");
     }
-        
+
     public void DamageHealth(float damageAmount)
     {
-        CurrentHealth -= damageAmount;
+        if (isIgnoreFirstDamageActive)
+        {
+            isIgnoreFirstDamageActive = false;
+            OnPlayerSaved?.Invoke();
+            return;
+        }
+        
+        if (isIgnoreLethalDamageActive && damageAmount >= currentHealth)
+        {
+            damageAmount = Mathf.Clamp(damageAmount, 0f, currentHealth - 1f);
+            isIgnoreLethalDamageActive = false;
+            OnPlayerSaved?.Invoke();
+        }
+
+        if (isReducedDamageActive) damageAmount *= reducedDamageMultiplier;
+        
+        if (!isCreepingDamageActive || CurrentFrontHealth <= 0)
+        {
+            CurrentHealth -= damageAmount;
+            return;
+        }
+
+        CurrentFrontHealth -= damageAmount;
+        currentDamageToCreep += damageAmount;
+
+        creeping ??= StartCoroutine(CreepDamage());
     }
-    public void CureHealth(float cureAmount) => CurrentHealth += cureAmount;
+
+    private IEnumerator CreepDamage()
+    {
+        while (currentDamageToCreep >= 0)
+        {
+            CurrentHealth -= creepingDamagePerSecond * Time.deltaTime;
+            currentDamageToCreep -= creepingDamagePerSecond * Time.deltaTime;
+            yield return null;
+        }
+        creeping = null;
+    }
+
+    public void CureHealth(float cureAmount)
+    {
+        if (!isCreepingDamageActive) CurrentHealth += cureAmount;
+        else CurrentFrontHealth += cureAmount;
+    }
 
     public void FullyRecoverMaxHealth() => CurrentMaxHealth = baseMaxHealth;
 
     public void DamageMaxHealth(float damageAmount) => CurrentMaxHealth -= damageAmount;
     public void CureMaxHealth(float cureAmount) => CurrentMaxHealth += cureAmount;
+
+    public event HealthChangedHandler OnHealthChanged;
+    public event HealthChangedHandler OnMaxHealthChanged;
+    public event HealthChangedHandler OnFrontHealthChanged;
+    public event PlayerDeathHandler OnPlayerDeath;
+    public event PlayerDeathHandler OnPlayerTrueDeath;
+    public event PlayerDeathHandler OnPlayerSaved;
 }
 
 #if UNITY_EDITOR

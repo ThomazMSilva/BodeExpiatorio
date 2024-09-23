@@ -18,6 +18,7 @@ namespace Assets.Scripts.Camera
         [SerializeField] private float maxShakeTime = 1f;
         [SerializeField] private float minShakeIntensity = 5;
         [SerializeField] private float maxShakeIntensity = 25;
+        [SerializeField] private float minDamageToActivate = 1f;
 
         [Space(8f)]
 
@@ -75,12 +76,15 @@ namespace Assets.Scripts.Camera
         }
 
         private Coroutine FreezeTime;
-
+        
         public void ShakeOnDamage(object sender, float oldHealth, float newHealth)
         {
             if (newHealth >= oldHealth) return;
 
             float damageDone = oldHealth - newHealth;
+
+            if (damageDone < minDamageToActivate) return;
+            
             float prctRelativeToMax = Mathf.Clamp01(damageDone / baseHealth);
 
             float damageSeverity = Mathf.Lerp(minShakeIntensity, maxShakeIntensity, prctRelativeToMax);

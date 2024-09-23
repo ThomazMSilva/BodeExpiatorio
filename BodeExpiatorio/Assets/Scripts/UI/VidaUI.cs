@@ -6,7 +6,8 @@ public class VidaUI : MonoBehaviour
     [SerializeField]
     Image
         MaxHealthBar,
-        CurrentHealthBar;
+        CurrentHealthBar,
+        FrontHealthBar;
 
     private VidaJogador vida;
     private float fillMultiplier;
@@ -21,6 +22,12 @@ public class VidaUI : MonoBehaviour
     {
         vida.OnHealthChanged += ChangeHealthUI;
         vida.OnMaxHealthChanged += ChangeMaxHealthUI;
+        vida.OnFrontHealthChanged += ChangeFrontHealth;
+    }
+
+    private void ChangeFrontHealth(object sender, float oldHealth, float newHealth)
+    {
+        FrontHealthBar.fillAmount = newHealth * fillMultiplier;
     }
 
     private void ChangeMaxHealthUI(object sender, float oldHealth, float newHealth)
