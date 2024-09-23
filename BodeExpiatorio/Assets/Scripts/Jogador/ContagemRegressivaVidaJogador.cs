@@ -23,9 +23,6 @@ public class ContagemRegressivaVidaJogador : MonoBehaviour
     public bool isCountDownPauseActive = false;
 
     private VidaJogador vida;
-
-    /*public delegate void CountDownHandler(float currentTime);
-    public CountDownHandler OnCountUp;*/
     
     private void OnEnable() => vida.OnHealthChanged += RecoverTimeOnCD;
     

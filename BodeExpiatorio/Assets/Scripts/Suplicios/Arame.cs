@@ -20,13 +20,13 @@ namespace Assets.Scripts.Suplicios
             _player.SetPlayerWired(true, willLookRight);
             _player.ApplyDamageEffect(damage);
 
-            _player.Movimento.OnPlayerJumpInput += WallPush;
+            Entrada.Instance.OnJumpButtonDown += WallPush;
         }
 
         private void OnTriggerExit(Collider other)
         {
             if (!other.gameObject.CompareTag("Player")) return;
-            if(_player != null) _player.Movimento.OnPlayerJumpInput -= WallPush;
+            if(_player != null) Entrada.Instance.OnJumpButtonDown -= WallPush;
         }
 
         private void WallPush()

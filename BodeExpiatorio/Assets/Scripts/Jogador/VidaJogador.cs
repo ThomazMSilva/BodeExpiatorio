@@ -1,5 +1,4 @@
 using UnityEngine;
-using Assets.Scripts.Camera;
 using System.Collections;
 
 
@@ -153,11 +152,13 @@ public class VidaJogador : MonoBehaviour
     public void FullyRecoverMaxHealth() => CurrentMaxHealth = baseMaxHealth;
 
     public void DamageMaxHealth(float damageAmount) => CurrentMaxHealth -= damageAmount;
+    
     public void CureMaxHealth(float cureAmount) => CurrentMaxHealth += cureAmount;
 
     public event HealthChangedHandler OnHealthChanged;
     public event HealthChangedHandler OnMaxHealthChanged;
     public event HealthChangedHandler OnFrontHealthChanged;
+
     public event PlayerDeathHandler OnPlayerDeath;
     public event PlayerDeathHandler OnPlayerTrueDeath;
     public event PlayerDeathHandler OnPlayerSaved;

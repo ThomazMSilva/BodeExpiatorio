@@ -1768,11 +1768,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317804128188777539, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: isCountDownActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2317804128188777539, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: countDownMultiplier
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2196,9 +2196,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37216690e068c9241bc46295800db36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalAxis: Horizontal
-  jumpAxis: Jump
-  kneelAxis: Fire3
   moveSpeed: 5
   clampVelocity: 1
   terminalVelocity: 30
@@ -2230,7 +2227,6 @@ MonoBehaviour:
   inRagdoll: 0
   isStunned: 0
   isStuckInWire: 0
-  horizontalInput: 0
   jumpBufferTimeCurrent: 0
   coyoteTimeCurrent: 0
   stunTimeRemaining: 0

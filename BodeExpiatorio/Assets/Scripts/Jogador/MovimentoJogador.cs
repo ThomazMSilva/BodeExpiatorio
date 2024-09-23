@@ -6,14 +6,6 @@ public class MovimentoJogador : MonoBehaviour
 {
     [Header("Configurações de Movimento"), Space(8f)]
 
-    [SerializeField] private string horizontalAxis = "Horizontal";
-
-    //[SerializeField] private string verticalAxis = "Vertical";
-
-    [SerializeField] private string jumpAxis = "Jump";
-
-    [SerializeField] private string kneelAxis = "Fire3";
-
     [SerializeField] private float moveSpeed = 5f;
 
     [Tooltip("Se ativo, a velocidade maxima que o Jogador pode se mover tem um limite.")]
@@ -92,7 +84,6 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField]
     private float
-        horizontalInput,
         //verticalInput,
         jumpBufferTimeCurrent,
         coyoteTimeCurrent,
@@ -116,9 +107,9 @@ public class MovimentoJogador : MonoBehaviour
     private RaycastHit hit;
 
     public delegate void EventHandler();
-    public event EventHandler OnPlayerTurned;
-    public event EventHandler OnPlayerJumpInput;
-    public event EventHandler OnPlayerKneelInput;
+    public event EventHandler OnPlayerTurned; //pra armadilha atiradora
+
+    private Entrada input;
 
     //Private methods
     private void Start()
@@ -134,16 +125,38 @@ public class MovimentoJogador : MonoBehaviour
         colliderKneelingCenter.Set(colliderBaseCenter.x, colliderBaseCenter.y - (colliderKneelingSize.y * 0.5f), colliderBaseCenter.z);
 
         gravity = Physics.gravity;
+
+        input = Entrada.Instance;
+        input.OnJumpButtonDown += Instance_OnJumpButtonDown;
+        input.OnJumpButtonUp += Instance_OnJumpButtonUp;
+        input.OnKneelButtonDown += Instance_OnKneelButtonDown;
+        input.OnKneelButtonUp += Instance_OnKneelButtonUp;
     }
 
-    private void Update()
+    private void OnDisable()
     {
-        HandleInput();
-        FlipCheck();
+        input.OnJumpButtonDown -= Instance_OnJumpButtonDown;
+        input.OnJumpButtonUp -= Instance_OnJumpButtonUp;
+        input.OnKneelButtonDown -= Instance_OnKneelButtonDown;
+        input.OnKneelButtonUp -= Instance_OnKneelButtonUp;
+    }
+
+    private void Instance_OnKneelButtonUp() => HandleKneel(false);
+
+    private void Instance_OnKneelButtonDown() => HandleKneel(true);
+
+    private void Instance_OnJumpButtonUp() => jumpKeyHeld = false;
+
+    private void Instance_OnJumpButtonDown()
+    {
+        StopCoroutine(JumpBuffer());
+        StartCoroutine(JumpBuffer());
+        jumpKeyHeld = true;
     }
     
     private void FixedUpdate()
     {
+        FlipCheck();
         CheckGrounded();
         ApplyGravity();
         HandleHorizontal();
@@ -153,34 +166,9 @@ public class MovimentoJogador : MonoBehaviour
         //Debug.Log(rb.velocity);
     }
 
-    //Input related
-    private void HandleInput()
-    {
-        horizontalInput = Input.GetAxis(horizontalAxis); 
-        //verticalInput = Input.GetAxisRaw(verticalAxis);
-
-        if (Input.GetButtonDown(jumpAxis))
-        {
-            StopCoroutine(JumpBuffer());
-            StartCoroutine(JumpBuffer());
-
-            OnPlayerJumpInput?.Invoke();
-            jumpKeyHeld = true;
-        }
-        if (Input.GetButtonUp(jumpAxis)) jumpKeyHeld = false;
-
-        if (Input.GetButtonDown(kneelAxis)) 
-        { 
-            HandleKneel(true); 
-            OnPlayerKneelInput?.Invoke();
-        }
-        if (Input.GetButtonUp(kneelAxis)) HandleKneel(false);
-       
-    }
-
     private void FlipCheck()
     {
-        if ((horizontalInput > 0 && !isLookingRight) || (horizontalInput < 0 && isLookingRight))
+        if ((input.HorizontalInput > 0 && !isLookingRight) || (input.HorizontalInput < 0 && isLookingRight))
             if (!isStuckInWire) FlipSprite();
     }
 
@@ -248,7 +236,7 @@ public class MovimentoJogador : MonoBehaviour
         if (allowRagdollMomentum && isStunned || isStuckInWire) return;
 
         float speed = isKneeling ? moveSpeed * kneelSpeedMultiplier : moveSpeed;
-        moveForce.Set(horizontalInput * speed - rb.velocity.x, 0, 0);
+        moveForce.Set(input.HorizontalInput * speed - rb.velocity.x, 0, 0);
 
         //Instantanea
         if (airControl) rb.AddForce(moveForce, ForceMode.VelocityChange);

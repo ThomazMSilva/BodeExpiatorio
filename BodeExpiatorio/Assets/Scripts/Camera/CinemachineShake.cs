@@ -1,6 +1,5 @@
 ﻿using Cinemachine;
 using System.Collections;
-using TreeEditor;
 using UnityEngine;
 
 namespace Assets.Scripts.Camera
