@@ -118,6 +118,7 @@ public class MovimentoJogador : MonoBehaviour
     public delegate void EventHandler();
     public event EventHandler OnPlayerTurned;
     public event EventHandler OnPlayerJumpInput;
+    public event EventHandler OnPlayerKneelInput;
 
     //Private methods
     private void Start()
@@ -168,7 +169,11 @@ public class MovimentoJogador : MonoBehaviour
         }
         if (Input.GetButtonUp(jumpAxis)) jumpKeyHeld = false;
 
-        if (Input.GetButtonDown(kneelAxis)) HandleKneel(true);
+        if (Input.GetButtonDown(kneelAxis)) 
+        { 
+            HandleKneel(true); 
+            OnPlayerKneelInput?.Invoke();
+        }
         if (Input.GetButtonUp(kneelAxis)) HandleKneel(false);
        
     }

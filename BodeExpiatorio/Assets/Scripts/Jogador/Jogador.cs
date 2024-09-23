@@ -3,8 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(MovimentoJogador),typeof(VidaJogador))]
 public class Jogador : MonoBehaviour
 {
-    [SerializeField] private MovimentoJogador movimento;
-    [SerializeField ]private VidaJogador vida;
+    [SerializeField] private MovimentoJogador movement;
+    [SerializeField] private VidaJogador life;
+    [SerializeField] private ContagemRegressivaVidaJogador countdown;
 
     [Header("Buffs")]
 
@@ -13,26 +14,94 @@ public class Jogador : MonoBehaviour
     public bool creepingDamage = false;
     public bool reducedDamage = false;
     public bool doubleFervor = false;
-    public bool pauseCountDown = false;
+    public bool countdownPause = false;
 
-    public VidaJogador Vida { get { return vida; } private set { vida = value; } }
-    public MovimentoJogador Movimento { get { return movimento; } private set { movimento = value; } }
+    public VidaJogador Vida { get => life;  private set => life = value; }
+    public MovimentoJogador Movimento { get => movement; private set => movement = value; }
 
-    public void ApplyDamageEffect(float damageAmount) => vida.DamageHealth(damageAmount);
+    public void ApplyDamageEffect(float damageAmount) => life.DamageHealth(damageAmount);
 
     public void ApplyDamageEffect(float damageAmount, Vector3 force, float stunSeconds, ForceMode forceMode = ForceMode.Impulse)
     {
-        vida.DamageHealth(damageAmount);
-        movimento.ApplyForce(force, forceMode);
-        movimento.Ragdoll(stunSeconds);
+        life.DamageHealth(damageAmount);
+        movement.ApplyForce(force, forceMode);
+        movement.Ragdoll(stunSeconds);
         //Debug.Log($"Dano: {damageAmount} Forca: {force} Stun: {stunSeconds}sec");
     }
 
-    public void ApplyCure() => vida.CureHealth(vida.BaseHealth);
+    public void ApplyCure() => life.CureHealth(life.BaseHealth);
 
-    public void ApplyCure(float cureAmount) => vida.CureHealth(cureAmount);
+    public void ApplyCure(float cureAmount) => life.CureHealth(cureAmount);
 
-    public void SetPosition(Vector3 position) => movimento.EnterWarp(position);
+    public void SetPosition(Vector3 position) => movement.EnterWarp(position);
 
-    public void SetPlayerWired(bool wiredState, bool shouldLookRight) => movimento.SetWiredState(wiredState, shouldLookRight);
+    public void StopCreepingDamage() => life.StopCreepingDamage();
+
+    public void SetBuffs()
+    {
+        life.isIgnoreLethalDamageActive = ignoreLethalDamage;
+        life.isIgnoreFirstDamageActive = ignoreFirstDamage;
+        life.isCreepingDamageActive = creepingDamage;
+        life.isReducedDamageActive = reducedDamage;
+        countdown.isDoubleFervorActive = doubleFervor;
+        countdown.isCountDownPauseActive = countdownPause;
+    }
+
+    public void ActivateBuff(BuffType buff)
+    {
+        ignoreLethalDamage = false;
+        ignoreFirstDamage = false;
+        creepingDamage = false;
+        reducedDamage = false;
+        doubleFervor = false;
+        countdownPause = false;
+
+        if(buff != BuffType.CreepingDamage && Vida.isCreepingDamageActive) 
+        {
+            Vida.isCreepingDamageActive = false;
+            Vida.StopCreepingDamage();
+            Vida.DamageHealth(Vida.CurrentHealth - Vida.CurrentFrontHealth); 
+        }
+
+
+        switch (buff)
+        {
+            case BuffType.IgnoreLethalDamage:
+                ignoreLethalDamage = true;
+                break;
+            case BuffType.IgnoreFirstDamage:
+                ignoreFirstDamage = true;
+                break;
+            case BuffType.CreepingDamage:
+                creepingDamage = true;
+                break;
+            case BuffType.ReducedDamage:
+                reducedDamage = true;
+                break;
+            case BuffType.DoubleFervor:
+                doubleFervor = true;
+                break;
+            case BuffType.CountDownPause:
+                countdownPause = true;
+                break;
+            default: 
+                Debug.Log("Buff invalido: " + buff); 
+                break;
+        }
+
+        SetBuffs();
+    }
+
+    public void SetPlayerWired(bool wiredState, bool shouldLookRight) => movement.SetWiredState(wiredState, shouldLookRight);
+}
+
+[System.Serializable]
+public enum BuffType
+{
+    IgnoreLethalDamage,
+    IgnoreFirstDamage,
+    CreepingDamage,
+    ReducedDamage,
+    DoubleFervor,
+    CountDownPause
 }

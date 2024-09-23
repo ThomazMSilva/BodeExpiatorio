@@ -149,8 +149,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b70f1695bbd2b64f8857238a8791aca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movimento: {fileID: 55350483955099054}
-  vida: {fileID: 1652553025521689414}
+  movement: {fileID: 55350483955099054}
+  life: {fileID: 1652553025521689414}
+  countdown: {fileID: 2317804128188777539}
+  ignoreLethalDamage: 0
+  ignoreFirstDamage: 0
+  creepingDamage: 0
+  reducedDamage: 0
+  doubleFervor: 0
+  countdownPause: 0
 --- !u!114 &1652553025521689414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,6 +173,14 @@ MonoBehaviour:
   baseMaxHealth: 25
   currentMaxHealth: 25
   currentHealth: 0
+  isIgnoreFirstDamageActive: 0
+  isIgnoreLethalDamageActive: 0
+  isReducedDamageActive: 0
+  reducedDamageMultiplier: 0.5
+  isCreepingDamageActive: 0
+  stopCreepingDamageAtFront: 0
+  creepingDamagePerSecond: 1
+  currentDamageToCreep: 0
 --- !u!114 &55350483955099054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,4 +248,8 @@ MonoBehaviour:
   countDownMultiplier: 3
   recoveryMultiplier: 10
   currentTime: 50
+  countDownPauseTime: 10
+  currentPauseTime: 10
   isCountDownActive: 0
+  isDoubleFervorActive: 0
+  isCountDownPauseActive: 0

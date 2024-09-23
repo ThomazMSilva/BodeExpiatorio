@@ -46,7 +46,7 @@ public class VidaJogador : MonoBehaviour
 
             if (isCreepingDamageActive && currentHealth > CurrentFrontHealth) return;
 
-            if (stopCreepingDamageAtFront) currentDamageToCreep = 0;
+            if (stopCreepingDamageAtFront) StopCreepingDamage();
 
             CurrentFrontHealth = currentHealth;
         }
@@ -66,17 +66,17 @@ public class VidaJogador : MonoBehaviour
     }
     [Header("Buffs"), Space(8f)]
 
-    public bool isIgnoreFirstDamageActive = false;
-    public bool isIgnoreLethalDamageActive = false;
+    [HideInInspector] public bool isIgnoreFirstDamageActive = false;
+    [HideInInspector] public bool isIgnoreLethalDamageActive = false;
 
     [Space(8f)]
 
-    public bool isReducedDamageActive = false;
+    [HideInInspector] public bool isReducedDamageActive = false;
     [SerializeField, Range(0, 1)] private float reducedDamageMultiplier = .5f;
 
     [Space(8f)]
 
-    public bool isCreepingDamageActive = false;
+    [HideInInspector] public bool isCreepingDamageActive = false;
     [Tooltip("Para de diminuir a Vida Real (cinza) quando chega na Fachada (vermelha). Se habilitado, curar pode parar o dano contínuo.")]
     [SerializeField] bool stopCreepingDamageAtFront = false;
     [SerializeField] private float creepingDamagePerSecond = 1f;
@@ -141,6 +141,8 @@ public class VidaJogador : MonoBehaviour
         }
         creeping = null;
     }
+
+    public void StopCreepingDamage() => currentDamageToCreep = 0;
 
     public void CureHealth(float cureAmount)
     {
