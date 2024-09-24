@@ -3037,14 +3037,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallSpeed: 20
-  riseSpeed: 2
+  riseSpeed: 5
   waitTimeBeforeFall: 2
+  initialWaitTime: 3
   detectionSize: {x: 2.16, y: 0.02, z: 1}
   detectionRadius: 0.1
   bottomSensor: {fileID: 577284144}
   topSensor: {fileID: 958815837}
-  ceilingSensor: {fileID: 0}
-  floorSensor: {fileID: 0}
 --- !u!1 &1289998998
 GameObject:
   m_ObjectHideFlags: 0

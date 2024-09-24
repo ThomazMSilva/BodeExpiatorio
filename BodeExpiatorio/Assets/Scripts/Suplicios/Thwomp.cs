@@ -6,16 +6,23 @@ public class Thwomp : MonoBehaviour
     public float fallSpeed = 20f;
     public float riseSpeed = 2f;
     public float waitTimeBeforeFall = 2f;
+    public float initialWaitTime = 3f;
     public Vector3 detectionSize = new Vector3(1f, 0.1f, 1f);
-    public float detectionRadius = 0.5f;
     public Transform bottomSensor;
     public Transform topSensor;
 
-    public Transform ceilingSensor;
-    public Transform floorSensor;
+    public Transform ceilingSensor;  
+    public Transform player;        
+    public float crushDistance = 0.1f;
 
-    private bool isFalling = true;
+    private bool isFalling = false;
     private bool isRising = false;
+
+    private void Start()
+    {
+        
+        StartCoroutine(StartFallAfterDelay());
+    }
 
     private void Update()
     {
@@ -29,11 +36,16 @@ public class Thwomp : MonoBehaviour
         }
     }
 
+    private IEnumerator StartFallAfterDelay()
+    {
+      
+        yield return new WaitForSeconds(initialWaitTime);
+        isFalling = true;
+    }
+
     private void Fall()
     {
-
         transform.position += Vector3.down * fallSpeed * Time.deltaTime;
-
 
         Collider[] bottomColliders = Physics.OverlapBox(bottomSensor.position, detectionSize / 2, Quaternion.identity);
 
@@ -52,10 +64,8 @@ public class Thwomp : MonoBehaviour
             }
         }
 
-
         if (hitGround)
         {
-
             if (hitPlayer)
             {
                 DamagePlayer(bottomColliders);
@@ -67,31 +77,28 @@ public class Thwomp : MonoBehaviour
 
     private void Rise()
     {
-
         transform.position += Vector3.up * riseSpeed * Time.deltaTime;
 
+       
+        float distanceToCeiling = Vector3.Distance(transform.position, ceilingSensor.position);
 
-        Collider[] topColliders = Physics.OverlapBox(topSensor.position, detectionSize / 2, Quaternion.identity);
-
-        bool hitCeiling = false;
-        bool hitPlayer = false;
-
-        foreach (var collider in topColliders)
+        
+        if (distanceToCeiling <= crushDistance)
         {
-            if (collider.CompareTag("Ground"))
+           
+            Collider[] topColliders = Physics.OverlapBox(topSensor.position, detectionSize / 2, Quaternion.identity);
+
+            bool hitPlayer = false;
+
+            foreach (var collider in topColliders)
             {
-                hitCeiling = true;
+                if (collider.CompareTag("Player"))
+                {
+                    hitPlayer = true;
+                }
             }
-            else if (collider.CompareTag("Player"))
-            {
-                hitPlayer = true;
-            }
-        }
 
-
-        if (hitCeiling)
-        {
-
+           
             if (hitPlayer)
             {
                 DamagePlayer(topColliders);
@@ -130,7 +137,7 @@ public class Thwomp : MonoBehaviour
         isFalling = true;
     }
 
-
+   
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -138,5 +145,4 @@ public class Thwomp : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(topSensor.position, detectionSize);
     }
-
 }
