@@ -7,20 +7,17 @@ public class Thwomp : MonoBehaviour
     public float riseSpeed = 2f;
     public float waitTimeBeforeFall = 2f;
     public float initialWaitTime = 3f;
-    public Vector3 detectionSize = new Vector3(1f, 0.1f, 1f);
-    public Transform bottomSensor;
-    public Transform topSensor;
-
-    public Transform ceilingSensor;  
-    public Transform player;        
-    public float crushDistance = 0.1f;
+    public Vector3 detectionSize = new Vector3(1f, 0.1f, 1f); 
+    public Vector3 expandedDetectionSize = new Vector3(2f, 0.1f, 2f); 
+    public Transform bottomSensor;   
+    public Transform topSensor;     
+    public Transform ceilingSensor; 
 
     private bool isFalling = false;
     private bool isRising = false;
 
     private void Start()
     {
-        
         StartCoroutine(StartFallAfterDelay());
     }
 
@@ -38,7 +35,6 @@ public class Thwomp : MonoBehaviour
 
     private IEnumerator StartFallAfterDelay()
     {
-      
         yield return new WaitForSeconds(initialWaitTime);
         isFalling = true;
     }
@@ -47,8 +43,8 @@ public class Thwomp : MonoBehaviour
     {
         transform.position += Vector3.down * fallSpeed * Time.deltaTime;
 
-        Collider[] bottomColliders = Physics.OverlapBox(bottomSensor.position, detectionSize / 2, Quaternion.identity);
-
+       
+        Collider[] bottomColliders = Physics.OverlapBox(bottomSensor.position, expandedDetectionSize / 2, Quaternion.identity);
         bool hitGround = false;
         bool hitPlayer = false;
 
@@ -82,12 +78,10 @@ public class Thwomp : MonoBehaviour
        
         float distanceToCeiling = Vector3.Distance(transform.position, ceilingSensor.position);
 
-        
-        if (distanceToCeiling <= crushDistance)
+        if (distanceToCeiling <= 0.1f)
         {
-           
-            Collider[] topColliders = Physics.OverlapBox(topSensor.position, detectionSize / 2, Quaternion.identity);
-
+          
+            Collider[] topColliders = Physics.OverlapBox(topSensor.position, expandedDetectionSize / 2, Quaternion.identity);
             bool hitPlayer = false;
 
             foreach (var collider in topColliders)
@@ -98,7 +92,6 @@ public class Thwomp : MonoBehaviour
                 }
             }
 
-           
             if (hitPlayer)
             {
                 DamagePlayer(topColliders);
@@ -117,10 +110,11 @@ public class Thwomp : MonoBehaviour
                 VidaJogador vidaJogador = collider.GetComponent<VidaJogador>();
                 if (vidaJogador != null)
                 {
-                    vidaJogador.DamageHealth(vidaJogador.CurrentHealth);
+                    vidaJogador.DamageHealth(vidaJogador.CurrentHealth);  
                 }
             }
         }
+
     }
 
     private IEnumerator RiseAfterDelay()
@@ -137,12 +131,62 @@ public class Thwomp : MonoBehaviour
         isFalling = true;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.collider.CompareTag("Player"))
+        {
+            
+            Rigidbody playerRb = collision.collider.GetComponent<Rigidbody>();
+            if (playerRb != null)
+            {
+                playerRb.velocity = new Vector3(playerRb.velocity.x, 0, playerRb.velocity.z);
+            }
+        }
+        if (collision.collider.CompareTag("Player"))
+        {
+            Rigidbody playerRb = collision.collider.GetComponent<Rigidbody>();
+            if (playerRb != null)
+            {
+               
+                playerRb.velocity = new Vector3(playerRb.velocity.x, 0, playerRb.velocity.z);
+            }
+
+           
+            collision.collider.transform.SetParent(transform);
+        }
+        if (collision.collider.CompareTag("Player"))
+        {
+            Rigidbody playerRb = collision.collider.GetComponent<Rigidbody>();
+            if (playerRb != null)
+            {
+               
+                playerRb.velocity = new Vector3(playerRb.velocity.x, 0, playerRb.velocity.z);
+            }
+
+           
+            collision.collider.transform.SetParent(transform);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+           
+            collision.collider.transform.SetParent(null);
+        }
+    }
+
+
    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(bottomSensor.position, detectionSize);
+        Gizmos.DrawWireCube(bottomSensor.position, expandedDetectionSize);
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(topSensor.position, detectionSize);
+        Gizmos.DrawWireCube(topSensor.position, expandedDetectionSize);   
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(ceilingSensor.position, detectionSize);       
     }
 }

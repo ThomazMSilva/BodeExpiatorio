@@ -328,9 +328,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37216690e068c9241bc46295800db36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalAxis: Horizontal
-  jumpAxis: Jump
-  kneelAxis: Fire3
   moveSpeed: 10
   clampVelocity: 1
   terminalVelocity: 30
@@ -362,7 +359,6 @@ MonoBehaviour:
   inRagdoll: 0
   isStunned: 0
   isStuckInWire: 0
-  horizontalInput: 0
   jumpBufferTimeCurrent: 0
   coyoteTimeCurrent: 0
   stunTimeRemaining: 0
@@ -670,7 +666,7 @@ GameObject:
   - component: {fileID: 161396567}
   - component: {fileID: 161396566}
   m_Layer: 0
-  m_Name: Sensor Cima
+  m_Name: Teto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -756,11 +752,11 @@ Transform:
   m_GameObject: {fileID: 161396565}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25.45, y: 8.37, z: 0.36490726}
-  m_LocalScale: {x: 5.0917835, y: 3.0334618, z: 2.392978}
+  m_LocalPosition: {x: 0, y: -0.13800049, z: 0}
+  m_LocalScale: {x: 2.3388991, y: 1.5464381, z: 2.392978}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1239841716}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &215508416
 GameObject:
@@ -1866,9 +1862,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37216690e068c9241bc46295800db36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalAxis: Horizontal
-  jumpAxis: Jump
-  kneelAxis: Fire3
   moveSpeed: 5
   clampVelocity: 1
   terminalVelocity: 30
@@ -1900,7 +1893,6 @@ MonoBehaviour:
   inRagdoll: 0
   isStunned: 0
   isStuckInWire: 0
-  horizontalInput: 0
   jumpBufferTimeCurrent: 0
   coyoteTimeCurrent: 0
   stunTimeRemaining: 0
@@ -2471,7 +2463,7 @@ Transform:
   m_GameObject: {fileID: 958815836}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.08, z: 0.000000029802}
+  m_LocalPosition: {x: 0, y: 0.51, z: 0.000000029802}
   m_LocalScale: {x: 1.0621198, y: 0.30173, z: 1.0866807}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2729,7 +2721,7 @@ GameObject:
   - component: {fileID: 1152112331}
   - component: {fileID: 1152112330}
   - component: {fileID: 1152112329}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (5)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -3022,6 +3014,7 @@ Transform:
   m_Children:
   - {fileID: 958815837}
   - {fileID: 577284144}
+  - {fileID: 161396569}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1239841717
@@ -3040,10 +3033,12 @@ MonoBehaviour:
   riseSpeed: 5
   waitTimeBeforeFall: 2
   initialWaitTime: 3
-  detectionSize: {x: 2.16, y: 0.02, z: 1}
-  detectionRadius: 0.1
+  detectionSize: {x: 2.175, y: 0.03, z: 1}
   bottomSensor: {fileID: 577284144}
   topSensor: {fileID: 958815837}
+  ceilingSensor: {fileID: 161396569}
+  player: {fileID: 83774181}
+  crushDistance: 0.01
 --- !u!1 &1289998998
 GameObject:
   m_ObjectHideFlags: 0
@@ -4064,5 +4059,4 @@ SceneRoots:
   - {fileID: 596468041}
   - {fileID: 1840134566}
   - {fileID: 1239841716}
-  - {fileID: 161396569}
   - {fileID: 855923346}

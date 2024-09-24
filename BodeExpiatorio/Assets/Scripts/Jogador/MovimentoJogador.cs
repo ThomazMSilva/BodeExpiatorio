@@ -29,13 +29,13 @@ public class MovimentoJogador : MonoBehaviour
 
     [Header("Configurações de Gravidade"), Space(8f)]
 
-    [SerializeField] private float fallGravityMultiplier = 5f; //"Gravidade" caindo (é um addforce)
+    [SerializeField] private float fallGravityMultiplier = 5f;
     
-    [SerializeField] private float jumpGravityMultiplier = 3f; //"Gravidade" qnd dá pulo grande
+    [SerializeField] private float jumpGravityMultiplier = 3f;
 
         [Space(8f)]
 
-    [SerializeField] private float ragdollGravityMultiplier = 6f; //"Gravidade" pulando em armadilha
+    [SerializeField] private float ragdollGravityMultiplier = 6f; 
 
     [SerializeField] private float ragdollJumpGravityMultiplier = 0.5f;
 
@@ -46,7 +46,7 @@ public class MovimentoJogador : MonoBehaviour
 
         [Space(8f)]
 
-    [SerializeField] private float raycastDistance = .75f; //Checagem de chão;
+    [SerializeField] private float raycastDistance = .75f; 
 
     [SerializeField] LayerMask groundLayer;
 
@@ -56,11 +56,11 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField] private float jumpForce = 11f;
 
-    [SerializeField] private float coyoteTimeMax = 0.1f; //Um tempinho que da pra pular depois de cair de alguma plataforma
+    [SerializeField] private float coyoteTimeMax = 0.1f; 
 
-    [SerializeField] private float jumpBufferTimeMax = 0.2f; //Um tempinho que se apertar o botao de pular antes de estar no chao, ainda conta qnd chegar no chão
+    [SerializeField] private float jumpBufferTimeMax = 0.2f; 
 
-    [SerializeField] private float shortJumpDelta = 2.5f; //Multiplicador pra uma "gravidade" extra que permite um pulo curto
+    [SerializeField] private float shortJumpDelta = 2.5f; 
 
         [Space(5f)]
 
@@ -74,7 +74,7 @@ public class MovimentoJogador : MonoBehaviour
     private bool
         isLookingRight,
         isGrounded = true,
-        //isClimbing = false,
+       
         jumpKeyHeld = false,
         willJump = false,
         isKneeling = false,
@@ -84,7 +84,7 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField]
     private float
-        //verticalInput,
+       
         jumpBufferTimeCurrent,
         coyoteTimeCurrent,
         stunTimeRemaining;
@@ -107,11 +107,11 @@ public class MovimentoJogador : MonoBehaviour
     private RaycastHit hit;
 
     public delegate void EventHandler();
-    public event EventHandler OnPlayerTurned; //pra armadilha atiradora
+    public event EventHandler OnPlayerTurned;
 
     private Entrada input;
 
-    //Private methods
+    
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -163,7 +163,7 @@ public class MovimentoJogador : MonoBehaviour
         HandleJump();
 
         if(clampVelocity && !rb.isKinematic) rb.velocity = Vector3.ClampMagnitude(rb.velocity, terminalVelocity);
-        //Debug.Log(rb.velocity);
+     
     }
 
     private void FlipCheck()
@@ -178,23 +178,51 @@ public class MovimentoJogador : MonoBehaviour
         OnPlayerTurned?.Invoke();
     }
 
-    //Physics operations
+
     private void CheckGrounded()
     {
-        isGrounded = Physics.Raycast(transform.position, -Vector3.up,out hit, raycastDistance, groundLayer);
-        
+        isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hit, raycastDistance, groundLayer) ||
+              hit.transform != null && hit.transform.CompareTag("Thwomp");
+
         transform.parent = hit.transform;
 
         coyoteTimeCurrent = isGrounded ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
 
-        if (inRagdoll && isGrounded) inRagdoll = false; //Reativa a gravidade de pulo
+        if (inRagdoll && isGrounded) inRagdoll = false; 
 
-        if (isStunned && isGrounded) EndStun(); //Reativa controle do movimento horizontal
+        if (isStunned && isGrounded) EndStun(); 
+      
+        
+         
+         isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hit, raycastDistance, groundLayer) ||
+                         (hit.transform != null && hit.transform.CompareTag("Thwomp"));
+
+            if (isGrounded)
+            {
+               
+                coyoteTimeCurrent = coyoteTimeMax;
+
+              
+                transform.parent = hit.transform.CompareTag("Thwomp") ? hit.transform : null;
+            }
+            else
+            {
+              
+                coyoteTimeCurrent -= Time.fixedDeltaTime;
+            }
+
+            if (inRagdoll && isGrounded)
+                inRagdoll = false; 
+
+            if (isStunned && isGrounded)
+                EndStun();
+        
+
     }
 
     private void ApplyGravity()
     {
-        //Desativa ou ativa a gravidade do rb com os Arames
+        
         if (isStuckInWire)
         {
             rb.useGravity = false;
@@ -205,14 +233,14 @@ public class MovimentoJogador : MonoBehaviour
 
         if (isGrounded) return;
 
-        //Pulando e caindo
+        
         float gravityScale = rb.velocity.y < 0 ? fallGravityMultiplier : jumpGravityMultiplier;
         gravityForce = gravity * (gravityScale - 1f);
         rb.AddForce(gravityForce, ForceMode.Acceleration);
 
         if (rb.velocity.y <= 0) return;
 
-        //Forca de armadilha
+      
         if (inRagdoll)
         {
             float forceMultiplier = ragdollGravityMultiplier;
@@ -225,7 +253,7 @@ public class MovimentoJogador : MonoBehaviour
             return;
         }
 
-        //Pulo curto
+ 
         if (!jumpKeyHeld)
             rb.AddForce(fallGravityMultiplier * shortJumpDelta * gravity, ForceMode.Acceleration);
         
@@ -238,10 +266,10 @@ public class MovimentoJogador : MonoBehaviour
         float speed = isKneeling ? moveSpeed * kneelSpeedMultiplier : moveSpeed;
         moveForce.Set(input.HorizontalInput * speed - rb.velocity.x, 0, 0);
 
-        //Instantanea
+       
         if (airControl) rb.AddForce(moveForce, ForceMode.VelocityChange);
 
-        //Gradual
+    
         else rb.AddForce 
         (
             isGrounded ? moveForce : moveForce * airAccelerationMultiplier, 
@@ -278,7 +306,7 @@ public class MovimentoJogador : MonoBehaviour
         if (isStuckInWire) SetWiredState(false, isLookingRight);
     }
 
-    //Public methods
+  
     public void ApplyForce(Vector3 force, ForceMode forceMode) => rb.AddForce(force, forceMode);
 
     public void Ragdoll(float stunTimeSecs)
@@ -332,4 +360,5 @@ public class MovimentoJogador : MonoBehaviour
         isStuckInWire = isWired;
         if (lookingRight != isLookingRight) FlipSprite();
     }
+
 }
