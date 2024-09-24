@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody))]
 public class MovimentoJogador : MonoBehaviour
@@ -344,8 +345,8 @@ public class MovimentoJogador : MonoBehaviour
         rb.isKinematic = true;
 
         position.Set(position.x, position.y, rb.position.z);
-        rb.position = position;
-
+        transform.position = position;
+        
         StartCoroutine(ExitWarp());
     }
 
