@@ -17,8 +17,9 @@ GameObject:
   - component: {fileID: 1652553025521689414}
   - component: {fileID: 55350483955099054}
   - component: {fileID: 2317804128188777539}
+  - component: {fileID: 4163043874282635791}
   m_Layer: 0
-  m_Name: Jogador
+  m_Name: JogadorPrefab
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,9 +194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37216690e068c9241bc46295800db36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalAxis: Horizontal
-  jumpAxis: Jump
-  kneelAxis: Fire3
   moveSpeed: 10
   clampVelocity: 1
   terminalVelocity: 30
@@ -250,6 +248,21 @@ MonoBehaviour:
   currentTime: 50
   countDownPauseTime: 10
   currentPauseTime: 10
-  isCountDownActive: 0
+  isCountDownActive: 1
   isDoubleFervorActive: 0
   isCountDownPauseActive: 0
+--- !u!114 &4163043874282635791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282366166164952403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f5b3e8e2683614a83b60b3a03176c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalAxis: Horizontal
+  jumpAxis: Jump
+  kneelAxis: Fire3

@@ -22,12 +22,14 @@ public class Confessionario : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player")) player.Movimento.OnPlayerKneelInput += BuffScreen;
+        if (buffScreen == null || !other.gameObject.CompareTag("Player")) return;
+        Entrada.Instance.OnKneelButtonDown += BuffScreen;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player")) player.Movimento.OnPlayerKneelInput -= BuffScreen;
+        if (buffScreen == null || !other.gameObject.CompareTag("Player")) return;
+        Entrada.Instance.OnKneelButtonDown -= BuffScreen;
     }
 
     private void BuffScreen() => buffScreen.SetActive(!buffScreen.activeSelf);
@@ -46,6 +48,7 @@ public class Confessionario : MonoBehaviour
         player.ApplyCure();
         player.SetBuffs();
     }
+
     private void GameOver()
     {
         Debug.Log("MORREU MUITASSOZASSO INSANO MESMO.");
