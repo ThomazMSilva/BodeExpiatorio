@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class TesteThwomp : MonoBehaviour
 {
-    [SerializeField] private bool isPlayerInside;
+    private bool isPlayerInside;
+    private Jogador player;
     [SerializeField] private float dano = 20f;
-    [SerializeField] private Jogador player;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
