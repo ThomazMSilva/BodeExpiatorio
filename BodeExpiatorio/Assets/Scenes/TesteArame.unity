@@ -753,6 +753,78 @@ MonoBehaviour:
   yVector: 0.75
   forceAmount: 30
   stunTime: 0.2
+--- !u!1 &575265397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 575265398}
+  - component: {fileID: 575265399}
+  m_Layer: 0
+  m_Name: PlayerEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &575265398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575265397}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 872421483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &575265399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575265397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a2e56117a101364db934d4e8868b61b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <PlayerDamaged>k__BackingField:
+    Guid:
+      Data1: 285871129
+      Data2: 1252473054
+      Data3: -490568259
+      Data4: 746552918
+    Path: event:/Dano
+  <PlayerCured>k__BackingField:
+    Guid:
+      Data1: -988109796
+      Data2: 1331373291
+      Data3: -1582414960
+      Data4: 889690395
+    Path: event:/Cura
+  <PlayerKnelt>k__BackingField:
+    Guid:
+      Data1: -542891264
+      Data2: 1262271139
+      Data3: 800231583
+      Data4: -1628671729
+    Path: event:/Ajoelhar
+  <PlayerJumped>k__BackingField:
+    Guid:
+      Data1: 1938043449
+      Data2: 1121183037
+      Data3: 954998683
+      Data4: 722726215
+    Path: event:/Pulo
 --- !u!1 &625250211
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,6 +1262,83 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 881810ad91a6e2649876cbd66e653d2e, type: 3}
+--- !u!1 &872421482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 872421483}
+  m_Layer: 0
+  m_Name: Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &872421483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872421482}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 880952171}
+  - {fileID: 575265398}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &880952170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 880952171}
+  - component: {fileID: 880952172}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &880952171
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880952170}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 872421483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &880952172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880952170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ecb7284bbc09e949afe0026be0c90f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &910626201
 GameObject:
   m_ObjectHideFlags: 0
@@ -1941,8 +2090,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1622566388}
   - component: {fileID: 1622566387}
-  - component: {fileID: 1622566386}
   - component: {fileID: 1622566389}
+  - component: {fileID: 1622566390}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1950,14 +2099,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1622566386
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1622566385}
-  m_Enabled: 1
 --- !u!20 &1622566387
 Camera:
   m_ObjectHideFlags: 0
@@ -2058,6 +2199,19 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1622566390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622566385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 1753771077}
 --- !u!1 &1708630813
 GameObject:
   m_ObjectHideFlags: 0
@@ -2181,6 +2335,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1753771077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2282366166164952403, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
+  m_PrefabInstance: {fileID: 395985060}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1879403719
 GameObject:
   m_ObjectHideFlags: 0
@@ -2270,6 +2429,7 @@ MonoBehaviour:
   maxShakeTime: 1
   minShakeIntensity: 1
   maxShakeIntensity: 25
+  minDamageToActivate: 1
   canHitStop: 1
   minHitStopTime: 0.035
   maxHitStopTime: 0.07
@@ -2460,3 +2620,4 @@ SceneRoots:
   - {fileID: 1708630818}
   - {fileID: 1388936424}
   - {fileID: 2021745059}
+  - {fileID: 872421483}
