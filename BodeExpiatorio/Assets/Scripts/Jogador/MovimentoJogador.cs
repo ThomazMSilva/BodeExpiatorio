@@ -281,7 +281,8 @@ public class MovimentoJogador : MonoBehaviour
     private void HandleJump()
     {
         if (!willJump || isKneeling || isStuckInWire || coyoteTimeCurrent <= 0) return;
-     
+
+        AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerJumped, transform.position);
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         coyoteTimeCurrent = 0f;
     }

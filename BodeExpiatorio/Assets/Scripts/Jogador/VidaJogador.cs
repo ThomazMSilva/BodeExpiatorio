@@ -116,6 +116,8 @@ public class VidaJogador : MonoBehaviour
             OnPlayerSaved?.Invoke();
         }
 
+        AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerDamaged, transform.position);
+
         if (isReducedDamageActive) damageAmount *= reducedDamageMultiplier;
         
         if (!isCreepingDamageActive || CurrentFrontHealth <= 0)
@@ -147,6 +149,7 @@ public class VidaJogador : MonoBehaviour
     {
         if (!isCreepingDamageActive) CurrentHealth += cureAmount;
         else CurrentFrontHealth += cureAmount;
+        AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerCured, transform.position);
     }
 
     public void FullyRecoverMaxHealth() => CurrentMaxHealth = baseMaxHealth;
