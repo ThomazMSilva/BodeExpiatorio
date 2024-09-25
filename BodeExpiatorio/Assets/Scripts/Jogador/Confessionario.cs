@@ -40,7 +40,7 @@ public class Confessionario : MonoBehaviour
         buffScreen.SetActive(false);
     }
 
-    private void Respawn()
+    public void Respawn()
     {
         if (player.Vida.CurrentMaxHealth <= 0) return;
         player.SetPosition(respawnPoint.position);
