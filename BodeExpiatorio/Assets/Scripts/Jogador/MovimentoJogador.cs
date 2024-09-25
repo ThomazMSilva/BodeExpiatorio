@@ -101,6 +101,8 @@ public class MovimentoJogador : MonoBehaviour
 
     private Coroutine stunCoroutine;
 
+    private SpriteRenderer playerSprite;
+
     private BoxCollider playerCollider;
 
     private Rigidbody rb;
@@ -116,6 +118,8 @@ public class MovimentoJogador : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        TryGetComponent<SpriteRenderer>(out playerSprite);
 
         playerCollider = GetComponent<BoxCollider>();
         
@@ -176,6 +180,7 @@ public class MovimentoJogador : MonoBehaviour
     private void FlipSprite()
     {
         isLookingRight = !isLookingRight;
+        if (playerSprite != null) playerSprite.flipX = !isLookingRight;
         OnPlayerTurned?.Invoke();
     }
 
