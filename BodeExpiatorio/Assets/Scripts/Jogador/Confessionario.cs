@@ -1,10 +1,15 @@
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class Confessionario : MonoBehaviour
 {
     [SerializeField] private Transform respawnPoint;
     private Jogador player;
     [SerializeField] private GameObject buffScreen;
+    public SceneAsset morte;
+
 
     private void Awake() => player = FindAnyObjectByType<Jogador>();
 
@@ -48,9 +53,14 @@ public class Confessionario : MonoBehaviour
         player.ApplyCure();
         player.SetBuffs();
     }
+    private string GetSceneName(SceneAsset sceneAsset)
+    {
+        return sceneAsset.name;
+    }
 
     private void GameOver()
     {
         Debug.Log("MORREU MUITASSOZASSO INSANO MESMO.");
+        SceneManager.LoadScene(GetSceneName(morte));
     }
 }
