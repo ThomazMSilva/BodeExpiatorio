@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuPrincipalManager : MonoBehaviour
 {
-    [SerializeField] private string nomeDoLevelDeJogo;
+    [SerializeField] private SceneAsset cenaDeJogo; 
     [SerializeField] private GameObject painelMenuInicial;
     [SerializeField] private GameObject painelOpcoes;
 
+  
+    private string GetSceneName(SceneAsset sceneAsset)
+    {
+        return sceneAsset.name;
+    }
 
     public void jogar()
     {
-        SceneManager.LoadScene(nomeDoLevelDeJogo);
+
+        SceneManager.LoadScene(GetSceneName(cenaDeJogo));
     }
 
     public void AbrirOpções()
