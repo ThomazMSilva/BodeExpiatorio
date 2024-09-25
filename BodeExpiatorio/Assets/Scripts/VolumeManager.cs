@@ -10,14 +10,14 @@ public class VolumeManager : MonoBehaviour
       
         float savedVolume = PlayerPrefs.GetFloat("GameVolume", 1f);
         volumeSlider.value = savedVolume; 
-        AudioListener.volume = savedVolume; 
+        AudioManager.Instance.SetGeneralVolume(savedVolume); 
     }
 
    
-    public void SetVolume(float volume)
+    public void SetVolume()
     {
-        AudioListener.volume = volume; 
-        PlayerPrefs.SetFloat("GameVolume", volume); 
+        AudioManager.Instance.SetGeneralVolume(volumeSlider.value);
+        PlayerPrefs.SetFloat("GameVolume", volumeSlider.value); 
         PlayerPrefs.Save(); 
     }
 
