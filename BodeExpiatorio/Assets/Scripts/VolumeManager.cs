@@ -3,14 +3,14 @@ using UnityEngine.UI;
 
 public class VolumeManager : MonoBehaviour
 {
-    public Slider volumeSlider; // Slider de volume
+    public Slider volumeSlider; 
 
     private void Start()
     {
-        // Carrega o volume salvo
+      
         float savedVolume = PlayerPrefs.GetFloat("GameVolume", 1f);
-        volumeSlider.value = savedVolume; // Ajusta o Slider para o volume salvo
-        AudioListener.volume = savedVolume; // Define o volume do jogo
+        volumeSlider.value = savedVolume; 
+        AudioListener.volume = savedVolume; 
     }
 
    
@@ -28,7 +28,7 @@ public class VolumeManager : MonoBehaviour
     }
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject); // Impede que o GameObject seja destruído ao trocar de cena
+        DontDestroyOnLoad(gameObject);
     }
 
 }

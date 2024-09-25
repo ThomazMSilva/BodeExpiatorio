@@ -1,18 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Certifique-se de ter esta diretiva
+using TMPro; 
 
 public class GameSettingsManager : MonoBehaviour
 {
     public Slider volumeSlider;
     public Toggle fullscreenToggle;
-    public TMP_Dropdown resolutionDropdown; // Use TMP_Dropdown
+    public TMP_Dropdown resolutionDropdown; 
 
     private void Start()
     {
         LoadSettings();
 
-        // Adiciona os listeners
+        
         volumeSlider.onValueChanged.AddListener(SetVolume);
         fullscreenToggle.onValueChanged.AddListener(SetFullscreen);
         resolutionDropdown.onValueChanged.AddListener(ChangeResolution);
@@ -20,7 +20,7 @@ public class GameSettingsManager : MonoBehaviour
 
     private void LoadSettings()
     {
-        // Carrega o volume
+      
         if (PlayerPrefs.HasKey("GameVolume"))
         {
             float savedVolume = PlayerPrefs.GetFloat("GameVolume");
@@ -28,7 +28,7 @@ public class GameSettingsManager : MonoBehaviour
             AudioListener.volume = savedVolume;
         }
 
-        // Carrega o modo fullscreen
+        
         if (PlayerPrefs.HasKey("Fullscreen"))
         {
             bool isFullscreen = PlayerPrefs.GetInt("Fullscreen") == 1;
@@ -36,7 +36,7 @@ public class GameSettingsManager : MonoBehaviour
             Screen.fullScreen = isFullscreen;
         }
 
-        // Carrega a resolução
+       
         if (PlayerPrefs.HasKey("Resolution"))
         {
             int resolutionIndex = PlayerPrefs.GetInt("Resolution");
