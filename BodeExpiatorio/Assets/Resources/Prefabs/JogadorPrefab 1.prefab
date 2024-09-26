@@ -172,8 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8137c588755519645bf07ca6f97454bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHealth: 25
-  currentMaxHealth: 25
+  baseMaxHealth: 100
+  currentMaxHealth: 100
   currentHealth: 0
   isIgnoreFirstDamageActive: 0
   isIgnoreLethalDamageActive: 0
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  clampVelocity: 1
+  clampVelocity: 0
   terminalVelocity: 30
   airControl: 0
   airAccelerationMultiplier: 10
