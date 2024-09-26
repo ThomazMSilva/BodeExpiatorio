@@ -171,8 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8137c588755519645bf07ca6f97454bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHealth: 25
-  currentMaxHealth: 25
+  baseMaxHealth: 100
+  currentMaxHealth: 100
   currentHealth: 0
   isIgnoreFirstDamageActive: 0
   isIgnoreLethalDamageActive: 0
@@ -225,10 +225,10 @@ MonoBehaviour:
   inRagdoll: 0
   isStunned: 0
   isStuckInWire: 0
-  horizontalInput: 0
   jumpBufferTimeCurrent: 0
   coyoteTimeCurrent: 0
   stunTimeRemaining: 0
+  input: {fileID: 4163043874282635791}
 --- !u!114 &2317804128188777539
 MonoBehaviour:
   m_ObjectHideFlags: 0

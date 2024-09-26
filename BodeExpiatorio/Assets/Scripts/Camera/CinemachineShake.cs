@@ -41,7 +41,11 @@ namespace Assets.Scripts.Camera
         }
 
         private void OnEnable() => vida.OnHealthChanged += ShakeOnDamage;
-        private void OnDisable() => vida.OnHealthChanged -= ShakeOnDamage;
+        private void OnDisable()
+        {
+            vida.OnHealthChanged -= ShakeOnDamage;
+            Time.timeScale = origTimeScale;
+        }
 
         public void ShakeCamera(float intensity, float time)
         {
@@ -74,8 +78,9 @@ namespace Assets.Scripts.Camera
             FreezeTime = null;
         }
 
+
         private Coroutine FreezeTime;
-        
+
         public void ShakeOnDamage(object sender, float oldHealth, float newHealth)
         {
             if (newHealth >= oldHealth) return;
@@ -83,7 +88,7 @@ namespace Assets.Scripts.Camera
             float damageDone = oldHealth - newHealth;
 
             if (damageDone < minDamageToActivate) return;
-            
+
             float prctRelativeToMax = Mathf.Clamp01(damageDone / baseHealth);
 
             float damageSeverity = Mathf.Lerp(minShakeIntensity, maxShakeIntensity, prctRelativeToMax);

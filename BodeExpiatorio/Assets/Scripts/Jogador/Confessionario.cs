@@ -6,7 +6,7 @@ public class Confessionario : MonoBehaviour
     [SerializeField] private Transform respawnPoint;
     private Jogador player;
     [SerializeField] private GameObject buffScreen;
-    [SerializeField] private string morteSceneName; 
+    [SerializeField] private string morteSceneName;
 
     private void Awake() => player = FindAnyObjectByType<Jogador>();
 
@@ -39,7 +39,7 @@ public class Confessionario : MonoBehaviour
     public void ActivateBuff(BuffButton buff)
     {
         player.ActivateBuff(buff.buffType);
-        buffScreen.SetActive(false);
+        if(buffScreen) buffScreen.SetActive(false);
     }
 
     public void Respawn()

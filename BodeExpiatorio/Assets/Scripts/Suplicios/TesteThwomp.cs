@@ -4,7 +4,6 @@ public class TesteThwomp : MonoBehaviour
 {
     private bool isPlayerInside;
     private Jogador player;
-    [SerializeField] private float dano = 20f;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -14,7 +13,7 @@ public class TesteThwomp : MonoBehaviour
         }
 
         if (other.CompareTag("Ground") && isPlayerInside)
-            player.ApplyDamageEffect(dano);
+            player.ApplyDamageEffect(player.Vida.BaseHealth);
     }
     private void OnTriggerExit(Collider other)
     {
