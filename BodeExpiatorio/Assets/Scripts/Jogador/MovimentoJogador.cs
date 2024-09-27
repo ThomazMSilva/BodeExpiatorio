@@ -75,7 +75,6 @@ public class MovimentoJogador : MonoBehaviour
     private bool
         isLookingRight,
         isGrounded = true,
-
         jumpKeyHeld = false,
         willJump = false,
         isKneeling = false,
@@ -85,10 +84,10 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField]
     private float
-
         jumpBufferTimeCurrent,
         coyoteTimeCurrent,
-        stunTimeRemaining;
+        stunTimeRemaining,
+        wiredRagdollTime = 0;
 
     private Vector3
         gravity,
@@ -97,7 +96,8 @@ public class MovimentoJogador : MonoBehaviour
         colliderBaseCenter,
         colliderKneelingCenter,
         moveForce = Vector3.zero,
-        gravityForce = Vector3.zero;
+        gravityForce = Vector3.zero,
+        currentWireForce = new(1,1,0);
 
     private Coroutine stunCoroutine;
 
@@ -187,7 +187,6 @@ public class MovimentoJogador : MonoBehaviour
         OnPlayerTurned?.Invoke();
     }
 
-
     private void CheckGrounded()
     {
         isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hit, raycastDistance, groundLayer) ||
@@ -195,7 +194,7 @@ public class MovimentoJogador : MonoBehaviour
 
         transform.parent = hit.transform;
 
-        coyoteTimeCurrent = isGrounded ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
+        coyoteTimeCurrent = isGrounded || isStuckInWire ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
 
         if (inRagdoll && isGrounded) inRagdoll = false;
 
@@ -291,9 +290,15 @@ public class MovimentoJogador : MonoBehaviour
 
     private void HandleJump()
     {
-        if (!willJump || isKneeling || isStuckInWire || coyoteTimeCurrent <= 0) return;
-
+        if (!willJump || isKneeling || coyoteTimeCurrent <= 0) return;
         AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerJumped, transform.position);
+
+        if (isStuckInWire)
+        {
+            rb.AddForce(currentWireForce, ForceMode.Impulse);
+            Ragdoll(wiredRagdollTime);
+            return;
+        }
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         coyoteTimeCurrent = 0f;
     }
@@ -312,13 +317,13 @@ public class MovimentoJogador : MonoBehaviour
 
     private void HandleKneel(bool willKneel)
     {
+        if (isStuckInWire) { SetWiredState(false, isLookingRight); return; }
+
         playerCollider.size = willKneel ? colliderKneelingSize : colliderBaseSize;
         playerCollider.center = willKneel ? colliderKneelingCenter : colliderBaseCenter;
         isKneeling = willKneel;
 
-        if (isStuckInWire) SetWiredState(false, isLookingRight);
     }
-
 
     public void ApplyForce(Vector3 force, ForceMode forceMode) => rb.AddForce(force, forceMode);
 
@@ -372,6 +377,12 @@ public class MovimentoJogador : MonoBehaviour
     {
         isStuckInWire = isWired;
         if (lookingRight != isLookingRight) FlipSprite();
+    }
+
+    public void SetWiredForce(float forceMultiplerX, float forceMultiplierY, float ragdollTime)
+    {
+        currentWireForce.Set((isLookingRight ? 1 : -1) * forceMultiplerX, 1 * forceMultiplierY, 0);
+        wiredRagdollTime = ragdollTime;
     }
 
 }

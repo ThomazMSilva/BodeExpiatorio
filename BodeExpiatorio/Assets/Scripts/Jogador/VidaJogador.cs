@@ -88,7 +88,7 @@ public class VidaJogador : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.P)) CureHealth(25f);
+        if (Input.GetKeyUp(KeyCode.P)) CureHealth(baseMaxHealth);
     }
    
     private void Start()
