@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody))]
 public class MovimentoJogador : MonoBehaviour
@@ -14,12 +13,24 @@ public class MovimentoJogador : MonoBehaviour
 
     [Tooltip("A velocidade maxima, em unidades/segundo, que o Jogador podera se mover pra qualquer direcao.")]
     [SerializeField] private float terminalVelocity = 30f;
-
+    
+    [Space(7f)]
+ 
     [Tooltip("Se ativo, o Jogador pode mudar de direcao no ar imediatamente com o Input Horizontal.\nSe inativo, ele vai acelerar gradualmente para a direcao do input.")]
-    [SerializeField] private bool airControl = true;
-
-    [Tooltip("So usar caso Air Control esteja INATIVO. \nA aceleracao com que ele muda de direcao no ar")]
+    [SerializeField] private bool instantAirVelocityChange = true;
+    
+    [Tooltip("So usar caso Instant Velocity Change esteja INATIVO. \nA aceleracao com que ele muda de direcao no ar")]
     [SerializeField] private float airAccelerationMultiplier = 3;
+    
+    [Space(7f)]
+
+    [Tooltip("Se ativo, o Jogador pode mudar de direcao no chao imediatamente com o Input Horizontal.\nSe inativo, ele vai acelerar gradualmente para a direcao do input.")]
+    [SerializeField] private bool instantGroundVelocityChange = true;
+
+    [Tooltip("So usar caso Instant Ground Change esteja INATIVO. \nA aceleracao com que ele muda de direcao no chao")]
+    [SerializeField] private float groundAccelerationMultiplier = 12f;
+
+    [Space(7f)]
 
     [Tooltip("Se ATIVO, o Jogador não tem nenhum controle de sua velocidade horizontal enquanto estiver em ragdoll.")]
     [SerializeField] private bool allowRagdollMomentum = false;
@@ -71,7 +82,7 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField, Range(0, 1)] private float kneelSpeedMultiplier = 0.7f;
 
-    [SerializeField]
+    //[SerializeField]
     private bool
         isLookingRight,
         isGrounded = true,
@@ -82,7 +93,7 @@ public class MovimentoJogador : MonoBehaviour
         isStunned = false,
         isStuckInWire = false;
 
-    [SerializeField]
+    //[SerializeField]
     private float
         jumpBufferTimeCurrent,
         coyoteTimeCurrent,
@@ -112,8 +123,8 @@ public class MovimentoJogador : MonoBehaviour
     public delegate void EventHandler();
     public event EventHandler OnPlayerTurned;
 
+    [Space(8f)]
     [SerializeField] private Entrada input;
-
 
     private void Start()
     {
@@ -189,9 +200,7 @@ public class MovimentoJogador : MonoBehaviour
 
     private void CheckGrounded()
     {
-        isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hit, raycastDistance, groundLayer) ||
-              hit.transform != null && hit.transform.CompareTag("Thwomp");
-
+        isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hit, raycastDistance, groundLayer);
         transform.parent = hit.transform;
 
         coyoteTimeCurrent = isGrounded || isStuckInWire ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
@@ -199,32 +208,6 @@ public class MovimentoJogador : MonoBehaviour
         if (inRagdoll && isGrounded) inRagdoll = false;
 
         if (isStunned && isGrounded) EndStun();
-
-
-
-        isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hit, raycastDistance, groundLayer) ||
-                        (hit.transform != null && hit.transform.CompareTag("Thwomp"));
-
-        if (isGrounded)
-        {
-
-            coyoteTimeCurrent = coyoteTimeMax;
-
-
-            transform.parent = hit.transform.CompareTag("Thwomp") ? hit.transform : null;
-        }
-        else
-        {
-
-            coyoteTimeCurrent -= Time.fixedDeltaTime;
-        }
-
-        if (inRagdoll && isGrounded)
-            inRagdoll = false;
-
-        if (isStunned && isGrounded)
-            EndStun();
-
 
     }
 
@@ -239,10 +222,10 @@ public class MovimentoJogador : MonoBehaviour
         }
         if (!rb.useGravity) rb.useGravity = true;
 
-        if (isGrounded) return;
+        //if (isGrounded) return;
 
-
-        float gravityScale = rb.velocity.y < 0 ? fallGravityMultiplier : jumpGravityMultiplier;
+        float notJumpingGravityMultiplier = isKneeling ? fallGravityMultiplier * shortJumpDelta : fallGravityMultiplier;
+        float gravityScale = rb.velocity.y < 0 ? notJumpingGravityMultiplier : jumpGravityMultiplier;
         gravityForce = gravity * (gravityScale - 1f);
         rb.AddForce(gravityForce, ForceMode.Acceleration);
 
@@ -274,18 +257,21 @@ public class MovimentoJogador : MonoBehaviour
         float speed = isKneeling ? moveSpeed * kneelSpeedMultiplier : moveSpeed;
         moveForce.Set(input.HorizontalInput * speed - rb.velocity.x, 0, 0);
 
+        Vector3 appliedForce = 
+            moveForce * (
+                            (isGrounded && !instantGroundVelocityChange) 
+                            ? groundAccelerationMultiplier
+                            : (!isGrounded && !instantAirVelocityChange) 
+                                ? airAccelerationMultiplier
+                                : 1f
+                        );
 
-        if (airControl) rb.AddForce(moveForce, ForceMode.VelocityChange);
+        ForceMode mode = (isGrounded && instantGroundVelocityChange) || (!isGrounded && instantAirVelocityChange)
+                            ? ForceMode.VelocityChange
+                            : ForceMode.Acceleration;
 
-
-        else
-        {
-            rb.AddForce
-            (
-                isGrounded ? moveForce : moveForce * airAccelerationMultiplier,
-                isGrounded ? ForceMode.VelocityChange : ForceMode.Acceleration
-            );
-        }
+        rb.AddForce(appliedForce, mode);
+    
     }
 
     private void HandleJump()

@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 3281047714142561252}
   - component: {fileID: 1287762491101862042}
   - component: {fileID: 4949242929930484042}
-  - component: {fileID: 1171310929653840271}
-  - component: {fileID: 1652553025521689414}
   - component: {fileID: 55350483955099054}
+  - component: {fileID: 1652553025521689414}
   - component: {fileID: 2317804128188777539}
+  - component: {fileID: 1171310929653840271}
   - component: {fileID: 4163043874282635791}
   m_Layer: 0
   m_Name: JogadorPrefabCapsula
@@ -138,7 +138,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 1
---- !u!114 &1171310929653840271
+--- !u!114 &55350483955099054
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,18 +147,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 2282366166164952403}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b70f1695bbd2b64f8857238a8791aca, type: 3}
+  m_Script: {fileID: 11500000, guid: 37216690e068c9241bc46295800db36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: 55350483955099054}
-  life: {fileID: 1652553025521689414}
-  countdown: {fileID: 2317804128188777539}
-  ignoreLethalDamage: 0
-  ignoreFirstDamage: 0
-  creepingDamage: 0
-  reducedDamage: 0
-  doubleFervor: 0
-  countdownPause: 0
+  moveSpeed: 10
+  clampVelocity: 1
+  terminalVelocity: 30
+  instantAirVelocityChange: 0
+  airAccelerationMultiplier: 10
+  instantGroundVelocityChange: 0
+  groundAccelerationMultiplier: 15
+  allowRagdollMomentum: 1
+  maxStunTime: 2
+  fallGravityMultiplier: 5
+  jumpGravityMultiplier: 3
+  ragdollGravityMultiplier: 6
+  ragdollJumpGravityMultiplier: 0.5
+  ragdollKneelGravityMultiplier: 2
+  isRagdollJumpUnlocked: 1
+  raycastDistance: 0.75
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  jumpForce: 15
+  coyoteTimeMax: 0.1
+  jumpBufferTimeMax: 0.15
+  shortJumpDelta: 1.5
+  kneelHeightMultiplier: 0.5
+  kneelSpeedMultiplier: 0.6
+  input: {fileID: 4163043874282635791}
 --- !u!114 &1652553025521689414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,53 +199,6 @@ MonoBehaviour:
   stopCreepingDamageAtFront: 0
   creepingDamagePerSecond: 1
   currentDamageToCreep: 0
---- !u!114 &55350483955099054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2282366166164952403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37216690e068c9241bc46295800db36f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 10
-  clampVelocity: 1
-  terminalVelocity: 30
-  airControl: 0
-  airAccelerationMultiplier: 10
-  allowRagdollMomentum: 1
-  maxStunTime: 2
-  fallGravityMultiplier: 5
-  jumpGravityMultiplier: 3
-  ragdollGravityMultiplier: 6
-  ragdollJumpGravityMultiplier: 0.5
-  ragdollKneelGravityMultiplier: 2
-  isRagdollJumpUnlocked: 1
-  raycastDistance: 0.75
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  jumpForce: 15
-  coyoteTimeMax: 0.1
-  jumpBufferTimeMax: 0.15
-  shortJumpDelta: 1.5
-  kneelHeightMultiplier: 0.5
-  kneelSpeedMultiplier: 0.7
-  isLookingRight: 0
-  isGrounded: 1
-  jumpKeyHeld: 0
-  willJump: 0
-  isKneeling: 0
-  inRagdoll: 0
-  isStunned: 0
-  isStuckInWire: 0
-  jumpBufferTimeCurrent: 0
-  coyoteTimeCurrent: 0
-  stunTimeRemaining: 0
-  input: {fileID: 4163043874282635791}
 --- !u!114 &2317804128188777539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +221,27 @@ MonoBehaviour:
   isCountDownActive: 1
   isDoubleFervorActive: 0
   isCountDownPauseActive: 0
+--- !u!114 &1171310929653840271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282366166164952403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b70f1695bbd2b64f8857238a8791aca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: {fileID: 55350483955099054}
+  life: {fileID: 1652553025521689414}
+  countdown: {fileID: 2317804128188777539}
+  ignoreLethalDamage: 0
+  ignoreFirstDamage: 0
+  creepingDamage: 0
+  reducedDamage: 0
+  doubleFervor: 0
+  countdownPause: 0
 --- !u!114 &4163043874282635791
 MonoBehaviour:
   m_ObjectHideFlags: 0

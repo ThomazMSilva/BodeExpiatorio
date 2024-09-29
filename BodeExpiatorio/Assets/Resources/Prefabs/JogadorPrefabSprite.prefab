@@ -217,7 +217,7 @@ MonoBehaviour:
   jumpBufferTimeMax: 0.15
   shortJumpDelta: 1.5
   kneelHeightMultiplier: 0.5
-  kneelSpeedMultiplier: 0.7
+  kneelSpeedMultiplier: 0.6
   isLookingRight: 0
   isGrounded: 1
   jumpKeyHeld: 0
@@ -229,7 +229,9 @@ MonoBehaviour:
   jumpBufferTimeCurrent: 0
   coyoteTimeCurrent: 0
   stunTimeRemaining: 0
+  wiredRagdollTime: 0
   input: {fileID: 4163043874282635791}
+  groundAccelerationMultiplier: 12
 --- !u!114 &2317804128188777539
 MonoBehaviour:
   m_ObjectHideFlags: 0
