@@ -61,6 +61,8 @@ public class MovimentoJogador : MonoBehaviour
     [SerializeField] private float raycastDistance = .75f;
 
     [SerializeField] LayerMask groundLayer;
+    
+    [SerializeField] string fallingPlatformTag = "Marvada";
 
     [Space(5f)]
 
@@ -82,7 +84,7 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField, Range(0, 1)] private float kneelSpeedMultiplier = 0.7f;
 
-    //[SerializeField]
+    [SerializeField]
     private bool
         isLookingRight,
         isGrounded = true,
@@ -201,8 +203,13 @@ public class MovimentoJogador : MonoBehaviour
     private void CheckGrounded()
     {
         isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hit, raycastDistance, groundLayer);
+        /*Transform hitTransform = hit.transform;
+        if (hitTransform && !hitTransform.CompareTag(fallingPlatformTag))
+        {
+            transform.parent = hitTransform;
+        }
+        Debug.Log(hitTransform);*/
         transform.parent = hit.transform;
-
         coyoteTimeCurrent = isGrounded || isStuckInWire ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
 
         if (inRagdoll && isGrounded) inRagdoll = false;

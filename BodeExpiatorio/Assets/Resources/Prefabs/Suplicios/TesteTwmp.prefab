@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 155242664284167180}
   - component: {fileID: 5571091788773955020}
   - component: {fileID: 3903899820108013062}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BaixoTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e6e623bd2706de4092f05aeb609d537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dano: 25
 --- !u!1 &35157669115493325
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +216,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fallingVelocity: 3
   risingVelocity: 0.7
+  maxSqrMag: 400
+  maxShakeIntensity: 10
+  maxShakeTime: 0.4
+  groundLayer: 3
 --- !u!1 &3373943445650349651
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +231,7 @@ GameObject:
   - component: {fileID: 5138142974120517838}
   - component: {fileID: 7082952106824754422}
   - component: {fileID: 3841927911874157152}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CimaTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,4 +286,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e6e623bd2706de4092f05aeb609d537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dano: 25

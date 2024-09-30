@@ -32,6 +32,8 @@ public class MovimentoJogadorEditor : Editor
         SerializedProperty shortJumpDelta = serializedObject.FindProperty("shortJumpDelta");
         SerializedProperty kneelHeightMultiplier = serializedObject.FindProperty("kneelHeightMultiplier");
         SerializedProperty kneelSpeedMultiplier = serializedObject.FindProperty("kneelSpeedMultiplier");
+        SerializedProperty isGrounded = serializedObject.FindProperty("isGrounded");
+        SerializedProperty input = serializedObject.FindProperty("input");
 
         // Draw all properties manually, applying custom logic for conditional fields
 
@@ -97,6 +99,14 @@ public class MovimentoJogadorEditor : Editor
 
         EditorGUILayout.PropertyField(kneelHeightMultiplier);
         EditorGUILayout.PropertyField(kneelSpeedMultiplier);
+
+        EditorGUILayout.Space();
+
+        EditorGUILayout.PropertyField(isGrounded);
+
+        EditorGUILayout.Space();
+
+        EditorGUILayout.PropertyField(input);
 
         // Apply modified properties
         serializedObject.ApplyModifiedProperties();

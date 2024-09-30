@@ -1,3 +1,5 @@
+using Assets.Scripts.Camera;
+using TMPro.Examples;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -9,11 +11,17 @@ public class TesteThwompMovel : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private float fallingVelocity = 5f;
     [SerializeField] private float risingVelocity = 2f;
+    [SerializeField] private float maxSqrMag = 400f;
+    [SerializeField] private float maxShakeIntensity = 10f;
+    [SerializeField] private float maxShakeTime = .4f;
+    private Transform playerTransform;
+    [SerializeField] private int groundLayer = 3;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         gravity = Physics.gravity;
+        playerTransform = FindAnyObjectByType<Jogador>().transform;
     }
 
     void FixedUpdate()
@@ -32,6 +40,24 @@ public class TesteThwompMovel : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Ground"))isFalling = !isFalling;
+        if (collision.gameObject.layer == groundLayer)
+        {
+            if(isFalling)
+                ShakeOnCollision();
+            
+            isFalling = !isFalling;
+        }
+    }
+
+    private void ShakeOnCollision()
+    {
+        float sqrMag = 1f;
+        if(playerTransform != null)
+        {
+            sqrMag = (playerTransform.position - transform.position).sqrMagnitude;
+        }
+        //if(sqrMag < maxSqrMag)Debug.Log($"{gameObject.name}'s distance: {sqrMag}");
+        float proximityMultiplier = Mathf.Clamp01(1 - (sqrMag / maxSqrMag));
+        CinemachineShake.instance.ShakeCamera(maxShakeIntensity * proximityMultiplier, maxShakeTime * proximityMultiplier);
     }
 }
