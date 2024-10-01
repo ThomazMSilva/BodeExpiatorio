@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TesteThwomp : MonoBehaviour
+public class SuplicioBrutalColisor : MonoBehaviour
 {
     private bool isPlayerInside;
     private Jogador player;

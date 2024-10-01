@@ -122,7 +122,7 @@ public class MovimentoJogador : MonoBehaviour
 
     private RaycastHit hit;
 
-    public delegate void EventHandler();
+    public delegate void EventHandler(bool boolean);
     public event EventHandler OnPlayerTurned;
 
     [Space(8f)]
@@ -197,19 +197,15 @@ public class MovimentoJogador : MonoBehaviour
     {
         isLookingRight = !isLookingRight;
         if (playerSprite != null) playerSprite.flipX = !isLookingRight;
-        OnPlayerTurned?.Invoke();
+        OnPlayerTurned?.Invoke(isLookingRight);
     }
 
     private void CheckGrounded()
     {
         isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hit, raycastDistance, groundLayer);
-        /*Transform hitTransform = hit.transform;
-        if (hitTransform && !hitTransform.CompareTag(fallingPlatformTag))
-        {
-            transform.parent = hitTransform;
-        }
-        Debug.Log(hitTransform);*/
-        transform.parent = hit.transform;
+        
+        transform.parent = hit.transform && !hit.transform.CompareTag(fallingPlatformTag) ? hit.transform : null;
+        
         coyoteTimeCurrent = isGrounded || isStuckInWire ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
 
         if (inRagdoll && isGrounded) inRagdoll = false;

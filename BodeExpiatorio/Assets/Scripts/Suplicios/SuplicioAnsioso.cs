@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Succ : MonoBehaviour
+public class SuplicioAnsioso : MonoBehaviour
 {
     [SerializeField] private float damagePerSecond = 1;
     [SerializeField] private float force = 45;

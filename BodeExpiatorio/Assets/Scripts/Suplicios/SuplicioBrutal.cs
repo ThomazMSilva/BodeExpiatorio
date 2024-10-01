@@ -1,9 +1,8 @@
 using Assets.Scripts.Camera;
-using TMPro.Examples;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class TesteThwompMovel : MonoBehaviour
+public class SuplicioBrutal : MonoBehaviour
 {
     private bool isFalling;
     private Vector3 gravity;
