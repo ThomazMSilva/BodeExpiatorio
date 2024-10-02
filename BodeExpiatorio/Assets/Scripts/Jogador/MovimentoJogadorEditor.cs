@@ -10,6 +10,7 @@ public class MovimentoJogadorEditor : Editor
 
         // Serialized properties
         SerializedProperty moveSpeed = serializedObject.FindProperty("moveSpeed");
+        SerializedProperty climbSpeed = serializedObject.FindProperty("climbSpeed");
         SerializedProperty clampVelocity = serializedObject.FindProperty("clampVelocity");
         SerializedProperty terminalVelocity = serializedObject.FindProperty("terminalVelocity");
         SerializedProperty instantAirVelocityChange = serializedObject.FindProperty("instantAirVelocityChange");
@@ -38,7 +39,7 @@ public class MovimentoJogadorEditor : Editor
         // Draw all properties manually, applying custom logic for conditional fields
 
         EditorGUILayout.PropertyField(moveSpeed);
-
+        EditorGUILayout.PropertyField(climbSpeed);
 
         EditorGUILayout.Space();
         EditorGUILayout.PropertyField(clampVelocity);

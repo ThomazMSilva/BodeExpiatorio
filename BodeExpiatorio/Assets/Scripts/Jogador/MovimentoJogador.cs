@@ -7,6 +7,7 @@ public class MovimentoJogador : MonoBehaviour
     [Header("Configurações de Movimento"), Space(8f)]
 
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float climbSpeed = 5f;
 
     [Tooltip("Se ativo, a velocidade maxima que o Jogador pode se mover tem um limite.")]
     [SerializeField] private bool clampVelocity = true;
@@ -88,6 +89,7 @@ public class MovimentoJogador : MonoBehaviour
     private bool
         isLookingRight,
         isGrounded = true,
+        isClimbing = false,
         jumpKeyHeld = false,
         willJump = false,
         isKneeling = false,
@@ -109,6 +111,7 @@ public class MovimentoJogador : MonoBehaviour
         colliderBaseCenter,
         colliderKneelingCenter,
         moveForce = Vector3.zero,
+        climbForce = Vector3.zero,
         gravityForce = Vector3.zero,
         currentWireForce = new(1,1,0);
 
@@ -146,6 +149,7 @@ public class MovimentoJogador : MonoBehaviour
 
 
     }
+    
     private void OnEnable()
     {
         input.OnJumpButtonDown += Instance_OnJumpButtonDown;
@@ -181,6 +185,7 @@ public class MovimentoJogador : MonoBehaviour
         CheckGrounded();
         ApplyGravity();
         HandleHorizontal();
+        HandleClimb();
         HandleJump();
 
         if (clampVelocity && !rb.isKinematic) rb.velocity = Vector3.ClampMagnitude(rb.velocity, terminalVelocity);
@@ -206,7 +211,7 @@ public class MovimentoJogador : MonoBehaviour
         
         transform.parent = hit.transform && !hit.transform.CompareTag(fallingPlatformTag) ? hit.transform : null;
         
-        coyoteTimeCurrent = isGrounded || isStuckInWire ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
+        coyoteTimeCurrent = isGrounded || isStuckInWire || isClimbing ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
 
         if (inRagdoll && isGrounded) inRagdoll = false;
 
@@ -217,7 +222,7 @@ public class MovimentoJogador : MonoBehaviour
     private void ApplyGravity()
     {
 
-        if (isStuckInWire)
+        if (isStuckInWire || isClimbing)
         {
             rb.useGravity = false;
             rb.velocity = Vector3.zero;
@@ -225,7 +230,7 @@ public class MovimentoJogador : MonoBehaviour
         }
         if (!rb.useGravity) rb.useGravity = true;
 
-        //if (isGrounded) return;
+        if (isGrounded) return;
 
         float notJumpingGravityMultiplier = isKneeling ? fallGravityMultiplier * shortJumpDelta : fallGravityMultiplier;
         float gravityScale = rb.velocity.y < 0 ? notJumpingGravityMultiplier : jumpGravityMultiplier;
@@ -277,6 +282,14 @@ public class MovimentoJogador : MonoBehaviour
     
     }
 
+    private void HandleClimb()
+    {
+        if (!isClimbing) return;
+     
+        climbForce.y = input.VerticalInput * climbSpeed;
+        rb.AddForce(climbForce, ForceMode.VelocityChange);
+    }
+
     private void HandleJump()
     {
         if (!willJump || isKneeling || coyoteTimeCurrent <= 0) return;
@@ -288,6 +301,8 @@ public class MovimentoJogador : MonoBehaviour
             Ragdoll(wiredRagdollTime);
             return;
         }
+        if (isClimbing) SetPlayerClimbing(false);
+
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         coyoteTimeCurrent = 0f;
     }
@@ -307,6 +322,7 @@ public class MovimentoJogador : MonoBehaviour
     private void HandleKneel(bool willKneel)
     {
         if (isStuckInWire) { SetWiredState(false, isLookingRight); return; }
+        if (isClimbing) { SetPlayerClimbing(false); return; }
 
         playerCollider.size = willKneel ? colliderKneelingSize : colliderBaseSize;
         playerCollider.center = willKneel ? colliderKneelingCenter : colliderBaseCenter;
@@ -366,6 +382,11 @@ public class MovimentoJogador : MonoBehaviour
     {
         isStuckInWire = isWired;
         if (lookingRight != isLookingRight) FlipSprite();
+    }
+
+    public void SetPlayerClimbing(bool climbing)
+    {
+        isClimbing = climbing;
     }
 
     public void SetWiredForce(float forceMultiplerX, float forceMultiplierY, float ragdollTime)

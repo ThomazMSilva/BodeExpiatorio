@@ -4,20 +4,21 @@ using UnityEngine;
 public class Entrada : MonoBehaviour
 {
     public static Entrada Instance;
-    // Use this for initialization
     private void Awake() => Instance = this;
 
     [SerializeField] private string horizontalAxis = "Horizontal";
 
-    //[SerializeField] private string verticalAxis = "Vertical";
+    [SerializeField] private string verticalAxis = "Vertical";
 
     [SerializeField] private string jumpAxis = "Jump";
 
     [SerializeField] private string kneelAxis = "Fire3";
 
     private float horizontalInput;
+    private float verticalInput;
 
-    public float HorizontalInput { get => horizontalInput; private set => horizontalInput = HorizontalInput; }
+    public float HorizontalInput { get => horizontalInput; private set => horizontalInput = value; }
+    public float VerticalInput { get => verticalInput; private set => verticalInput = value; }
 
     public delegate void EventHandler();
     public event EventHandler OnJumpButtonDown;
@@ -29,7 +30,7 @@ public class Entrada : MonoBehaviour
     private void Update()
     {
         horizontalInput = Input.GetAxis(horizontalAxis);
-        //verticalInput = Input.GetAxisRaw(verticalAxis);
+        verticalInput = Input.GetAxisRaw(verticalAxis);
 
         if (Input.GetButtonDown(jumpAxis)) OnJumpButtonDown?.Invoke();
 

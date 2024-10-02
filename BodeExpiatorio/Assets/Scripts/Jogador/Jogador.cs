@@ -93,7 +93,8 @@ public class Jogador : MonoBehaviour
     }
 
     public void SetPlayerWired(bool wiredState, bool shouldLookRight) => movement.SetWiredState(wiredState, shouldLookRight);
-    
+
+    public void SetPlayerClimbing(bool climbing) => Movimento.SetPlayerClimbing(climbing);
     public void SetWiredForceAndRagdoll(float wiredForceX, float wiredForceY, float ragdollTime) => movement.SetWiredForce(wiredForceX, wiredForceY, ragdollTime);
 }
 
