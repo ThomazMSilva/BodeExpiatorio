@@ -689,7 +689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damagePerSecond: 0.5
-  force: 200
+  force: 48
   kneelingForceMultiplier: 0.09
 --- !u!65 &132608962
 BoxCollider:
@@ -857,7 +857,7 @@ Transform:
   m_GameObject: {fileID: 215508416}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 47.4, y: -0.3, z: -10}
+  m_LocalPosition: {x: 68.55, y: 9.14, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1028,7 +1028,7 @@ Transform:
   m_GameObject: {fileID: 242778176}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35.6, y: 4.8, z: -0.12892294}
+  m_LocalPosition: {x: 35.6, y: 1.58, z: -0.12892294}
   m_LocalScale: {x: 20.418152, y: 7.7298, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3316,7 +3316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damagePerSecond: 0.5
-  force: 200
+  force: 100
   kneelingForceMultiplier: 0.09
 --- !u!65 &1045162807
 BoxCollider:
@@ -3439,11 +3439,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1285180426386494445, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 47.4
+      value: 68.55
       objectReference: {fileID: 0}
     - target: {fileID: 1285180426386494445, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.3
+      value: 9.14
       objectReference: {fileID: 0}
     - target: {fileID: 1285180426386494445, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4393,7 +4393,7 @@ Transform:
   m_GameObject: {fileID: 1619135572}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 47.4, y: -0.3, z: -10}
+  m_LocalPosition: {x: 68.55, y: 9.14, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
