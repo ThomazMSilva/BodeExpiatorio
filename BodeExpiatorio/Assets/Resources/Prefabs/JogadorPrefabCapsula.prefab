@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  clampVelocity: 1
+  clampVelocity: 0
   terminalVelocity: 30
   instantAirVelocityChange: 0
   airAccelerationMultiplier: 10
@@ -169,12 +169,21 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  jumpForce: 15
+  fallingPlatformTag: Marvada
+  jumpForce: 15.5
   coyoteTimeMax: 0.1
   jumpBufferTimeMax: 0.15
   shortJumpDelta: 1.5
   kneelHeightMultiplier: 0.5
   kneelSpeedMultiplier: 0.6
+  isLookingRight: 0
+  isGrounded: 1
+  jumpKeyHeld: 0
+  willJump: 0
+  isKneeling: 0
+  inRagdoll: 0
+  isStunned: 0
+  isStuckInWire: 0
   input: {fileID: 4163043874282635791}
 --- !u!114 &1652553025521689414
 MonoBehaviour:
@@ -211,11 +220,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618293a7b4bf96048a6170428de64b35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 10
-  maxTime: 50
+  damageAmount: 5
+  maxTime: 30
   countDownMultiplier: 3
   recoveryMultiplier: 10
-  currentTime: 50
+  currentTime: 30
   countDownPauseTime: 10
   currentPauseTime: 10
   isCountDownActive: 1
