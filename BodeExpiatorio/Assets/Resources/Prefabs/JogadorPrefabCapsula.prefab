@@ -151,7 +151,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  clampVelocity: 1
+  climbSpeed: 5
+  clampVelocity: 0
   terminalVelocity: 30
   instantAirVelocityChange: 0
   airAccelerationMultiplier: 10
@@ -178,12 +179,15 @@ MonoBehaviour:
   kneelSpeedMultiplier: 0.6
   isLookingRight: 0
   isGrounded: 1
+  isClimbing: 0
   jumpKeyHeld: 0
   willJump: 0
   isKneeling: 0
   inRagdoll: 0
   isStunned: 0
   isStuckInWire: 0
+  playerCollider: {fileID: 1287762491101862042}
+  rb: {fileID: 4949242929930484042}
   input: {fileID: 4163043874282635791}
 --- !u!114 &1652553025521689414
 MonoBehaviour:
@@ -264,5 +268,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horizontalAxis: Horizontal
+  verticalAxis: Vertical
   jumpAxis: Jump
   kneelAxis: Fire3

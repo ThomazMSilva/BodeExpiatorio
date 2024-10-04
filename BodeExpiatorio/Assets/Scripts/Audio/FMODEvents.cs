@@ -13,6 +13,7 @@ public class FMODEvents : MonoBehaviour
         if(Instance != null)
         {
             Debug.LogError("Mais de um FMODEvents na cena");
+            return;
         }
         Instance = this;
     }

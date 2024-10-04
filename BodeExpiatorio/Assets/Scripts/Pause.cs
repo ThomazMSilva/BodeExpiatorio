@@ -42,4 +42,9 @@ public class AbrirPause : MonoBehaviour
         Time.timeScale = 1f;   
         Pausado = false;
     }
+    private void OnDisable()
+    {
+        if (menu.activeSelf) ResumeGame();
+    }
+    public void ReturnToMainMenu() => GameManager.Instance.LoadMainMenu();
 }

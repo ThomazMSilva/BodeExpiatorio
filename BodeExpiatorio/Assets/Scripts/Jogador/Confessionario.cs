@@ -3,12 +3,20 @@ using UnityEngine.SceneManagement;
 
 public class Confessionario : MonoBehaviour
 {
+    [SerializeField] private int roomIndex;
+    [SerializeField] private bool checkpointStartsActive;
     [SerializeField] private Transform respawnPoint;
-    private Jogador player;
     [SerializeField] private GameObject buffScreen;
-    [SerializeField] private string morteSceneName;
+    private Jogador player;
 
     private void Awake() => player = FindAnyObjectByType<Jogador>();
+
+    private void Start()
+    {
+        Respawn();
+        GameManager.Instance.SetCurrentRoom(roomIndex);
+        if(checkpointStartsActive) GameManager.Instance.ActivateSceneCheckpoint(roomIndex);
+    }
 
     private void OnEnable()
     {
@@ -34,7 +42,11 @@ public class Confessionario : MonoBehaviour
         Entrada.Instance.OnKneelButtonDown -= BuffScreen;
     }
 
-    private void BuffScreen() => buffScreen.SetActive(!buffScreen.activeSelf);
+    private void BuffScreen()
+    {
+        buffScreen.SetActive(!buffScreen.activeSelf);
+        GameManager.Instance.ActivateSceneCheckpoint(roomIndex);
+    }
 
     public void ActivateBuff(BuffButton buff)
     {
@@ -54,6 +66,8 @@ public class Confessionario : MonoBehaviour
     private void GameOver()
     {
         Debug.Log("MORREU MUITASSO INSANO MESMO.");
-        SceneManager.LoadScene(morteSceneName);
+        GameManager.Instance.LoadDeathScene();
     }
+
+    public void NextLevel() => GameManager.Instance.LoadNextRoom();
 }

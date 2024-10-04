@@ -5,17 +5,38 @@ using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance { get; private set; }
+    private static AudioManager _Instance;
+    private const string prefabPath = "Prefabs/Audio";
+    public static AudioManager Instance
+    {
+        get
+        {
+            if (!_Instance)
+            {
+                var prefab = Resources.Load<GameObject>(prefabPath);
+
+                var inScene = Instantiate(prefab);
+
+                _Instance = inScene.GetComponentInChildren<AudioManager>();
+
+                if (!_Instance) { _Instance = inScene.AddComponent<AudioManager>();Debug.Log("ainda assim n tinha csgido"); }
+            }
+            return _Instance;
+        }
+    }
+
     [SerializeField] private string generalVCAPath = "vca:/SFX";
     public VCA generalVCA;
 
     private void Awake()
     {
-        if (Instance != null)
+        if (_Instance != null && _Instance != this)
         {
             Debug.LogError("Mais de um AudioManager");
+            Destroy(gameObject);
         }
-        Instance = this;
+        else _Instance = this;
+
         StartCoroutine(InitializeVCAs());
     }
 
