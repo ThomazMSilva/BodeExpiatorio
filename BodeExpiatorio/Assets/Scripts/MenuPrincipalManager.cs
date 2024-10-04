@@ -28,4 +28,14 @@ public class MenuPrincipalManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void Continue()
+    {
+        GameManager.Instance.Continue();
+    }
+
+    public void NewGame()
+    {
+        GameManager.Instance.NewGame();
+    }
 }

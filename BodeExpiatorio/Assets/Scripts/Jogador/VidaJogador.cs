@@ -149,6 +149,7 @@ public class VidaJogador : MonoBehaviour
     {
         if (!isCreepingDamageActive) CurrentHealth += cureAmount;
         else CurrentFrontHealth += cureAmount;
+        Debug.Log("Curou ");
         AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerCured, transform.position);
     }
 

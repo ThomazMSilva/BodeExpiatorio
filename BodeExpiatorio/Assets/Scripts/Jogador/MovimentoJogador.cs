@@ -1,4 +1,5 @@
 using System.Collections;
+using TreeEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -99,6 +100,7 @@ public class MovimentoJogador : MonoBehaviour
 
     //[SerializeField]
     private float
+        horizontalInput,
         jumpBufferTimeCurrent,
         coyoteTimeCurrent,
         stunTimeRemaining,
@@ -113,15 +115,15 @@ public class MovimentoJogador : MonoBehaviour
         moveForce = Vector3.zero,
         climbForce = Vector3.zero,
         gravityForce = Vector3.zero,
-        currentWireForce = new(1,1,0);
+        currentWireForce = new(1, 1, 0);
 
     private Coroutine stunCoroutine;
 
     private SpriteRenderer playerSprite;
 
-    private BoxCollider playerCollider;
+    [SerializeField] private BoxCollider playerCollider;
 
-    private Rigidbody rb;
+    [SerializeField] private Rigidbody rb;
 
     private RaycastHit hit;
 
@@ -133,21 +135,20 @@ public class MovimentoJogador : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
 
         TryGetComponent<SpriteRenderer>(out playerSprite);
 
-        playerCollider = GetComponent<BoxCollider>();
+        //playerCollider = GetComponent<BoxCollider>();
 
         colliderBaseSize = playerCollider.size;
         colliderKneelingSize.Set(colliderBaseSize.x, colliderBaseSize.y * kneelHeightMultiplier, colliderBaseSize.z);
 
         colliderBaseCenter = playerCollider.center;
         colliderKneelingCenter.Set(colliderBaseCenter.x, colliderBaseCenter.y - (colliderKneelingSize.y * 0.5f), colliderBaseCenter.z);
+        raycastDistance = playerCollider.bounds.extents.y + .05f;
 
         gravity = Physics.gravity;
-
-
     }
     
     private void OnEnable()
@@ -181,7 +182,7 @@ public class MovimentoJogador : MonoBehaviour
 
     private void FixedUpdate()
     {
-        FlipCheck();
+        //FlipCheck();
         CheckGrounded();
         ApplyGravity();
         HandleHorizontal();
@@ -192,16 +193,11 @@ public class MovimentoJogador : MonoBehaviour
 
     }
 
-    private void FlipCheck()
-    {
-        if ((input.HorizontalInput > 0 && !isLookingRight) || (input.HorizontalInput < 0 && isLookingRight))
-            if (!isStuckInWire) FlipSprite();
-    }
-
     private void FlipSprite()
     {
         isLookingRight = !isLookingRight;
         if (playerSprite != null) playerSprite.flipX = !isLookingRight;
+
         OnPlayerTurned?.Invoke(isLookingRight);
     }
 
@@ -263,7 +259,11 @@ public class MovimentoJogador : MonoBehaviour
         if (allowRagdollMomentum && isStunned || isStuckInWire) return;
 
         float speed = isKneeling ? moveSpeed * kneelSpeedMultiplier : moveSpeed;
-        moveForce.Set(input.HorizontalInput * speed - rb.velocity.x, 0, 0);
+        horizontalInput = input.HorizontalInput;
+        moveForce.Set(horizontalInput * speed - rb.velocity.x, 0, 0);
+        
+        bool wantToFlip = (isLookingRight ? horizontalInput < 0 : horizontalInput > 0) && !isStuckInWire;
+        if (wantToFlip) FlipSprite();
 
         Vector3 appliedForce = 
             moveForce * (
