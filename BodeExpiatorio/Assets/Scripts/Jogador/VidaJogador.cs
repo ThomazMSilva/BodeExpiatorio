@@ -116,7 +116,7 @@ public class VidaJogador : MonoBehaviour
             OnPlayerSaved?.Invoke();
         }
 
-        AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerDamaged, transform.position);
+        if(damageAmount >= 1) AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerDamaged, transform.position);
 
         if (isReducedDamageActive) damageAmount *= reducedDamageMultiplier;
         
