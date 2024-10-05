@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _Instance;
-
     public static GameManager Instance
     {
         get
@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     private static readonly string prefabPath = "Prefabs/_-GameManager-_";
     
     private static readonly string currentRoomPref = "CurrentRoom";
+    private static readonly string maxHealthPref = "MaxHealth";
+    private static readonly string currentHealthPref = "CurrentHealth";
     
     [SerializeField] private string deathSceneName = "Morte";
 
@@ -59,6 +61,7 @@ public class GameManager : MonoBehaviour
         currentRoom = rooms[0];
 
         PlayerPrefs.SetInt(currentRoomPref, 0);
+        SetHealth(100, 100);
 
         LoadCurrentRoom();
     }
@@ -104,6 +107,24 @@ public class GameManager : MonoBehaviour
         lastCheckpoint = rooms[scene];
     }
 
+    public void SetHealth(float maxHealth, float currentHealth)
+    {
+        PlayerPrefs.SetFloat(maxHealthPref, maxHealth);
+        PlayerPrefs.SetFloat(currentHealthPref, currentHealth);
+    }
+    
+    public float GetMaxHealth() 
+    {
+        if(!PlayerPrefs.HasKey(maxHealthPref)) return 0;
+        return PlayerPrefs.GetFloat(maxHealthPref);
+    }
+    
+    public float GetCurrentHealth()
+    {
+        if(! PlayerPrefs.HasKey(currentHealthPref)) return 0;
+        return PlayerPrefs.GetFloat(currentHealthPref);
+    }
+
     public void LoadCurrentRoom() => SceneManager.LoadScene(currentRoom.sceneName);
 
     public void LoadLastCheckpoint() => SceneManager.LoadSceneAsync(lastCheckpoint.sceneName);
@@ -116,6 +137,8 @@ public class GameManager : MonoBehaviour
             Debug.Log("Tentando carregar sala que não existe na lista do Game Manager");
             return;
         }
+        Jogador _player = FindAnyObjectByType<Jogador>();
+        SetHealth(_player.Vida.CurrentMaxHealth, _player.Vida.CurrentHealth);
         SceneManager.LoadSceneAsync(rooms[currentRoom.sceneIndex + 1].sceneName);
     }
 

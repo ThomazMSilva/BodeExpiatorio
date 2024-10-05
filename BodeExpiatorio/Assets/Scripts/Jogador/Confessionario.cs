@@ -1,5 +1,5 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Confessionario : MonoBehaviour
 {
@@ -7,13 +7,17 @@ public class Confessionario : MonoBehaviour
     [SerializeField] private bool checkpointStartsActive;
     [SerializeField] private Transform respawnPoint;
     [SerializeField] private GameObject buffScreen;
+    private float startingRoomTime;
+    private float startingRunTime;
     private Jogador player;
 
     private void Awake() => player = FindAnyObjectByType<Jogador>();
 
     private void Start()
     {
-        Respawn();
+        startingRoomTime = Time.time;
+        startingRunTime = Time.time;
+        Spawn();
         GameManager.Instance.SetCurrentRoom(roomIndex);
         if(checkpointStartsActive) GameManager.Instance.ActivateSceneCheckpoint(roomIndex);
     }
@@ -57,9 +61,16 @@ public class Confessionario : MonoBehaviour
     public void Respawn()
     {
         if (player.Vida.CurrentMaxHealth <= 0) return;
+        player.Vida.ResetDamageTakenInRun();
+        player.ApplyCure();
+        startingRunTime = Time.time;
+        Spawn();
+    }
+
+    public void Spawn()
+    {
         player.SetPosition(respawnPoint.position);
         player.StopCreepingDamage();
-        player.ApplyCure();
         player.SetBuffs();
     }
 
@@ -70,4 +81,6 @@ public class Confessionario : MonoBehaviour
     }
 
     public void NextLevel() => GameManager.Instance.LoadNextRoom();
+
+    public void DisplayTime() { Debug.Log($"RoomTime: {Time.time - startingRoomTime}; RunTime: {Time.time - startingRunTime}\n{player.Vida.DamageString}"); }
 }

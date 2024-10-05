@@ -19,7 +19,7 @@ namespace Assets.Scripts.Suplicios
             _player.SetPlayerWired(true, willLookRight);
             _player.SetWiredForceAndRagdoll(forceAmountX, forceAmountY, stunTime);
             
-            _player.ApplyDamageEffect(damage);
+            _player.ApplyDamageEffect(damage, this.name);
         }
 
         private void OnTriggerExit(Collider other)
@@ -28,7 +28,7 @@ namespace Assets.Scripts.Suplicios
 
             _player.SetPlayerWired(false, willLookRight);
             
-            _player.ApplyDamageEffect(damage);
+            _player.ApplyDamageEffect(damage, this.name);
         }
     }
 }

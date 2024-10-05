@@ -1518,37 +1518,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1388851103}
         m_TargetAssemblyTypeName: Confessionario, Assembly-CSharp
-        m_MethodName: Respawn
+        m_MethodName: NextLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Confessionario, Assembly-CSharp
-        m_MethodName: ActivateBuff
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 682620993}
-          m_ObjectArgumentAssemblyTypeName: BuffButton, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Confessionario, Assembly-CSharp
-        m_MethodName: ActivateBuff
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1279930166}
-          m_ObjectArgumentAssemblyTypeName: BuffButton, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6821,6 +6797,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2061126850}
   m_CullTransparentMesh: 1
+--- !u!1001 &2700030011660122027
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1838427752006241464, guid: 77cd05b98de889547bce88fadf54a199, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.8852
+      objectReference: {fileID: 0}
+    - target: {fileID: 1838427752006241464, guid: 77cd05b98de889547bce88fadf54a199, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.2888
+      objectReference: {fileID: 0}
+    - target: {fileID: 1838427752006241464, guid: 77cd05b98de889547bce88fadf54a199, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1838427752006241464, guid: 77cd05b98de889547bce88fadf54a199, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1838427752006241464, guid: 77cd05b98de889547bce88fadf54a199, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1838427752006241464, guid: 77cd05b98de889547bce88fadf54a199, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1838427752006241464, guid: 77cd05b98de889547bce88fadf54a199, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1838427752006241464, guid: 77cd05b98de889547bce88fadf54a199, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1838427752006241464, guid: 77cd05b98de889547bce88fadf54a199, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1838427752006241464, guid: 77cd05b98de889547bce88fadf54a199, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2532576451600767624, guid: 77cd05b98de889547bce88fadf54a199, type: 3}
+      propertyPath: telaVitoria
+      value: 
+      objectReference: {fileID: 158098529}
+    - target: {fileID: 2532576451600767624, guid: 77cd05b98de889547bce88fadf54a199, type: 3}
+      propertyPath: confessionario
+      value: 
+      objectReference: {fileID: 1388851103}
+    - target: {fileID: 8995350554505572058, guid: 77cd05b98de889547bce88fadf54a199, type: 3}
+      propertyPath: m_Name
+      value: Venceu
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 77cd05b98de889547bce88fadf54a199, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -6837,3 +6878,4 @@ SceneRoots:
   - {fileID: 1234619113}
   - {fileID: 2059103012}
   - {fileID: 822342779}
+  - {fileID: 2700030011660122027}

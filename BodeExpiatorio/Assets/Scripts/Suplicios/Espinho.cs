@@ -39,7 +39,7 @@ public class Espinho : MonoBehaviour
 
         //Debug.Log($"velPrct: {velPrctRelativeToTerminal} forceMultiplier: {finalForce}");
 
-        _player.ApplyDamageEffect(damage, finalForce * transform.up, timeStunned);
+        _player.ApplyDamageEffect(damage, finalForce * transform.up, timeStunned, this.name);
     }
 
 }

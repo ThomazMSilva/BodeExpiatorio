@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections;
 
-
-
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -10,8 +8,8 @@ using UnityEditor;
 public class VidaJogador : MonoBehaviour
 {
     [SerializeField]
-    private float baseMaxHealth = 10f;
-    public float BaseHealth { get { return baseMaxHealth; } private set { baseMaxHealth = value; } } 
+    private float baseMaxHealth = 100f;
+    public float BaseHealth { get { return baseMaxHealth; } private set { baseMaxHealth = value; } }
 
     [SerializeField]
     private float currentMaxHealth;
@@ -50,6 +48,7 @@ public class VidaJogador : MonoBehaviour
             CurrentFrontHealth = currentHealth;
         }
     }
+
     private float currentFrontHealth;
     public float CurrentFrontHealth
     {
@@ -63,6 +62,7 @@ public class VidaJogador : MonoBehaviour
             if (currentFrontHealth > currentHealth) CurrentHealth = currentFrontHealth;
         }
     }
+
     [Header("Buffs"), Space(8f)]
 
     [HideInInspector] public bool isIgnoreFirstDamageActive = false;
@@ -90,17 +90,39 @@ public class VidaJogador : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.P)) CureHealth(baseMaxHealth);
     }
-   
-    private void Start()
-    {
-        currentMaxHealth = baseMaxHealth;
-        currentHealth = currentMaxHealth;
-        currentFrontHealth = currentHealth;
 
-        OnPlayerSaved += () => Debug.Log("Se safou de dano, por um fio!");
+    private string damageString = "";
+    public string DamageString 
+    {
+        get => damageString + 
+            $"\n\nTotal damage taken to the health: {totalDamageTaken}" +
+            $"\nTotal damage to the fervor: {totalFervorTaken}" +
+            $"\nDamage taken in run: {damageTakenInRun}" +
+            $"\nFervor taken in run: {fervorTakenInRun}" +
+            $"\nCurrent life: {currentHealth}" +
+            $"\nCurrent fervor: {currentMaxHealth}";
     }
 
-    public void DamageHealth(float damageAmount)
+    private float totalDamageTaken;
+    private float totalFervorTaken;
+    public float damageTakenInRun;
+    public float fervorTakenInRun;
+    private void Start()
+    {
+        CurrentMaxHealth = GameManager.Instance.GetMaxHealth();
+        CurrentHealth = GameManager.Instance.GetCurrentHealth();
+        CurrentFrontHealth = currentHealth;
+        OnPlayerSaved += () => Debug.Log("Se safou de dano, por um fio!");
+        damageString += $"starting life: {currentHealth}\nstarting fervor: {currentMaxHealth}";
+    }
+
+    public void ResetDamageTakenInRun()
+    {
+        damageTakenInRun = 0f;
+        fervorTakenInRun = 0f;
+    }
+
+    public void DamageHealth(float damageAmount, object sender)
     {
         if (isIgnoreFirstDamageActive)
         {
@@ -115,14 +137,18 @@ public class VidaJogador : MonoBehaviour
             isIgnoreLethalDamageActive = false;
             OnPlayerSaved?.Invoke();
         }
+        damageAmount = Mathf.Clamp(damageAmount, 0f, currentHealth);
 
-        if(damageAmount >= 1) AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerDamaged, transform.position);
+        if (damageAmount >= 1) AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerDamaged, transform.position);
 
         if (isReducedDamageActive) damageAmount *= reducedDamageMultiplier;
         
         if (!isCreepingDamageActive || CurrentFrontHealth <= 0)
         {
             CurrentHealth -= damageAmount;
+            totalDamageTaken += damageAmount;
+            damageTakenInRun += damageAmount;
+            damageString += $"\ntook {damageAmount} to the health from {sender}";
             return;
         }
 
@@ -149,13 +175,18 @@ public class VidaJogador : MonoBehaviour
     {
         if (!isCreepingDamageActive) CurrentHealth += cureAmount;
         else CurrentFrontHealth += cureAmount;
-        Debug.Log("Curou ");
         AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerCured, transform.position);
     }
 
     public void FullyRecoverMaxHealth() => CurrentMaxHealth = baseMaxHealth;
 
-    public void DamageMaxHealth(float damageAmount) => CurrentMaxHealth -= damageAmount;
+    public void DamageMaxHealth(float damageAmount) 
+    { 
+        CurrentMaxHealth -= damageAmount; 
+        totalFervorTaken += damageAmount;
+        fervorTakenInRun += damageAmount;
+        damageString += $"\ntook {damageAmount} damage to the fervor";
+    }
     
     public void CureMaxHealth(float cureAmount) => CurrentMaxHealth += cureAmount;
 
@@ -188,7 +219,7 @@ public class VidaJogadorEditor : Editor
         }
         if (GUILayout.Button("Damage Health by 5"))
         {
-            vidaJogador.DamageHealth(5f);
+            vidaJogador.DamageHealth(5f, this.name);
         } 
 
         if (GUILayout.Button("Full Heal"))
@@ -200,7 +231,7 @@ public class VidaJogadorEditor : Editor
         
         if (GUILayout.Button("DamagePersonalized"))
         {
-            vidaJogador.DamageHealth(customDamage);
+            vidaJogador.DamageHealth(customDamage, this.name);
         }
 
         EditorGUILayout.Space();

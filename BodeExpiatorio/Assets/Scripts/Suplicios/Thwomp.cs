@@ -110,7 +110,7 @@ public class Thwomp : MonoBehaviour
                 VidaJogador vidaJogador = collider.GetComponent<VidaJogador>();
                 if (vidaJogador != null)
                 {
-                    vidaJogador.DamageHealth(vidaJogador.CurrentHealth);  
+                    vidaJogador.DamageHealth(vidaJogador.CurrentHealth, this.name);  
                 }
             }
         }

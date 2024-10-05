@@ -19,11 +19,11 @@ public class Jogador : MonoBehaviour
     public VidaJogador Vida { get => life;  private set => life = value; }
     public MovimentoJogador Movimento { get => movement; private set => movement = value; }
 
-    public void ApplyDamageEffect(float damageAmount) => life.DamageHealth(damageAmount);
+    public void ApplyDamageEffect(float damageAmount, object sender) => life.DamageHealth(damageAmount, sender);
 
-    public void ApplyDamageEffect(float damageAmount, Vector3 force, float stunSeconds, ForceMode forceMode = ForceMode.Impulse)
+    public void ApplyDamageEffect(float damageAmount, Vector3 force, float stunSeconds, object sender, ForceMode forceMode = ForceMode.Impulse)
     {
-        life.DamageHealth(damageAmount);
+        life.DamageHealth(damageAmount, sender);
         movement.ApplyForce(force, forceMode);
         movement.Ragdoll(stunSeconds);
         //Debug.Log($"Dano: {damageAmount} Forca: {force} Stun: {stunSeconds}sec");
@@ -60,7 +60,7 @@ public class Jogador : MonoBehaviour
         {
             Vida.isCreepingDamageActive = false;
             Vida.StopCreepingDamage();
-            Vida.DamageHealth(Vida.CurrentHealth - Vida.CurrentFrontHealth); 
+            Vida.DamageHealth(Vida.CurrentHealth - Vida.CurrentFrontHealth, this.name); 
         }
 
 

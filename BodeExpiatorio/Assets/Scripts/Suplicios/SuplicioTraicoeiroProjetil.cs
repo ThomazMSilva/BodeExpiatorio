@@ -24,7 +24,7 @@ namespace Assets.Scripts.Suplicios
             GameObject go = collision.gameObject;
             if (go.CompareTag("Player"))
             {
-                player.ApplyDamageEffect(directDamage);
+                player.ApplyDamageEffect(directDamage, this.name);
                 gameObject.SetActive(false);
             }
 
@@ -40,7 +40,7 @@ namespace Assets.Scripts.Suplicios
                     
                     Vector3 direction = collider.transform.position - transform.position;
                     direction.y += yExplosionSupport;
-                    player.ApplyDamageEffect(explosionDamage, direction.normalized * explosionForce, stunTime);
+                    player.ApplyDamageEffect(explosionDamage, direction.normalized * explosionForce, stunTime, this.name);
                     break;
                 }
                 gameObject.SetActive(false);
