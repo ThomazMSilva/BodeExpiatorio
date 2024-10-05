@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -126,13 +124,13 @@ public class GameManager : MonoBehaviour
     
     public float GetMaxHealth() 
     {
-        if(!PlayerPrefs.HasKey(maxHealthPref)) return 0;
+        if(!PlayerPrefs.HasKey(maxHealthPref)) PlayerPrefs.SetFloat(maxHealthPref, 100f);
         return PlayerPrefs.GetFloat(maxHealthPref);
     }
     
     public float GetCurrentHealth()
     {
-        if(! PlayerPrefs.HasKey(currentHealthPref)) return 0;
+        if(!PlayerPrefs.HasKey(currentHealthPref)) PlayerPrefs.SetFloat(currentHealthPref, 100f);
         return PlayerPrefs.GetFloat(currentHealthPref);
     }
 
