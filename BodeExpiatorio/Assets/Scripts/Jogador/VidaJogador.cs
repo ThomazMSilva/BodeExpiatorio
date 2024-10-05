@@ -63,6 +63,8 @@ public class VidaJogador : MonoBehaviour
         }
     }
 
+    private float startingMaxHealth;
+
     [Header("Buffs"), Space(8f)]
 
     [HideInInspector] public bool isIgnoreFirstDamageActive = false;
@@ -112,6 +114,7 @@ public class VidaJogador : MonoBehaviour
         CurrentMaxHealth = GameManager.Instance.GetMaxHealth();
         CurrentHealth = GameManager.Instance.GetCurrentHealth();
         CurrentFrontHealth = currentHealth;
+        startingMaxHealth = CurrentMaxHealth;
         OnPlayerSaved += () => Debug.Log("Se safou de dano, por um fio!");
         damageString += $"starting life: {currentHealth}\nstarting fervor: {currentMaxHealth}";
     }
@@ -189,6 +192,8 @@ public class VidaJogador : MonoBehaviour
     }
     
     public void CureMaxHealth(float cureAmount) => CurrentMaxHealth += cureAmount;
+
+    public void CureMaxHealth() => CurrentMaxHealth = startingMaxHealth;
 
     public event HealthChangedHandler OnHealthChanged;
     public event HealthChangedHandler OnMaxHealthChanged;

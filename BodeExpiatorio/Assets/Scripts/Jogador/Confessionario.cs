@@ -5,6 +5,7 @@ public class Confessionario : MonoBehaviour
 {
     [SerializeField] private int roomIndex;
     [SerializeField] private bool checkpointStartsActive;
+    [SerializeField] private bool recoverMaxHealthToStartingPoint = true;
     [SerializeField] private Transform respawnPoint;
     [SerializeField] private GameObject buffScreen;
     private float startingRoomTime;
@@ -62,6 +63,9 @@ public class Confessionario : MonoBehaviour
     {
         if (player.Vida.CurrentMaxHealth <= 0) return;
         player.Vida.ResetDamageTakenInRun();
+        
+        if(recoverMaxHealthToStartingPoint) player.Vida.CureMaxHealth();
+
         player.ApplyCure();
         startingRunTime = Time.time;
         Spawn();
