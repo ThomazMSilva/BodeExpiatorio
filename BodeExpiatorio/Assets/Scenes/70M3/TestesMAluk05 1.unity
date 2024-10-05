@@ -1585,7 +1585,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 10
+  far clip plane: 15
   field of view: 90
   orthographic: 0
   orthographic size: 8
@@ -11483,6 +11483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomIndex: 1
   checkpointStartsActive: 0
+  recoverMaxHealthToStartingPoint: 1
   respawnPoint: {fileID: 1986816571}
   buffScreen: {fileID: 0}
 --- !u!1 &2000760895
@@ -11711,7 +11712,7 @@ MonoBehaviour:
     FieldOfView: 90
     OrthographicSize: 8
     NearClipPlane: 0.3
-    FarClipPlane: 10
+    FarClipPlane: 15
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
