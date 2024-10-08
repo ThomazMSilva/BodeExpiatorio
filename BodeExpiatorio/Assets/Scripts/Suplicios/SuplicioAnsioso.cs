@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
@@ -48,6 +49,7 @@ public class SuplicioAnsioso : MonoBehaviour
         while (true)
         {
             if (!isIntervalActive) yield return null;
+            GetComponent<Renderer>().material.DOFade(isAttracting ? 0 : 1, interval * .5f);
             isAttracting = !isAttracting;
             yield return new WaitForSeconds(interval);
         }
