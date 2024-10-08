@@ -9,6 +9,7 @@ public class Venceu : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             telaVitoria.SetActive(true);
+            Debug.Log(confessionario.name);
             confessionario.DisplayTime();
         }
     }

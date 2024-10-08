@@ -20,6 +20,7 @@ public class ObjetoMovel : MonoBehaviour
     [SerializeField] private Ease animEase;
     //bool isPathing = false;
 
+    private Tween pathTween;
     [SerializeField] bool isCoiso = false;
     [SerializeField] private PathType pathType;
     [SerializeField] private PathMode pathMode;
@@ -29,7 +30,7 @@ public class ObjetoMovel : MonoBehaviour
     {   
         if (isCoiso)
         {
-            transform.DOMove(Path[0], duration).SetEase(animEase).SetLoops(-1,loopType);
+            pathTween = transform.DOMove(Path[0], duration).SetEase(animEase).SetLoops(-1,loopType);
             return;
         }
 
@@ -39,7 +40,7 @@ public class ObjetoMovel : MonoBehaviour
     private void DoPath()
     {
         //isPathing = true;
-        transform.
+        pathTween = transform.
         DOPath(Path, duration, pathType, pathMode).
         SetEase(animEase).
         OnComplete
@@ -54,5 +55,5 @@ public class ObjetoMovel : MonoBehaviour
             }
         );
     }
-
+    private void OnDestroy() => pathTween?.Kill();
 }

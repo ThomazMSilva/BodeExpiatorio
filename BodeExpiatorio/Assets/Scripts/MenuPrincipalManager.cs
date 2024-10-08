@@ -38,4 +38,9 @@ public class MenuPrincipalManager : MonoBehaviour
     {
         GameManager.Instance.NewGame();
     }
+
+    public void BackToLastCheckpoint()
+    {
+        GameManager.Instance.LoadLastCheckpoint();
+    }
 }

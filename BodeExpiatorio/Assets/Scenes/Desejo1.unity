@@ -432,6 +432,75 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 114462777}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &124620531
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1285180426386494445, guid: bab359eaf7c18ee41ae68206655260d4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285180426386494445, guid: bab359eaf7c18ee41ae68206655260d4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -52.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285180426386494445, guid: bab359eaf7c18ee41ae68206655260d4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285180426386494445, guid: bab359eaf7c18ee41ae68206655260d4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285180426386494445, guid: bab359eaf7c18ee41ae68206655260d4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285180426386494445, guid: bab359eaf7c18ee41ae68206655260d4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285180426386494445, guid: bab359eaf7c18ee41ae68206655260d4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285180426386494445, guid: bab359eaf7c18ee41ae68206655260d4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285180426386494445, guid: bab359eaf7c18ee41ae68206655260d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285180426386494445, guid: bab359eaf7c18ee41ae68206655260d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285180426386494445, guid: bab359eaf7c18ee41ae68206655260d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2282366166164952403, guid: bab359eaf7c18ee41ae68206655260d4, type: 3}
+      propertyPath: m_Name
+      value: JogadorPrefabSprite
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1285180426386494445, guid: bab359eaf7c18ee41ae68206655260d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 133064124}
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bab359eaf7c18ee41ae68206655260d4, type: 3}
+--- !u!4 &124620532 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1285180426386494445, guid: bab359eaf7c18ee41ae68206655260d4, type: 3}
+  m_PrefabInstance: {fileID: 124620531}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &126766236
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,6 +627,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 126766236}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &133064123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 133064124}
+  m_Layer: 0
+  m_Name: Sprite Follow da Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &133064124
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133064123}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.043619405, y: -0, z: -0, w: 0.9990483}
+  m_LocalPosition: {x: 0, y: 11, z: 0}
+  m_LocalScale: {x: 1.9230769, y: 1.9096867, z: 1.0036594}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 124620532}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &138564150
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,35 +837,11 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2026835916}
         m_TargetAssemblyTypeName: Confessionario, Assembly-CSharp
-        m_MethodName: Respawn
+        m_MethodName: NextLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2026835916}
-        m_TargetAssemblyTypeName: Confessionario, Assembly-CSharp
-        m_MethodName: ActivateBuff
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 157746107}
-          m_ObjectArgumentAssemblyTypeName: BuffButton, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2026835916}
-        m_TargetAssemblyTypeName: Confessionario, Assembly-CSharp
-        m_MethodName: ActivateBuff
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1915489463}
-          m_ObjectArgumentAssemblyTypeName: BuffButton, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3048,7 +3124,7 @@ Transform:
   m_GameObject: {fileID: 512845245}
   serializedVersion: 2
   m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
-  m_LocalPosition: {x: -52.72, y: 14.792999, z: -10}
+  m_LocalPosition: {x: -52.72, y: 18.22, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4236,6 +4312,74 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 859853181}
   m_CullTransparentMesh: 1
+--- !u!1 &862000334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 862000335}
+  - component: {fileID: 862000337}
+  - component: {fileID: 862000336}
+  m_Layer: 0
+  m_Name: Chegada
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &862000335
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862000334}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -62.007782, y: 38.294106, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &862000336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862000334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d55685c5477e14499977dfec7f9de6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  telaVitoria: {fileID: 1003570259}
+  confessionario: {fileID: 2026835916}
+--- !u!65 &862000337
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862000334}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 8.2067795, y: 4.3585587, z: 4.995825}
+  m_Center: {x: -3.6033897, y: 0.6975479, z: 0}
 --- !u!1 &886335166
 GameObject:
   m_ObjectHideFlags: 0
@@ -5096,7 +5240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2282366166164952403, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2317804128188777539, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
       propertyPath: maxTime
@@ -7182,7 +7326,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 2049665624}
+  m_Follow: {fileID: 133064124}
   m_Lens:
     FieldOfView: 90
     OrthographicSize: 5
@@ -7211,7 +7355,7 @@ Transform:
   m_GameObject: {fileID: 1581906988}
   serializedVersion: 2
   m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
-  m_LocalPosition: {x: -52.72, y: 14.792999, z: -10}
+  m_LocalPosition: {x: -52.72, y: 18.22, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9785,7 +9929,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2049665624}
   m_Layer: 0
-  m_Name: Follow da Camera
+  m_Name: Capsula Follow da Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10042,6 +10186,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1039590230}
+  - {fileID: 124620531}
   - {fileID: 1581906991}
   - {fileID: 1284638896}
   - {fileID: 512845250}
@@ -10055,3 +10200,4 @@ SceneRoots:
   - {fileID: 196915425}
   - {fileID: 537322510}
   - {fileID: 671283426}
+  - {fileID: 862000335}
