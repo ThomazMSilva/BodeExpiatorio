@@ -34,7 +34,6 @@ public class SuplicioBrutal : MonoBehaviour
             risingForce.Set(0, -gravity.y * risingVelocity - rb.velocity.y, 0);
             rb.AddForce(risingForce, ForceMode.VelocityChange);
         }
-
     }
 
     private void OnCollisionEnter(Collision collision)

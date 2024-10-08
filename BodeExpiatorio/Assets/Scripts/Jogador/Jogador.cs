@@ -21,6 +21,8 @@ public class Jogador : MonoBehaviour
 
     public void ApplyDamageEffect(float damageAmount, object sender) => life.DamageHealth(damageAmount, sender);
 
+    public void InstaKill(object sender) => life.DamageHealth(sender);
+
     public void ApplyDamageEffect(float damageAmount, Vector3 force, float stunSeconds, object sender, ForceMode forceMode = ForceMode.Impulse)
     {
         life.DamageHealth(damageAmount, sender);

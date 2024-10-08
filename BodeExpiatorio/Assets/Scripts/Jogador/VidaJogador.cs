@@ -125,6 +125,12 @@ public class VidaJogador : MonoBehaviour
         fervorTakenInRun = 0f;
     }
 
+    public void DamageHealth(object sender)
+    {
+        damageString += $"\n Got smitten by The Hand. Praise {sender}";
+        CurrentHealth = 0;
+    }
+
     public void DamageHealth(float damageAmount, object sender)
     {
         if (isIgnoreFirstDamageActive)
