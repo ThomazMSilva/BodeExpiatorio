@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class SuplicioAnsioso : MonoBehaviour
     [SerializeField] private float damagePerSecond = 1;
     [SerializeField] private float force = 45;
     [SerializeField, Range(0, 1)] private float kneelingForceMultiplier = 0.5f;
+    [SerializeField, Range(0, 1)] private float fadeTimeRelativeToInterval = 0.5f;
 
     [SerializeField] private bool isIntervalActive = true;
     [SerializeField] private bool isAttracting;
@@ -48,6 +50,7 @@ public class SuplicioAnsioso : MonoBehaviour
         while (true)
         {
             if (!isIntervalActive) yield return null;
+            GetComponent<Renderer>().material.DOFade(isAttracting ? 0 : 1, interval * fadeTimeRelativeToInterval);
             isAttracting = !isAttracting;
             yield return new WaitForSeconds(interval);
         }
