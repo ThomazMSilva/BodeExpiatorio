@@ -34,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 0.52, y: 0.52, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: eafeb2fac7789ef49bc16930f53be371, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9c4f0bce607d21847b866fcb7f452639, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -110,8 +110,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2.65, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.2380352, y: 3.986659, z: 1}
+  m_Center: {x: -0.11901758, y: -0.11901788, z: 0}
 --- !u!54 &4949242929930484042
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -183,6 +183,8 @@ MonoBehaviour:
   stopCreepingDamageAtFront: 0
   creepingDamagePerSecond: 1
   currentDamageToCreep: 0
+  damageTakenInRun: 0
+  fervorTakenInRun: 0
 --- !u!114 &55350483955099054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,10 +198,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  climbSpeed: 5
   clampVelocity: 0
   terminalVelocity: 30
-  airControl: 0
+  instantAirVelocityChange: 0
   airAccelerationMultiplier: 10
+  instantGroundVelocityChange: 0
+  groundAccelerationMultiplier: 15
   allowRagdollMomentum: 1
   maxStunTime: 2
   fallGravityMultiplier: 5
@@ -208,11 +213,12 @@ MonoBehaviour:
   ragdollJumpGravityMultiplier: 0.5
   ragdollKneelGravityMultiplier: 2
   isRagdollJumpUnlocked: 1
-  raycastDistance: 1
+  raycastDistance: 2.42
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  jumpForce: 15
+  fallingPlatformTag: Marvada
+  jumpForce: 15.5
   coyoteTimeMax: 0.1
   jumpBufferTimeMax: 0.15
   shortJumpDelta: 1.5
@@ -220,18 +226,16 @@ MonoBehaviour:
   kneelSpeedMultiplier: 0.6
   isLookingRight: 0
   isGrounded: 1
+  isClimbing: 0
   jumpKeyHeld: 0
   willJump: 0
   isKneeling: 0
   inRagdoll: 0
   isStunned: 0
   isStuckInWire: 0
-  jumpBufferTimeCurrent: 0
-  coyoteTimeCurrent: 0
-  stunTimeRemaining: 0
-  wiredRagdollTime: 0
+  playerCollider: {fileID: 1287762491101862042}
+  rb: {fileID: 4949242929930484042}
   input: {fileID: 4163043874282635791}
-  groundAccelerationMultiplier: 12
 --- !u!114 &2317804128188777539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,11 +248,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618293a7b4bf96048a6170428de64b35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 10
-  maxTime: 50
+  damageAmount: 5
+  maxTime: 30
   countDownMultiplier: 3
   recoveryMultiplier: 10
-  currentTime: 50
+  currentTime: 30
   countDownPauseTime: 10
   currentPauseTime: 10
   isCountDownActive: 1
@@ -267,5 +271,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horizontalAxis: Horizontal
+  verticalAxis: Vertical
   jumpAxis: Jump
   kneelAxis: Fire3

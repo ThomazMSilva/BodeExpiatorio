@@ -97,6 +97,8 @@ public class MovimentoJogador : MonoBehaviour
         isStunned = false,
         isStuckInWire = false;
 
+    public bool IsClimbing { get => isClimbing; private set => isClimbing = value; }
+
     //[SerializeField]
     private float
         horizontalInput,
@@ -145,7 +147,7 @@ public class MovimentoJogador : MonoBehaviour
 
         colliderBaseCenter = playerCollider.center;
         colliderKneelingCenter.Set(colliderBaseCenter.x, colliderBaseCenter.y - (colliderKneelingSize.y * 0.5f), colliderBaseCenter.z);
-        raycastDistance = playerCollider.bounds.extents.y + .05f;
+        raycastDistance = playerCollider.bounds.extents.y + .1f;
 
         gravity = Physics.gravity;
     }
