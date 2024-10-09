@@ -40,7 +40,7 @@ MonoBehaviour:
   - {fileID: 6293285285345787701}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -74,12 +74,13 @@ MonoBehaviour:
   - {fileID: 5243557991869343500}
   - {fileID: 801769388822466813}
   - {fileID: -5224368923283218197}
+  - {fileID: 5243885595177766225}
   EditorParameters: []
   MasterBanks:
   - {fileID: 1371532584112850200}
   StringsBanks:
   - {fileID: 1938391425009025117}
-  cacheTime: 638640152622256293
+  cacheTime: 638640219930580009
   cacheVersion: 131619
 --- !u!114 &801769388822466813
 MonoBehaviour:
@@ -130,7 +131,7 @@ MonoBehaviour:
   - {fileID: 6293285285345787701}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -168,10 +169,10 @@ MonoBehaviour:
   Path: FMODpenitente/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638640152621697900
+  lastModified: 638640219930331422
   FileSizes:
   - Name: 
-    Value: 1346
+    Value: 1382
   Exists: 1
 --- !u!114 &2869084027191929020
 MonoBehaviour:
@@ -222,7 +223,7 @@ MonoBehaviour:
   - {fileID: 6293285285345787701}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -281,6 +282,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &5243885595177766225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Cura
+  m_EditorClassIdentifier: 
+  Path: event:/Cura
+  Guid:
+    Data1: 69658318
+    Data2: 1197733939
+    Data3: 535569536
+    Data4: -1825381928
+  Banks:
+  - {fileID: 6293285285345787701}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &5742931214026230186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,7 +351,7 @@ MonoBehaviour:
   Path: FMODpenitente/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638640152622256293
+  lastModified: 638640219930580009
   FileSizes: []
   Exists: 1
 --- !u!114 &6445930725729269179
@@ -375,7 +403,7 @@ MonoBehaviour:
   - {fileID: 6293285285345787701}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
