@@ -1,18 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class CutsceneInicial : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] VideoPlayer videoPlayer;
+
+    private void Start()
     {
-        
+        StartCoroutine(CheckPlayingState());
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            videoPlayer.Stop();
+        }
+
+    }
+
+    IEnumerator CheckPlayingState()
+    {
+        yield return new WaitForSeconds(1f);
+        while (videoPlayer.isPlaying)
+        {
+            yield return null;
+        }
+        Debug.Log("Acabou video");
+        GameManager.Instance.LoadMainMenu();
     }
 }
