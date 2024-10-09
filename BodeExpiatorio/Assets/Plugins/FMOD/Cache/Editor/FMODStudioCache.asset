@@ -1,5 +1,23 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7807614539043725879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Animacoes.bank
+  m_EditorClassIdentifier: 
+  Path: FMODpenitente/Desktop/Animacoes.bank
+  Name: Animacoes
+  StudioPath: bank:/Animacoes
+  lastModified: 638640286188918091
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-7631982052999177441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,6 +63,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-2402976101826464371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/AnimIntro
+  m_EditorClassIdentifier: 
+  Path: event:/AnimIntro
+  Guid:
+    Data1: -258501034
+    Data2: 1148449231
+    Data3: 839492740
+    Data4: 1048042098
+  Banks:
+  - {fileID: -7807614539043725879}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +107,7 @@ MonoBehaviour:
   - {fileID: 1371532584112850200}
   - {fileID: -7631982052999177441}
   - {fileID: 6293285285345787701}
+  - {fileID: -7807614539043725879}
   EditorEvents:
   - {fileID: 891596458803142336}
   - {fileID: 6445930725729269179}
@@ -75,12 +121,13 @@ MonoBehaviour:
   - {fileID: 801769388822466813}
   - {fileID: -5224368923283218197}
   - {fileID: 5243885595177766225}
+  - {fileID: -2402976101826464371}
   EditorParameters: []
   MasterBanks:
   - {fileID: 1371532584112850200}
   StringsBanks:
   - {fileID: 1938391425009025117}
-  cacheTime: 638640219930580009
+  cacheTime: 638640286189060447
   cacheVersion: 131619
 --- !u!114 &801769388822466813
 MonoBehaviour:
@@ -169,10 +216,10 @@ MonoBehaviour:
   Path: FMODpenitente/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638640219930331422
+  lastModified: 638640286189060447
   FileSizes:
   - Name: 
-    Value: 1382
+    Value: 1460
   Exists: 1
 --- !u!114 &2869084027191929020
 MonoBehaviour:
