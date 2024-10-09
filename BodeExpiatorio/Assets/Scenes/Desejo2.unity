@@ -619,6 +619,7 @@ MonoBehaviour:
   damagePerSecond: 0.5
   force: 100
   kneelingForceMultiplier: 0.09
+  fadeTimeRelativeToInterval: 0.5
   isIntervalActive: 1
   isAttracting: 0
 --- !u!65 &70189980
@@ -4156,6 +4157,7 @@ MonoBehaviour:
   damagePerSecond: 0.5
   force: 50
   kneelingForceMultiplier: 0.09
+  fadeTimeRelativeToInterval: 0.5
   isIntervalActive: 1
   isAttracting: 0
 --- !u!65 &660741201
@@ -4280,6 +4282,7 @@ MonoBehaviour:
   damagePerSecond: 0.5
   force: 100
   kneelingForceMultiplier: 0.09
+  fadeTimeRelativeToInterval: 0.5
   isIntervalActive: 1
   isAttracting: 0
 --- !u!65 &673875814
@@ -4609,6 +4612,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1161070638284259591, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
+      propertyPath: roomIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1161070638284259591, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
       propertyPath: checkpointStartsActive
       value: 1
@@ -7558,6 +7565,7 @@ MonoBehaviour:
   damagePerSecond: 0.5
   force: 100
   kneelingForceMultiplier: 0.09
+  fadeTimeRelativeToInterval: 0.5
   isIntervalActive: 1
   isAttracting: 0
 --- !u!65 &1362920958
@@ -8599,6 +8607,7 @@ MonoBehaviour:
   damagePerSecond: 0.5
   force: 100
   kneelingForceMultiplier: 0.09
+  fadeTimeRelativeToInterval: 0.5
   isIntervalActive: 1
   isAttracting: 0
 --- !u!65 &1462753018
@@ -9596,6 +9605,7 @@ MonoBehaviour:
   damagePerSecond: 0.5
   force: 50
   kneelingForceMultiplier: 0.09
+  fadeTimeRelativeToInterval: 0.5
   isIntervalActive: 1
   isAttracting: 0
 --- !u!65 &1646517059
@@ -9798,6 +9808,7 @@ MonoBehaviour:
   damagePerSecond: 0.5
   force: 100
   kneelingForceMultiplier: 0.09
+  fadeTimeRelativeToInterval: 0.5
   isIntervalActive: 1
   isAttracting: 0
 --- !u!65 &1789071897
