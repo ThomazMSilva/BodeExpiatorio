@@ -44,7 +44,6 @@ public class AudioManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         generalVCA = RuntimeManager.GetVCA(generalVCAPath);
-
     }
 
 
