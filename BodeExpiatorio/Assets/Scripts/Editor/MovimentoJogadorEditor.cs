@@ -29,6 +29,7 @@ public class MovimentoJogadorEditor : Editor
     SerializedProperty kneelHeightMultiplier;
     SerializedProperty kneelSpeedMultiplier;
     SerializedProperty isGrounded;
+    SerializedProperty isBind;
     SerializedProperty isLookingRight;
     SerializedProperty input;
     SerializedProperty playerCollider;
@@ -62,6 +63,7 @@ public class MovimentoJogadorEditor : Editor
         kneelHeightMultiplier = serializedObject.FindProperty("kneelHeightMultiplier");
         kneelSpeedMultiplier = serializedObject.FindProperty("kneelSpeedMultiplier");
         isGrounded = serializedObject.FindProperty("isGrounded");
+        isBind = serializedObject.FindProperty("isBind");
         isLookingRight = serializedObject.FindProperty("isLookingRight");
         input = serializedObject.FindProperty("input");
         playerCollider = serializedObject.FindProperty("playerCollider");
@@ -140,6 +142,7 @@ public class MovimentoJogadorEditor : Editor
         EditorGUILayout.Space();
 
         EditorGUILayout.PropertyField(isGrounded);
+        EditorGUILayout.PropertyField(isBind);
         EditorGUILayout.PropertyField(isLookingRight);
 
         EditorGUILayout.Space();

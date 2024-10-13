@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class Entrada : MonoBehaviour
 {
-    public static Entrada Instance;
-    private void Awake() => Instance = this;
+    private static Entrada instance;
+    public static Entrada Instance { get => instance; }
+    private void Awake() => instance = this;
 
     [SerializeField] private string horizontalAxis = "Horizontal";
 

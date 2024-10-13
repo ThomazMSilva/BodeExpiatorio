@@ -95,7 +95,8 @@ public class MovimentoJogador : MonoBehaviour
         isKneeling = false,
         inRagdoll = false,
         isStunned = false,
-        isStuckInWire = false;
+        isStuckInWire = false,
+        isBind;
 
     public bool IsClimbing { get => isClimbing; private set => isClimbing = value; }
 
@@ -183,7 +184,12 @@ public class MovimentoJogador : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //FlipCheck();
+        if (isBind)
+        {
+            //rb.velocity = Vector3.zero;
+            return;
+        }
+
         CheckGrounded();
         ApplyGravity();
         HandleHorizontal();
@@ -294,14 +300,18 @@ public class MovimentoJogador : MonoBehaviour
     private void HandleJump()
     {
         if (!willJump || isKneeling || coyoteTimeCurrent <= 0) return;
+
         AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerJumped, transform.position);
 
+        //Pulo Arame
         if (isStuckInWire)
         {
             rb.AddForce(currentWireForce, ForceMode.Impulse);
             Ragdoll(wiredRagdollTime);
             return;
         }
+
+        //Pulo Comum
         if (isClimbing) SetPlayerClimbing(false);
 
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -367,6 +377,9 @@ public class MovimentoJogador : MonoBehaviour
 
         rb.isKinematic = true;
 
+        SetPlayerClimbing(false);
+        SetWiredState(false, true);
+
         position.Set(position.x, position.y, rb.position.z);
         transform.position = position;
 
@@ -384,16 +397,17 @@ public class MovimentoJogador : MonoBehaviour
         isStuckInWire = isWired;
         if (lookingRight != isLookingRight) FlipSprite();
     }
-
-    public void SetPlayerClimbing(bool climbing)
-    {
-        isClimbing = climbing;
-    }
-
+    public void SetPlayerClimbing(bool climbing) => isClimbing = climbing;
+    public void SetInstantVelocityChange(bool accelerating) => instantGroundVelocityChange = accelerating;
     public void SetWiredForce(float forceMultiplerX, float forceMultiplierY, float ragdollTime)
     {
         currentWireForce.Set((isLookingRight ? 1 : -1) * forceMultiplerX, 1 * forceMultiplierY, 0);
         wiredRagdollTime = ragdollTime;
     }
-
+    public void SetPlayerBind(bool bind)
+    {
+        rb.velocity = Vector3.zero;
+        rb.useGravity = !bind;
+        isBind = bind;
+    }
 }
