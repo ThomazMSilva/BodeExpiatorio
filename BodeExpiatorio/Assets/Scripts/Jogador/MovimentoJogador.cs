@@ -147,7 +147,7 @@ public class MovimentoJogador : MonoBehaviour
 
         colliderBaseCenter = playerCollider.center;
         colliderKneelingCenter.Set(colliderBaseCenter.x, colliderBaseCenter.y - (colliderKneelingSize.y * 0.5f), colliderBaseCenter.z);
-        raycastDistance = playerCollider.bounds.extents.y + .1f;
+        raycastDistance = playerCollider.bounds.extents.y + .25f;
 
         gravity = Physics.gravity;
     }

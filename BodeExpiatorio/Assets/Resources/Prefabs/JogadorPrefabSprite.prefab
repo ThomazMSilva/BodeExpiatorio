@@ -203,12 +203,12 @@ MonoBehaviour:
   terminalVelocity: 30
   instantAirVelocityChange: 0
   airAccelerationMultiplier: 10
-  instantGroundVelocityChange: 0
+  instantGroundVelocityChange: 1
   groundAccelerationMultiplier: 15
   allowRagdollMomentum: 1
   maxStunTime: 2
   fallGravityMultiplier: 5
-  jumpGravityMultiplier: 3
+  jumpGravityMultiplier: 3.5
   ragdollGravityMultiplier: 6
   ragdollJumpGravityMultiplier: 0.5
   ragdollKneelGravityMultiplier: 2
@@ -218,7 +218,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   fallingPlatformTag: Marvada
-  jumpForce: 15.5
+  jumpForce: 17
   coyoteTimeMax: 0.1
   jumpBufferTimeMax: 0.15
   shortJumpDelta: 1.5
