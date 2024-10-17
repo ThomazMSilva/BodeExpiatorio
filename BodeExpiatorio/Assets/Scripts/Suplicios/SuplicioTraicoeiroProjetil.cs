@@ -1,11 +1,17 @@
 ﻿using DG.Tweening;
 using UnityEngine;
+using System.Collections;
+using Autodesk.Fbx;
 
 namespace Assets.Scripts.Suplicios
 {
     public class SuplicioTraicoeiroProjetil : MonoBehaviour
     {
         private Jogador player;
+
+        [SerializeField] private float decayTime = 7f;
+        //private WaitForSeconds waitForDecay;
+
         [SerializeField] private int groundLayer = 3;
         [SerializeField] private float stunTime = 1f;
         [SerializeField] private float directDamage = 4f;
@@ -17,7 +23,14 @@ namespace Assets.Scripts.Suplicios
         [SerializeField] private Material explosionDisplayColor;
         [SerializeField] private float explosionDisplayDuration;
 
-        private void Start() => player = FindAnyObjectByType<Jogador>();
+        private void Start()
+        {
+            //waitForDecay = new(decayTime);
+            player = FindAnyObjectByType<Jogador>();
+        }
+
+        private void OnEnable() => StartCoroutine(Decay());
+        private void OnDisable() => StopCoroutine(Decay());
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -59,5 +72,11 @@ namespace Assets.Scripts.Suplicios
             displaySphere.GetComponent<Renderer>().material.DOFade(0, explosionDisplayDuration);
             Destroy(displaySphere, explosionDisplayDuration);
         }
+        private IEnumerator Decay()
+        {
+            yield return new WaitForSeconds(decayTime);
+            gameObject.SetActive(false);
+        }
     }
+
 }
