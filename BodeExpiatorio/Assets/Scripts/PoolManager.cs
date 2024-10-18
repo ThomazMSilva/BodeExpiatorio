@@ -18,7 +18,7 @@ public class PoolManager : MonoBehaviour
 
                 _Instance = inScene.GetComponentInChildren<PoolManager>();
                 if (!_Instance) _Instance = inScene.AddComponent<PoolManager>();
-                DontDestroyOnLoad(_Instance.transform.root.gameObject);
+                //DontDestroyOnLoad(_Instance.transform.root.gameObject);
             }
             return _Instance;
         }
@@ -42,9 +42,42 @@ public class PoolManager : MonoBehaviour
         return obj;
     }
 
+    public GameObject InstantiateFromPool(GameObject prefab, Vector3 position, Quaternion rotation, string sender)
+    {
+        string poolKey = $"{sender}_{prefab.name}";
+
+        if (!objectPools.ContainsKey(poolKey))
+        {
+            CreateObjectPool(prefab, poolKey);
+        }
+
+        GameObject obj = GetObjectFromPool(poolKey);
+        obj.transform.SetPositionAndRotation(position, rotation);
+        obj.SetActive(true);
+
+        return obj;
+    }
+
     private void CreateObjectPool(GameObject prefab)
     {
         string poolKey = prefab.name;
+        List<GameObject> objectPool = new();
+        objectPools.Add(poolKey, objectPool);
+
+        GameObject poolParent = new("Pool_" + poolKey);
+        poolParent.transform.parent = transform;
+
+        for (int i = 0; i < 10; i++)  // Cria uma pool direto com no minimo 10 elementos, mas da pra mudar
+        {
+            GameObject obj = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+            obj.SetActive(false);
+            obj.transform.parent = poolParent.transform;
+            objectPool.Add(obj);
+        }
+    }
+
+    private void CreateObjectPool(GameObject prefab, string poolKey)
+    {
         List<GameObject> objectPool = new();
         objectPools.Add(poolKey, objectPool);
 

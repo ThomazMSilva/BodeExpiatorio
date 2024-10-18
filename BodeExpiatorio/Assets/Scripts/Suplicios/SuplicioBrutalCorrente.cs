@@ -1,52 +1,81 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class SuplicioBrutalCorrente : MonoBehaviour
 {
     [SerializeField] private GameObject chainPrefab;
-    private Dictionary<Vector3, GameObject> chainsInPlace;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private float rayDistance;
     [SerializeField] private float chainSize = .05f;
+    private float xPos;
+    private int _id;
+    private Vector3 endPoint;
     private RaycastHit hit;
-    private List<GameObject> chains = new();
+    private List<GameObject> chainList = new();
 
-    void Start()
+    private void Start()
     {
-        chainsInPlace = new();
+        _id = Guid.NewGuid().GetHashCode();
+        xPos = transform.position.x;
+        UpdateEndPoint();   
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        Physics.Raycast(transform.position, transform.up, out hit, rayDistance, layerMask);
-        Vector3 endPoint = hit.transform ? hit.point : transform.position + new Vector3(0,10,0);
+        if(xPos != transform.position.x)
+        {
+            xPos = transform.position.x;
+            UpdateEndPoint();
+        }
 
         int chainLinkAmount = Mathf.RoundToInt((endPoint.y - transform.position.y) / chainSize);
 
-        for(int i = 0; i < chainLinkAmount; i ++)
-        {
-            Vector3 chainPosition = new(endPoint.x,  endPoint.y - (chainSize * i), endPoint.z);
+        UpdateChains(chainLinkAmount);
+        DeactivateChainBelow(transform.position.y);
+    }
 
-            if (!chainsInPlace.ContainsKey(chainPosition))
-                chainsInPlace.Add(chainPosition, PoolManager.Instance.InstantiateFromPool(chainPrefab, chainPosition, Quaternion.identity));
-            else chainsInPlace[chainPosition].SetActive(true);
+    private void UpdateChains(int chainLinkAmount)
+    {
+        while (chainList.Count < chainLinkAmount)
+        {
+            GameObject newChain = PoolManager.Instance.InstantiateFromPool(chainPrefab, transform.position, Quaternion.identity, $"{this}_{_id}");
+            chainList.Add(newChain);
         }
 
-    }
-    private void Update()
-    {
-
-        for (int j = 0; j < chainsInPlace.Count; j++)
+        for (int i = 0; i < chainLinkAmount; i++)
         {
-            var pair = chainsInPlace.ElementAt(j);
-            if (pair.Value.activeSelf && pair.Key.y < transform.position.y)
+            Vector3 chainPosition = new(endPoint.x, endPoint.y - (chainSize * i), endPoint.z);
+
+            GameObject chain = chainList[i];
+
+            if (chain.transform.position != chainPosition)
             {
-                //Debug.Log($"Posicao {pair.Key} de {pair.Value} eh menor que {transform.position}; Desativando {pair.Value}");
-                pair.Value.SetActive(false);
+                chain.transform.position = chainPosition;
             }
+
+            if (!chain.activeSelf)
+            {
+                chain.SetActive(true);
+            }
+        }
+    }
+
+    private void UpdateEndPoint()
+    {
+        endPoint = Physics.Raycast(transform.position, transform.up, out hit, rayDistance, layerMask)
+            ? hit.point
+            : transform.position + Vector3.up * 10;
+        DeactivateChainBelow(1000f);
+    }
+
+    private void DeactivateChainBelow(float y)
+    {
+        foreach (var chain in chainList)
+        {
+            if (!chain.activeSelf) continue;
+            if (chain.transform.position.y < transform.position.y || chain.transform.position.y > endPoint.y)
+                chain.SetActive(false);
         }
     }
 }
