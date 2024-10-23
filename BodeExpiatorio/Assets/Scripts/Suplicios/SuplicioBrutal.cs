@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class SuplicioBrutal : MonoBehaviour
 {
+    [SerializeField]
     private bool isFalling;
     private Vector3 gravity;
     private Vector3 risingForce = Vector3.zero;
