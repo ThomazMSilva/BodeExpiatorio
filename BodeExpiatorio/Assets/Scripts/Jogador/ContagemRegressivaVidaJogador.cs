@@ -4,7 +4,7 @@
 public class ContagemRegressivaVidaJogador : MonoBehaviour
 {
     [SerializeField]
-    private float
+    public float
         damageAmount = 10f,
         maxTime = 50f,
         countDownMultiplier = 5f,
