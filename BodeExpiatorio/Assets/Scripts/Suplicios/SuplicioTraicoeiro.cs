@@ -76,6 +76,9 @@ namespace Assets.Scripts.Suplicios
                     Rigidbody sporeRB = go.GetComponent<Rigidbody>();
                     sporeRB.velocity = Vector3.zero;
                     sporeRB.AddForce(transformDirection * sporeSpeed, ForceMode.Impulse);
+
+                    AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.TreacheryShot, sporeDispenser.position);
+
                     yield return shootingInterval;
                 }
                 yield return playerCheckInterval;

@@ -44,13 +44,14 @@ public class SuplicioAnsioso : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.TryGetComponent<Jogador>(out _player)) return;
+        if (!other.gameObject.CompareTag("Player")) return;
+        other.TryGetComponent<Jogador>(out _player);
         _player.Movimento.SetInstantVelocityChange(false);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.TryGetComponent<Jogador>(out _player)) return;
+        if (!other.gameObject.CompareTag("Player")) return;
         _player.Movimento.SetInstantVelocityChange(true);
     }
 
@@ -76,6 +77,9 @@ public class SuplicioAnsioso : MonoBehaviour
             if (!isIntervalActive) yield return null;
             GetComponent<Renderer>().material.DOFade(isAttracting ? 0 : 1, interval * fadeTimeRelativeToInterval);
             isAttracting = !isAttracting;
+
+            if (isAttracting)
+                AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.LongingAttracted, transform.position);
             OnChangedAttractingState?.Invoke();
             yield return new WaitForSeconds(interval);
         }

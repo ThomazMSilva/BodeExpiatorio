@@ -39,6 +39,7 @@ public class Espinho : MonoBehaviour
 
         //Debug.Log($"velPrct: {velPrctRelativeToTerminal} forceMultiplier: {finalForce}");
 
+        AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.SpikeCollided, transform.position);
         _player.ApplyDamageEffect(damage, finalForce * transform.up, timeStunned, this.name);
     }
 
