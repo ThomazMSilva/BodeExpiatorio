@@ -11,7 +11,7 @@ public class PoolManager : MonoBehaviour
         {
             if (!_Instance)
             {
-                Debug.Log("Criou pool");
+                //Debug.Log("Criou pool");
                 var prefab = Resources.Load<GameObject>("Prefabs/Pool");
 
                 var inScene = Instantiate(prefab);

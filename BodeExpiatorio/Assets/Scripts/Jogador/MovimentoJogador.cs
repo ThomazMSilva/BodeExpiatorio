@@ -211,6 +211,7 @@ public class MovimentoJogador : MonoBehaviour
     private void CheckGrounded()
     {
         isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hit, raycastDistance, groundLayer);
+        Debug.DrawRay(transform.position, -Vector3.up * raycastDistance, Color.magenta);
         
         transform.parent = hit.transform && !hit.transform.CompareTag(fallingPlatformTag) ? hit.transform : null;
         

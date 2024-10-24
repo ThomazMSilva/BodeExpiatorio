@@ -146,11 +146,11 @@ public class VidaJogador : MonoBehaviour
             isIgnoreLethalDamageActive = false;
             OnPlayerSaved?.Invoke();
         }
+        if (isReducedDamageActive) damageAmount *= reducedDamageMultiplier;
+
         damageAmount = Mathf.Clamp(damageAmount, 0f, currentHealth);
 
         if (damageAmount >= 1) AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerDamaged, transform.position);
-
-        if (isReducedDamageActive) damageAmount *= reducedDamageMultiplier;
         
         if (!isCreepingDamageActive || CurrentFrontHealth <= 0)
         {
