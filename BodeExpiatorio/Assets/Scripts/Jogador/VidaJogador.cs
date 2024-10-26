@@ -81,7 +81,6 @@ public class VidaJogador : MonoBehaviour
     [Tooltip("Para de diminuir a Vida Real (cinza) quando chega na Fachada (vermelha). Se habilitado, curar pode parar o dano contínuo.")]
     [SerializeField] bool stopCreepingDamageAtFront = false;
     [SerializeField] private float creepingDamagePerSecond = 1f;
-    [SerializeField, Range(1f,1.5f)] private float creepingDamageMultiplier = 1.1f;
     [SerializeField] private float currentDamageToCreep;
     private Coroutine creeping;
 
@@ -126,26 +125,9 @@ public class VidaJogador : MonoBehaviour
         fervorTakenInRun = 0f;
     }
 
-    public void DamageHealth(object sender, bool trueDamage = true)
+    public void DamageHealth(object sender)
     {
-        if (!trueDamage)
-        {
-            if (isIgnoreFirstDamageActive)
-            {
-                OnPlayerSaved?.Invoke();
-                return;
-            }
-
-            if (isIgnoreLethalDamageActive)
-            {
-                OnPlayerSaved?.Invoke();
-                damageString += $"\n Survived the Judgement of {CurrentHealth - 1}. Praise {sender} for its mercy.";
-                CurrentHealth = 1;
-                return;
-            }
-
-        }
-        damageString += $"\n Got smitten by The Hand. Praise {sender} for its Light.";
+        damageString += $"\n Got smitten by The Hand. Praise {sender}";
         CurrentHealth = 0;
     }
 
@@ -180,7 +162,7 @@ public class VidaJogador : MonoBehaviour
         }
 
         CurrentFrontHealth -= damageAmount;
-        currentDamageToCreep += damageAmount * creepingDamageMultiplier;
+        currentDamageToCreep += damageAmount;
 
         creeping ??= StartCoroutine(CreepDamage());
     }

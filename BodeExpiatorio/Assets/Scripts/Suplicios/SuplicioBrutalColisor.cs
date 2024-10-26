@@ -14,7 +14,7 @@ public class SuplicioBrutalColisor : MonoBehaviour
         }
 
         if (other.gameObject.layer == groundLayer && isPlayerInside)
-            player.InstaKill(this.name, false);
+            player.ApplyDamageEffect(player.Vida.BaseHealth, this.name);
     }
     private void OnTriggerExit(Collider other)
     {
