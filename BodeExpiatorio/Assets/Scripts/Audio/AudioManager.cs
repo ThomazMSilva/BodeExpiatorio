@@ -2,6 +2,7 @@ using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
 using System.Collections;
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
@@ -27,6 +28,8 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private string generalVCAPath = "vca:/SFX";
     public VCA generalVCA;
+    public List<EventInstance> eventInstances;
+
 
     private void Awake()
     {
@@ -37,6 +40,8 @@ public class AudioManager : MonoBehaviour
         }
         else _Instance = this;
 
+        eventInstances = new();
+
         StartCoroutine(InitializeVCAs());
     }
 
@@ -46,14 +51,25 @@ public class AudioManager : MonoBehaviour
         generalVCA = RuntimeManager.GetVCA(generalVCAPath);
     }
 
+    public void PlayerOneShot(EventReference sound, Vector3 worldPos) => RuntimeManager.PlayOneShot(sound, worldPos);
 
-    public void PlayerOneShot(EventReference sound, Vector3 worldPos)
+    public EventInstance CreateEventInstance(EventReference eventReference)
     {
-        RuntimeManager.PlayOneShot(sound, worldPos);
+        EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
+        eventInstances.Add(eventInstance);
+        return eventInstance;
     }
 
-    public void SetGeneralVolume(float volume)
+    private void CleanEventInstanceList()
     {
-        generalVCA.setVolume(volume);
+        foreach(var eventInstance in eventInstances)
+        {
+            eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            eventInstance.release();
+        }
     }
+
+    public void SetGeneralVolume(float volume) => generalVCA.setVolume(volume);
+
+    private void OnDestroy() => CleanEventInstanceList();
 }
