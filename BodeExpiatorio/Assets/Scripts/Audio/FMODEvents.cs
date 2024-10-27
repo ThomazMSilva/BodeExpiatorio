@@ -14,6 +14,8 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference TreacheryShot { get; private set; }
     [field: SerializeField] public EventReference ThornCollided { get; private set; }
     [field: SerializeField] public EventReference SpikeCollided { get; private set; }
+    [field: SerializeField] public FMOD.Studio.PLAYBACK_STATE thwompCollidedPBState { get; private set; }
+
 
     public static FMODEvents Instance { get; private set; }
     private void Awake()
