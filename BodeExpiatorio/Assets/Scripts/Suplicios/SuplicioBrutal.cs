@@ -22,7 +22,7 @@ public class SuplicioBrutal : MonoBehaviour
     [SerializeField] private float maxShakeTime = .4f;
     [SerializeField] private int groundLayer = 3;
 
-    [SerializeField] private FMOD.Studio.EventInstance brutalChainsEventInstance;
+    [SerializeField] private EventInstance brutalChainsEventInstance;
 
     void Start()
     {
@@ -31,7 +31,6 @@ public class SuplicioBrutal : MonoBehaviour
         playerTransform = FindAnyObjectByType<Jogador>().transform;
         brutalChainsEventInstance = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.BrutalityMoved);
         waitForSeconds = new(waitTime);
-        //AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.BrutalityMoved, transform.position);
     }
 
 
