@@ -175,8 +175,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 1.7902374, z: 1}
-  m_Center: {x: 0, y: 0.10488129, z: 0}
+  m_Size: {x: 2, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4733183883587788632
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -219,10 +219,61 @@ MonoBehaviour:
   isFalling: 0
   fallingVelocity: 1.5
   risingVelocity: 0.6
+  waitTime: 0.5
   maxSqrMag: 400
   maxShakeIntensity: 10
   maxShakeTime: 0.4
   groundLayer: 3
+--- !u!1 &160880505190362075
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5539061052699121753}
+  - component: {fileID: 6686606785093290941}
+  m_Layer: 0
+  m_Name: corrente_mng
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5539061052699121753
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160880505190362075}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5997335899217691692}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6686606785093290941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160880505190362075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 394c175e90b3029458d946ae5143d66a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chainPrefab: {fileID: 9120527599194519761, guid: c06886fb686551f47801e0cbc26fa2bc, type: 3}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  rayDistance: 50
+  chainSize: 0.05
 --- !u!1 &3373943445650349651
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,9 +401,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: twompplataforma (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1574290328502332769, guid: f69534c3e0b698d4fb6e6af58db49c4e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: f69534c3e0b698d4fb6e6af58db49c4e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5539061052699121753}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f69534c3e0b698d4fb6e6af58db49c4e, type: 3}
 --- !u!4 &5997335899217691692 stripped

@@ -29,8 +29,12 @@ public class SuplicioBrutal : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         gravity = Physics.gravity;
         playerTransform = FindAnyObjectByType<Jogador>().transform;
-        brutalChainsEventInstance = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.BrutalityMoved);
+        
         waitForSeconds = new(waitTime);
+
+        brutalChainsEventInstance = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.BrutalityMoved);
+        brutalChainsEventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform));
+        brutalChainsEventInstance.start();
     }
 
 
@@ -47,9 +51,9 @@ public class SuplicioBrutal : MonoBehaviour
                 risingForce.Set(0, -gravity.y * risingVelocity - rb.velocity.y, 0);
                 rb.AddForce(risingForce, ForceMode.VelocityChange);
             }
+            
+            brutalChainsEventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform));
         }
-
-        UpdateSound();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -60,6 +64,7 @@ public class SuplicioBrutal : MonoBehaviour
             {
                 ShakeOnCollision();
                 StartCoroutine(Wait());
+                brutalChainsEventInstance.keyOff();
             }
             
             isFalling = !isFalling;
@@ -71,6 +76,7 @@ public class SuplicioBrutal : MonoBehaviour
         isWaiting = true;
         yield return waitForSeconds;
         isWaiting = false;
+        brutalChainsEventInstance.start();
     }
 
     private void ShakeOnCollision()
@@ -83,7 +89,7 @@ public class SuplicioBrutal : MonoBehaviour
         CinemachineShake.instance.ShakeCamera(maxShakeIntensity * proximityMultiplier, maxShakeTime * proximityMultiplier);
     }
 
-    private void UpdateSound()
+    /*private void UpdateSound()
     {
         if (rb.velocity.y != 0 && !isWaiting)
         {
@@ -101,5 +107,5 @@ public class SuplicioBrutal : MonoBehaviour
         {
             brutalChainsEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
         }
-    }
+    }*/
 }
