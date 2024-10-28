@@ -4,6 +4,7 @@ using System.Reflection;
 public class ReiniciarNivel : MonoBehaviour
 {
     public VidaJogador vidaJogador; 
+    public Confessionario confessionario;
 
     public void OnReiniciarNivel()
     {
@@ -18,6 +19,14 @@ public class ReiniciarNivel : MonoBehaviour
             }
 
             
+        }
+
+    }
+    public void OnReturnToLastCheckpoint()
+    {
+        if (confessionario != null)
+        {
+            confessionario.TeleportToLastCheckpoint();
         }
     }
 }

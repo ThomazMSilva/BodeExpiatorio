@@ -13,6 +13,8 @@ public class Confessionario : MonoBehaviour
     private Jogador player;
 
     private void Awake() => player = FindAnyObjectByType<Jogador>();
+    private static Transform lastRespawnPoint;
+
 
     private void Start()
     {
@@ -57,6 +59,7 @@ public class Confessionario : MonoBehaviour
     {
         player.ActivateBuff(buff.buffType);
         if(buffScreen) buffScreen.SetActive(false);
+        lastRespawnPoint = respawnPoint;
     }
 
     public void Respawn()
@@ -73,6 +76,7 @@ public class Confessionario : MonoBehaviour
 
     public void Spawn()
     {
+        Transform point = lastRespawnPoint != null ? lastRespawnPoint : respawnPoint;
         player.SetPosition(respawnPoint.position);
         player.StopCreepingDamage();
         player.SetBuffs();
@@ -82,6 +86,14 @@ public class Confessionario : MonoBehaviour
     {
         Debug.Log("MORREU MUITASSO INSANO MESMO.");
         GameManager.Instance.LoadDeathScene();
+    }
+    public void TeleportToLastCheckpoint()
+    {
+        
+        Transform point = lastRespawnPoint != null ? lastRespawnPoint : respawnPoint;
+        player.SetPosition(point.position);
+        player.StopCreepingDamage();
+        player.SetBuffs();
     }
 
     public void NextLevel() => GameManager.Instance.LoadNextRoom();
