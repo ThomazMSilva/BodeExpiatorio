@@ -27,6 +27,8 @@ public class AudioManager : MonoBehaviour
     }
 
     [SerializeField] private string generalVCAPath = "vca:/SFX";
+    [SerializeField] private string sfxVCAPath = "vca:/SFX";
+    [SerializeField] private string musicVCAPath = "vca:/Music";
     public VCA generalVCA;
     public List<EventInstance> eventInstances;
 
