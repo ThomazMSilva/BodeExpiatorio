@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7976524692076871546
+--- !u!114 &-8159567135445642150
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Pulo
+  m_Name: event:/Penitente/Pulo
   m_EditorClassIdentifier: 
-  Path: event:/Pulo
+  Path: event:/Penitente/Pulo
   Guid:
     Data1: -747660536
     Data2: 1239932654
@@ -27,7 +27,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-7829411531683616853
+--- !u!114 &-8144572234177192850
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37,14 +37,68 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Ajoelhar
+  m_Name: event:/Animacoes/AnimIntro
   m_EditorClassIdentifier: 
-  Path: event:/Ajoelhar
+  Path: event:/Animacoes/AnimIntro
   Guid:
-    Data1: 1409008271
-    Data2: 1174864223
-    Data3: -252313721
-    Data4: -1950277317
+    Data1: -258501034
+    Data2: 1148449231
+    Data3: 839492740
+    Data4: 1048042098
+  Banks:
+  - {fileID: 4596896888960068754}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7691305544061437724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Penitente/Cura
+  m_EditorClassIdentifier: 
+  Path: event:/Penitente/Cura
+  Guid:
+    Data1: 69658318
+    Data2: 1197733939
+    Data3: 535569536
+    Data4: -1825381928
+  Banks:
+  - {fileID: -7038295471888812275}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7463127842271540703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Penitente/Idle
+  m_EditorClassIdentifier: 
+  Path: event:/Penitente/Idle
+  Guid:
+    Data1: -839145459
+    Data2: 1091628472
+    Data3: 431373243
+    Data4: 1948417660
   Banks:
   - {fileID: -7038295471888812275}
   IsStream: 0
@@ -69,36 +123,9 @@ MonoBehaviour:
   Path: FMODpenitente/Desktop/Musica.bank
   Name: Musica
   StudioPath: bank:/Musica
-  lastModified: 638640152622000324
+  lastModified: 638658303389528063
   FileSizes: []
   Exists: 1
---- !u!114 &-7127595775161370609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Thwomp
-  m_EditorClassIdentifier: 
-  Path: event:/Thwomp
-  Guid:
-    Data1: -624416147
-    Data2: 1126561794
-    Data3: 1329370803
-    Data4: 889655720
-  Banks:
-  - {fileID: -7038295471888812275}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 4.6
-  MaxDistance: 90
-  Length: 1298
 --- !u!114 &-7038295471888812275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,63 +141,9 @@ MonoBehaviour:
   Path: FMODpenitente/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638656634909996991
+  lastModified: 638658303390420806
   FileSizes: []
   Exists: 1
---- !u!114 &-6952823684769721124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Passo
-  m_EditorClassIdentifier: 
-  Path: event:/Passo
-  Guid:
-    Data1: -1303287478
-    Data2: 1321682389
-    Data3: 124486574
-    Data4: -47014835
-  Banks:
-  - {fileID: -7038295471888812275}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-6786103612461418546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Dano
-  m_EditorClassIdentifier: 
-  Path: event:/Dano
-  Guid:
-    Data1: 1885096880
-    Data2: 1275817544
-    Data3: -664718452
-    Data4: 2059643658
-  Banks:
-  - {fileID: -7038295471888812275}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &-6640213740609525214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,12 +159,12 @@ MonoBehaviour:
   Path: FMODpenitente/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638656597138242553
+  lastModified: 638658303389183884
   FileSizes:
   - Name: 
-    Value: 1460
+    Value: 1346
   Exists: 1
---- !u!114 &-2884132791410760725
+--- !u!114 &-352414911139531083
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,19 +174,46 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Idle
+  m_Name: event:/TracksMusicais/TrackMusicalBrutal
   m_EditorClassIdentifier: 
-  Path: event:/Idle
+  Path: event:/TracksMusicais/TrackMusicalBrutal
   Guid:
-    Data1: -839145459
-    Data2: 1091628472
-    Data3: 431373243
-    Data4: 1948417660
+    Data1: -1551933931
+    Data2: 1142880083
+    Data3: -1291372116
+    Data4: -948762191
+  Banks:
+  - {fileID: -7312351707125281735}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 36000
+--- !u!114 &-250953545698379502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Penitente/Ajoelhar
+  m_EditorClassIdentifier: 
+  Path: event:/Penitente/Ajoelhar
+  Guid:
+    Data1: 1409008271
+    Data2: 1174864223
+    Data3: -252313721
+    Data4: -1950277317
   Banks:
   - {fileID: -7038295471888812275}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -237,27 +237,23 @@ MonoBehaviour:
   - {fileID: -7312351707125281735}
   - {fileID: -7038295471888812275}
   EditorEvents:
-  - {fileID: 2046910518182504200}
-  - {fileID: 5318058647717594882}
-  - {fileID: -7976524692076871546}
-  - {fileID: -2884132791410760725}
-  - {fileID: 7768633834791251657}
-  - {fileID: -7127595775161370609}
-  - {fileID: -6952823684769721124}
-  - {fileID: 7015431383451468584}
-  - {fileID: -7829411531683616853}
-  - {fileID: -6786103612461418546}
-  - {fileID: 7314387074888795333}
-  - {fileID: 4832671073871931183}
-  - {fileID: 444910506512371800}
+  - {fileID: -8144572234177192850}
+  - {fileID: -352414911139531083}
+  - {fileID: -8159567135445642150}
+  - {fileID: -7463127842271540703}
+  - {fileID: 6775298966063003066}
+  - {fileID: 3429417291085396249}
+  - {fileID: -250953545698379502}
+  - {fileID: 624406316650470526}
+  - {fileID: -7691305544061437724}
   EditorParameters: []
   MasterBanks:
   - {fileID: 6174678603951002349}
   StringsBanks:
   - {fileID: -6640213740609525214}
-  cacheTime: 638656634909996991
+  cacheTime: 638658303390420806
   cacheVersion: 131620
---- !u!114 &444910506512371800
+--- !u!114 &624406316650470526
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,14 +263,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Cura
+  m_Name: event:/Penitente/Dano
   m_EditorClassIdentifier: 
-  Path: event:/Cura
+  Path: event:/Penitente/Dano
   Guid:
-    Data1: 69658318
-    Data2: 1197733939
-    Data3: 535569536
-    Data4: -1825381928
+    Data1: 1885096880
+    Data2: 1275817544
+    Data3: -664718452
+    Data4: 2059643658
   Banks:
   - {fileID: -7038295471888812275}
   IsStream: 0
@@ -283,8 +279,8 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
---- !u!114 &2046910518182504200
+  Length: 850
+--- !u!114 &3429417291085396249
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -294,23 +290,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/AnimIntro
+  m_Name: event:/Suplicios/Thwomp
   m_EditorClassIdentifier: 
-  Path: event:/AnimIntro
+  Path: event:/Suplicios/Thwomp
   Guid:
-    Data1: -258501034
-    Data2: 1148449231
-    Data3: 839492740
-    Data4: 1048042098
+    Data1: -624416147
+    Data2: 1126561794
+    Data3: 1329370803
+    Data4: 889655720
   Banks:
-  - {fileID: 4596896888960068754}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
+  - {fileID: -7038295471888812275}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
+  MinDistance: 4.6
+  MaxDistance: 90
+  Length: 1298
 --- !u!114 &4596896888960068754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,63 +322,9 @@ MonoBehaviour:
   Path: FMODpenitente/Desktop/Animacoes.bank
   Name: Animacoes
   StudioPath: bank:/Animacoes
-  lastModified: 638640286188918091
+  lastModified: 638658303389094116
   FileSizes: []
   Exists: 1
---- !u!114 &4832671073871931183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Succ
-  m_EditorClassIdentifier: 
-  Path: event:/Succ
-  Guid:
-    Data1: 274760653
-    Data2: 1140593241
-    Data3: 829361571
-    Data4: -515379127
-  Banks:
-  - {fileID: -7038295471888812275}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &5318058647717594882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TrackMusicalBrutal
-  m_EditorClassIdentifier: 
-  Path: event:/TrackMusicalBrutal
-  Guid:
-    Data1: -1551933931
-    Data2: 1142880083
-    Data3: -1291372116
-    Data4: -948762191
-  Banks:
-  - {fileID: -7312351707125281735}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 36000
 --- !u!114 &6174678603951002349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,10 +340,10 @@ MonoBehaviour:
   Path: FMODpenitente/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638640152620148615
+  lastModified: 638658303389173907
   FileSizes: []
   Exists: 1
---- !u!114 &7015431383451468584
+--- !u!114 &6775298966063003066
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -411,68 +353,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/PlantaBomba
+  m_Name: event:/Penitente/Passo
   m_EditorClassIdentifier: 
-  Path: event:/PlantaBomba
+  Path: event:/Penitente/Passo
   Guid:
-    Data1: -1309756295
-    Data2: 1075385308
-    Data3: 711409816
-    Data4: 1416859811
-  Banks:
-  - {fileID: -7038295471888812275}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &7314387074888795333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Espinho
-  m_EditorClassIdentifier: 
-  Path: event:/Espinho
-  Guid:
-    Data1: -1282390599
-    Data2: 1242276883
-    Data3: -780451931
-    Data4: -1009014088
-  Banks:
-  - {fileID: -7038295471888812275}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &7768633834791251657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Arame
-  m_EditorClassIdentifier: 
-  Path: event:/Arame
-  Guid:
-    Data1: -1588578285
-    Data2: 1100782539
-    Data3: 1558197921
-    Data4: 1674892140
+    Data1: -1303287478
+    Data2: 1321682389
+    Data3: 124486574
+    Data4: -47014835
   Banks:
   - {fileID: -7038295471888812275}
   IsStream: 0
