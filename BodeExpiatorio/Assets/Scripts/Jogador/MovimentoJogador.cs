@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using FMOD.Studio;
 
 [RequireComponent(typeof(Rigidbody))]
 public class MovimentoJogador : MonoBehaviour
@@ -129,6 +130,9 @@ public class MovimentoJogador : MonoBehaviour
 
     private RaycastHit hit;
 
+    private EventInstance playerWalkingEventInstance;
+    private EventInstance playerIdleEventInstance;
+
     public delegate void EventHandler(bool boolean);
     public event EventHandler OnPlayerTurned;
 
@@ -151,6 +155,9 @@ public class MovimentoJogador : MonoBehaviour
         raycastDistance = playerCollider.bounds.extents.y + .25f;
 
         gravity = Physics.gravity;
+
+        playerWalkingEventInstance = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.PlayerWalked);
+        playerIdleEventInstance = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.PlayerIdle);
     }
     
     private void OnEnable()
@@ -184,6 +191,8 @@ public class MovimentoJogador : MonoBehaviour
 
     private void FixedUpdate()
     {
+        HandleWalkingSound();
+
         if (isBind)
         {
             //rb.velocity = Vector3.zero;
@@ -211,6 +220,7 @@ public class MovimentoJogador : MonoBehaviour
     private void CheckGrounded()
     {
         isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hit, raycastDistance, groundLayer);
+        Debug.DrawRay(transform.position, -Vector3.up * raycastDistance, Color.magenta);
         
         transform.parent = hit.transform && !hit.transform.CompareTag(fallingPlatformTag) ? hit.transform : null;
         
@@ -289,6 +299,37 @@ public class MovimentoJogador : MonoBehaviour
     
     }
 
+    private void HandleWalkingSound()
+    {
+        if (!isGrounded || isKneeling)
+        {
+            playerWalkingEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
+            playerIdleEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
+            return;
+        }
+
+        if(horizontalInput != 0)
+        {
+            playerIdleEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
+
+            playerWalkingEventInstance.getPlaybackState(out PLAYBACK_STATE walkingPbState);
+            if (walkingPbState.Equals(PLAYBACK_STATE.STOPPED))
+            {
+                playerWalkingEventInstance.start();
+            }
+        }
+        else
+        {
+            playerWalkingEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
+
+            playerIdleEventInstance.getPlaybackState(out PLAYBACK_STATE idlePbState);
+            if(idlePbState.Equals(PLAYBACK_STATE.STOPPED))
+            {
+                playerIdleEventInstance.start();
+            }
+        }
+    }
+
     private void HandleClimb()
     {
         if (!isClimbing) return;
@@ -335,6 +376,7 @@ public class MovimentoJogador : MonoBehaviour
         if (isStuckInWire) { SetWiredState(false, isLookingRight); return; }
         if (isClimbing) { SetPlayerClimbing(false); return; }
 
+        AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerKnelt, transform.position);
         playerCollider.size = willKneel ? colliderKneelingSize : colliderBaseSize;
         playerCollider.center = willKneel ? colliderKneelingCenter : colliderBaseCenter;
         isKneeling = willKneel;

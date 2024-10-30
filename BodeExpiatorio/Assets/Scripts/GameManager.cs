@@ -40,19 +40,22 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J)) LoadNextRoom();
-        if (Input.GetKeyDown(KeyCode.H)) LoadLastCheckpoint();
+        if (Input.GetKeyDown(KeyCode.N)) LoadNextRoom();
+        if (Input.GetKeyDown(KeyCode.R)) LoadLastCheckpoint();
 
-        if (Input.GetKeyDown(KeyCode.F1)) SceneManager.LoadScene("Menu");
-        if (Input.GetKeyDown(KeyCode.F2)) SceneManager.LoadScene("Brutal 1");
-        if (Input.GetKeyDown(KeyCode.F3)) SceneManager.LoadScene("Brutal 2");
-        if (Input.GetKeyDown(KeyCode.F4)) SceneManager.LoadScene("Menu 1");
-        if (Input.GetKeyDown(KeyCode.F5)) SceneManager.LoadScene("TestesMAluk05");
-        if (Input.GetKeyDown(KeyCode.F6)) SceneManager.LoadScene("TestesMAluk05 1");
-        if (Input.GetKeyDown(KeyCode.F7)) SceneManager.LoadScene("Teste Momentum 2");
-        if (Input.GetKeyDown(KeyCode.F8)) SceneManager.LoadScene("Teste Arame");
-        if (Input.GetKeyDown(KeyCode.F9)) SceneManager.LoadScene("Teste Semeltr");
-        if (Input.GetKeyDown(KeyCode.F12)) SceneManager.LoadScene("Morte");
+        if (Input.GetKeyDown(KeyCode.F1)) SceneManager.LoadScene("Menu 1");
+        if (Input.GetKeyDown(KeyCode.F2)) SceneManager.LoadScene("Desejo 1");
+        if (Input.GetKeyDown(KeyCode.F3)) SceneManager.LoadScene("Desejo 2");
+        if (Input.GetKeyDown(KeyCode.F4)) SceneManager.LoadScene("Traicao 1");
+        if (Input.GetKeyDown(KeyCode.F5)) SceneManager.LoadScene("Brutal 1");
+        if (Input.GetKeyDown(KeyCode.F6)) SceneManager.LoadScene("Brutal 2");
+        if (Input.GetKeyDown(KeyCode.F7)) SceneManager.LoadScene("Brutal 3");
+        if (Input.GetKeyDown(KeyCode.F8)) SceneManager.LoadScene("TestesMAluk05");
+        if (Input.GetKeyDown(KeyCode.F9)) SceneManager.LoadScene("TestesMAluk05 1");
+        //if (Input.GetKeyDown(KeyCode.F10)) SceneManager.LoadScene("Teste Momentum 2");
+        if (Input.GetKeyDown(KeyCode.F10)) SceneManager.LoadScene("Teste Semeltr");
+        if (Input.GetKeyDown(KeyCode.F11)) SceneManager.LoadScene("Teste Arame");
+        if (Input.GetKeyDown(KeyCode.F12)) LoadDeathScene();
     }
 
     public void NewGame()

@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using Autodesk.Fbx;
+using UnityEngine.InputSystem.Controls;
 
 namespace Assets.Scripts.Suplicios
 {
@@ -18,7 +19,10 @@ namespace Assets.Scripts.Suplicios
         [SerializeField] private float explosionRadius = 10f;
         [SerializeField] private float explosionDamage = 6f;
         [SerializeField] private float explosionForce = 10f;
+        [Tooltip("A tendência da explosão a subir. O vetor Y da diferença entre a posição do jogador e o centro da explosão é somado com esse valor.")]
         [SerializeField] private float yExplosionSupport = 2f;
+        [Tooltip("A força vertical que é aplicada ao Jogador antes da Explosão. Isso é pra ele não estar grounded quando é expurgado.")]
+        [SerializeField] private float yMultiplier = 10;
 
         [SerializeField] private Material explosionDisplayColor;
         [SerializeField] private float explosionDisplayDuration;
@@ -29,6 +33,7 @@ namespace Assets.Scripts.Suplicios
             player = FindAnyObjectByType<Jogador>();
         }
 
+        private Vector3 direction;
         private void OnEnable() => StartCoroutine(Decay());
         private void OnDisable() => StopCoroutine(Decay());
 
@@ -46,18 +51,34 @@ namespace Assets.Scripts.Suplicios
                 DisplayExplosion(); 
 
                 Collider[] col = Physics.OverlapSphere(transform.position, explosionRadius);
-                
+
+                bool hasCollidedToPlayer = false;
+
                 foreach(var collider in col)
                 {
                     if (!collider.CompareTag("Player")) continue;
                     
-                    Vector3 direction = collider.transform.position - transform.position;
+                    direction = collider.transform.position - transform.position;
                     direction.y += yExplosionSupport;
-                    player.ApplyDamageEffect(explosionDamage, direction.normalized * explosionForce, stunTime, this.name);
+                    hasCollidedToPlayer = true;
+                    StartCoroutine(ApplyForce());
                     break;
                 }
-                gameObject.SetActive(false);
+                if (!hasCollidedToPlayer) gameObject.SetActive(false);
             }
+        }
+
+        private IEnumerator ApplyForce()
+        {
+            //que bizarro ;-; isso eh meio feio de se fazer, mas ta funcionando
+            player.ApplyDamageEffect(0, yMultiplier * yExplosionSupport * Vector3.up, stunTime, "Cogumelo levantou o Jogador antes de aplicar forca");
+            
+            yield return new WaitForFixedUpdate();
+            yield return new WaitForFixedUpdate();
+            
+            player.ApplyDamageEffect(explosionDamage, direction.normalized * explosionForce, stunTime, this.name);
+            
+            gameObject.SetActive(false);
         }
 
         private void DisplayExplosion()

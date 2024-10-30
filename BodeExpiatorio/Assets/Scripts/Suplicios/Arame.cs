@@ -20,6 +20,8 @@ namespace Assets.Scripts.Suplicios
             _player.SetWiredForceAndRagdoll(forceAmountX, forceAmountY, stunTime);
             
             _player.ApplyDamageEffect(damage, this.name);
+
+            AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.ThornCollided, transform.position);
         }
 
         private void OnTriggerExit(Collider other)

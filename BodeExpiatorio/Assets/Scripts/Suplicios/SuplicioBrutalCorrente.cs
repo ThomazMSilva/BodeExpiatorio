@@ -57,6 +57,7 @@ public class SuplicioBrutalCorrente : MonoBehaviour
             if (!chain.activeSelf)
             {
                 chain.SetActive(true);
+                //AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.BrutalityMoved, transform.position);
             }
         }
     }
@@ -75,7 +76,10 @@ public class SuplicioBrutalCorrente : MonoBehaviour
         {
             if (!chain.activeSelf) continue;
             if (chain.transform.position.y < transform.position.y || chain.transform.position.y > endPoint.y)
+            {
                 chain.SetActive(false);
+                //AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.BrutalityMoved, transform.position);
+            }
         }
     }
 }

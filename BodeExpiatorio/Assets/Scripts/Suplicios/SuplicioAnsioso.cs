@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using UnityEngine;
+using FMOD.Studio;
 
 public class SuplicioAnsioso : MonoBehaviour
 {
@@ -13,16 +14,15 @@ public class SuplicioAnsioso : MonoBehaviour
     [SerializeField] private bool isIntervalActive = true;
     [SerializeField] private bool isAttracting;
     public bool IsAttracting { get => isAttracting; }
+
     private bool _isKneeling;
     private float currentForceMultiplier;
+
+    private EventInstance windEventInstance;
     private Jogador _player;
     public Jogador Player { get => _player; }
     private Entrada _input;
 
-    private void OnEnable()
-    {
-        StartCoroutine(InitializeSingletonReference());
-    }
     private IEnumerator InitializeSingletonReference()
     {
         while (_input == null)
@@ -32,25 +32,39 @@ public class SuplicioAnsioso : MonoBehaviour
         }
         _input.OnKneelButtonDown += SetKneelingTrue;
         _input.OnKneelButtonUp += SetKneelingFalse;
+
         StartCoroutine(Attract());
     }
-        
+
+    private void OnEnable()
+    {
+        StartCoroutine(InitializeSingletonReference());
+    }
+
     private void OnDisable()
     {
         _input.OnKneelButtonDown -= SetKneelingTrue;
         _input.OnKneelButtonUp -= SetKneelingFalse;
         StopCoroutine(Attract());
+        windEventInstance.release();
+    }
+
+    private void Start()
+    {
+        windEventInstance = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.LongingAttracted);
+        windEventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.TryGetComponent<Jogador>(out _player)) return;
+        if (!other.gameObject.CompareTag("Player")) return;
+        other.TryGetComponent<Jogador>(out _player);
         _player.Movimento.SetInstantVelocityChange(false);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.TryGetComponent<Jogador>(out _player)) return;
+        if (!other.gameObject.CompareTag("Player")) return;
         _player.Movimento.SetInstantVelocityChange(true);
     }
 
@@ -76,6 +90,11 @@ public class SuplicioAnsioso : MonoBehaviour
             if (!isIntervalActive) yield return null;
             GetComponent<Renderer>().material.DOFade(isAttracting ? 0 : 1, interval * fadeTimeRelativeToInterval);
             isAttracting = !isAttracting;
+
+            if (isAttracting) windEventInstance.start();
+
+            else windEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
+            
             OnChangedAttractingState?.Invoke();
             yield return new WaitForSeconds(interval);
         }
