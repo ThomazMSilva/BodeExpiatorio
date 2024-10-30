@@ -1739,6 +1739,7 @@ GameObject:
   m_Component:
   - component: {fileID: 220860125}
   - component: {fileID: 220860126}
+  - component: {fileID: 220860127}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -1823,6 +1824,29 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &220860127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220860124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &261077046
 GameObject:
   m_ObjectHideFlags: 0
@@ -5524,6 +5548,10 @@ MonoBehaviour:
   cenaDeJogoNome: 
   painelMenuInicial: {fileID: 180761979}
   painelOpcoes: {fileID: 1332861868}
+  creditsScreen: {fileID: 0}
+  firstMenuOption: {fileID: 0}
+  firstConfigOption: {fileID: 0}
+  creditsReturnBTN: {fileID: 0}
 --- !u!4 &1006841565
 Transform:
   m_ObjectHideFlags: 0
@@ -8315,6 +8343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
   attenuationObject: {fileID: 161061368}
 --- !u!114 &1431233937
 MonoBehaviour:
@@ -11902,11 +11931,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8922bbd1e20ca0c419d1fcb17a0f4c43, type: 2}
     - target: {fileID: 6826200906080137360, guid: 2a1007ce9487cd14193672cd5215dc22, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4
+      value: 74.6
       objectReference: {fileID: 0}
     - target: {fileID: 6826200906080137360, guid: 2a1007ce9487cd14193672cd5215dc22, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.5
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 6826200906080137360, guid: 2a1007ce9487cd14193672cd5215dc22, type: 3}
       propertyPath: m_LocalPosition.z
