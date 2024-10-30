@@ -1,22 +1,29 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-public class ComeçaDialogo : MonoBehaviour
+public class ComecaDialogo : MonoBehaviour
 {
-   
-    public GameObject objetoParaVerificar;
+    [System.Serializable]
+    public class ParObjetos
+    {
+        public GameObject objetoParaVerificar;
+        public GameObject objetoParaAtivar;
+    }
 
-
-    public GameObject objetoParaAtivar;
+    public List<ParObjetos> paresDeObjetos; // Lista de pares de objetos para verificar e ativar
 
     void Update()
     {
-        
-        if (objetoParaVerificar != null && !objetoParaVerificar.activeInHierarchy)
+        foreach (ParObjetos par in paresDeObjetos)
         {
-            
-            if (objetoParaAtivar != null && !objetoParaAtivar.activeInHierarchy)
+            // Verifica se o objeto do par está inativo
+            if (par.objetoParaVerificar != null && !par.objetoParaVerificar.activeInHierarchy)
             {
-                objetoParaAtivar.SetActive(true);
+                // Ativa o objeto correspondente do par, caso esteja inativo
+                if (par.objetoParaAtivar != null && !par.objetoParaAtivar.activeInHierarchy)
+                {
+                    par.objetoParaAtivar.SetActive(true);
+                }
             }
         }
     }
