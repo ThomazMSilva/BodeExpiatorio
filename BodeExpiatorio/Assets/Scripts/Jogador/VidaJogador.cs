@@ -68,7 +68,13 @@ public class VidaJogador : MonoBehaviour
     [Header("Buffs"), Space(8f)]
 
     [HideInInspector] public bool isIgnoreFirstDamageActive = false;
+
+    [Space(8f)]
+
     [HideInInspector] public bool isIgnoreLethalDamageActive = false;
+    [SerializeField] private bool lethalCanBecomeInvulnerable = true;
+    [SerializeField] private float lethalInvulnerabilityTime = .5f;
+    private bool isInvulnerable = false;
 
     [Space(8f)]
 
@@ -130,6 +136,8 @@ public class VidaJogador : MonoBehaviour
     {
         if (!trueDamage)
         {
+            if (isInvulnerable) return;
+
             if (isIgnoreFirstDamageActive)
             {
                 OnPlayerSaved?.Invoke();
@@ -141,6 +149,8 @@ public class VidaJogador : MonoBehaviour
                 OnPlayerSaved?.Invoke();
                 damageString += $"\n Survived the Judgement of {CurrentHealth - 1}. Praise {sender} for its mercy.";
                 CurrentHealth = 1;
+                if (lethalCanBecomeInvulnerable)
+                    StartCoroutine(InvulnerabilityTime());
                 return;
             }
 
@@ -151,6 +161,8 @@ public class VidaJogador : MonoBehaviour
 
     public void DamageHealth(float damageAmount, object sender)
     {
+        if (isInvulnerable) return;
+
         if (isIgnoreFirstDamageActive)
         {
             isIgnoreFirstDamageActive = false;
@@ -163,6 +175,9 @@ public class VidaJogador : MonoBehaviour
             damageAmount = Mathf.Clamp(damageAmount, 0f, currentHealth - 1f);
             isIgnoreLethalDamageActive = false;
             OnPlayerSaved?.Invoke();
+            
+            if(lethalCanBecomeInvulnerable)
+                StartCoroutine(InvulnerabilityTime());
         }
         if (isReducedDamageActive) damageAmount *= reducedDamageMultiplier;
 
@@ -196,6 +211,17 @@ public class VidaJogador : MonoBehaviour
         creeping = null;
     }
 
+    private IEnumerator InvulnerabilityTime()
+    {
+        isInvulnerable = true;
+        OnPlayerInvulnerabilityStart?.Invoke();
+
+        yield return new WaitForSeconds(lethalInvulnerabilityTime);
+        
+        isInvulnerable = false;
+        OnPlayerInvulnerabilityEnd?.Invoke();
+    }
+
     public void StopCreepingDamage() => currentDamageToCreep = 0;
 
     public void CureHealth(float cureAmount)
@@ -226,6 +252,8 @@ public class VidaJogador : MonoBehaviour
     public event PlayerDeathHandler OnPlayerDeath;
     public event PlayerDeathHandler OnPlayerTrueDeath;
     public event PlayerDeathHandler OnPlayerSaved;
+    public event PlayerDeathHandler OnPlayerInvulnerabilityStart;
+    public event PlayerDeathHandler OnPlayerInvulnerabilityEnd;
 }
 
 #if UNITY_EDITOR

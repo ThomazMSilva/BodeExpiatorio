@@ -45,7 +45,7 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField] private float fallGravityMultiplier = 5f;
 
-    [SerializeField] private float jumpGravityMultiplier = 3f;
+    [SerializeField] private float jumpGravityMultiplier = 3.5f;
 
     [Space(8f)]
 

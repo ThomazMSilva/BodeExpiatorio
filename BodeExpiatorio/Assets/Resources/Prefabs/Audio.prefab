@@ -50,78 +50,77 @@ MonoBehaviour:
       Data2: 1275817544
       Data3: -664718452
       Data4: 2059643658
-    Path: event:/Dano
+    Path: event:/Penitente/Dano
   <PlayerCured>k__BackingField:
     Guid:
       Data1: 69658318
       Data2: 1197733939
       Data3: 535569536
       Data4: -1825381928
-    Path: event:/Cura
+    Path: event:/Penitente/Cura
   <PlayerKnelt>k__BackingField:
     Guid:
       Data1: 1409008271
       Data2: 1174864223
       Data3: -252313721
       Data4: -1950277317
-    Path: event:/Ajoelhar
+    Path: event:/Penitente/Ajoelhar
   <PlayerJumped>k__BackingField:
     Guid:
       Data1: -747660536
       Data2: 1239932654
       Data3: 1457128345
       Data4: 2099958832
-    Path: event:/Pulo
+    Path: event:/Penitente/Pulo
   <PlayerWalked>k__BackingField:
     Guid:
       Data1: -1303287478
       Data2: 1321682389
       Data3: 124486574
       Data4: -47014835
-    Path: event:/Passo
+    Path: event:/Penitente/Passo
   <PlayerIdle>k__BackingField:
     Guid:
       Data1: -839145459
       Data2: 1091628472
       Data3: 431373243
       Data4: 1948417660
-    Path: event:/Idle
+    Path: event:/Penitente/Idle
   <BrutalityMoved>k__BackingField:
     Guid:
       Data1: -624416147
       Data2: 1126561794
       Data3: 1329370803
       Data4: 889655720
-    Path: event:/Thwomp
+    Path: event:/Suplicios/Thwomp
   <LongingAttracted>k__BackingField:
     Guid:
-      Data1: 274760653
-      Data2: 1140593241
-      Data3: 829361571
-      Data4: -515379127
-    Path: event:/Succ
+      Data1: -163297117
+      Data2: 1094505970
+      Data3: -1867584893
+      Data4: 250949934
+    Path: event:/Suplicios/Portal
   <TreacheryShot>k__BackingField:
     Guid:
-      Data1: -1309756295
-      Data2: 1075385308
-      Data3: 711409816
-      Data4: 1416859811
-    Path: event:/PlantaBomba
+      Data1: -661327483
+      Data2: 1263375898
+      Data3: 1644477336
+      Data4: -700516704
+    Path: event:/Suplicios/PlantaBomba
   <ThornCollided>k__BackingField:
     Guid:
-      Data1: -1588578285
-      Data2: 1100782539
-      Data3: 1558197921
-      Data4: 1674892140
-    Path: event:/Arame
+      Data1: -1190321241
+      Data2: 1203844738
+      Data3: -1608619392
+      Data4: -2126915139
+    Path: event:/Suplicios/Arame
   <SpikeCollided>k__BackingField:
     Guid:
-      Data1: -1282390599
-      Data2: 1242276883
-      Data3: -780451931
-      Data4: -1009014088
-    Path: event:/Espinho
-  <thwompCollidedPBState>k__BackingField: 0
+      Data1: -1190321241
+      Data2: 1203844738
+      Data3: -1608619392
+      Data4: -2126915139
+    Path: event:/Suplicios/Arame
 --- !u!1 &897027071311015816
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,6 +166,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalVCAPath: vca:/SFX
+  sfxVCAPath: vca:/SFX
+  musicVCAPath: vca:/Music
 --- !u!1 &992860386079937580
 GameObject:
   m_ObjectHideFlags: 0

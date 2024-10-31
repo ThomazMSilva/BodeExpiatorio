@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
@@ -17,6 +18,37 @@ public class Espinho : MonoBehaviour
     [SerializeField, Range(1f, 10f)] private float maxVelMultiplier = 3f;
     [SerializeField] private float terminalVelocity = 30f;
 
+    [SerializeField] private Material damageMaterial;
+    private Renderer[] rend;
+    private Material[] originalMaterial;
+    //private readonly Color damageColor = Color.white;
+    private Coroutine changeColorCoroutine;
+
+    private void Start()
+    {
+
+        rend = GetComponentsInChildren<Renderer>();
+        originalMaterial = new Material[rend.Length];
+        for (int i = 0; i < rend.Length; i++)
+        {
+            originalMaterial[i] = rend[i].material;
+        }
+    }
+
+    private IEnumerator ChangeColor()
+    {
+        foreach(var renderer in rend)
+        {
+            renderer.material = damageMaterial;
+        }
+
+        yield return new WaitForSeconds(Time.fixedDeltaTime * 3);
+
+        for (int i = 0; i < rend.Length; i++)
+        {
+            rend[i].material = originalMaterial[i];
+        }
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -38,6 +70,9 @@ public class Espinho : MonoBehaviour
         float damage = !isVelocityRelevant ? damageAmount : damageAmount + (damageAmount * velPrctRelativeToTerminal);
 
         //Debug.Log($"velPrct: {velPrctRelativeToTerminal} forceMultiplier: {finalForce}");
+
+        if(changeColorCoroutine != null) StopCoroutine(changeColorCoroutine);
+        changeColorCoroutine = StartCoroutine(ChangeColor());
 
         AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.SpikeCollided, transform.position);
         _player.ApplyDamageEffect(damage, finalForce * transform.up, timeStunned, this.name);
