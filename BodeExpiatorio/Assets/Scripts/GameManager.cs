@@ -1,6 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System;
+using TMPro;
 
 
 public class GameManager : MonoBehaviour
@@ -44,8 +49,8 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R)) LoadLastCheckpoint();
 
         if (Input.GetKeyDown(KeyCode.F1)) SceneManager.LoadScene("Menu 1");
-        if (Input.GetKeyDown(KeyCode.F2)) SceneManager.LoadScene("Desejo 1");
-        if (Input.GetKeyDown(KeyCode.F3)) SceneManager.LoadScene("Desejo 2");
+        if (Input.GetKeyDown(KeyCode.F2)) SceneManager.LoadScene("Desejo1");
+        if (Input.GetKeyDown(KeyCode.F3)) StartCoroutine(LoadScreen("Desejo2"));//SceneManager.LoadScene("Desejo 2");
         if (Input.GetKeyDown(KeyCode.F4)) SceneManager.LoadScene("Traicao 1");
         if (Input.GetKeyDown(KeyCode.F5)) SceneManager.LoadScene("Brutal 1");
         if (Input.GetKeyDown(KeyCode.F6)) SceneManager.LoadScene("Brutal 2");
@@ -151,19 +156,98 @@ public class GameManager : MonoBehaviour
         }
         Jogador _player = FindAnyObjectByType<Jogador>();
         SetHealth(_player.Vida.CurrentMaxHealth, _player.Vida.CurrentHealth);
-        SceneManager.LoadSceneAsync(rooms[currentRoom.sceneIndex + 1].sceneName);
+
+        StartCoroutine(LoadScreen(rooms[currentRoom.sceneIndex + 1].sceneName));
+        //SceneManager.LoadSceneAsync(rooms[currentRoom.sceneIndex + 1].sceneName);
     }
 
     public void LoadDeathScene() => SceneManager.LoadScene(deathSceneName);
 
     public void LoadMainMenu() => SceneManager.LoadScene("Menu 1");
+
+    [Header("Tela de Carregamento"), Space(8f)]
+
+    [SerializeField] private GameObject LoadingScreen;
+
+    [SerializeField] private TextMeshProUGUI loadingText;
+    [SerializeField] private TextMeshProUGUI statisticsText;
+
+    [SerializeField] private float fadeTime = 0.5f;
+
+    private IEnumerator LoadScreen(string sceneName)
+    {
+        var images = LoadingScreen.GetComponentsInChildren<Image>();
+        float[] originalAlpha = new float[images.Length];
+        
+        for (int i = 0; i < originalAlpha.Length; i++) originalAlpha[i] = images[i].color.a;
+        
+        loadingText.text = "Loading...";
+        statisticsText.text = FindObjectOfType<Confessionario>().LevelStatistics();
+
+        LoadingScreen.SetActive(true);
+
+        for (float t = 0; t < fadeTime; t += Time.deltaTime)
+        {
+            float normalizedTime = t / fadeTime;
+            for (int i = 0; i < images.Length; i++)
+            {
+                var color = images[i].color;
+                color.a = Mathf.Lerp(0, originalAlpha[i], normalizedTime);
+                images[i].color = color;
+            }
+            yield return null;
+        }
+
+        foreach (var image in images)
+        {
+            var color = image.color;
+            color.a = originalAlpha[Array.IndexOf(images, image)];
+            image.color = color;
+        }
+
+        AsyncOperation loadSceneOperation = SceneManager.LoadSceneAsync(sceneName);
+
+        while (!loadSceneOperation.isDone)
+        {
+            yield return null;
+        }
+
+        loadingText.text = "Press any key to continue.";
+
+        Time.timeScale = 0;
+        while (!Input.anyKey || Input.GetMouseButton(0)) yield return null;
+
+        Time.timeScale = 1;
+
+        for (float t = 0; t < fadeTime; t += Time.deltaTime)
+        {
+            float normalizedTime = t / fadeTime;
+            for (int i = 0; i < images.Length; i++)
+            {
+                var color = images[i].color;
+                color.a = Mathf.Lerp(originalAlpha[i], 0, normalizedTime);
+                images[i].color = color;
+            }
+            yield return null;
+        }
+
+        foreach (var image in images)
+        {
+            var color = image.color;
+            color.a = 0;
+            image.color = color;
+        }
+
+        LoadingScreen.SetActive(false);
+
+        for (int i = 0; i < images.Length; i++)
+        {
+            var color = images[i].color;
+            color.a = originalAlpha[i];
+            images[i].color = color;
+        }
+    }
 }
-
-
-
-
-
-
 
 [System.Serializable]
 public class Sala

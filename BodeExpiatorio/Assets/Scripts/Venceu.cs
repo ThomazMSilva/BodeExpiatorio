@@ -10,7 +10,7 @@ public class Venceu : MonoBehaviour
         {
             telaVitoria.SetActive(true);
             Debug.Log(confessionario.name);
-            confessionario.DisplayTime();
+            confessionario.LevelStatistics();
         }
     }
 }

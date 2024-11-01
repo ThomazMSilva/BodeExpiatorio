@@ -98,5 +98,8 @@ public class Confessionario : MonoBehaviour
 
     public void NextLevel() => GameManager.Instance.LoadNextRoom();
 
-    public void DisplayTime() { Debug.Log($"RoomTime: {Time.time - startingRoomTime}; RunTime: {Time.time - startingRunTime}\n{player.Vida.DamageString}"); }
+    public string LevelStatistics()
+    {
+        return $"--Level {roomIndex + 1}Statistics--\nRoomTime: {Time.time - startingRoomTime}; RunTime: {Time.time - startingRunTime}\n{player.Vida.DamageString}"; 
+    }
 }

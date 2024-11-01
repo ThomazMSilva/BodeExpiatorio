@@ -10,6 +10,7 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler
     [SerializeField] TextMeshProUGUI TMPTexto;
     [SerializeField] float intervaloCaracteres;
     [SerializeField] bool temFundoPreto;
+    [SerializeField] string fontName = "LiberationSans SDF";
     int indiceAtual;
     bool isTextoTerminado;
     public UnityEvent OnDialogoAcabou;
@@ -21,7 +22,7 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler
 
         if (!isTextoTerminado)
         {
-            TMPTexto.text = (temFundoPreto ? "<font=\"LiberationSans SDF\"> <mark=#000000 padding=10,20,5,5>" : "") + falas[indiceAtual];
+            TMPTexto.text = (temFundoPreto ? $"<font=\"{fontName}\"> <mark=#000000 padding=10,20,5,5>" : "") + falas[indiceAtual];
             isTextoTerminado = true;
         }
 
