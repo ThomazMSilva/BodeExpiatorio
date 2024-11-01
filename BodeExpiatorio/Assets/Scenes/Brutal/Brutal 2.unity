@@ -13323,7 +13323,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1161070638284259591, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
       propertyPath: roomIndex
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1161070638284259591, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
       propertyPath: checkpointStartsActive
@@ -16509,6 +16509,7 @@ MonoBehaviour:
   TMPTexto: {fileID: 912913330}
   intervaloCaracteres: 0.1
   temFundoPreto: 0
+  fontName: LiberationSans SDF
   OnDialogoAcabou:
     m_PersistentCalls:
       m_Calls:
@@ -45294,7 +45295,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vidaJogador: {fileID: 914629822}
-  confessionario: {fileID: 547199338}
 --- !u!114 &1807958296
 MonoBehaviour:
   m_ObjectHideFlags: 0

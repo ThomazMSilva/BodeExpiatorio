@@ -98,6 +98,7 @@ public class VidaJogador : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.P)) CureHealth(baseMaxHealth);
+        if (Input.GetKeyUp(KeyCode.O)) FullyRecoverMaxHealth();
     }
 
     private string damageString = "";
@@ -113,9 +114,17 @@ public class VidaJogador : MonoBehaviour
     }
 
     private float totalDamageTaken;
+    public float DamageTakenInRoom { get => totalDamageTaken; }
+    
     private float totalFervorTaken;
-    public float damageTakenInRun;
-    public float fervorTakenInRun;
+    public float FervorTakenInRoom { get => totalFervorTaken; }
+    
+    private float damageTakenInRun;
+    public float DamageTakenInRun{ get => damageTakenInRun; }
+    
+    private float fervorTakenInRun;
+    public float FervorTakenInRun{ get => fervorTakenInRun; }
+
     private void Start()
     {
         CurrentMaxHealth = GameManager.Instance.GetMaxHealth();

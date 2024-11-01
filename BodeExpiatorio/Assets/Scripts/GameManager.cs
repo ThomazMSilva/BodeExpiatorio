@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
 using TMPro;
-
 
 public class GameManager : MonoBehaviour
 {
@@ -34,6 +32,7 @@ public class GameManager : MonoBehaviour
     private static readonly string currentRoomPref = "CurrentRoom";
     private static readonly string maxHealthPref = "MaxHealth";
     private static readonly string currentHealthPref = "CurrentHealth";
+    private static readonly string currentActStatisticsPref = "CurrentActStatistics";
     
     [SerializeField] private string deathSceneName = "Morte";
 
@@ -142,9 +141,9 @@ public class GameManager : MonoBehaviour
         return PlayerPrefs.GetFloat(currentHealthPref);
     }
 
-    public void LoadCurrentRoom() => SceneManager.LoadScene(currentRoom.sceneName);
+    public void LoadCurrentRoom() => StartCoroutine(LoadScreen(currentRoom.sceneName));
 
-    public void LoadLastCheckpoint() => SceneManager.LoadSceneAsync(lastCheckpoint.sceneName);
+    public void LoadLastCheckpoint() => StartCoroutine(LoadScreen(lastCheckpoint.sceneName));
 
     public void LoadNextRoom()
     {
@@ -157,13 +156,13 @@ public class GameManager : MonoBehaviour
         Jogador _player = FindAnyObjectByType<Jogador>();
         SetHealth(_player.Vida.CurrentMaxHealth, _player.Vida.CurrentHealth);
 
-        StartCoroutine(LoadScreen(rooms[currentRoom.sceneIndex + 1].sceneName));
+        StartCoroutine(LoadScreen(rooms[currentRoom.sceneIndex + 1].sceneName, true));
         //SceneManager.LoadSceneAsync(rooms[currentRoom.sceneIndex + 1].sceneName);
     }
 
     public void LoadDeathScene() => SceneManager.LoadScene(deathSceneName);
 
-    public void LoadMainMenu() => SceneManager.LoadScene("Menu 1");
+    public void LoadMainMenu() => StartCoroutine(LoadScreen("Menu 1"));
 
     [Header("Tela de Carregamento"), Space(8f)]
 
@@ -172,9 +171,34 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI loadingText;
     [SerializeField] private TextMeshProUGUI statisticsText;
 
+    [SerializeField, TextArea] List<string> randomTexts = new List<string>();
+
     [SerializeField] private float fadeTime = 0.5f;
 
-    private IEnumerator LoadScreen(string sceneName)
+    [SerializeField] float operationTime = 0;
+    [SerializeField] float changeTime = 3;
+
+    private string actStatistics = "";
+
+    private float actRunTime;
+    private float actRoomTime;
+
+    private Vector4 totalActTorment;
+
+    private string ActText 
+    { 
+        get =>  
+                $"Estatisticas do Ato: \n\n" +
+                $"Total Damage Taken: {totalActTorment.x}\n" +
+                $"Total Damage in Run: {totalActTorment.y}\n" +
+                $"Total Fervor Taken: {totalActTorment.z}\n" +
+                $"Total Fervor in Run: {totalActTorment.w}\n" +
+                $"Total Time: {actRoomTime}\n" +
+                $"Total Run Time: {actRunTime}\n\n\n"+
+                $"Specifications:\n\n{actStatistics}";
+    }
+
+    private IEnumerator LoadScreen(string sceneName, bool loadingNextLevel = false)
     {
         var images = LoadingScreen.GetComponentsInChildren<Image>();
         float[] originalAlpha = new float[images.Length];
@@ -182,8 +206,63 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < originalAlpha.Length; i++) originalAlpha[i] = images[i].color.a;
         
         loadingText.text = "Loading...";
-        statisticsText.text = FindObjectOfType<Confessionario>().LevelStatistics();
 
+        if (loadingNextLevel)
+        {
+            var confessionario = FindAnyObjectByType<Confessionario>();
+
+            if (confessionario == null)
+            {
+                Debug.LogError("Ce ta fazendo merda com o GameManager. " +
+                    "Ta tentando carregar o \"proximo nivel\" a partir um nivel que nao tem nem confessionario.");
+            }
+            else
+            {
+                actStatistics += $"\n{confessionario.LevelStatistics()}\n";
+                totalActTorment += confessionario.TotalTorment();
+                actRoomTime += confessionario.RoomTime();
+                actRunTime += confessionario.RunTime();
+
+                PlayerPrefs.SetString(currentActStatisticsPref, actStatistics);
+
+                //Cada um dos cases é pro nível 4 de cada Ato
+                switch (currentRoom.sceneIndex)
+                {
+                    case 3:
+                        statisticsText.text = ActText;
+                        actStatistics = "";
+                        totalActTorment = Vector4.zero;
+                        actRoomTime = 0;
+                        actRunTime = 0;
+                        break;
+
+                    case 7:
+                        statisticsText.text = ActText;
+                        actStatistics = "";
+                        totalActTorment = Vector4.zero;
+                        actRoomTime = 0;
+                        actRunTime = 0;
+                        break;
+
+                    case 11:
+                        statisticsText.text = ActText;
+                        actStatistics = "";
+                        totalActTorment = Vector4.zero;
+                        actRoomTime = 0;
+                        actRunTime = 0;
+                        //Muda a imagem da animacao aq pra ele subindo tb
+                        break;
+
+                    default:
+                        statisticsText.text = confessionario.LevelStatistics();
+                        break;
+                }
+            }
+        }
+        else statisticsText.text = randomTexts[UnityEngine.Random.Range(0, randomTexts.Count - 1)];
+
+        //Ativa as imagens e da Fade In
+        
         LoadingScreen.SetActive(true);
 
         for (float t = 0; t < fadeTime; t += Time.deltaTime)
@@ -198,6 +277,8 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
+        //Completa o Fade In
+        
         foreach (var image in images)
         {
             var color = image.color;
@@ -205,20 +286,53 @@ public class GameManager : MonoBehaviour
             image.color = color;
         }
 
+
+        //Espera a cena carregar
+        
         AsyncOperation loadSceneOperation = SceneManager.LoadSceneAsync(sceneName);
+
+        operationTime = 0;
 
         while (!loadSceneOperation.isDone)
         {
+            if (!loadingNextLevel)
+            {
+                operationTime += Time.unscaledDeltaTime;
+                if (operationTime > changeTime)
+                {
+                    statisticsText.text = randomTexts[UnityEngine.Random.Range(0, randomTexts.Count - 1)];
+                    operationTime = 0;
+                }
+            }
             yield return null;
         }
+
+
+        //Espera input do Jogador
 
         loadingText.text = "Press any key to continue.";
 
         Time.timeScale = 0;
-        while (!Input.anyKey || Input.GetMouseButton(0)) yield return null;
+
+        while (!Input.anyKey || Input.GetMouseButton(0))
+        {
+            if (!loadingNextLevel)
+            {
+                operationTime += Time.unscaledDeltaTime;
+                if (operationTime > changeTime)
+                {
+                    statisticsText.text = randomTexts[UnityEngine.Random.Range(0, randomTexts.Count - 1)]; ;
+                    operationTime = 0;
+                }
+            }
+            yield return null;
+        }
 
         Time.timeScale = 1;
 
+
+        //Fade Out nas imagens
+        
         for (float t = 0; t < fadeTime; t += Time.deltaTime)
         {
             float normalizedTime = t / fadeTime;
@@ -240,6 +354,9 @@ public class GameManager : MonoBehaviour
 
         LoadingScreen.SetActive(false);
 
+
+        //Reseta os valores das imagens
+        
         for (int i = 0; i < images.Length; i++)
         {
             var color = images[i].color;

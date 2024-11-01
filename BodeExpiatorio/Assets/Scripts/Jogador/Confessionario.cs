@@ -89,7 +89,6 @@ public class Confessionario : MonoBehaviour
     }
     public void TeleportToLastCheckpoint()
     {
-        
         Transform point = lastRespawnPoint != null ? lastRespawnPoint : respawnPoint;
         player.SetPosition(point.position);
         player.StopCreepingDamage();
@@ -100,6 +99,27 @@ public class Confessionario : MonoBehaviour
 
     public string LevelStatistics()
     {
-        return $"--Level {roomIndex + 1}Statistics--\nRoomTime: {Time.time - startingRoomTime}; RunTime: {Time.time - startingRunTime}\n{player.Vida.DamageString}"; 
+        return $"--Level {roomIndex + 1} Statistics--\n\nRoomTime: {RoomTime()}; RunTime: {RunTime()}\n{player.Vida.DamageString}"; 
     }
+
+    public float RoomTime() => Time.time - startingRoomTime;
+
+    public float RunTime() => Time.time - startingRunTime;
+
+    public float DamageTakenRoom() => player.Vida.DamageTakenInRoom;
+
+    public float DamageTakenRun() => player.Vida.DamageTakenInRun;
+
+    public float FervorTakenRoom() => player.Vida.FervorTakenInRoom;
+
+    public float FervorTakenRun() => player.Vida.FervorTakenInRun;
+
+    /// <summary>
+    /// x = damage in room
+    /// y = damage in run
+    /// z = fervor in room
+    /// w = fervor in run
+    /// </summary>
+    /// <returns></returns>
+    public Vector4 TotalTorment() => new(DamageTakenRoom(), DamageTakenRun(), FervorTakenRoom(), FervorTakenRun());
 }
