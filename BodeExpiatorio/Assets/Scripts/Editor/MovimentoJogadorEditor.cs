@@ -28,6 +28,7 @@ public class MovimentoJogadorEditor : Editor
     SerializedProperty shortJumpDelta;
     SerializedProperty kneelHeightMultiplier;
     SerializedProperty kneelSpeedMultiplier;
+    SerializedProperty timeToPlayIdle;
     SerializedProperty isGrounded;
     SerializedProperty isBind;
     SerializedProperty isRagdolling;
@@ -63,6 +64,7 @@ public class MovimentoJogadorEditor : Editor
         shortJumpDelta = serializedObject.FindProperty("shortJumpDelta");
         kneelHeightMultiplier = serializedObject.FindProperty("kneelHeightMultiplier");
         kneelSpeedMultiplier = serializedObject.FindProperty("kneelSpeedMultiplier");
+        timeToPlayIdle = serializedObject.FindProperty("timeToPlayIdle");
         isGrounded = serializedObject.FindProperty("isGrounded");
         isBind = serializedObject.FindProperty("isBind");
         isRagdolling = serializedObject.FindProperty("inRagdoll");
@@ -122,6 +124,10 @@ public class MovimentoJogadorEditor : Editor
         EditorGUILayout.PropertyField(ragdollGravityMultiplier);
         EditorGUILayout.PropertyField(ragdollJumpGravityMultiplier);
         EditorGUILayout.PropertyField(ragdollKneelGravityMultiplier);
+
+        EditorGUILayout.Space();
+
+        EditorGUILayout.PropertyField(timeToPlayIdle);
 
         EditorGUILayout.Space();
 

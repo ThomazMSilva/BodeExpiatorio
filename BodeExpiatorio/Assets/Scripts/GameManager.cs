@@ -200,6 +200,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator LoadScreen(string sceneName, bool loadingNextLevel = false)
     {
+
+        if (Time.timeScale == 0) Time.timeScale = 1;
         var images = LoadingScreen.GetComponentsInChildren<Image>();
         float[] originalAlpha = new float[images.Length];
         

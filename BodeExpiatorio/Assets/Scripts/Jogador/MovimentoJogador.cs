@@ -86,6 +86,9 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField, Range(0, 1)] private float kneelSpeedMultiplier = 0.7f;
 
+    [SerializeField] private float timeToPlayIdle = 3;
+    private float idlingCurrentTime;
+
     [SerializeField]
     private bool
         isLookingRight,
@@ -310,22 +313,27 @@ public class MovimentoJogador : MonoBehaviour
 
         if(horizontalInput != 0)
         {
+            idlingCurrentTime = 0;
+            
             playerIdleEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
 
             playerWalkingEventInstance.getPlaybackState(out PLAYBACK_STATE walkingPbState);
-            if (walkingPbState.Equals(PLAYBACK_STATE.STOPPED))
-            {
-                playerWalkingEventInstance.start();
-            }
+            
+            if (walkingPbState.Equals(PLAYBACK_STATE.STOPPED)) playerWalkingEventInstance.start();
         }
         else
         {
+            idlingCurrentTime += Time.fixedDeltaTime;
+            
             playerWalkingEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
-
-            playerIdleEventInstance.getPlaybackState(out PLAYBACK_STATE idlePbState);
-            if(idlePbState.Equals(PLAYBACK_STATE.STOPPED))
+            
+            if(idlingCurrentTime > timeToPlayIdle)
             {
-                playerIdleEventInstance.start();
+                playerIdleEventInstance.getPlaybackState(out PLAYBACK_STATE idlePbState);
+                
+                if(idlePbState.Equals(PLAYBACK_STATE.STOPPED)) playerIdleEventInstance.start();
+
+                idlingCurrentTime = 0;
             }
         }
     }
@@ -375,13 +383,32 @@ public class MovimentoJogador : MonoBehaviour
     {
         if (isStuckInWire) { SetWiredState(false, isLookingRight); return; }
         if (isClimbing) { SetPlayerClimbing(false); return; }
+        
+        if (!willKneel && Physics.Raycast(transform.position, transform.up, raycastDistance, groundLayer))
+        {
+            StartCoroutine(CheckOverHead());
+            return;
+        }
 
         AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerKnelt, transform.position);
         playerCollider.size = willKneel ? colliderKneelingSize : colliderBaseSize;
         playerCollider.center = willKneel ? colliderKneelingCenter : colliderBaseCenter;
         isKneeling = willKneel;
-
     }
+
+    private IEnumerator CheckOverHead()
+    {
+        bool isUnderStuff = true;
+
+        while(isUnderStuff)
+        {
+            isUnderStuff = Physics.Raycast(transform.position, transform.up, raycastDistance, groundLayer);
+            yield return null;
+        }
+
+        HandleKneel(false);
+    }
+
 
     public void ApplyForce(Vector3 force, ForceMode forceMode) => rb.AddForce(force, forceMode);
 
