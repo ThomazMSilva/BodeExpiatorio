@@ -36,6 +36,7 @@ public class MovimentoJogadorEditor : Editor
     SerializedProperty input;
     SerializedProperty playerCollider;
     SerializedProperty rb;
+    SerializedProperty playerAnim;
 
     private void OnEnable()
     {
@@ -72,6 +73,7 @@ public class MovimentoJogadorEditor : Editor
         input = serializedObject.FindProperty("input");
         playerCollider = serializedObject.FindProperty("playerCollider");
         rb = serializedObject.FindProperty("rb");
+        playerAnim = serializedObject.FindProperty("playerAnim");
     }
     public override void OnInspectorGUI()
     {
@@ -159,6 +161,7 @@ public class MovimentoJogadorEditor : Editor
         EditorGUILayout.PropertyField(input);
         EditorGUILayout.PropertyField(playerCollider);
         EditorGUILayout.PropertyField(rb);
+        EditorGUILayout.PropertyField(playerAnim);
 
         // Apply modified properties
         serializedObject.ApplyModifiedProperties();
