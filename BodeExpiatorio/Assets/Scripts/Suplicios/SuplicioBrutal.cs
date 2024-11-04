@@ -40,9 +40,12 @@ public class SuplicioBrutal : MonoBehaviour
         brutalChainsEventInstance.start();
     }
 
-    [SerializeField] private float timeStuck = 0;
-    [SerializeField] private float sqrMag;
-    [SerializeField] private float sqrMagCap = 1;
+    [SerializeField] 
+    private float 
+        timeStuck = 0,
+        sqrMag,
+        sqrMagCap = 1;
+
     void FixedUpdate()
     {
         currentVelocity = rb.velocity;
@@ -61,6 +64,7 @@ public class SuplicioBrutal : MonoBehaviour
                 rb.AddForce(risingForce, ForceMode.VelocityChange);
             }
 
+            //Isso aqui eh mt porco, mas o thwomp tava travando as vezes, e isso parece corrigir (forcadamente)
             if (sqrMag < sqrMagCap)
             {
                 timeStuck += Time.fixedDeltaTime;

@@ -124,6 +124,7 @@ public class MovimentoJogador : MonoBehaviour
         currentWireForce = new(1, 1, 0);
 
     private Coroutine stunCoroutine;
+    private Coroutine checkOverCoroutine;
 
     private SpriteRenderer playerSprite;
 
@@ -219,6 +220,16 @@ public class MovimentoJogador : MonoBehaviour
 
         OnPlayerTurned?.Invoke(isLookingRight);
     }
+
+    /*private void HandleAnimation()
+    {
+        Animator playerAnim = new(); 
+        playerAnim.SetBool("isStunned", isStunned);
+        playerAnim.SetBool("isKneeling", isKneeling);
+        playerAnim.SetBool("jumpKeyHeld", jumpKeyHeld);
+        playerAnim.SetBool("isGrounded", isGrounded);
+        playerAnim.SetFloat("velocityX", rb.velocity.x);
+    }*/
 
     private void CheckGrounded()
     {
@@ -352,6 +363,8 @@ public class MovimentoJogador : MonoBehaviour
 
         AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerJumped, transform.position);
 
+        //playerAnim.SetTrigger("jumping");
+
         //Pulo Arame
         if (isStuckInWire)
         {
@@ -386,10 +399,12 @@ public class MovimentoJogador : MonoBehaviour
         
         if (!willKneel && Physics.Raycast(transform.position, transform.up, raycastDistance, groundLayer))
         {
-            StartCoroutine(CheckOverHead());
+            checkOverCoroutine ??= StartCoroutine(CheckOverHead());
             return;
         }
 
+
+        //playerAnim.SetBool("kneeling", willKneel);
         AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerKnelt, transform.position);
         playerCollider.size = willKneel ? colliderKneelingSize : colliderBaseSize;
         playerCollider.center = willKneel ? colliderKneelingCenter : colliderBaseCenter;
@@ -407,8 +422,8 @@ public class MovimentoJogador : MonoBehaviour
         }
 
         HandleKneel(false);
+        checkOverCoroutine = null;
     }
-
 
     public void ApplyForce(Vector3 force, ForceMode forceMode) => rb.AddForce(force, forceMode);
 
