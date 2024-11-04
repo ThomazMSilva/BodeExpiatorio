@@ -15,6 +15,8 @@ public class Entrada : MonoBehaviour
 
     [SerializeField] private string kneelAxis = "Fire3";
 
+    [SerializeField] private string pauseAxis = "Cancel";
+
     private float horizontalInput;
     private float verticalInput;
 
@@ -26,6 +28,7 @@ public class Entrada : MonoBehaviour
     public event EventHandler OnJumpButtonUp;
     public event EventHandler OnKneelButtonDown;
     public event EventHandler OnKneelButtonUp;
+    public event EventHandler OnPauseButtonDown;
 
     // Update is called once per frame
     private void Update()
@@ -40,5 +43,7 @@ public class Entrada : MonoBehaviour
         if (Input.GetButtonDown(kneelAxis)) OnKneelButtonDown?.Invoke();
 
         if (Input.GetButtonUp(kneelAxis)) OnKneelButtonUp?.Invoke();
+
+        if (Input.GetButtonDown(pauseAxis)) OnPauseButtonDown?.Invoke();
     }
 }
