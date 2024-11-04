@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using FMOD.Studio;
+using System;
 
 [RequireComponent(typeof(Rigidbody))]
 public class MovimentoJogador : MonoBehaviour
@@ -132,6 +133,8 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField] private Rigidbody rb;
 
+    [SerializeField] private Animator playerAnim;
+
     private RaycastHit hit;
 
     private EventInstance playerWalkingEventInstance;
@@ -196,6 +199,7 @@ public class MovimentoJogador : MonoBehaviour
     private void FixedUpdate()
     {
         HandleWalkingSound();
+        HandleAnimation();
 
         if (isBind)
         {
@@ -221,15 +225,14 @@ public class MovimentoJogador : MonoBehaviour
         OnPlayerTurned?.Invoke(isLookingRight);
     }
 
-    /*private void HandleAnimation()
+    private void HandleAnimation()
     {
-        Animator playerAnim = new(); 
         playerAnim.SetBool("isStunned", isStunned);
         playerAnim.SetBool("isKneeling", isKneeling);
         playerAnim.SetBool("jumpKeyHeld", jumpKeyHeld);
         playerAnim.SetBool("isGrounded", isGrounded);
-        playerAnim.SetFloat("velocityX", rb.velocity.x);
-    }*/
+        playerAnim.SetFloat("velocityX", MathF.Abs(rb.velocity.x));
+    }
 
     private void CheckGrounded()
     {
@@ -363,7 +366,7 @@ public class MovimentoJogador : MonoBehaviour
 
         AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerJumped, transform.position);
 
-        //playerAnim.SetTrigger("jumping");
+        playerAnim.SetTrigger("jumping");
 
         //Pulo Arame
         if (isStuckInWire)
