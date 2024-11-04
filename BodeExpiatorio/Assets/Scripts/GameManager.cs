@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
 
     public Sala lastCheckpoint;
 
+    [SerializeField] private Jogador player;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.N)) LoadNextRoom();
@@ -116,6 +118,8 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt(currentRoomPref, scene);
     }
 
+    public void SetCurrentPlayer(Jogador p) => player = p;
+
     public void ActivateSceneCheckpoint(int scene)
     {
         Debug.Log($"Ativou o checkpoint {scene}");
@@ -164,14 +168,15 @@ public class GameManager : MonoBehaviour
 
     public void LoadMainMenu() => StartCoroutine(LoadScreen("Menu 1"));
 
+    //Loading
+
     [Header("Tela de Carregamento"), Space(8f)]
 
-    [SerializeField] private GameObject LoadingScreen;
-
+    [SerializeField] private GameObject loadingScreen;
     [SerializeField] private TextMeshProUGUI loadingText;
     [SerializeField] private TextMeshProUGUI statisticsText;
 
-    [SerializeField, TextArea] List<string> randomTexts = new List<string>();
+    [SerializeField, TextArea] List<string> randomTexts = new();
 
     [SerializeField] private float fadeTime = 0.5f;
 
@@ -183,7 +188,14 @@ public class GameManager : MonoBehaviour
     private float actRunTime;
     private float actRoomTime;
 
+    /// <summary>
+    /// x = room damage
+    /// y = run damage
+    /// z = room fervor
+    /// w = run fervor
+    /// </summary>
     private Vector4 totalActTorment;
+
 
     private string ActText 
     { 
@@ -202,7 +214,7 @@ public class GameManager : MonoBehaviour
     {
 
         if (Time.timeScale == 0) Time.timeScale = 1;
-        var images = LoadingScreen.GetComponentsInChildren<Image>();
+        var images = loadingScreen.GetComponentsInChildren<Image>();
         float[] originalAlpha = new float[images.Length];
         
         for (int i = 0; i < originalAlpha.Length; i++) originalAlpha[i] = images[i].color.a;
@@ -259,13 +271,15 @@ public class GameManager : MonoBehaviour
                         statisticsText.text = confessionario.LevelStatistics();
                         break;
                 }
+
+                SetBuffButtonValues(confessionario.TotalTorment().y, confessionario.damageThreshold);
             }
         }
         else statisticsText.text = randomTexts[UnityEngine.Random.Range(0, randomTexts.Count - 1)];
 
         //Ativa as imagens e da Fade In
         
-        LoadingScreen.SetActive(true);
+        loadingScreen.SetActive(true);
 
         for (float t = 0; t < fadeTime; t += Time.deltaTime)
         {
@@ -354,7 +368,7 @@ public class GameManager : MonoBehaviour
             image.color = color;
         }
 
-        LoadingScreen.SetActive(false);
+        loadingScreen.SetActive(false);
 
 
         //Reseta os valores das imagens
@@ -366,6 +380,43 @@ public class GameManager : MonoBehaviour
             images[i].color = color;
         }
     }
+
+    [Header("Tela de Buff"), Space(8f)]
+
+    [SerializeField] private GameObject buffScreen;
+    [SerializeField] private BuffButton buffButtonA;
+    [SerializeField] private BuffButton buffButtonB;
+    [SerializeField] private BuffButton buffButtonC;
+    
+    [Space(8f)]
+
+    [SerializeField] private List<BuffButton> salvationBuffs;
+    [SerializeField] private List<BuffButton> reluctanceBuffs;
+
+    private void SetBuffButtonValues(float lastRoomTorment, float lastRoomDmgThreshold)
+    {
+        bool salvationPath = lastRoomTorment < lastRoomDmgThreshold;
+
+        buffButtonA.SetValues(GetRandomBuff(salvationPath));
+
+        buffButtonB.SetValues(GetRandomBuff(!salvationPath));
+
+        buffButtonC.SetValues(GetRandomBuff(salvationPath));
+    }
+
+    private BuffButton GetRandomBuff(bool salvation)
+    {
+        var buffList = salvation ? salvationBuffs : reluctanceBuffs;
+        return buffList[UnityEngine.Random.Range(0, buffList.Count - 1)];
+    }
+
+    public void ActivateBuff(BuffButton buff)
+    {
+        Jogador player = FindAnyObjectByType<Jogador>();
+        player.ActivateBuff(buff.buffType);
+        CloseBuffScreen();
+    }
+    public void CloseBuffScreen() { if(buffScreen) buffScreen.SetActive(false); }
 }
 
 [System.Serializable]
