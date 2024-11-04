@@ -1,14 +1,15 @@
 using Assets.Scripts.Camera;
 using FMOD.Studio;
 using System.Collections;
+using System.Threading;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class SuplicioBrutal : MonoBehaviour
 {
-    [SerializeField]
-    private bool isFalling;
-    private bool isWaiting = false;
+    [SerializeField] private bool isFalling;
+    [SerializeField] private bool isWaiting = false;
     private Vector3 gravity;
     private Vector3 risingForce = Vector3.zero;
     private Transform playerTransform;
@@ -21,6 +22,8 @@ public class SuplicioBrutal : MonoBehaviour
     [SerializeField] private float maxShakeIntensity = 10f;
     [SerializeField] private float maxShakeTime = .4f;
     [SerializeField] private int groundLayer = 3;
+    [SerializeField] private Vector3 currentVelocity;
+    private Coroutine waitForTime;
 
     [SerializeField] private EventInstance brutalChainsEventInstance;
 
@@ -37,11 +40,20 @@ public class SuplicioBrutal : MonoBehaviour
         brutalChainsEventInstance.start();
     }
 
+    [SerializeField] 
+    private float 
+        timeStuck = 0,
+        sqrMag,
+        sqrMagCap = 1;
 
     void FixedUpdate()
     {
+        currentVelocity = rb.velocity;
+        sqrMag = currentVelocity.sqrMagnitude;
+        
         if (!isWaiting)
         {
+
             if (isFalling)
             {
                 rb.AddForce(gravity * fallingVelocity, ForceMode.Acceleration);
@@ -51,19 +63,39 @@ public class SuplicioBrutal : MonoBehaviour
                 risingForce.Set(0, -gravity.y * risingVelocity - rb.velocity.y, 0);
                 rb.AddForce(risingForce, ForceMode.VelocityChange);
             }
+
+            //Isso aqui eh mt porco, mas o thwomp tava travando as vezes, e isso parece corrigir (forcadamente)
+            if (sqrMag < sqrMagCap)
+            {
+                timeStuck += Time.fixedDeltaTime;
+                if (timeStuck > waitTime)
+                {
+                    timeStuck = 0;
+                    isFalling = !isFalling;
+                }
+            }
+            else timeStuck = 0;
             
             brutalChainsEventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform));
         }
     }
 
+    [SerializeField] private GameObject currCollided;
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject == currCollided) currCollided = null;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
+        currCollided = collision.gameObject;
         if (collision.gameObject.layer == groundLayer)
         {
             if (isFalling) 
             {
                 ShakeOnCollision();
-                StartCoroutine(Wait());
+                waitForTime ??= StartCoroutine(Wait());
                 brutalChainsEventInstance.keyOff();
             }
             
@@ -77,6 +109,7 @@ public class SuplicioBrutal : MonoBehaviour
         yield return waitForSeconds;
         isWaiting = false;
         brutalChainsEventInstance.start();
+        waitForTime = null;
     }
 
     private void ShakeOnCollision()

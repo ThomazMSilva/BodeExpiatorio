@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundLayer: 3
+  trueDamageActive: 0
 --- !u!1 &35157669115493325
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,7 +298,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   rayDistance: 50
-  chainSize: 0.05
+  chainSize: 0.5
 --- !u!1 &3373943445650349651
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,6 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundLayer: 3
+  trueDamageActive: 0
 --- !u!1001 &6102492140131902407
 PrefabInstance:
   m_ObjectHideFlags: 0

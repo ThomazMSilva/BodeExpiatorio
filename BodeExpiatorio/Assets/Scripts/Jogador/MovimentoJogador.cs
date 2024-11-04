@@ -86,6 +86,9 @@ public class MovimentoJogador : MonoBehaviour
 
     [SerializeField, Range(0, 1)] private float kneelSpeedMultiplier = 0.7f;
 
+    [SerializeField] private float timeToPlayIdle = 3;
+    private float idlingCurrentTime;
+
     [SerializeField]
     private bool
         isLookingRight,
@@ -121,6 +124,7 @@ public class MovimentoJogador : MonoBehaviour
         currentWireForce = new(1, 1, 0);
 
     private Coroutine stunCoroutine;
+    private Coroutine checkOverCoroutine;
 
     private SpriteRenderer playerSprite;
 
@@ -217,6 +221,16 @@ public class MovimentoJogador : MonoBehaviour
         OnPlayerTurned?.Invoke(isLookingRight);
     }
 
+    /*private void HandleAnimation()
+    {
+        Animator playerAnim = new(); 
+        playerAnim.SetBool("isStunned", isStunned);
+        playerAnim.SetBool("isKneeling", isKneeling);
+        playerAnim.SetBool("jumpKeyHeld", jumpKeyHeld);
+        playerAnim.SetBool("isGrounded", isGrounded);
+        playerAnim.SetFloat("velocityX", rb.velocity.x);
+    }*/
+
     private void CheckGrounded()
     {
         isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hit, raycastDistance, groundLayer);
@@ -310,22 +324,27 @@ public class MovimentoJogador : MonoBehaviour
 
         if(horizontalInput != 0)
         {
+            idlingCurrentTime = 0;
+            
             playerIdleEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
 
             playerWalkingEventInstance.getPlaybackState(out PLAYBACK_STATE walkingPbState);
-            if (walkingPbState.Equals(PLAYBACK_STATE.STOPPED))
-            {
-                playerWalkingEventInstance.start();
-            }
+            
+            if (walkingPbState.Equals(PLAYBACK_STATE.STOPPED)) playerWalkingEventInstance.start();
         }
         else
         {
+            idlingCurrentTime += Time.fixedDeltaTime;
+            
             playerWalkingEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
-
-            playerIdleEventInstance.getPlaybackState(out PLAYBACK_STATE idlePbState);
-            if(idlePbState.Equals(PLAYBACK_STATE.STOPPED))
+            
+            if(idlingCurrentTime > timeToPlayIdle)
             {
-                playerIdleEventInstance.start();
+                playerIdleEventInstance.getPlaybackState(out PLAYBACK_STATE idlePbState);
+                
+                if(idlePbState.Equals(PLAYBACK_STATE.STOPPED)) playerIdleEventInstance.start();
+
+                idlingCurrentTime = 0;
             }
         }
     }
@@ -343,6 +362,8 @@ public class MovimentoJogador : MonoBehaviour
         if (!willJump || isKneeling || coyoteTimeCurrent <= 0) return;
 
         AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerJumped, transform.position);
+
+        //playerAnim.SetTrigger("jumping");
 
         //Pulo Arame
         if (isStuckInWire)
@@ -375,12 +396,33 @@ public class MovimentoJogador : MonoBehaviour
     {
         if (isStuckInWire) { SetWiredState(false, isLookingRight); return; }
         if (isClimbing) { SetPlayerClimbing(false); return; }
+        
+        if (!willKneel && Physics.Raycast(transform.position, transform.up, raycastDistance, groundLayer))
+        {
+            checkOverCoroutine ??= StartCoroutine(CheckOverHead());
+            return;
+        }
 
+
+        //playerAnim.SetBool("kneeling", willKneel);
         AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerKnelt, transform.position);
         playerCollider.size = willKneel ? colliderKneelingSize : colliderBaseSize;
         playerCollider.center = willKneel ? colliderKneelingCenter : colliderBaseCenter;
         isKneeling = willKneel;
+    }
 
+    private IEnumerator CheckOverHead()
+    {
+        bool isUnderStuff = true;
+
+        while(isUnderStuff)
+        {
+            isUnderStuff = Physics.Raycast(transform.position, transform.up, raycastDistance, groundLayer);
+            yield return null;
+        }
+
+        HandleKneel(false);
+        checkOverCoroutine = null;
     }
 
     public void ApplyForce(Vector3 force, ForceMode forceMode) => rb.AddForce(force, forceMode);
