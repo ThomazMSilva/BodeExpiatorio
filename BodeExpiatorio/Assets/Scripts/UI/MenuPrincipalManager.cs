@@ -8,14 +8,37 @@ public class MenuPrincipalManager : MonoBehaviour
     [SerializeField] private GameObject painelOpcoes;
     [SerializeField] private GameObject creditsScreen;
 
+
     [SerializeField] private GameObject firstMenuOption;
     [SerializeField] private GameObject firstConfigOption;
     [SerializeField] private GameObject creditsReturnBTN;
 
+
+
+    private void Update()
+    {
+       
+        if (painelMenuInicial.activeSelf && EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(firstMenuOption);
+        }
+        else if (painelOpcoes.activeSelf && EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(firstConfigOption);
+        }
+        else if (creditsScreen.activeSelf && EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(creditsReturnBTN);
+        }
+    }
+
     public void AbrirOpções()
     {
-        //painelMenuInicial.SetActive(false);
+       
+        painelMenuInicial.SetActive(false);
         painelOpcoes.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(null);
 
         EventSystem.current.SetSelectedGameObject(firstConfigOption);
     }
@@ -29,8 +52,10 @@ public class MenuPrincipalManager : MonoBehaviour
     public void FecharOpções()
     {
         painelOpcoes.SetActive(false);
+        painelMenuInicial.SetActive(true);
         //painelMenuInicial.SetActive(true);
-        
+        EventSystem.current.SetSelectedGameObject(null);
+
         EventSystem.current.SetSelectedGameObject(firstMenuOption);
     }
 
