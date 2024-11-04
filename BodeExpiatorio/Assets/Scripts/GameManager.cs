@@ -390,21 +390,21 @@ public class GameManager : MonoBehaviour
     
     [Space(8f)]
 
-    [SerializeField] private List<BuffButton> salvationBuffs;
-    [SerializeField] private List<BuffButton> reluctanceBuffs;
+    [SerializeField] private List<BuffButtonValues> salvationBuffs;
+    [SerializeField] private List<BuffButtonValues> reluctanceBuffs;
 
     private void SetBuffButtonValues(float lastRoomTorment, float lastRoomDmgThreshold)
     {
         bool salvationPath = lastRoomTorment < lastRoomDmgThreshold;
 
-        buffButtonA.SetValues(GetRandomBuff(salvationPath));
+        buffButtonA.buffButton.SetValues(GetRandomBuff(salvationPath));
 
-        buffButtonB.SetValues(GetRandomBuff(!salvationPath));
+        buffButtonB.buffButton.SetValues(GetRandomBuff(!salvationPath));
 
-        buffButtonC.SetValues(GetRandomBuff(salvationPath));
+        buffButtonC.buffButton.SetValues(GetRandomBuff(salvationPath));
     }
 
-    private BuffButton GetRandomBuff(bool salvation)
+    private BuffButtonValues GetRandomBuff(bool salvation)
     {
         var buffList = salvation ? salvationBuffs : reluctanceBuffs;
         return buffList[UnityEngine.Random.Range(0, buffList.Count - 1)];
@@ -413,7 +413,7 @@ public class GameManager : MonoBehaviour
     public void ActivateBuff(BuffButton buff)
     {
         Jogador player = FindAnyObjectByType<Jogador>();
-        player.ActivateBuff(buff.buffType);
+        player.ActivateBuff(buff.buffButton.buffType);
         CloseBuffScreen();
     }
     public void CloseBuffScreen() { if(buffScreen) buffScreen.SetActive(false); }

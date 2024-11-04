@@ -14,8 +14,8 @@ public class Confessionario : MonoBehaviour
     private Jogador player;
     public Jogador Player { get { return player; } }
 
-    public List<BuffButton> aBuffs = new();
-    public List<BuffButton> bBuffs = new();
+    /*public List<BuffButtonValues> aBuffs = new();
+    public List<BuffButton> bBuffs = new();*/
 
     private void Awake() => player = FindAnyObjectByType<Jogador>();
 
@@ -57,11 +57,11 @@ public class Confessionario : MonoBehaviour
 
     private void Pray() => GameManager.Instance.ActivateSceneCheckpoint(roomIndex);
 
-    public void ActivateBuff(BuffButton buff)
+    /*public void ActivateBuff(BuffButtonValues buff)
     {
         player.ActivateBuff(buff.buffType);
         if(buffScreen) buffScreen.SetActive(false);
-    }
+    }*/
 
     public void Respawn()
     {

@@ -8,6 +8,7 @@ public class Venceu : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Pau");
             //telaVitoria.SetActive(true);
             //Debug.Log(confessionario.name);
             //confessionario.LevelStatistics();
