@@ -2181,6 +2181,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 172633986}
   m_CullTransparentMesh: 1
+--- !u!1 &172944129 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7023240452801201026, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
+  m_PrefabInstance: {fileID: 6983674078688327038}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &175120395
 GameObject:
   m_ObjectHideFlags: 0
@@ -2601,9 +2606,9 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 967475982}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 2021531329}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 2021531329}
+    m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
@@ -2629,9 +2634,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 390899003}
-        m_TargetAssemblyTypeName: AbrirPause, Assembly-CSharp
-        m_MethodName: ResumeGame
+      - m_Target: {fileID: 333119606}
+        m_TargetAssemblyTypeName: MenuPrincipalManager, Assembly-CSharp
+        m_MethodName: SairDoJogo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4932,6 +4937,7 @@ GameObject:
   - component: {fileID: 390899004}
   - component: {fileID: 390899003}
   - component: {fileID: 390899002}
+  - component: {fileID: 390899005}
   m_Layer: 0
   m_Name: PauseManager
   m_TagString: Untagged
@@ -4981,6 +4987,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 493363104}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &390899005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390899001}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e9dd08e5dab5334ba1d9ed5388d9d89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objeto1: {fileID: 580971903}
+  objeto2: {fileID: 185212695}
+  objetoParaControlar: {fileID: 172944129}
 --- !u!1 &393995413
 GameObject:
   m_ObjectHideFlags: 0
@@ -7686,7 +7707,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Menu Inicial
+  m_text: Sair
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 40b69913a3b49e04a839d9b5d4cb71bd, type: 2}
   m_sharedMaterial: {fileID: 5022771704181596361, guid: 40b69913a3b49e04a839d9b5d4cb71bd, type: 2}
@@ -21037,6 +21058,14 @@ PrefabInstance:
       propertyPath: isCountDownActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4163043874282635791, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
+      propertyPath: painelOpcoes
+      value: 
+      objectReference: {fileID: 580971903}
+    - target: {fileID: 4163043874282635791, guid: 4b34988f3a0f4294b9739071d6b52b6b, type: 3}
+      propertyPath: painelMenuInicial
+      value: 
+      objectReference: {fileID: 185212695}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -21285,6 +21314,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1161070638284259591, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
       propertyPath: recoverMaxHealthToStartingPoint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1918008410212450726, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7304667388467233881, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}

@@ -13,11 +13,9 @@ public class MenuPrincipalManager : MonoBehaviour
     [SerializeField] private GameObject firstConfigOption;
     [SerializeField] private GameObject creditsReturnBTN;
 
-
-
     private void Update()
     {
-       
+
         if (painelMenuInicial.activeSelf && EventSystem.current.currentSelectedGameObject == null)
         {
             EventSystem.current.SetSelectedGameObject(firstMenuOption);
@@ -34,7 +32,7 @@ public class MenuPrincipalManager : MonoBehaviour
 
     public void AbrirOpções()
     {
-       
+
         painelMenuInicial.SetActive(false);
         painelOpcoes.SetActive(true);
 
