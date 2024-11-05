@@ -192,7 +192,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 1
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -237,6 +237,140 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &2105937149798945940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7490526618462356449}
+  - component: {fileID: 3580724218873302818}
+  - component: {fileID: 6489441802364957124}
+  m_Layer: 5
+  m_Name: Descricao (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7490526618462356449
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105937149798945940}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5033482774433448456}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -130.781}
+  m_SizeDelta: {x: 600, y: 56.167}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3580724218873302818
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105937149798945940}
+  m_CullTransparentMesh: 1
+--- !u!114 &6489441802364957124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105937149798945940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "Descri\xE7\xE3o"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 20
+  m_fontSizeBase: 20
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &2780984133041905138
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,12 +673,13 @@ RectTransform:
   - {fileID: 3853038647649281582}
   - {fileID: 2081536778435003956}
   - {fileID: 6816727181377704199}
+  - {fileID: 7490526618462356449}
   m_Father: {fileID: 7220530782923914697}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 350}
+  m_SizeDelta: {x: 700, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2477538449910740969
 CanvasRenderer:
@@ -597,6 +732,7 @@ GameObject:
   - component: {fileID: 1239111094455250215}
   - component: {fileID: 5086514841370111811}
   - component: {fileID: 6853379646111237623}
+  - component: {fileID: 5628017869096350860}
   m_Layer: 5
   m_Name: First_BTN
   m_TagString: Untagged
@@ -622,7 +758,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2970177606467190706
 CanvasRenderer:
@@ -652,9 +788,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -684,9 +820,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.048508644, g: 0, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.019820213, g: 0, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -731,10 +867,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffButton:
-    buffImage: {fileID: 0}
+    buffImage: {fileID: 1239111094455250215}
     buffType: 0
     buffIcon: {fileID: 0}
     buffDescription: 
+--- !u!114 &5628017869096350860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5361300133792586175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 824672366573443616}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: SetDescriptionText
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 6853379646111237623}
+            m_ObjectArgumentAssemblyTypeName: BuffButton, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 824672366573443616}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: SetDescriptionText
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 6853379646111237623}
+            m_ObjectArgumentAssemblyTypeName: BuffButton, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &5629002586426036904
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,6 +1004,7 @@ GameObject:
   - component: {fileID: 7278672111855865386}
   - component: {fileID: 6181526109863135874}
   - component: {fileID: 8771136018570995838}
+  - component: {fileID: 4900931278438853273}
   m_Layer: 5
   m_Name: Lethal_BTN
   m_TagString: Untagged
@@ -848,7 +1030,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -200, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3763819476131252261
 CanvasRenderer:
@@ -878,9 +1060,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -910,9 +1092,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.048508644, g: 0, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.019820213, g: 0, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -957,10 +1139,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffButton:
-    buffImage: {fileID: 0}
+    buffImage: {fileID: 7278672111855865386}
     buffType: 0
     buffIcon: {fileID: 0}
     buffDescription: 
+--- !u!114 &4900931278438853273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5708868749014756752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 824672366573443616}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: SetDescriptionText
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8771136018570995838}
+            m_ObjectArgumentAssemblyTypeName: BuffButton, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 824672366573443616}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: SetDescriptionText
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8771136018570995838}
+            m_ObjectArgumentAssemblyTypeName: BuffButton, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &5959628947868347957
 GameObject:
   m_ObjectHideFlags: 0
@@ -973,7 +1200,7 @@ GameObject:
   - component: {fileID: 3806589169488124487}
   - component: {fileID: 7255912840724924273}
   - component: {fileID: 2964803436244143109}
-  - component: {fileID: 3099921218115132082}
+  - component: {fileID: 3591954639200062496}
   m_Layer: 5
   m_Name: ExitBuffScreen_BTN
   m_TagString: Untagged
@@ -998,8 +1225,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 250, y: 175}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 0, y: 160}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3806589169488124487
 CanvasRenderer:
@@ -1061,9 +1288,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.010393143, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0, g: 0.0381248, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1095,7 +1322,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3099921218115132082
+--- !u!114 &3591954639200062496
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1104,14 +1331,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 5959628947868347957}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b066285309908e9409f07fb593935951, type: 3}
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffButton:
-    buffImage: {fileID: 0}
-    buffType: 0
-    buffIcon: {fileID: 0}
-    buffDescription: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 824672366573443616}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: EmptyDescriptionText
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 824672366573443616}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: EmptyDescriptionText
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &7599193033091545310
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,6 +1380,7 @@ GameObject:
   - component: {fileID: 6069294328396250524}
   - component: {fileID: 8493019921537211605}
   - component: {fileID: 467778794069964796}
+  - component: {fileID: 3089649025151930565}
   m_Layer: 5
   m_Name: Creep_BTN
   m_TagString: Untagged
@@ -1150,7 +1406,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 200, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3367365826545457633
 CanvasRenderer:
@@ -1180,9 +1436,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1212,9 +1468,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.048508644, g: 0, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.019820213, g: 0, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1259,10 +1515,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffButton:
-    buffImage: {fileID: 0}
+    buffImage: {fileID: 6069294328396250524}
     buffType: 0
     buffIcon: {fileID: 0}
     buffDescription: 
+--- !u!114 &3089649025151930565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7599193033091545310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 824672366573443616}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: SetDescriptionText
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 467778794069964796}
+            m_ObjectArgumentAssemblyTypeName: BuffButton, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 824672366573443616}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: SetDescriptionText
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 467778794069964796}
+            m_ObjectArgumentAssemblyTypeName: BuffButton, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &8291518985103027008
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,19 +1658,46 @@ MonoBehaviour:
   operationTime: 0
   changeTime: 3
   buffScreen: {fileID: 1421141089417626126}
+  descriptionTMP: {fileID: 6489441802364957124}
   buffButtonA: {fileID: 8771136018570995838}
   buffButtonB: {fileID: 6853379646111237623}
   buffButtonC: {fileID: 467778794069964796}
   salvationBuffs:
   - buffImage: {fileID: 0}
     buffType: 0
-    buffIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-    buffDescription: ffe
+    buffIcon: {fileID: 21300000, guid: a307e3515bcfc484d898e23c4dc21b70, type: 3}
+    buffDescription: "<b>Salva\xE7\xE3o Angelical</b>\nNa primeira vez que receber
+      um dano que seria letal \xE0 Sa\xFAde nesta c\xE2mara, sobrevive com 1 de Sa\xFAde
+      e fica invulner\xE1vel por poucos segundos. Este efeito \xE9 recuperado ao
+      recome\xE7ar a c\xE2mara."
+  - buffImage: {fileID: 0}
+    buffType: 2
+    buffIcon: {fileID: 21300000, guid: 4d0bdf2c6cda45848990abe1c4960029, type: 3}
+    buffDescription: "<b>Cil\xEDcio</b>\nO dano causado por um Supl\xEDcio nesta
+      c\xE2mara \xE9 parcelado por v\xE1rios segundos, ao inv\xE9s de infligido imediatamente.
+      Por\xE9m, o dano total causado por Supl\xEDcios \xE9 aumentado pouqu\xEDssimo."
+  - buffImage: {fileID: 0}
+    buffType: 3
+    buffIcon: {fileID: 21300000, guid: e1142a4fa3edd6c4894d8ca93a4309b9, type: 3}
+    buffDescription: "<b>Reafirma\xE7\xE3o de F\xE9</b>\nPerde menos Sa\xFAde com
+      Suplicios nesta c\xE2mara."
   reluctanceBuffs:
   - buffImage: {fileID: 0}
-    buffType: 0
-    buffIcon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-    buffDescription: 
+    buffType: 4
+    buffIcon: {fileID: 21300000, guid: 3a7cbe3233f12204e8efec370f3ce81f, type: 3}
+    buffDescription: "<b>For\xE7a Interna</b>\nRecupera o dobro de Fervor que recuperaria
+      normalmente ao ter sua Sa\xFAde alterada nesta c\xE2mara."
+  - buffImage: {fileID: 0}
+    buffType: 1
+    buffIcon: {fileID: 21300000, guid: eccf82ad2dfe0f04cacf51fad3fb49c4, type: 3}
+    buffDescription: "<b>Impar\xE1vel</b>\nIgnora o primeiro dano \xE0 Sa\xFAde causado
+      por um Supl\xEDcio nesta c\xE2mara. Este efeito \xE9 recuperado ao recome\xE7ar
+      a c\xE2mara. "
+  - buffImage: {fileID: 0}
+    buffType: 5
+    buffIcon: {fileID: 21300000, guid: 2ae95bd670401f9428feeeaa92726794, type: 3}
+    buffDescription: "<b>Tranquilidade</b>\nPausa o temporizador do Fervor por alguns
+      segundos toda vez que iniciar esta c\xE2mara."
 --- !u!1 &8943587151897225731
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,7 +1763,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: X
+  m_text: Ignorar e prosseguir
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1462,8 +1790,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

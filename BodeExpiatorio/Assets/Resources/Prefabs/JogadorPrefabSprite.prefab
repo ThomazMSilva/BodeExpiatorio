@@ -91,7 +91,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!65 &1287762491101862042
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -112,7 +112,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.2380352, y: 3.986659, z: 1}
-  m_Center: {x: -0.11901758, y: -0.11901788, z: 0}
+  m_Center: {x: -0.11901758, y: -0.07, z: 0}
 --- !u!54 &4949242929930484042
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -279,6 +279,7 @@ MonoBehaviour:
   verticalAxis: Vertical
   jumpAxis: Jump
   kneelAxis: Fire1
+  pauseAxis: Cancel
 --- !u!95 &5920615976259816849
 Animator:
   serializedVersion: 5

@@ -6,6 +6,9 @@ namespace Assets.Scripts.Suplicios
     public class SuplicioTraicoeiro : MonoBehaviour
     {
         private bool isLookingRight;
+        private bool isLookingUp;
+        [SerializeField] private bool isLookingVertical;
+        [SerializeField] private float verticalShooterHorizontalRange = 10;
         private bool isPlayerLookingRight;
         private Vector3 playerDirection = Vector3.zero;
         private Vector3 transformDirection = Vector3.zero;
@@ -31,6 +34,7 @@ namespace Assets.Scripts.Suplicios
             playerDirection = new(1, 0, 0);
             transformDirection = transform.right;
             isLookingRight = transformDirection.x > 0;
+            isLookingVertical = transformDirection.y != 0;
             playerCheckInterval = new WaitForSeconds(playerCheckRate);
             shootingInterval = new WaitForSeconds(shootingRate);
         }
@@ -55,13 +59,21 @@ namespace Assets.Scripts.Suplicios
 
         private bool CanShoot()
         {
-            bool isPlayerOnFront = isLookingRight
-                                   ? playerTransform.position.x > transform.position.x
-                                   : playerTransform.position.x < transform.position.x;
+            bool isPlayerOnFront = !isLookingVertical
+                                    ? isLookingRight
+                                        ? playerTransform.position.x > transform.position.x
+                                        : playerTransform.position.x < transform.position.x
+                                    : transformDirection.y > 0
+                                        ? playerTransform.position.y > transform.position.y
+                                        : playerTransform.position.y < transform.position.y;
 
-            bool isPlayerFacingAway = isLookingRight
-                                      ? playerDirection.x > 0
-                                      : playerDirection.x < 0;
+
+            bool isPlayerFacingAway = !isLookingVertical
+                                        ? isLookingRight
+                                            ? playerDirection.x > 0
+                                            : playerDirection.x < 0
+                                        : playerTransform.position.x > transform.position.x - verticalShooterHorizontalRange
+                                          && playerTransform.position.x < transform.position.x + verticalShooterHorizontalRange;
             
             return isPlayerOnFront && isPlayerFacingAway;
         }

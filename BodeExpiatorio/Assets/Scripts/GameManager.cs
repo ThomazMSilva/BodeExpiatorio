@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
 using TMPro;
+using UnityEngine.EventSystems;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour
     private static readonly string prefabPath = "Prefabs/_-GameManager-_";
     
     private static readonly string currentRoomPref = "CurrentRoom";
+    private static readonly string currentCheckpointPref = "CurrentCheckpoint";
     private static readonly string maxHealthPref = "MaxHealth";
     private static readonly string currentHealthPref = "CurrentHealth";
     private static readonly string currentActStatisticsPref = "CurrentActStatistics";
@@ -47,6 +50,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.N)) LoadNextRoom();
+        if (Input.GetKeyDown(KeyCode.T)) ResetCheckpointStates();
         if (Input.GetKeyDown(KeyCode.R)) LoadLastCheckpoint();
 
         if (Input.GetKeyDown(KeyCode.F1)) SceneManager.LoadScene("Menu 1");
@@ -66,15 +70,7 @@ public class GameManager : MonoBehaviour
 
     public void NewGame()
     {
-        //seta os checkpoints a negativo
-        for (int i = 0; i < rooms.Count; i++)
-        {
-            string checkpointState = $"Checkpoint {i}";
-            
-            PlayerPrefs.SetInt(checkpointState, 0);
-
-            InitializeCheckpointState(checkpointState, i);
-        }
+        ResetCheckpointStates();
 
         currentRoom = rooms[0];
 
@@ -84,14 +80,27 @@ public class GameManager : MonoBehaviour
         LoadCurrentRoom();
     }
 
+    public void ResetCheckpointStates()
+    {
+        //seta os checkpoints a negativo
+        for (int i = 0; i < rooms.Count; i++)
+        {
+            string checkpointIndex = $"Checkpoint {i}";
+
+            PlayerPrefs.SetInt(checkpointIndex, 0);
+
+            InitializeCheckpointState(checkpointIndex, i);
+        }
+    }
+
     public void Continue()
     {
         string debug = "";
         for (int i = 0; i < rooms.Count; i++)
         {
-            string checkpointState = $"Checkpoint {i}";
-            InitializeCheckpointState(checkpointState, i);
-            debug += $" {checkpointState} tem o checkpoint {(rooms[i].isCheckpointActive ? "ativo" : "inativo")};";
+            string checkpointIndex = $"Checkpoint {i}";
+            InitializeCheckpointState(checkpointIndex, i);
+            debug += $" {checkpointIndex} tem o checkpoint {(rooms[i].isCheckpointActive ? "ativo" : "inativo")};";
         }
         Debug.Log(debug);
 
@@ -124,7 +133,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log($"Ativou o checkpoint {scene}");
         rooms[scene].isCheckpointActive = true;
-        lastCheckpoint = rooms[scene];
+        //lastCheckpoint = rooms[scene];
     }
 
     public void SetHealth(float maxHealth, float currentHealth)
@@ -147,7 +156,15 @@ public class GameManager : MonoBehaviour
 
     public void LoadCurrentRoom() => StartCoroutine(LoadScreen(currentRoom.sceneName));
 
-    public void LoadLastCheckpoint() => StartCoroutine(LoadScreen(lastCheckpoint.sceneName));
+    public void LoadLastCheckpoint()
+    {
+        int mostAdvancedRoom = 0;
+        for (int i = 0; i < rooms.Count; i++)
+        {
+            if (rooms[i].isCheckpointActive) mostAdvancedRoom = i;
+        }
+        StartCoroutine(LoadScreen(rooms[mostAdvancedRoom].sceneName));
+    }
 
     public void LoadNextRoom()
     {
@@ -344,12 +361,17 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
 
+        if (loadingNextLevel)
+        {
+            buffScreen.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(buffButtonA.gameObject);
+        }
 
         //Fade Out nas imagens
         
-        for (float t = 0; t < fadeTime; t += Time.deltaTime)
+        for (float t = 0; t < fadeTime; t += Time.unscaledDeltaTime)
         {
             float normalizedTime = t / fadeTime;
             for (int i = 0; i < images.Length; i++)
@@ -383,32 +405,35 @@ public class GameManager : MonoBehaviour
 
     [Header("Tela de Buff"), Space(8f)]
 
-    [SerializeField] private GameObject buffScreen;
-    [SerializeField] private BuffButton buffButtonA;
-    [SerializeField] private BuffButton buffButtonB;
-    [SerializeField] private BuffButton buffButtonC;
+        [SerializeField] private GameObject buffScreen;
+        [SerializeField] private TextMeshProUGUI descriptionTMP;
+        [SerializeField] private BuffButton buffButtonA;
+        [SerializeField] private BuffButton buffButtonB;
+        [SerializeField] private BuffButton buffButtonC;
     
-    [Space(8f)]
+        [Space(8f)]
 
-    [SerializeField] private List<BuffButtonValues> salvationBuffs;
-    [SerializeField] private List<BuffButtonValues> reluctanceBuffs;
+        [SerializeField] private List<BuffButtonValues> salvationBuffs;
+        [SerializeField] private List<BuffButtonValues> reluctanceBuffs;
 
-    private void SetBuffButtonValues(float lastRoomTorment, float lastRoomDmgThreshold)
-    {
-        bool salvationPath = lastRoomTorment < lastRoomDmgThreshold;
+        private void SetBuffButtonValues(float lastRoomTorment, float lastRoomDmgThreshold)
+        {
+            bool isOnSalvationPath = lastRoomTorment < lastRoomDmgThreshold;
 
-        buffButtonA.buffButton.SetValues(GetRandomBuff(salvationPath));
+            var buffA = GetRandomBuff(isOnSalvationPath); 
+            buffButtonA.buffButton.SetValues(buffA);
 
-        buffButtonB.buffButton.SetValues(GetRandomBuff(!salvationPath));
+            buffButtonB.buffButton.SetValues(GetRandomBuff(!isOnSalvationPath));
 
-        buffButtonC.buffButton.SetValues(GetRandomBuff(salvationPath));
-    }
+            buffButtonC.buffButton.SetValues(GetRandomBuff(isOnSalvationPath, buffA));
+        }
 
-    private BuffButtonValues GetRandomBuff(bool salvation)
-    {
-        var buffList = salvation ? salvationBuffs : reluctanceBuffs;
-        return buffList[UnityEngine.Random.Range(0, buffList.Count - 1)];
-    }
+        private BuffButtonValues GetRandomBuff(bool salvation, BuffButtonValues excludedBuff = null)
+        {
+            var buffList = salvation ? salvationBuffs : reluctanceBuffs;
+            var filteredList = excludedBuff != null ? buffList.Where(buff => buff != excludedBuff) : buffList;
+            return buffList[UnityEngine.Random.Range(0, buffList.Count)];
+        }
 
     public void ActivateBuff(BuffButton buff)
     {
@@ -416,7 +441,11 @@ public class GameManager : MonoBehaviour
         player.ActivateBuff(buff.buffButton.buffType);
         CloseBuffScreen();
     }
-    public void CloseBuffScreen() { if(buffScreen) buffScreen.SetActive(false); }
+
+    public void SetDescriptionText(BuffButton buff) => descriptionTMP.text = buff.buffButton.buffDescription;
+    public void EmptyDescriptionText() => descriptionTMP.text = "";
+
+    public void CloseBuffScreen() { if(buffScreen) buffScreen.SetActive(false); Time.timeScale = 1; }
 }
 
 [System.Serializable]
