@@ -13,7 +13,7 @@ public class MenuPrincipalManager : MonoBehaviour
     [SerializeField] private GameObject firstConfigOption;
     [SerializeField] private GameObject creditsReturnBTN;
 
-    private void Update()
+    /*private void Update()
     {
 
         if (painelMenuInicial.activeSelf && EventSystem.current.currentSelectedGameObject == null)
@@ -28,7 +28,7 @@ public class MenuPrincipalManager : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(creditsReturnBTN);
         }
-    }
+    }*/
 
     public void AbrirOpções()
     {
