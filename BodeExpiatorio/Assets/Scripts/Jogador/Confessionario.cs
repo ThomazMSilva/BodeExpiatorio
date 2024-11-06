@@ -6,16 +6,14 @@ public class Confessionario : MonoBehaviour
     [SerializeField] private int roomIndex;
     [SerializeField] private bool checkpointStartsActive;
     [SerializeField] private bool recoverMaxHealthToStartingPoint = true;
-    [SerializeField] private Transform respawnPoint;
+    [SerializeField] private Transform respawnPoint;  // Correção: Removida a duplicação desta linha
     [SerializeField] private GameObject buffScreen;
     public float damageThreshold = 50f;
     private float startingRoomTime;
     private float startingRunTime;
     private Jogador player;
+    public static Confessionario ultimoAtivo;
     public Jogador Player { get { return player; } }
-
-    /*public List<BuffButtonValues> aBuffs = new();
-    public List<BuffButton> bBuffs = new();*/
 
     private void Awake() => player = FindAnyObjectByType<Jogador>();
 
@@ -28,7 +26,11 @@ public class Confessionario : MonoBehaviour
         GameManager gameManager = GameManager.Instance;
         gameManager.SetCurrentRoom(roomIndex);
         gameManager.SetCurrentPlayer(player);
-        if(checkpointStartsActive) gameManager.ActivateSceneCheckpoint(roomIndex);
+        if (checkpointStartsActive)
+        {
+            gameManager.ActivateSceneCheckpoint(roomIndex);
+            SetUltimoAtivo();
+        }
     }
 
     private void OnEnable()
@@ -55,20 +57,28 @@ public class Confessionario : MonoBehaviour
         Entrada.Instance.OnKneelButtonDown -= Pray;
     }
 
-    private void Pray() => GameManager.Instance.ActivateSceneCheckpoint(roomIndex);
-
-    /*public void ActivateBuff(BuffButtonValues buff)
+    private void Pray()
     {
-        player.ActivateBuff(buff.buffType);
-        if(buffScreen) buffScreen.SetActive(false);
-    }*/
+        GameManager.Instance.ActivateSceneCheckpoint(roomIndex);
+        SetUltimoAtivo();
+    }
+
+    private void SetUltimoAtivo()
+    {
+        ultimoAtivo = this;
+    }
+
+    public Transform GetRespawnPoint()
+    {
+        return respawnPoint;
+    }
 
     public void Respawn()
     {
         if (player.Vida.CurrentMaxHealth <= 0) return;
         player.Vida.ResetDamageTakenInRun();
-        
-        if(recoverMaxHealthToStartingPoint) player.Vida.CureMaxHealth();
+
+        if (recoverMaxHealthToStartingPoint) player.Vida.CureMaxHealth();
 
         player.ApplyCure();
         startingRunTime = Time.time;
@@ -92,7 +102,7 @@ public class Confessionario : MonoBehaviour
 
     public string LevelStatistics()
     {
-        return $"--Level {roomIndex + 1} Statistics--\n\nRoomTime: {RoomTime()}; RunTime: {RunTime()}\n{player.Vida.DamageString}"; 
+        return $"--Level {roomIndex + 1} Statistics--\n\nRoomTime: {RoomTime()}; RunTime: {RunTime()}\n{player.Vida.DamageString}";
     }
 
     public float RoomTime() => Time.time - startingRoomTime;
@@ -107,12 +117,5 @@ public class Confessionario : MonoBehaviour
 
     public float FervorTakenRun() => player.Vida.FervorTakenInRun;
 
-    /// <summary>
-    /// x = damage in room
-    /// y = damage in run
-    /// z = fervor in room
-    /// w = fervor in run
-    /// </summary>
-    /// <returns></returns>
     public Vector4 TotalTorment() => new(DamageTakenRoom(), DamageTakenRun(), FervorTakenRoom(), FervorTakenRun());
 }

@@ -2,14 +2,27 @@ using UnityEngine;
 
 public class ReiniciarNivel : MonoBehaviour
 {
-    public VidaJogador vidaJogador; 
+    public VidaJogador vidaJogador;
+    public Jogador jogador;
 
     public void OnReiniciarNivel()
     {
         if (vidaJogador == null) return;
-    
+
         vidaJogador.DamageHealth("Reiniciou nivel"); //esse metodo, DamageHealth(), mata o jogador instantâneamente se n botar um valor de dano.
     }
 
-    public void OnReturnToLastCheckpoint() => GameManager.Instance.LoadLastCheckpoint(); //Isso muda a cena pra cena do último confessionário ativo
+    public void OnReturnToLastCheckpoint()
+    {
+        if (Confessionario.ultimoAtivo != null)
+        {
+            Transform respawnPoint = Confessionario.ultimoAtivo.GetRespawnPoint();
+            jogador.SetPosition(respawnPoint.position);
+            vidaJogador.DamageHealth("reiniciou nivel");
+        }
+        else
+        {
+            Debug.LogWarning("nenhum confessionario encontrado");
+        }
+    }
 }
