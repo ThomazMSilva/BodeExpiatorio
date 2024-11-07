@@ -4,28 +4,27 @@ using UnityEngine.UI;
 
 public class AbrirPause : MonoBehaviour
 {
-    public GameObject menu; 
+    public GameObject pauseScreen;
+    [SerializeField] GameObject firstPauseButton;
     public bool Pausado;
     private Entrada input;
 
-    void Start()
-    {
-        menu.SetActive(false); 
-    }
-    
+    private void Start() => pauseScreen.SetActive(false);
+
+    public void SetPauseSelected() => UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(firstPauseButton);
+
     public void PauseGame()
     {
-        menu.SetActive(true);
+        pauseScreen.SetActive(true);
         Time.timeScale = 0f; 
         Pausado = true;
-
       
-        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
+        SetPauseSelected();
     }
 
     public void ResumeGame()
     {
-        menu.SetActive(false);
+        pauseScreen.SetActive(false);
         Time.timeScale = 1f;   
         Pausado = false;
     }
@@ -35,7 +34,7 @@ public class AbrirPause : MonoBehaviour
     private void OnDisable()
     {
         input.OnPauseButtonDown -= EscapePressed;
-        if (menu.activeSelf) ResumeGame();
+        if (pauseScreen.activeSelf) ResumeGame();
     }
     
     private IEnumerator InitializeReference()
@@ -48,7 +47,7 @@ public class AbrirPause : MonoBehaviour
         input.OnPauseButtonDown += EscapePressed;
     }
 
-    void EscapePressed()
+    private void EscapePressed()
     {
         if (Pausado)
         {
@@ -60,6 +59,21 @@ public class AbrirPause : MonoBehaviour
         }
 
     }
+    public VidaJogador vidaJogador;
+    public Jogador jogador;
 
+    public void OnReiniciarNivel()
+    {
+        if (vidaJogador == null) return;
+
+        vidaJogador.DamageHealth("Reiniciou nivel"); //esse metodo, DamageHealth(), mata o jogador instantâneamente se n botar um valor de dano.
+        ResumeGame();
+    }
+
+    public void OnReturnToLastCheckpoint()
+    {
+        GameManager.Instance.LoadLastCheckpoint();
+        ResumeGame();
+    }
     public void ReturnToMainMenu() => GameManager.Instance.LoadMainMenu();
 }

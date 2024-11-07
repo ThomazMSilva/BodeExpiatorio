@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1285180426386494445}
-  - component: {fileID: 1758008643768673950}
-  - component: {fileID: 3281047714142561252}
   - component: {fileID: 1287762491101862042}
   - component: {fileID: 4949242929930484042}
   - component: {fileID: 55350483955099054}
@@ -18,7 +16,9 @@ GameObject:
   - component: {fileID: 2317804128188777539}
   - component: {fileID: 1171310929653840271}
   - component: {fileID: 4163043874282635791}
-  m_Layer: 0
+  - component: {fileID: 1831900279988898924}
+  - component: {fileID: 8706968887072362318}
+  m_Layer: 6
   m_Name: JogadorPrefabCapsula
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -35,61 +35,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.7, z: 1}
+  m_LocalScale: {x: 0.52, y: 0.52, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1758008643768673950
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2282366166164952403}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &3281047714142561252
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2282366166164952403}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &1287762491101862042
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -109,8 +59,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.2380352, y: 3.986659, z: 1}
+  m_Center: {x: -0.11901758, y: -0.07, z: 0}
 --- !u!54 &4949242929930484042
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -156,27 +106,28 @@ MonoBehaviour:
   terminalVelocity: 30
   instantAirVelocityChange: 0
   airAccelerationMultiplier: 10
-  instantGroundVelocityChange: 0
+  instantGroundVelocityChange: 1
   groundAccelerationMultiplier: 15
   allowRagdollMomentum: 1
   maxStunTime: 2
   fallGravityMultiplier: 5
-  jumpGravityMultiplier: 3
+  jumpGravityMultiplier: 3.5
   ragdollGravityMultiplier: 6
   ragdollJumpGravityMultiplier: 0.5
   ragdollKneelGravityMultiplier: 2
   isRagdollJumpUnlocked: 1
-  raycastDistance: 0.75
+  raycastDistance: 2.42
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   fallingPlatformTag: Marvada
-  jumpForce: 15.5
+  jumpForce: 17
   coyoteTimeMax: 0.1
   jumpBufferTimeMax: 0.15
   shortJumpDelta: 1.5
   kneelHeightMultiplier: 0.5
   kneelSpeedMultiplier: 0.6
+  timeToPlayIdle: 3
   isLookingRight: 0
   isGrounded: 1
   isClimbing: 0
@@ -189,6 +140,7 @@ MonoBehaviour:
   isBind: 0
   playerCollider: {fileID: 1287762491101862042}
   rb: {fileID: 4949242929930484042}
+  playerAnim: {fileID: 8706968887072362318}
   input: {fileID: 4163043874282635791}
 --- !u!114 &1652553025521689414
 MonoBehaviour:
@@ -207,14 +159,15 @@ MonoBehaviour:
   currentHealth: 0
   isIgnoreFirstDamageActive: 0
   isIgnoreLethalDamageActive: 0
+  lethalCanBecomeInvulnerable: 1
+  lethalInvulnerabilityTime: 0.5
   isReducedDamageActive: 0
   reducedDamageMultiplier: 0.5
   isCreepingDamageActive: 0
   stopCreepingDamageAtFront: 0
   creepingDamagePerSecond: 1
+  creepingDamageMultiplier: 1.1
   currentDamageToCreep: 0
-  damageTakenInRun: 0
-  fervorTakenInRun: 0
 --- !u!114 &2317804128188777539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,3 +227,77 @@ MonoBehaviour:
   verticalAxis: Vertical
   jumpAxis: Jump
   kneelAxis: Fire1
+  pauseAxis: Cancel
+--- !u!212 &1831900279988898924
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282366166164952403}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a6bdd305b6871d340a908002a5ea4d86, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 9c4f0bce607d21847b866fcb7f452639, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 16.402267, y: 22.56}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 1
+--- !u!95 &8706968887072362318
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282366166164952403}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f24ef825cc9503c42b202f4c075b1f96, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

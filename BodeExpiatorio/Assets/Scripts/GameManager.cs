@@ -66,6 +66,8 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F10)) SceneManager.LoadScene("Teste Semeltr");
         if (Input.GetKeyDown(KeyCode.F11)) SceneManager.LoadScene("Teste Arame");
         if (Input.GetKeyDown(KeyCode.F12)) LoadDeathScene();
+
+        //Debug.Log(Time.timeScale);
     }
 
     public void NewGame()
@@ -163,7 +165,7 @@ public class GameManager : MonoBehaviour
         {
             if (rooms[i].isCheckpointActive) mostAdvancedRoom = i;
         }
-        StartCoroutine(LoadScreen(rooms[mostAdvancedRoom].sceneName));
+        StartCoroutine(LoadScreen(rooms[mostAdvancedRoom].sceneName, true));
     }
 
     public void LoadNextRoom()
@@ -171,7 +173,7 @@ public class GameManager : MonoBehaviour
         int nextRoom = currentRoom.sceneIndex + 1;
         if (nextRoom > rooms.Count - 1)
         {
-            Debug.Log("Tentando carregar sala que não existe na lista do Game Manager");
+            Debug.Log($"Tentando carregar sala que não existe na lista do Game Manager; CurrentScene: {currentRoom}; CurrentUIndex: {currentRoom.sceneIndex};  Tried Index: {nextRoom}");
             return;
         }
         Jogador _player = FindAnyObjectByType<Jogador>();
@@ -230,7 +232,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator LoadScreen(string sceneName, bool loadingNextLevel = false)
     {
 
-        if (Time.timeScale == 0) Time.timeScale = 1;
+        Time.timeScale = 1;
         var images = loadingScreen.GetComponentsInChildren<Image>();
         float[] originalAlpha = new float[images.Length];
         
@@ -259,29 +261,12 @@ public class GameManager : MonoBehaviour
                 //Cada um dos cases é pro nível 4 de cada Ato
                 switch (currentRoom.sceneIndex)
                 {
-                    case 3:
+                    case 3: case 7: case 11:
                         statisticsText.text = ActText;
                         actStatistics = "";
                         totalActTorment = Vector4.zero;
                         actRoomTime = 0;
                         actRunTime = 0;
-                        break;
-
-                    case 7:
-                        statisticsText.text = ActText;
-                        actStatistics = "";
-                        totalActTorment = Vector4.zero;
-                        actRoomTime = 0;
-                        actRunTime = 0;
-                        break;
-
-                    case 11:
-                        statisticsText.text = ActText;
-                        actStatistics = "";
-                        totalActTorment = Vector4.zero;
-                        actRoomTime = 0;
-                        actRunTime = 0;
-                        //Muda a imagem da animacao aq pra ele subindo tb
                         break;
 
                     default:
@@ -361,7 +346,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        //Time.timeScale = 1;
+        if(!loadingNextLevel) Time.timeScale = 1;
 
         if (loadingNextLevel)
         {
@@ -434,7 +419,10 @@ public class GameManager : MonoBehaviour
             var filteredList = excludedBuff != null ? buffList.Where(buff => buff != excludedBuff) : buffList;
             return buffList[UnityEngine.Random.Range(0, buffList.Count)];
         }
-
+    public void SetScreenSelected()
+    {
+        EventSystem.current.SetSelectedGameObject(buffButtonA.gameObject);
+    }
     public void ActivateBuff(BuffButton buff)
     {
         Jogador player = FindAnyObjectByType<Jogador>();

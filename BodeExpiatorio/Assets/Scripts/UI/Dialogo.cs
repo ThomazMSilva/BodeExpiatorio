@@ -11,6 +11,7 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler
     [SerializeField] float intervaloCaracteres;
     [SerializeField] bool temFundoPreto;
     [SerializeField] string fontName = "LiberationSans SDF";
+    [SerializeField] Font font;
     int indiceAtual;
     bool isTextoTerminado;
     public UnityEvent OnDialogoAcabou;
@@ -52,7 +53,7 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler
     public IEnumerator InvocaTexto(string textoNovo)
     {
         isTextoTerminado = false;
-        TMPTexto.text = temFundoPreto ? "<font=\"LiberationSans SDF\"> <mark=#000000 padding=10,20,5,5>" : "";
+        TMPTexto.text = temFundoPreto ? $"<font=\"{fontName}\"> <mark=#000000 padding=10,20,5,5>" : "";
         WaitForSeconds intervalo = new(intervaloCaracteres);
 
         for (int i = 0; i < textoNovo.Length; i++)
@@ -66,7 +67,7 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler
     }
     public void DestruaItem()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
 }

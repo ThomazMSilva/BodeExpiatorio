@@ -73,7 +73,7 @@ namespace Assets.Scripts.Camera
             Time.timeScale = 0;
 
             yield return new WaitForSecondsRealtime(time);
-            Time.timeScale = origTimeScale;
+            Time.timeScale = 1;
 
             FreezeTime = null;
         }
@@ -103,7 +103,7 @@ namespace Assets.Scripts.Camera
             if (FreezeTime != null)
             {
                 StopCoroutine(FreezeTime);
-                Time.timeScale = origTimeScale;
+                Time.timeScale = 1;
             }
 
             FreezeTime = StartCoroutine(HitStop(hitStopTime));

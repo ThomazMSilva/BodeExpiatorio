@@ -3,78 +3,57 @@ using UnityEngine.EventSystems;
 
 public class MenuPrincipalManager : MonoBehaviour
 {
-    [SerializeField] private string cenaDeJogoNome; 
-    [SerializeField] private GameObject painelMenuInicial;
-    [SerializeField] private GameObject painelOpcoes;
+    [SerializeField] private GameObject mainMenuScreen;
+    [SerializeField] private GameObject optionsScreen;
     [SerializeField] private GameObject creditsScreen;
-    [SerializeField] private GameObject MenuGrafico;
-    [SerializeField] private GameObject MenuSom;
-    [SerializeField] private GameObject MenuAcessibilidade;
+    [SerializeField] private GameObject graphicsScreen;
+    [SerializeField] private GameObject soundScreen;
+    [SerializeField] private GameObject accessiblityScreen;
 
 
     [SerializeField] private GameObject firstMenuOption;
     [SerializeField] private GameObject firstConfigOption;
     [SerializeField] private GameObject creditsReturnBTN;
-    [SerializeField] private GameObject MenuGraficoBotao;
-    [SerializeField] private GameObject MenuSomBotao;
-    [SerializeField] private GameObject MenuAcessibilidadeBotão;
+    [SerializeField] private GameObject firstGraphicsBTN;
+    [SerializeField] private GameObject firstSoundBTN;
+    [SerializeField] private GameObject firstAccessibilityBTN;
 
-   private void Update()
-    {
-
-        if (painelMenuInicial.activeSelf && EventSystem.current.currentSelectedGameObject == null)
-        {
-            EventSystem.current.SetSelectedGameObject(firstMenuOption);
-        }
-        else if (painelOpcoes.activeSelf && EventSystem.current.currentSelectedGameObject == null)
-        {
-            EventSystem.current.SetSelectedGameObject(firstConfigOption);
-        }
-        else if (creditsScreen.activeSelf && EventSystem.current.currentSelectedGameObject == null)
-        {
-            EventSystem.current.SetSelectedGameObject(creditsReturnBTN);
-        }
-    }
+    public void SetOptionsSelected() => EventSystem.current.SetSelectedGameObject(firstConfigOption);
+    public void SetMainMenuSelected() => EventSystem.current.SetSelectedGameObject(firstMenuOption);
+    public void SetGraphicsSelected() => EventSystem.current.SetSelectedGameObject(firstGraphicsBTN);
+    public void SetSoundsSelected() => EventSystem.current.SetSelectedGameObject(firstSoundBTN);
+    public void SetAccessibilitySelected() => EventSystem.current.SetSelectedGameObject(firstAccessibilityBTN);
 
     public void AbrirMenuGrafico()
     {
+        optionsScreen.SetActive(false);
+        graphicsScreen.SetActive(true);
 
-        painelOpcoes.SetActive(false);
-        MenuGrafico.SetActive(true);
-
-        EventSystem.current.SetSelectedGameObject(null);
-
-        EventSystem.current.SetSelectedGameObject(MenuGraficoBotao);
+        SetGraphicsSelected();
     }
+
     public void AbrirMenuSom()
     {
+        optionsScreen.SetActive(false);
+        soundScreen.SetActive(true);
 
-        painelOpcoes.SetActive(false);
-        MenuSom.SetActive(true);
-
-        EventSystem.current.SetSelectedGameObject(null);
-
-        EventSystem.current.SetSelectedGameObject(MenuSomBotao);
+        SetSoundsSelected();
     }
+
     public void AbrirMenuAcessibilidade()
     {
+        optionsScreen.SetActive(false);
+        accessiblityScreen.SetActive(true);
 
-        painelOpcoes.SetActive(false);
-        MenuAcessibilidade.SetActive(true);
-
-        EventSystem.current.SetSelectedGameObject(null);
-
-        EventSystem.current.SetSelectedGameObject(MenuAcessibilidadeBotão);
+        SetAccessibilitySelected();
     }
+
     public void AbrirOpções()
     {
+        mainMenuScreen.SetActive(false);
+        optionsScreen.SetActive(true);
 
-        painelMenuInicial.SetActive(false);
-        painelOpcoes.SetActive(true);
-
-        EventSystem.current.SetSelectedGameObject(null);
-
-        EventSystem.current.SetSelectedGameObject(firstConfigOption);
+        SetOptionsSelected();
     }
 
     public void Credits()
@@ -85,58 +64,40 @@ public class MenuPrincipalManager : MonoBehaviour
 
     public void FecharOpções()
     {
-        painelOpcoes.SetActive(false);
-        painelMenuInicial.SetActive(true);
-        //painelMenuInicial.SetActive(true);
+        optionsScreen.SetActive(false);
+        mainMenuScreen.SetActive(true);
+        //mainMenuScreen.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
 
         EventSystem.current.SetSelectedGameObject(firstMenuOption);
     }
     public void FecharGrafico()
     {
-        MenuGrafico.SetActive(false);
-        painelOpcoes.SetActive(true);
-        //painelMenuInicial.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(null);
+        graphicsScreen.SetActive(false);
+        optionsScreen.SetActive(true);
 
-        EventSystem.current.SetSelectedGameObject(firstConfigOption);
+        SetOptionsSelected();
     }
     public void FecharSom()
     {
-        MenuSom.SetActive(false);
-        painelOpcoes.SetActive(true);
-        //painelMenuInicial.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(null);
+        soundScreen.SetActive(false);
+        optionsScreen.SetActive(true);
 
-        EventSystem.current.SetSelectedGameObject(firstConfigOption);
+        SetOptionsSelected();
     }
     public void FecharAcessibilidade()
     {
-        MenuAcessibilidade.SetActive(false);
-        painelOpcoes.SetActive(true);
-        //painelMenuInicial.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(null);
-
-        EventSystem.current.SetSelectedGameObject(firstConfigOption);
+        accessiblityScreen.SetActive(false);
+        optionsScreen.SetActive(true);
+        
+        SetOptionsSelected();
     }
 
-    public void SairDoJogo()
-    {
-        Application.Quit();
-    }
+    public void SairDoJogo() => Application.Quit();
 
-    public void Continue()
-    {
-        GameManager.Instance.Continue();
-    }
+    public void Continue() => GameManager.Instance.Continue();
 
-    public void NewGame()
-    {
-        GameManager.Instance.NewGame();
-    }
+    public void NewGame() => GameManager.Instance.NewGame();
 
-    public void BackToLastCheckpoint()
-    {
-        GameManager.Instance.LoadLastCheckpoint();
-    }
+    public void BackToLastCheckpoint() => GameManager.Instance.LoadLastCheckpoint();
 }

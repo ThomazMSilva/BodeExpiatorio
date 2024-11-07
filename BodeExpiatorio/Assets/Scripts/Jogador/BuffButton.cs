@@ -21,7 +21,7 @@ public class BuffButtonValues
         buffIcon = values.buffIcon;
         buffDescription = values.buffDescription;
 
-        Debug.Log($"type: {buffType}; icon:{buffIcon}; desc: {buffDescription}");
+        //Debug.Log($"type: {buffType}; icon:{buffIcon}; desc: {buffDescription}");
         buffImage.sprite = buffIcon;
     }
     
