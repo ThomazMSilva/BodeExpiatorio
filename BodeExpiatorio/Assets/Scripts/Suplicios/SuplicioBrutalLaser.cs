@@ -2,7 +2,7 @@ using Assets.Scripts.Camera;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class daNa : MonoBehaviour
+public class SuplicioBrutalLaser : MonoBehaviour
 {
     [SerializeField] private bool isFalling = false;
     [SerializeField] private bool isReturning = false;

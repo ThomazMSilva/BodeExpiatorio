@@ -1,17 +1,23 @@
 using UnityEngine;
+using DG.Tweening;
 
+[RequireComponent(typeof(Rigidbody))]
 public class QuebraPlataforma : MonoBehaviour
 {
-    public GameObject plataforma; 
+    //public GameObject plataforma; 
     public Transform sensor; 
     public float tempoParaQuebrar = 1f; 
     public float tempoParaReaparecer = 3f;
 
     private float contadorQuebra; 
     private float contadorReaparecer; 
-    private bool jogadorNaArea = false; 
+    private bool jogadorNaArea = false;
 
-    private void Update()
+    [SerializeField] private GameObject frontPlatform;
+    [SerializeField] private GameObject backPlatform;
+
+
+    private void FixedUpdate()
     {
         
         Collider[] colliders = Physics.OverlapBox(sensor.position, sensor.localScale / 2, sensor.rotation);
@@ -40,12 +46,12 @@ public class QuebraPlataforma : MonoBehaviour
         
         if (jogadorNaArea)
         {
-            contadorQuebra -= Time.deltaTime;
+            contadorQuebra -= Time.fixedDeltaTime;
 
             if (contadorQuebra <= 0f)
             {
-               
-                plataforma.SetActive(false);
+                //UnityEngine.UI.Image cu; cu.DOColor
+                frontPlatform.transform.DORotate(Quaternion.EulerAngles(new(90, 0, 0)), .5f, RotateMode.Fast);
                 contadorReaparecer = tempoParaReaparecer; 
                 jogadorNaArea = false; 
             }
@@ -54,7 +60,7 @@ public class QuebraPlataforma : MonoBehaviour
         
         if (!plataforma.activeSelf)
         {
-            contadorReaparecer -= Time.deltaTime;
+            contadorReaparecer -= Time.fixedDeltaTime;
 
             if (contadorReaparecer <= 0f)
             {

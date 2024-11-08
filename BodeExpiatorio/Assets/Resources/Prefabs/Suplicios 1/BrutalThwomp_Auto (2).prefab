@@ -67,7 +67,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundLayer: 3
-  trueDamageActive: 0
 --- !u!1 &35157669115493325
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,10 +80,9 @@ GameObject:
   - component: {fileID: 8516380449693111156}
   - component: {fileID: 2426690257966399130}
   - component: {fileID: 4733183883587788632}
-  - component: {fileID: 5142029618590812435}
   - component: {fileID: 7931890251873224542}
   m_Layer: 3
-  m_Name: TesteTwmp
+  m_Name: BrutalThwomp_Auto (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,6 +103,7 @@ Transform:
   m_Children:
   - {fileID: 155242664284167180}
   - {fileID: 5138142974120517838}
+  - {fileID: 1349332681948532290}
   - {fileID: 5997335899217691692}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -206,29 +205,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
---- !u!114 &5142029618590812435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 35157669115493325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc0bf62e122d6e74c845a1f38f22d8af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fallingVelocity: 20
-  risingVelocity: 7
-  maxShakeIntensity: 10
-  maxShakeTime: 0.4
-  groundLayer: 3
-  enableRaycastDetection: 1
-  raycastDistance: 14
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 65
-  maxSqrMag: 400
 --- !u!114 &7931890251873224542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,7 +225,7 @@ MonoBehaviour:
   maxShakeIntensity: 10
   maxShakeTime: 0.4
   groundLayer: 3
---- !u!1 &160880505190362075
+--- !u!1 &737534446144056247
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -257,37 +233,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5539061052699121753}
-  - component: {fileID: 6686606785093290941}
+  - component: {fileID: 1349332681948532290}
+  - component: {fileID: 1551166994622306432}
   m_Layer: 0
-  m_Name: corrente_mng
+  m_Name: corrente_dinamica
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5539061052699121753
+--- !u!4 &1349332681948532290
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 160880505190362075}
+  m_GameObject: {fileID: 737534446144056247}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: -0.20097065, z: 0}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5997335899217691692}
+  m_Father: {fileID: 1859803600432346976}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6686606785093290941
+--- !u!114 &1551166994622306432
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 160880505190362075}
+  m_GameObject: {fileID: 737534446144056247}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 394c175e90b3029458d946ae5143d66a, type: 3}
@@ -298,7 +274,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   rayDistance: 50
-  chainSize: 0.5
+  chainSize: 0.05
 --- !u!1 &3373943445650349651
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +342,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundLayer: 3
-  trueDamageActive: 0
 --- !u!1001 &6102492140131902407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -427,16 +402,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: twompplataforma (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 1574290328502332769, guid: f69534c3e0b698d4fb6e6af58db49c4e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: f69534c3e0b698d4fb6e6af58db49c4e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5539061052699121753}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f69534c3e0b698d4fb6e6af58db49c4e, type: 3}
 --- !u!4 &5997335899217691692 stripped
