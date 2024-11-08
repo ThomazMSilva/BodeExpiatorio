@@ -1,7 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
 
-[RequireComponent(typeof(Rigidbody))]
 public class QuebraPlataforma : MonoBehaviour
 {
     //public GameObject plataforma; 
@@ -12,6 +11,8 @@ public class QuebraPlataforma : MonoBehaviour
     private float contadorQuebra; 
     private float contadorReaparecer; 
     private bool jogadorNaArea = false;
+
+    [SerializeField] private Rigidbody rb;
 
     [SerializeField] private GameObject frontPlatform;
     [SerializeField] private GameObject backPlatform;
@@ -51,14 +52,14 @@ public class QuebraPlataforma : MonoBehaviour
             if (contadorQuebra <= 0f)
             {
                 //UnityEngine.UI.Image cu; cu.DOColor
-                frontPlatform.transform.DORotate(Quaternion.EulerAngles(new(90, 0, 0)), .5f, RotateMode.Fast);
+               // frontPlatform.transform.DORotate(Quaternion.EulerAngles(new(90, 0, 0)), .5f, RotateMode.Fast);
                 contadorReaparecer = tempoParaReaparecer; 
                 jogadorNaArea = false; 
             }
         }
 
         
-        if (!plataforma.activeSelf)
+       /* if (!plataforma.activeSelf)
         {
             contadorReaparecer -= Time.fixedDeltaTime;
 
@@ -67,7 +68,7 @@ public class QuebraPlataforma : MonoBehaviour
                 
                 plataforma.SetActive(true);
             }
-        }
+        }*/
     }
 
     private void OnDrawGizmos()
