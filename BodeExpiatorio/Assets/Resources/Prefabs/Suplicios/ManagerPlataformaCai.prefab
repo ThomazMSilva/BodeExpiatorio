@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2498878739810547266}
   - component: {fileID: 3892201084540149310}
   - component: {fileID: 4580773707067358941}
+  - component: {fileID: 4576210089796626145}
   m_Layer: 3
   m_Name: plataformalcapaofrente
   m_TagString: Untagged
@@ -61,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7791486788655378091, guid: dbafbffd45ae74d478f734e33e451ae4, type: 3}
+  - {fileID: 2100000, guid: 6eb1f252044fc364f8b360a648c23f48, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,6 +84,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &4576210089796626145
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165838964567410274}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 14
+  m_CollisionDetection: 0
 --- !u!1 &2231174020344949184
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +122,7 @@ GameObject:
   - component: {fileID: 5603003773007054097}
   - component: {fileID: 5803604858082085193}
   - component: {fileID: 5364829902216307679}
+  - component: {fileID: 5602225144860790779}
   m_Layer: 3
   m_Name: plataformalcapaotras
   m_TagString: Untagged
@@ -144,7 +173,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7791486788655378091, guid: dbafbffd45ae74d478f734e33e451ae4, type: 3}
+  - {fileID: 2100000, guid: 6eb1f252044fc364f8b360a648c23f48, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -166,6 +195,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &5602225144860790779
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2231174020344949184}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 14
+  m_CollisionDetection: 0
 --- !u!1 &2664697598318730305
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,10 +268,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d43bb6cb6dac5ce4cb1e01fd7427436b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plataforma: {fileID: 8382360934816089998}
   sensor: {fileID: 6331251467941632221}
   tempoParaQuebrar: 1
   tempoParaReaparecer: 3
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  platformCollider: {fileID: 2702751165548447722}
+  frontPlatformRB: {fileID: 4576210089796626145}
+  backPlatformRB: {fileID: 5602225144860790779}
+  openingAnimationDurationA: 0.3
+  openingAnimationDurationB: 0.3
+  closingAnimationDurationA: 0.5
+  closingAnimationDurationB: 0.1
 --- !u!1 &5189731618031998177
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +404,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5035855485255739844
 Transform:
   m_ObjectHideFlags: 0

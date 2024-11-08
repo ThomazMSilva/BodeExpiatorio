@@ -3,72 +3,76 @@ using DG.Tweening;
 
 public class QuebraPlataforma : MonoBehaviour
 {
-    //public GameObject plataforma; 
     public Transform sensor; 
     public float tempoParaQuebrar = 1f; 
     public float tempoParaReaparecer = 3f;
 
+    [SerializeField] LayerMask playerLayerMask;
     private float contadorQuebra; 
     private float contadorReaparecer; 
-    private bool jogadorNaArea = false;
+    private bool abrindoAlcapao = false;
+    private bool jogadorNaOverlapBox;
 
-    [SerializeField] private Rigidbody rb;
-
-    [SerializeField] private GameObject frontPlatform;
-    [SerializeField] private GameObject backPlatform;
-
+    [SerializeField] Collider platformCollider; 
+    Collider[] colliders = new Collider[4]; 
+    [SerializeField] private Rigidbody frontPlatformRB;
+    [SerializeField] private Rigidbody backPlatformRB;
+    [SerializeField] private float openingAnimationDurationA = .3f;
+    [SerializeField] private float openingAnimationDurationB = .15f;
+    [SerializeField] private float closingAnimationDurationA = .5f;
+    [SerializeField] private float closingAnimationDurationB = .1f;
 
     private void FixedUpdate()
     {
-        
-        Collider[] colliders = Physics.OverlapBox(sensor.position, sensor.localScale / 2, sensor.rotation);
+        jogadorNaOverlapBox = Physics.OverlapBoxNonAlloc(sensor.position, sensor.localScale / 2, colliders, sensor.rotation, playerLayerMask) > 0;
 
-        
-        bool jogadorDetectado = false;
-        foreach (Collider collider in colliders)
-        {
-            if (collider.CompareTag("Player"))
-            {
-                jogadorDetectado = true;
-                break; 
-            }
-        }
+        contadorReaparecer = jogadorNaOverlapBox ? tempoParaReaparecer : contadorReaparecer - Time.fixedDeltaTime;
 
-        
-        if (jogadorDetectado)
+        if (jogadorNaOverlapBox)
         {
-            if (!jogadorNaArea) 
+            if (!abrindoAlcapao && platformCollider.enabled) 
             {
-                jogadorNaArea = true;
+                abrindoAlcapao = true;
+                Debug.Log("Comecu a abrir: " + Time.time);
                 contadorQuebra = tempoParaQuebrar; 
             }
         }
 
         
-        if (jogadorNaArea)
+        if (abrindoAlcapao && platformCollider.enabled)
         {
             contadorQuebra -= Time.fixedDeltaTime;
 
             if (contadorQuebra <= 0f)
             {
-                //UnityEngine.UI.Image cu; cu.DOColor
-               // frontPlatform.transform.DORotate(Quaternion.EulerAngles(new(90, 0, 0)), .5f, RotateMode.Fast);
-                contadorReaparecer = tempoParaReaparecer; 
-                jogadorNaArea = false; 
+                platformCollider.enabled = false;
+             
+                frontPlatformRB.DORotate(new Vector3(95, 0, 0), openingAnimationDurationA, RotateMode.Fast)
+                    .OnComplete(() => frontPlatformRB.DORotate(new(90, 0, 0), openingAnimationDurationB, RotateMode.Fast));
+
+                backPlatformRB.DORotate(new Vector3(-95, 0, 0), closingAnimationDurationA, RotateMode.Fast)
+                    .OnComplete(() => backPlatformRB.DORotate(new(-90, 0, 0), closingAnimationDurationB, RotateMode.Fast));
+
+                contadorReaparecer = tempoParaReaparecer;
+                Debug.Log("Tempo que parou de abrir: "+Time.time);
+                abrindoAlcapao = false; 
             }
         }
 
-        
-       /* if (!plataforma.activeSelf)
-        {
-            contadorReaparecer -= Time.fixedDeltaTime;
 
+        if (!jogadorNaOverlapBox && !platformCollider.enabled)
+        {
             if (contadorReaparecer <= 0f)
             {
-                
-                plataforma.SetActive(true);
+                platformCollider.enabled = true;
+
+                frontPlatformRB.DORotate(new Vector3(-5, 0, 0), .5f, RotateMode.Fast)
+                    .OnComplete(() => frontPlatformRB.DORotate(new(0, 0, 0), .1f, RotateMode.Fast));
+
+                backPlatformRB.DORotate(new Vector3(5, 0, 0), .5f, RotateMode.Fast)
+                    .OnComplete(() => backPlatformRB.DORotate(new(0, 0, 0), .1f, RotateMode.Fast));
             }
-        }*/
+        }
     }
 
     private void OnDrawGizmos()
