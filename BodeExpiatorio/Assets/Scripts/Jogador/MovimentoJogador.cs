@@ -142,6 +142,7 @@ public class MovimentoJogador : MonoBehaviour
 
     public delegate void EventHandler(bool boolean);
     public event EventHandler OnPlayerTurned;
+    public event EventHandler OnPlayerKnelt;
 
     [Space(8f)]
     [SerializeField] private Entrada input;
@@ -409,6 +410,7 @@ public class MovimentoJogador : MonoBehaviour
 
         //playerAnim.SetBool("kneeling", willKneel);
         AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerKnelt, transform.position);
+        OnPlayerKnelt?.Invoke(willKneel);
         playerCollider.size = willKneel ? colliderKneelingSize : colliderBaseSize;
         playerCollider.center = willKneel ? colliderKneelingCenter : colliderBaseCenter;
         isKneeling = willKneel;

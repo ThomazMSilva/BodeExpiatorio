@@ -5,6 +5,7 @@ public class FollowDaCamera : MonoBehaviour
     private Vector3 originalPosition;
     private Vector3 kneltPositon;
     [SerializeField, Range(-10, 1)] private float kneltY = -5f;
+    private MovimentoJogador player;
 
     private void Start()
     {
@@ -12,17 +13,9 @@ public class FollowDaCamera : MonoBehaviour
         kneltPositon = originalPosition;
         kneltPositon.y += kneltY;
 
-        Entrada.Instance.OnKneelButtonDown += Input_OnKneelButtonDown;
-        Entrada.Instance.OnKneelButtonUp += Input_OnKneelButtonUp;
+        player = FindAnyObjectByType<MovimentoJogador>();
+        player.OnPlayerKnelt += Player_OnPlayerKnelt;
     }
 
-    private void OnDestroy()
-    {
-        Entrada.Instance.OnKneelButtonDown -= Input_OnKneelButtonDown;
-        Entrada.Instance.OnKneelButtonUp -= Input_OnKneelButtonUp;
-    }
-
-    private void Input_OnKneelButtonDown() => transform.localPosition = kneltPositon;
-
-    private void Input_OnKneelButtonUp() => transform.localPosition = originalPosition;
+    private void Player_OnPlayerKnelt(bool boolean) => transform.localPosition = boolean ? kneltPositon : originalPosition;
 }
