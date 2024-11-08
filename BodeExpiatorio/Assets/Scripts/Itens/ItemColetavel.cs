@@ -21,8 +21,6 @@ namespace Assets.Scripts.Itens
             Hover();
         }
 
-        [SerializeField] private float cureAmount;
-
         private void OnTriggerEnter(Collider other)
         {
             if (!other.gameObject.CompareTag("Player")) return;

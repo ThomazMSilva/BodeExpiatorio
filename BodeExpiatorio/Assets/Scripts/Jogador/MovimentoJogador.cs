@@ -397,7 +397,7 @@ public class MovimentoJogador : MonoBehaviour
 
     private void HandleKneel(bool willKneel)
     {
-        if (isStuckInWire) { SetWiredState(false, isLookingRight); return; }
+        if (isStuckInWire) { SetWiredState(false, isLookingRight); isKneeling = false; return; }
         if (isClimbing) { SetPlayerClimbing(false); return; }
         
         if (!willKneel && Physics.Raycast(transform.position, transform.up, raycastDistance, groundLayer))

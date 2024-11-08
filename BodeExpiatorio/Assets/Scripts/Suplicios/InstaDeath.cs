@@ -2,9 +2,15 @@ using UnityEngine;
 
 public class InstaDeath : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider col)
     {
-        if (collision.gameObject.TryGetComponent<Jogador>(out Jogador player))
+        if (col.gameObject.TryGetComponent<Jogador>(out Jogador player))
+            player.InstaKill("The Abyss.");
+    }
+    
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.TryGetComponent<Jogador>(out Jogador player))
             player.InstaKill("The Abyss.");
     }
 }
