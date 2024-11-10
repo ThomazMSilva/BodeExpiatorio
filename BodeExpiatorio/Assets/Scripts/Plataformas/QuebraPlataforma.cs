@@ -33,7 +33,6 @@ public class QuebraPlataforma : MonoBehaviour
             if (!abrindoAlcapao && platformCollider.enabled) 
             {
                 abrindoAlcapao = true;
-                Debug.Log("Comecu a abrir: " + Time.time);
                 contadorQuebra = tempoParaQuebrar; 
             }
         }
@@ -47,14 +46,13 @@ public class QuebraPlataforma : MonoBehaviour
             {
                 platformCollider.enabled = false;
              
-                frontPlatformRB.DORotate(new Vector3(95, 0, 0), openingAnimationDurationA, RotateMode.Fast)
-                    .OnComplete(() => frontPlatformRB.DORotate(new(90, 0, 0), openingAnimationDurationB, RotateMode.Fast));
+                frontPlatformRB.DORotate(new Vector3(95, 0, 0), openingAnimationDurationA, RotateMode.LocalAxisAdd)
+                    .OnComplete(() => frontPlatformRB.DORotate(new(-5, 0, 0), openingAnimationDurationB, RotateMode.LocalAxisAdd));
 
-                backPlatformRB.DORotate(new Vector3(-95, 0, 0), closingAnimationDurationA, RotateMode.Fast)
-                    .OnComplete(() => backPlatformRB.DORotate(new(-90, 0, 0), closingAnimationDurationB, RotateMode.Fast));
+                backPlatformRB.DORotate(new Vector3(-95, 0, 0), closingAnimationDurationA, RotateMode.LocalAxisAdd)
+                    .OnComplete(() => backPlatformRB.DORotate(new(5, 0, 0), closingAnimationDurationB, RotateMode.LocalAxisAdd));
 
                 contadorReaparecer = tempoParaReaparecer;
-                Debug.Log("Tempo que parou de abrir: "+Time.time);
                 abrindoAlcapao = false; 
             }
         }
@@ -66,11 +64,11 @@ public class QuebraPlataforma : MonoBehaviour
             {
                 platformCollider.enabled = true;
 
-                frontPlatformRB.DORotate(new Vector3(-5, 0, 0), .5f, RotateMode.Fast)
-                    .OnComplete(() => frontPlatformRB.DORotate(new(0, 0, 0), .1f, RotateMode.Fast));
+                frontPlatformRB.DORotate(new Vector3(-95, 0, 0), .5f, RotateMode.LocalAxisAdd)
+                    .OnComplete(() => frontPlatformRB.DORotate(new(5, 0, 0), .1f, RotateMode.LocalAxisAdd));
 
-                backPlatformRB.DORotate(new Vector3(5, 0, 0), .5f, RotateMode.Fast)
-                    .OnComplete(() => backPlatformRB.DORotate(new(0, 0, 0), .1f, RotateMode.Fast));
+                backPlatformRB.DORotate(new Vector3(95, 0, 0), .5f, RotateMode.LocalAxisAdd)
+                    .OnComplete(() => backPlatformRB.DORotate(new(-5, 0, 0), .1f, RotateMode.LocalAxisAdd));
             }
         }
     }

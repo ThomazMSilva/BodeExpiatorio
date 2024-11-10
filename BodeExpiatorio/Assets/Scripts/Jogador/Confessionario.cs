@@ -6,14 +6,20 @@ public class Confessionario : MonoBehaviour
     [SerializeField] private int roomIndex;
     [SerializeField] private bool checkpointStartsActive;
     [SerializeField] private bool recoverMaxHealthToStartingPoint = true;
-    [SerializeField] private Transform respawnPoint;  // Correção: Removida a duplicação desta linha
+    [SerializeField] private bool isFinalRoom;
+    public bool IsFinalRoom { get => isFinalRoom; }
+
+    [SerializeField] private Transform respawnPoint;
     [SerializeField] private GameObject buffScreen;
+
     public float damageThreshold = 50f;
     private float startingRoomTime;
     private float startingRunTime;
+
     private Jogador player;
+    public Jogador Player { get => player; }
+
     public static Confessionario ultimoAtivo;
-    public Jogador Player { get { return player; } }
 
     private void Awake() => player = FindAnyObjectByType<Jogador>();
 
@@ -47,13 +53,13 @@ public class Confessionario : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (buffScreen == null || !other.gameObject.CompareTag("Player")) return;
+        if (!other.gameObject.CompareTag("Player")) return;
         Entrada.Instance.OnKneelButtonDown += Pray;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (buffScreen == null || !other.gameObject.CompareTag("Player")) return;
+        if (!other.gameObject.CompareTag("Player")) return;
         Entrada.Instance.OnKneelButtonDown -= Pray;
     }
 
@@ -63,15 +69,7 @@ public class Confessionario : MonoBehaviour
         SetUltimoAtivo();
     }
 
-    private void SetUltimoAtivo()
-    {
-        ultimoAtivo = this;
-    }
-
-    public Transform GetRespawnPoint()
-    {
-        return respawnPoint;
-    }
+    private void SetUltimoAtivo() => ultimoAtivo = this;
 
     public void Respawn()
     {
@@ -92,18 +90,11 @@ public class Confessionario : MonoBehaviour
         player.SetBuffs();
     }
 
-    private void GameOver()
-    {
-        Debug.Log("MORREU MUITASSO INSANO MESMO.");
-        GameManager.Instance.LoadDeathScene();
-    }
+    public Transform GetRespawnPoint() => respawnPoint;
 
-    public void NextLevel() => GameManager.Instance.LoadNextRoom();
+    private void GameOver() => GameManager.Instance.LoadDeathScene();
 
-    public string LevelStatistics()
-    {
-        return $"--Level {roomIndex + 1} Statistics--\n\nRoomTime: {RoomTime()}; RunTime: {RunTime()}\n{player.Vida.DamageString}";
-    }
+    public string LevelStatistics() => $"--Level {roomIndex + 1} Statistics--\n\nRoomTime: {RoomTime()}; RunTime: {RunTime()}\n{player.Vida.DamageString}";
 
     public float RoomTime() => Time.time - startingRoomTime;
 

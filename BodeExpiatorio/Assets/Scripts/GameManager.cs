@@ -45,12 +45,15 @@ public class GameManager : MonoBehaviour
 
     public Sala lastCheckpoint;
 
+    private bool isLoadingScene;
+    public bool IsLoading { get => isLoadingScene; }
+
     [SerializeField] private Jogador player;
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.N)) LoadNextRoom();
-        if (Input.GetKeyDown(KeyCode.T)) ResetCheckpointStates();
+        if (Input.GetKeyDown(KeyCode.T)) ResetCheckpointsOver();
         if (Input.GetKeyDown(KeyCode.R)) LoadLastCheckpoint();
 
         if (Input.GetKeyDown(KeyCode.F1)) SceneManager.LoadScene("Menu 1");
@@ -72,7 +75,7 @@ public class GameManager : MonoBehaviour
 
     public void NewGame()
     {
-        ResetCheckpointStates();
+        ResetCheckpointsOver();
 
         currentRoom = rooms[0];
 
@@ -82,10 +85,10 @@ public class GameManager : MonoBehaviour
         LoadCurrentRoom();
     }
 
-    public void ResetCheckpointStates()
+    public void ResetCheckpointsOver(int initialIndex = 0)
     {
         //seta os checkpoints a negativo
-        for (int i = 0; i < rooms.Count; i++)
+        for (int i = initialIndex; i < rooms.Count; i++)
         {
             string checkpointIndex = $"Checkpoint {i}";
 
@@ -126,6 +129,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log($"A cena atual é a {scene}");
         currentRoom = rooms[scene];
+        ResetCheckpointsOver(scene);
         PlayerPrefs.SetInt(currentRoomPref, scene);
     }
 
@@ -165,7 +169,7 @@ public class GameManager : MonoBehaviour
         {
             if (rooms[i].isCheckpointActive) mostAdvancedRoom = i;
         }
-        StartCoroutine(LoadScreen(rooms[mostAdvancedRoom].sceneName, true));
+        StartCoroutine(LoadScreen(rooms[mostAdvancedRoom].sceneName));
     }
 
     public void LoadNextRoom()
@@ -229,9 +233,11 @@ public class GameManager : MonoBehaviour
                 $"Specifications:\n\n{actStatistics}";
     }
 
+    public void EndLoading() => isLoadingScene = false;
+
     private IEnumerator LoadScreen(string sceneName, bool loadingNextLevel = false)
     {
-
+        isLoadingScene = true;
         Time.timeScale = 1;
         var images = loadingScreen.GetComponentsInChildren<Image>();
         float[] originalAlpha = new float[images.Length];
@@ -258,29 +264,25 @@ public class GameManager : MonoBehaviour
 
                 PlayerPrefs.SetString(currentActStatisticsPref, actStatistics);
 
-                //Cada um dos cases é pro nível 4 de cada Ato
-                switch (currentRoom.sceneIndex)
+                //Caso seja a quarta sala do ato (ou qualquer q seja q definiu como ultima de um ato)
+                if (confessionario.IsFinalRoom)
                 {
-                    case 3: case 7: case 11:
-                        statisticsText.text = ActText;
-                        actStatistics = "";
-                        totalActTorment = Vector4.zero;
-                        actRoomTime = 0;
-                        actRunTime = 0;
-                        break;
-
-                    default:
-                        statisticsText.text = confessionario.LevelStatistics();
-                        break;
+                    statisticsText.text = ActText;
+                    actStatistics = "";
+                    totalActTorment = Vector4.zero;
+                    actRoomTime = 0;
+                    actRunTime = 0;
                 }
-
+                else
+                    statisticsText.text = confessionario.LevelStatistics();
+                
                 SetBuffButtonValues(confessionario.TotalTorment().y, confessionario.damageThreshold);
             }
         }
-        else statisticsText.text = randomTexts[UnityEngine.Random.Range(0, randomTexts.Count - 1)];
+        else statisticsText.text = randomTexts[UnityEngine.Random.Range(0, randomTexts.Count - 1)]; //Nao e um load de nivel, e sim de menu
 
         //Ativa as imagens e da Fade In
-        
+
         loadingScreen.SetActive(true);
 
         for (float t = 0; t < fadeTime; t += Time.deltaTime)
@@ -348,7 +350,7 @@ public class GameManager : MonoBehaviour
 
         if(!loadingNextLevel) Time.timeScale = 1;
 
-        if (loadingNextLevel)
+        else
         {
             buffScreen.SetActive(true);
             EventSystem.current.SetSelectedGameObject(buffButtonA.gameObject);
@@ -376,7 +378,7 @@ public class GameManager : MonoBehaviour
         }
 
         loadingScreen.SetActive(false);
-
+        if(!loadingNextLevel) isLoadingScene = false;
 
         //Reseta os valores das imagens
         
@@ -390,39 +392,38 @@ public class GameManager : MonoBehaviour
 
     [Header("Tela de Buff"), Space(8f)]
 
-        [SerializeField] private GameObject buffScreen;
-        [SerializeField] private TextMeshProUGUI descriptionTMP;
-        [SerializeField] private BuffButton buffButtonA;
-        [SerializeField] private BuffButton buffButtonB;
-        [SerializeField] private BuffButton buffButtonC;
+    [SerializeField] private GameObject buffScreen;
+    [SerializeField] private TextMeshProUGUI descriptionTMP;
+    [SerializeField] private BuffButton buffButtonA;
+    [SerializeField] private BuffButton buffButtonB;
+    [SerializeField] private BuffButton buffButtonC;
     
-        [Space(8f)]
+    [Space(8f)]
 
-        [SerializeField] private List<BuffButtonValues> salvationBuffs;
-        [SerializeField] private List<BuffButtonValues> reluctanceBuffs;
+    [SerializeField] private List<BuffButtonValues> salvationBuffs;
+    [SerializeField] private List<BuffButtonValues> reluctanceBuffs;
 
-        private void SetBuffButtonValues(float lastRoomTorment, float lastRoomDmgThreshold)
-        {
-            bool isOnSalvationPath = lastRoomTorment < lastRoomDmgThreshold;
-
-            var buffA = GetRandomBuff(isOnSalvationPath); 
-            buffButtonA.buffButton.SetValues(buffA);
-
-            buffButtonB.buffButton.SetValues(GetRandomBuff(!isOnSalvationPath));
-
-            buffButtonC.buffButton.SetValues(GetRandomBuff(isOnSalvationPath, buffA));
-        }
-
-        private BuffButtonValues GetRandomBuff(bool salvation, BuffButtonValues excludedBuff = null)
-        {
-            var buffList = salvation ? salvationBuffs : reluctanceBuffs;
-            var filteredList = excludedBuff != null ? buffList.Where(buff => buff != excludedBuff) : buffList;
-            return buffList[UnityEngine.Random.Range(0, buffList.Count)];
-        }
-    public void SetScreenSelected()
+    private void SetBuffButtonValues(float lastRoomTorment, float lastRoomDmgThreshold)
     {
-        EventSystem.current.SetSelectedGameObject(buffButtonA.gameObject);
+        bool isOnSalvationPath = lastRoomTorment < lastRoomDmgThreshold;
+
+        var buffA = GetRandomBuff(isOnSalvationPath); 
+        buffButtonA.buffButton.SetValues(buffA);
+
+        buffButtonB.buffButton.SetValues(GetRandomBuff(!isOnSalvationPath));
+
+        buffButtonC.buffButton.SetValues(GetRandomBuff(isOnSalvationPath, buffA));
     }
+
+    private BuffButtonValues GetRandomBuff(bool salvation, BuffButtonValues excludedBuff = null)
+    {
+        var buffList = salvation ? salvationBuffs : reluctanceBuffs;
+        var filteredList = excludedBuff != null ? buffList.Where(buff => buff != excludedBuff) : buffList;
+        return buffList[UnityEngine.Random.Range(0, buffList.Count)];
+    }
+    
+    public void SetScreenSelected() => EventSystem.current.SetSelectedGameObject(buffButtonA.gameObject);
+    
     public void ActivateBuff(BuffButton buff)
     {
         Jogador player = FindAnyObjectByType<Jogador>();
@@ -431,9 +432,15 @@ public class GameManager : MonoBehaviour
     }
 
     public void SetDescriptionText(BuffButton buff) => descriptionTMP.text = buff.buffButton.buffDescription;
+    
     public void EmptyDescriptionText() => descriptionTMP.text = "";
 
-    public void CloseBuffScreen() { if(buffScreen) buffScreen.SetActive(false); Time.timeScale = 1; }
+    public void CloseBuffScreen() 
+    { 
+        if(buffScreen) buffScreen.SetActive(false); 
+        Time.timeScale = 1; 
+        isLoadingScene = false;
+    }
 }
 
 [System.Serializable]

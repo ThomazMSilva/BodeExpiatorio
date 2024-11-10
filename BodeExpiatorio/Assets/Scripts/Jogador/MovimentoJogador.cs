@@ -108,6 +108,7 @@ public class MovimentoJogador : MonoBehaviour
     //[SerializeField]
     private float
         horizontalInput,
+        colliderExtentsX,
         jumpBufferTimeCurrent,
         coyoteTimeCurrent,
         stunTimeRemaining,
@@ -118,6 +119,7 @@ public class MovimentoJogador : MonoBehaviour
         colliderBaseSize,
         colliderKneelingSize,
         colliderBaseCenter,
+        colliderHorizontalRange,
         colliderKneelingCenter,
         moveForce = Vector3.zero,
         climbForce = Vector3.zero,
@@ -161,6 +163,7 @@ public class MovimentoJogador : MonoBehaviour
         colliderBaseCenter = playerCollider.center;
         colliderKneelingCenter.Set(colliderBaseCenter.x, colliderBaseCenter.y - (colliderKneelingSize.y * 0.5f), colliderBaseCenter.z);
         raycastDistance = playerCollider.bounds.extents.y + .25f;
+        colliderHorizontalRange = new(playerCollider.bounds.extents.x, 0, 0);
 
         gravity = Physics.gravity;
 
@@ -237,8 +240,14 @@ public class MovimentoJogador : MonoBehaviour
 
     private void CheckGrounded()
     {
-        isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hit, raycastDistance, groundLayer);
-        Debug.DrawRay(transform.position, -Vector3.up * raycastDistance, Color.magenta);
+        isGrounded =
+            Physics.Raycast(transform.position, -Vector3.up, out hit, raycastDistance, groundLayer)
+            /*|| Physics.Raycast(transform.position - colliderHorizontalRange, -Vector3.up, out hit, raycastDistance, groundLayer) ||
+            Physics.Raycast(transform.position + colliderHorizontalRange, -Vector3.up, out hit, raycastDistance, groundLayer)*/;
+        Debug.DrawRay(transform.position, -Vector3.up * raycastDistance, !isGrounded ? Color.magenta : Color.cyan);
+        //Color c = !isGrounded ? Color.magenta : Color.cyan;
+        /*Debug.DrawRay(transform.position - colliderHorizontalRange, -Vector3.up * raycastDistance, c);
+        Debug.DrawRay(transform.position + colliderHorizontalRange, -Vector3.up * raycastDistance, c);*/
         
         transform.parent = hit.transform && !hit.transform.CompareTag(fallingPlatformTag) ? hit.transform : null;
         
