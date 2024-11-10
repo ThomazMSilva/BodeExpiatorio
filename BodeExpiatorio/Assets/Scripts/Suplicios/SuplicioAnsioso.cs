@@ -17,6 +17,7 @@ public class SuplicioAnsioso : MonoBehaviour
 
     private bool _isKneeling;
     private float currentForceMultiplier;
+    private float originalAlpha;
 
     private EventInstance windEventInstance;
     private Jogador _player;
@@ -45,7 +46,8 @@ public class SuplicioAnsioso : MonoBehaviour
     {
         _input.OnKneelButtonDown -= SetKneelingTrue;
         _input.OnKneelButtonUp -= SetKneelingFalse;
-        StopCoroutine(Attract());
+        //StopCoroutine(Attract());
+        StopAllCoroutines();
         windEventInstance.release();
     }
 
@@ -53,6 +55,7 @@ public class SuplicioAnsioso : MonoBehaviour
     {
         windEventInstance = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.LongingAttracted);
         windEventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
+        originalAlpha = GetComponent<Renderer>().material.color.a;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -88,7 +91,7 @@ public class SuplicioAnsioso : MonoBehaviour
         while (true)
         {
             if (!isIntervalActive) yield return null;
-            GetComponent<Renderer>().material.DOFade(isAttracting ? 0 : 1, interval * fadeTimeRelativeToInterval);
+            GetComponent<Renderer>().material.DOFade(isAttracting ? 0 : originalAlpha, interval * fadeTimeRelativeToInterval);
             isAttracting = !isAttracting;
 
             if (isAttracting) windEventInstance.start();
