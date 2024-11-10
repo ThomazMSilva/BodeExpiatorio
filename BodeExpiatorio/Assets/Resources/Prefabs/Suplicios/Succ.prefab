@@ -147,8 +147,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interval: 2.5
-  damagePerSecond: 0.5
-  force: 200
+  damagePerSecond: 2
+  force: 100
   kneelingForceMultiplier: 0.09
   fadeTimeRelativeToInterval: 0.5
   isIntervalActive: 1
@@ -273,3 +273,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   suplicioEfeito: {fileID: 450720624145101271}
+  canSpitOut: 1
+  spitDamage: 10
+  spitForce: 15
