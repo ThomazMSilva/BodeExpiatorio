@@ -146,12 +146,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e476b19386ceba244afabb8f0944efa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  decayTime: 7
   groundLayer: 3
-  stunTime: 3
+  stunTime: 4
   directDamage: 4
   explosionRadius: 6
   explosionDamage: 6
   explosionForce: 100
   yExplosionSupport: 2
+  yMultiplier: 10
   explosionDisplayColor: {fileID: 2100000, guid: 6deabda4583afb54da895955dfba290a, type: 2}
   explosionDisplayDuration: 0.2
