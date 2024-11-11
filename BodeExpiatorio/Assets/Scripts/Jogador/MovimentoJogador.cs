@@ -236,6 +236,7 @@ public class MovimentoJogador : MonoBehaviour
         playerAnim.SetBool("jumpKeyHeld", jumpKeyHeld);
         playerAnim.SetBool("isGrounded", isGrounded);
         playerAnim.SetFloat("velocityX", MathF.Abs(rb.velocity.x));
+        playerAnim.SetFloat("velocityY", rb.velocity.y);
     }
 
     private void CheckGrounded()
