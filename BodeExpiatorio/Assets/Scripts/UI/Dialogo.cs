@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-public class Dialogo : MonoBehaviour, IPointerClickHandler
+public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler
 {
     [TextArea, SerializeField] string[] falas;
     [SerializeField] TextMeshProUGUI TMPTexto;
@@ -15,6 +15,35 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler
     int indiceAtual;
     bool isTextoTerminado;
     public UnityEvent OnDialogoAcabou;
+
+
+
+    public void OnSubmit(BaseEventData eventData)
+    {
+        StopAllCoroutines();
+
+        if (!isTextoTerminado)
+        {
+            TMPTexto.text = (temFundoPreto ? $"<font=\"{fontName}\"> <mark=#000000 padding=10,20,5,5>" : "") + falas[indiceAtual];
+            isTextoTerminado = true;
+        }
+
+        else
+        {
+            TMPTexto.text = "";
+
+            if (indiceAtual + 1 < falas.Length)
+            {
+                indiceAtual++;
+                StartCoroutine(InvocaTexto(falas[indiceAtual]));
+            }
+            else
+            {
+                OnDialogoAcabou?.Invoke();
+            }
+
+        }
+    }
 
     //eu nao entendi pq isso funciona e o OnMouseDown nao, mas n conheco mt de EventSystems, achei essa interface na internet
     public void OnPointerClick(PointerEventData pointerEventData)
@@ -48,6 +77,7 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler
     {
         indiceAtual = 0;
         StartCoroutine(InvocaTexto(falas[indiceAtual]));
+        EventSystem.current.SetSelectedGameObject(gameObject);
     }
 
     public IEnumerator InvocaTexto(string textoNovo)
@@ -69,5 +99,4 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler
     {
         gameObject.SetActive(false);
     }
-
 }

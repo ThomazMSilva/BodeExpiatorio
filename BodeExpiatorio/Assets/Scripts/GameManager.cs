@@ -60,8 +60,8 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F2)) SceneManager.LoadScene("Desejo1");
         if (Input.GetKeyDown(KeyCode.F3)) StartCoroutine(LoadScreen("Desejo2"));//SceneManager.LoadScene("Desejo 2");
         if (Input.GetKeyDown(KeyCode.F4)) SceneManager.LoadScene("Traicao 1");
-        if (Input.GetKeyDown(KeyCode.F5)) SceneManager.LoadScene("Brutal 1");
-        if (Input.GetKeyDown(KeyCode.F6)) SceneManager.LoadScene("Brutal 2");
+        if (Input.GetKeyDown(KeyCode.F5)) SceneManager.LoadScene("Brutal 1 Modelos Novos");
+        if (Input.GetKeyDown(KeyCode.F6)) SceneManager.LoadScene("Brutal 2 Mobiliada");
         if (Input.GetKeyDown(KeyCode.F7)) SceneManager.LoadScene("Brutal 3");
         if (Input.GetKeyDown(KeyCode.F8)) SceneManager.LoadScene("TestesMAluk05");
         if (Input.GetKeyDown(KeyCode.F9)) SceneManager.LoadScene("TestesMAluk05 1");

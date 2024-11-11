@@ -1,8 +1,10 @@
+using Newtonsoft.Json.Bson;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class MenuPrincipalManager : MonoBehaviour
 {
+    [SerializeField] private GameObject pauseMenuScreen;
     [SerializeField] private GameObject mainMenuScreen;
     [SerializeField] private GameObject optionsScreen;
     [SerializeField] private GameObject creditsScreen;
@@ -11,18 +13,25 @@ public class MenuPrincipalManager : MonoBehaviour
     [SerializeField] private GameObject accessiblityScreen;
 
 
-    [SerializeField] private GameObject firstMenuOption;
+    [SerializeField] private GameObject firstMainMenuOption;
+    [SerializeField] private GameObject firstPauseMenuOption;
     [SerializeField] private GameObject firstConfigOption;
     [SerializeField] private GameObject creditsReturnBTN;
     [SerializeField] private GameObject firstGraphicsBTN;
     [SerializeField] private GameObject firstSoundBTN;
     [SerializeField] private GameObject firstAccessibilityBTN;
 
+    private bool isMainMenu;
+
     public void SetOptionsSelected() => EventSystem.current.SetSelectedGameObject(firstConfigOption);
-    public void SetMainMenuSelected() => EventSystem.current.SetSelectedGameObject(firstMenuOption);
+    public void SetPauseMenuSelected() => EventSystem.current.SetSelectedGameObject(firstPauseMenuOption);
+    public void SetMainSelected() => EventSystem.current.SetSelectedGameObject(firstMainMenuOption);
     public void SetGraphicsSelected() => EventSystem.current.SetSelectedGameObject(firstGraphicsBTN);
     public void SetSoundsSelected() => EventSystem.current.SetSelectedGameObject(firstSoundBTN);
+    public void SetCreditsSelected() => EventSystem.current.SetSelectedGameObject(creditsReturnBTN);
     public void SetAccessibilitySelected() => EventSystem.current.SetSelectedGameObject(firstAccessibilityBTN);
+
+    private void Start() => isMainMenu = mainMenuScreen.activeSelf;
 
     public void AbrirMenuGrafico()
     {
@@ -50,26 +59,51 @@ public class MenuPrincipalManager : MonoBehaviour
 
     public void AbrirOpções()
     {
-        mainMenuScreen.SetActive(false);
+        if(!isMainMenu) pauseMenuScreen.SetActive(false);
+        else mainMenuScreen.SetActive(false);
+
         optionsScreen.SetActive(true);
 
         SetOptionsSelected();
     }
 
-    public void Credits()
+    public void OpenCredits()
     {
-        creditsScreen.SetActive(!creditsScreen.activeSelf);
-        EventSystem.current.SetSelectedGameObject(creditsScreen.activeSelf ? creditsReturnBTN : firstMenuOption);
+        if (!isMainMenu) pauseMenuScreen.SetActive(false);
+        else mainMenuScreen.SetActive(false);
+        creditsScreen.SetActive(true);
+        SetCreditsSelected();
+    }
+
+    public void CloseCredits()
+    {
+        creditsScreen.SetActive(false);
+        if (!isMainMenu)
+        {
+            pauseMenuScreen.SetActive(true);
+            SetPauseMenuSelected();
+        }
+        else
+        {
+            mainMenuScreen.SetActive(true);
+            SetMainSelected();
+        }
     }
 
     public void FecharOpções()
     {
         optionsScreen.SetActive(false);
-        mainMenuScreen.SetActive(true);
-        //mainMenuScreen.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(null);
 
-        EventSystem.current.SetSelectedGameObject(firstMenuOption);
+        if (!isMainMenu)
+        {
+            pauseMenuScreen.SetActive(true);
+            SetPauseMenuSelected();
+        }
+        else
+        {
+            mainMenuScreen.SetActive(true);
+            SetMainSelected();
+        }
     }
     public void FecharGrafico()
     {
@@ -92,6 +126,7 @@ public class MenuPrincipalManager : MonoBehaviour
         
         SetOptionsSelected();
     }
+    public void ReturnToMainMenu() => GameManager.Instance.LoadMainMenu();
 
     public void SairDoJogo() => Application.Quit();
 

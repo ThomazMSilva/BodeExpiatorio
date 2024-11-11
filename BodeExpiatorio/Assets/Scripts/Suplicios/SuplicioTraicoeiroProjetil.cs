@@ -1,8 +1,6 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 using System.Collections;
-using Autodesk.Fbx;
-using UnityEngine.InputSystem.Controls;
 
 namespace Assets.Scripts.Suplicios
 {

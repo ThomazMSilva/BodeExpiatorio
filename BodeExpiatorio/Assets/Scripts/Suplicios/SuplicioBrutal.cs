@@ -1,8 +1,6 @@
 using Assets.Scripts.Camera;
 using FMOD.Studio;
 using System.Collections;
-using System.Threading;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
