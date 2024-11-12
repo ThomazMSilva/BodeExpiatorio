@@ -34,4 +34,5 @@ public class VolumeController : MonoBehaviour
             volumeSlider.onValueChanged.RemoveListener(SetVolume);
         }
     }
+
 }
