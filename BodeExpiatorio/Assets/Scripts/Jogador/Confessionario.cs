@@ -5,6 +5,7 @@ public class Confessionario : MonoBehaviour
 {
     [SerializeField] private int roomIndex;
     [SerializeField] private bool checkpointStartsActive;
+    [Tooltip("Quando o Jogador morre, a vida máxima volta para o valor que estava quando entrou na câmara.")]
     [SerializeField] private bool recoverMaxHealthToStartingPoint = true;
     [SerializeField] private bool isFinalRoom;
     public bool IsFinalRoom { get => isFinalRoom; }
