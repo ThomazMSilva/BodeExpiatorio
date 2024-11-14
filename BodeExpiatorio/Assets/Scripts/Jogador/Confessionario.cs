@@ -94,7 +94,7 @@ public class Confessionario : MonoBehaviour
 
     private void GameOver() => GameManager.Instance.LoadDeathScene();
 
-    public string LevelStatistics() => $"--Level {roomIndex + 1} Statistics--\n\nRoomTime: {RoomTime()}; RunTime: {RunTime()}\n{player.Vida.DamageString}";
+    public string LevelStatistics() => $"--Level {roomIndex + 1} Statistics--\n\nRoomTime: {RoomTime()} seconds; RunTime: {RunTime()} seconds.\n{player.Vida.DamageString}";
 
     public float RoomTime() => Time.time - startingRoomTime;
 

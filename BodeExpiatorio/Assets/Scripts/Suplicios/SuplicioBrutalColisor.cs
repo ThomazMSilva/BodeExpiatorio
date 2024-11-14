@@ -15,7 +15,7 @@ public class SuplicioBrutalColisor : MonoBehaviour
         }
 
         if (other.gameObject.layer == groundLayer && isPlayerInside)
-            player.InstaKill(this.name, trueDamageActive);
+            player.InstaKill("Estrela-da-Manhã", trueDamageActive);
     }
     private void OnTriggerExit(Collider other)
     {

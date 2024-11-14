@@ -24,9 +24,9 @@ public class ContagemRegressivaVidaJogador : MonoBehaviour
 
     private VidaJogador vida;
     
-    private void OnEnable() => vida.OnHealthChanged += RecoverTimeOnCD;
+    private void OnEnable() => vida.OnFrontHealthChanged += RecoverTimeOnCD;
     
-    private void OnDisable() => vida.OnHealthChanged -= RecoverTimeOnCD;
+    private void OnDisable() => vida.OnFrontHealthChanged -= RecoverTimeOnCD;
 
     private void Awake() => vida = GetComponent<VidaJogador>();
 
