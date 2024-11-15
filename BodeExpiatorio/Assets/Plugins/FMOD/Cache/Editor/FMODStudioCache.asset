@@ -1,234 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8143894518182355634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Suplicios/Portal
-  m_EditorClassIdentifier: 
-  Path: event:/Suplicios/Portal
-  Guid:
-    Data1: -163297117
-    Data2: 1094505970
-    Data3: -1867584893
-    Data4: 250949934
-  Banks:
-  - {fileID: -4694303126296919446}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 6000
---- !u!114 &-7654461940428955197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Penitente/Passo
-  m_EditorClassIdentifier: 
-  Path: event:/Penitente/Passo
-  Guid:
-    Data1: -1303287478
-    Data2: 1321682389
-    Data3: 124486574
-    Data4: -47014835
-  Banks:
-  - {fileID: -4694303126296919446}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-7561333115149197976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Musica.bank
-  m_EditorClassIdentifier: 
-  Path: FMODpenitente/Desktop/Musica.bank
-  Name: Musica
-  StudioPath: bank:/Musica
-<<<<<<< HEAD
-  lastModified: 638669336120258555
-=======
-  lastModified: 638664370651185192
->>>>>>> bf79221eff508113a458b04f6adc3fc5e4e13e16
-  FileSizes: []
-  Exists: 1
---- !u!114 &-7313024140035465428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Animacoes.bank
-  m_EditorClassIdentifier: 
-  Path: FMODpenitente/Desktop/Animacoes.bank
-  Name: Animacoes
-  StudioPath: bank:/Animacoes
-<<<<<<< HEAD
-  lastModified: 638664331690177614
-=======
-  lastModified: 638664370651048720
->>>>>>> bf79221eff508113a458b04f6adc3fc5e4e13e16
-  FileSizes: []
-  Exists: 1
---- !u!114 &-7253237464218833541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Penitente/Idle
-  m_EditorClassIdentifier: 
-  Path: event:/Penitente/Idle
-  Guid:
-    Data1: -839145459
-    Data2: 1091628472
-    Data3: 431373243
-    Data4: 1948417660
-  Banks:
-  - {fileID: -4694303126296919446}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-5476774815946534815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Suplicios/PlantaBomba
-  m_EditorClassIdentifier: 
-  Path: event:/Suplicios/PlantaBomba
-  Guid:
-    Data1: -661327483
-    Data2: 1263375898
-    Data3: 1644477336
-    Data4: -700516704
-  Banks:
-  - {fileID: -4694303126296919446}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-5108354480563869135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Penitente/Cura
-  m_EditorClassIdentifier: 
-  Path: event:/Penitente/Cura
-  Guid:
-    Data1: 69658318
-    Data2: 1197733939
-    Data3: 535569536
-    Data4: -1825381928
-  Banks:
-  - {fileID: -4694303126296919446}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-4694303126296919446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/SFX.bank
-  m_EditorClassIdentifier: 
-  Path: FMODpenitente/Desktop/SFX.bank
-  Name: SFX
-  StudioPath: bank:/SFX
-<<<<<<< HEAD
-  lastModified: 638669336121694712
-=======
-  lastModified: 638664370651290986
->>>>>>> bf79221eff508113a458b04f6adc3fc5e4e13e16
-  FileSizes: []
-  Exists: 1
---- !u!114 &-4256357802518981525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Suplicios/Espinho
-  m_EditorClassIdentifier: 
-  Path: event:/Suplicios/Espinho
-  Guid:
-    Data1: -1848132951
-    Data2: 1224516814
-    Data3: -866928205
-    Data4: -863339503
-  Banks:
-  - {fileID: -4694303126296919446}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-3992473836635413982
+--- !u!114 &-8756456966459085940
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,217 +15,12 @@ MonoBehaviour:
   Path: FMODpenitente/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-<<<<<<< HEAD
-  lastModified: 638669336110783787
-=======
-  lastModified: 638658855067642710
->>>>>>> bf79221eff508113a458b04f6adc3fc5e4e13e16
+  lastModified: 638672923040663914
   FileSizes:
   - Name: 
-    Value: 1572
+    Value: 1536
   Exists: 1
---- !u!114 &-3196452544552977695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Penitente/Dano
-  m_EditorClassIdentifier: 
-  Path: event:/Penitente/Dano
-  Guid:
-    Data1: 1885096880
-    Data2: 1275817544
-    Data3: -664718452
-    Data4: 2059643658
-  Banks:
-  - {fileID: -4694303126296919446}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 850
---- !u!114 &-509506072831527464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Suplicios/Arame
-  m_EditorClassIdentifier: 
-  Path: event:/Suplicios/Arame
-  Guid:
-    Data1: -1190321241
-    Data2: 1203844738
-    Data3: -1608619392
-    Data4: -2126915139
-  Banks:
-  - {fileID: -4694303126296919446}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
-  m_Name: FMODStudioCache
-  m_EditorClassIdentifier: 
-  EditorBanks:
-  - {fileID: -3992473836635413982}
-  - {fileID: -7313024140035465428}
-  - {fileID: 2559047011809748228}
-  - {fileID: -7561333115149197976}
-  - {fileID: -4694303126296919446}
-  EditorEvents:
-  - {fileID: 2396557372581752697}
-  - {fileID: 8611315348820901553}
-  - {fileID: 8215880776198565016}
-  - {fileID: -7253237464218833541}
-  - {fileID: -7654461940428955197}
-  - {fileID: 8190101636273234736}
-  - {fileID: -5476774815946534815}
-  - {fileID: 5188480594882100534}
-  - {fileID: -8143894518182355634}
-  - {fileID: -509506072831527464}
-  - {fileID: -4256357802518981525}
-  - {fileID: -3196452544552977695}
-  - {fileID: -5108354480563869135}
-  - {fileID: 8286738490113301557}
-  EditorParameters: []
-  MasterBanks:
-  - {fileID: 2559047011809748228}
-  StringsBanks:
-  - {fileID: -3992473836635413982}
-<<<<<<< HEAD
-  cacheTime: 638669336121694712
-=======
-  cacheTime: 638664370651290986
->>>>>>> bf79221eff508113a458b04f6adc3fc5e4e13e16
-  cacheVersion: 131620
---- !u!114 &2396557372581752697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Animacoes/AnimIntro
-  m_EditorClassIdentifier: 
-  Path: event:/Animacoes/AnimIntro
-  Guid:
-    Data1: -258501034
-    Data2: 1148449231
-    Data3: 839492740
-    Data4: 1048042098
-  Banks:
-  - {fileID: -7313024140035465428}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &2559047011809748228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: FMODpenitente/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-<<<<<<< HEAD
-  lastModified: 638669336110763849
-=======
-  lastModified: 638640152620148615
->>>>>>> bf79221eff508113a458b04f6adc3fc5e4e13e16
-  FileSizes: []
-  Exists: 1
---- !u!114 &5188480594882100534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Penitente/Ajoelhar
-  m_EditorClassIdentifier: 
-  Path: event:/Penitente/Ajoelhar
-  Guid:
-    Data1: 1409008271
-    Data2: 1174864223
-    Data3: -252313721
-    Data4: -1950277317
-  Banks:
-  - {fileID: -4694303126296919446}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &8190101636273234736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Suplicios/Thwomp
-  m_EditorClassIdentifier: 
-  Path: event:/Suplicios/Thwomp
-  Guid:
-    Data1: -624416147
-    Data2: 1126561794
-    Data3: 1329370803
-    Data4: 889655720
-  Banks:
-  - {fileID: -4694303126296919446}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 4.6
-  MaxDistance: 65
-  Length: 1860
---- !u!114 &8215880776198565016
+--- !u!114 &-8556599371135501248
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -472,7 +39,7 @@ MonoBehaviour:
     Data3: 1457128345
     Data4: 2099958832
   Banks:
-  - {fileID: -4694303126296919446}
+  - {fileID: 9185903082814431767}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -480,7 +47,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &8286738490113301557
+--- !u!114 &-8490807718857989034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Penitente/Cura
+  m_EditorClassIdentifier: 
+  Path: event:/Penitente/Cura
+  Guid:
+    Data1: 69658318
+    Data2: 1197733939
+    Data3: 535569536
+    Data4: -1825381928
+  Banks:
+  - {fileID: 9185903082814431767}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5972977114006487167
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -499,7 +93,7 @@ MonoBehaviour:
     Data3: 1996377006
     Data4: 1419976690
   Banks:
-  - {fileID: -7561333115149197976}
+  - {fileID: 3931086620124452970}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -507,7 +101,172 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 12000
---- !u!114 &8611315348820901553
+--- !u!114 &-3291390951240252952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Penitente/Dano
+  m_EditorClassIdentifier: 
+  Path: event:/Penitente/Dano
+  Guid:
+    Data1: 1885096880
+    Data2: 1275817544
+    Data3: -664718452
+    Data4: 2059643658
+  Banks:
+  - {fileID: 9185903082814431767}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 850
+--- !u!114 &-2060210928878087862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Animacoes.bank
+  m_EditorClassIdentifier: 
+  Path: FMODpenitente/Desktop/Animacoes.bank
+  Name: Animacoes
+  StudioPath: bank:/Animacoes
+  lastModified: 638664331690177614
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-929880446236875035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Animacoes/AnimIntro
+  m_EditorClassIdentifier: 
+  Path: event:/Animacoes/AnimIntro
+  Guid:
+    Data1: -258501034
+    Data2: 1148449231
+    Data3: 839492740
+    Data4: 1048042098
+  Banks:
+  - {fileID: -2060210928878087862}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: -8756456966459085940}
+  - {fileID: -2060210928878087862}
+  - {fileID: 7694215470441480789}
+  - {fileID: 3931086620124452970}
+  - {fileID: 9185903082814431767}
+  EditorEvents:
+  - {fileID: -929880446236875035}
+  - {fileID: 2882513857366297769}
+  - {fileID: -5972977114006487167}
+  - {fileID: -8556599371135501248}
+  - {fileID: 7101988873102208666}
+  - {fileID: 5011458987682020555}
+  - {fileID: 1911921723426700931}
+  - {fileID: 399909670887744948}
+  - {fileID: 3685219870662676085}
+  - {fileID: 3245341439048680438}
+  - {fileID: 8386225985137484507}
+  - {fileID: -3291390951240252952}
+  - {fileID: -8490807718857989034}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: 7694215470441480789}
+  StringsBanks:
+  - {fileID: -8756456966459085940}
+  cacheTime: 638672923052040545
+  cacheVersion: 131620
+--- !u!114 &399909670887744948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Penitente/Ajoelhar
+  m_EditorClassIdentifier: 
+  Path: event:/Penitente/Ajoelhar
+  Guid:
+    Data1: 1409008271
+    Data2: 1174864223
+    Data3: -252313721
+    Data4: -1950277317
+  Banks:
+  - {fileID: 9185903082814431767}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &1911921723426700931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Suplicios/PlantaBomba
+  m_EditorClassIdentifier: 
+  Path: event:/Suplicios/PlantaBomba
+  Guid:
+    Data1: -661327483
+    Data2: 1263375898
+    Data3: 1644477336
+    Data4: -700516704
+  Banks:
+  - {fileID: 9185903082814431767}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &2882513857366297769
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -526,11 +285,200 @@ MonoBehaviour:
     Data3: -1291372116
     Data4: -948762191
   Banks:
-  - {fileID: -7561333115149197976}
+  - {fileID: 3931086620124452970}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 35008
+  Length: 48000
+--- !u!114 &3245341439048680438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Suplicios/Arame
+  m_EditorClassIdentifier: 
+  Path: event:/Suplicios/Arame
+  Guid:
+    Data1: -1190321241
+    Data2: 1203844738
+    Data3: -1608619392
+    Data4: -2126915139
+  Banks:
+  - {fileID: 9185903082814431767}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3685219870662676085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Suplicios/Portal
+  m_EditorClassIdentifier: 
+  Path: event:/Suplicios/Portal
+  Guid:
+    Data1: -163297117
+    Data2: 1094505970
+    Data3: -1867584893
+    Data4: 250949934
+  Banks:
+  - {fileID: 9185903082814431767}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 6000
+--- !u!114 &3931086620124452970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Musica.bank
+  m_EditorClassIdentifier: 
+  Path: FMODpenitente/Desktop/Musica.bank
+  Name: Musica
+  StudioPath: bank:/Musica
+  lastModified: 638672923050783907
+  FileSizes: []
+  Exists: 1
+--- !u!114 &5011458987682020555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Suplicios/Thwomp
+  m_EditorClassIdentifier: 
+  Path: event:/Suplicios/Thwomp
+  Guid:
+    Data1: -624416147
+    Data2: 1126561794
+    Data3: 1329370803
+    Data4: 889655720
+  Banks:
+  - {fileID: 9185903082814431767}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 4.6
+  MaxDistance: 65
+  Length: 1860
+--- !u!114 &7101988873102208666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Penitente/Passo
+  m_EditorClassIdentifier: 
+  Path: event:/Penitente/Passo
+  Guid:
+    Data1: -1303287478
+    Data2: 1321682389
+    Data3: 124486574
+    Data4: -47014835
+  Banks:
+  - {fileID: 9185903082814431767}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &7694215470441480789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMODpenitente/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638672923040653945
+  FileSizes: []
+  Exists: 1
+--- !u!114 &8386225985137484507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Suplicios/Espinho
+  m_EditorClassIdentifier: 
+  Path: event:/Suplicios/Espinho
+  Guid:
+    Data1: -1848132951
+    Data2: 1224516814
+    Data3: -866928205
+    Data4: -863339503
+  Banks:
+  - {fileID: 9185903082814431767}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &9185903082814431767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: FMODpenitente/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 638672923052040545
+  FileSizes: []
+  Exists: 1
