@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     private static readonly string currentActStatisticsPref = "CurrentActStatistics";
     
     [SerializeField] private string deathSceneName = "Morte";
+    [SerializeField] private string confessionSceneName = "Confessionario";
 
     [SerializeField] private List<Sala> rooms;
 
@@ -188,6 +189,13 @@ public class GameManager : MonoBehaviour
         //SceneManager.LoadSceneAsync(rooms[currentRoom.sceneIndex + 1].sceneName);
     }
 
+    public void LoadConfessionBooth()
+    {
+        Jogador _player = FindAnyObjectByType<Jogador>();
+        SetHealth(_player.Vida.CurrentMaxHealth, _player.Vida.CurrentHealth);
+        StartCoroutine(LoadScreen(confessionSceneName));
+    }
+
     public void LoadDeathScene() => SceneManager.LoadScene(deathSceneName);
 
     public void LoadMainMenu() => StartCoroutine(LoadScreen("Menu 1"));
@@ -247,7 +255,7 @@ public class GameManager : MonoBehaviour
         UpdateStatistics(loadingNextLevel);
 
 
-        //Ativa as imagens e da Fade In
+        //Fade In
 
         yield return FadeIn(images, originalAlpha, fadeTime);
 
@@ -263,7 +271,8 @@ public class GameManager : MonoBehaviour
 
         yield return WaitForInput(loadingNextLevel);
 
-        //Fade Out nas imagens
+        //Fade Out
+
         yield return FadeOut(images, originalAlpha, fadeTime);
 
         
