@@ -970,7 +970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1859803600432346976, guid: 5fc7453f8133a9d449de839a12430fb4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 254.639
+      value: 256.514
       objectReference: {fileID: 0}
     - target: {fileID: 1859803600432346976, guid: 5fc7453f8133a9d449de839a12430fb4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4498,7 +4498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1859803600432346976, guid: 5fc7453f8133a9d449de839a12430fb4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 249.639
+      value: 251.514
       objectReference: {fileID: 0}
     - target: {fileID: 1859803600432346976, guid: 5fc7453f8133a9d449de839a12430fb4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7722,7 +7722,6 @@ GameObject:
   m_Component:
   - component: {fileID: 598901458}
   - component: {fileID: 598901457}
-  - component: {fileID: 598901456}
   m_Layer: 3
   m_Name: MorteQueda (2)
   m_TagString: Untagged
@@ -7730,18 +7729,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &598901456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 598901455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04f7a298923f19340b0e30ad1676c4bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &598901457
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7757,7 +7744,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -7772,7 +7759,7 @@ Transform:
   m_GameObject: {fileID: 598901455}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 241.5, y: 37, z: 2.2586026}
+  m_LocalPosition: {x: 254, y: 37, z: 2.2586026}
   m_LocalScale: {x: 15, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
