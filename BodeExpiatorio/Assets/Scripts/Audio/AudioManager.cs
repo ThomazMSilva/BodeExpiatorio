@@ -86,6 +86,8 @@ public class AudioManager : MonoBehaviour
     }
 
     public void SetGeneralVolume(float volume) => generalVCA.setVolume(volume);
+    public void SetSFXVolume(float volume) => sfxVCA.setVolume(volume);
+    public void SetMusicVolume(float volume) => musicVCA.setVolume(volume);
 
     private void OnDestroy() => CleanEventInstanceList();
 }
