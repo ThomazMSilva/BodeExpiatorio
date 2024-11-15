@@ -23,10 +23,18 @@ public class ContagemRegressivaVidaJogador : MonoBehaviour
     public bool isCountDownPauseActive = false;
 
     private VidaJogador vida;
-    
-    private void OnEnable() => vida.OnHealthChanged += RecoverTimeOnCD;
-    
-    private void OnDisable() => vida.OnHealthChanged -= RecoverTimeOnCD;
+
+    private void OnEnable()
+    {
+        vida.OnFrontHealthChanged += RecoverTimeOnCD;
+        vida.OnPlayerDeath += ResetCD;
+    }
+
+    private void OnDisable()
+    {
+        vida.OnFrontHealthChanged -= RecoverTimeOnCD;
+        vida.OnPlayerDeath -= ResetCD;
+    }
 
     private void Awake() => vida = GetComponent<VidaJogador>();
 
@@ -64,6 +72,8 @@ public class ContagemRegressivaVidaJogador : MonoBehaviour
         }
         return true;
     }
+
+    private void ResetCD() => currentTime = maxTime;
 
     private void RecoverTimeOnCD(object sender, float oldHealth, float newHealth)
     {

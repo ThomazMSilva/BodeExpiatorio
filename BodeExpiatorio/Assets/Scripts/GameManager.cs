@@ -7,6 +7,7 @@ using System;
 using TMPro;
 using UnityEngine.EventSystems;
 using System.Linq;
+using FMODUnity;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
     private static readonly string currentActStatisticsPref = "CurrentActStatistics";
     
     [SerializeField] private string deathSceneName = "Morte";
+    [SerializeField] private string confessionSceneName = "Confessionario";
 
     [SerializeField] private List<Sala> rooms;
 
@@ -187,6 +189,13 @@ public class GameManager : MonoBehaviour
         //SceneManager.LoadSceneAsync(rooms[currentRoom.sceneIndex + 1].sceneName);
     }
 
+    public void LoadConfessionBooth()
+    {
+        Jogador _player = FindAnyObjectByType<Jogador>();
+        SetHealth(_player.Vida.CurrentMaxHealth, _player.Vida.CurrentHealth);
+        StartCoroutine(LoadScreen(confessionSceneName));
+    }
+
     public void LoadDeathScene() => SceneManager.LoadScene(deathSceneName);
 
     public void LoadMainMenu() => StartCoroutine(LoadScreen("Menu 1"));
@@ -238,79 +247,46 @@ public class GameManager : MonoBehaviour
     private IEnumerator LoadScreen(string sceneName, bool loadingNextLevel = false)
     {
         isLoadingScene = true;
-        Time.timeScale = 1;
         var images = loadingScreen.GetComponentsInChildren<Image>();
-        float[] originalAlpha = new float[images.Length];
+        float[] originalAlpha = PrepareLoadingScreen(images);
+
+        Time.timeScale = 1;
         
-        for (int i = 0; i < originalAlpha.Length; i++) originalAlpha[i] = images[i].color.a;
-        
-        loadingText.text = "Loading...";
+        UpdateStatistics(loadingNextLevel);
 
-        if (loadingNextLevel)
-        {
-            var confessionario = FindAnyObjectByType<Confessionario>();
 
-            if (confessionario == null)
-            {
-                Debug.LogError("Ce ta fazendo merda com o GameManager. " +
-                    "Ta tentando carregar o \"proximo nivel\" a partir um nivel que nao tem nem confessionario.");
-            }
-            else
-            {
-                actStatistics += $"\n{confessionario.LevelStatistics()}\n";
-                totalActTorment += confessionario.TotalTorment();
-                actRoomTime += confessionario.RoomTime();
-                actRunTime += confessionario.RunTime();
+        //Fade In
 
-                PlayerPrefs.SetString(currentActStatisticsPref, actStatistics);
-
-                //Caso seja a quarta sala do ato (ou qualquer q seja q definiu como ultima de um ato)
-                if (confessionario.IsFinalRoom)
-                {
-                    statisticsText.text = ActText;
-                    actStatistics = "";
-                    totalActTorment = Vector4.zero;
-                    actRoomTime = 0;
-                    actRunTime = 0;
-                }
-                else
-                    statisticsText.text = confessionario.LevelStatistics();
-                
-                SetBuffButtonValues(confessionario.TotalTorment().y, confessionario.damageThreshold);
-            }
-        }
-        else statisticsText.text = randomTexts[UnityEngine.Random.Range(0, randomTexts.Count - 1)]; //Nao e um load de nivel, e sim de menu
-
-        //Ativa as imagens e da Fade In
-
-        loadingScreen.SetActive(true);
-
-        for (float t = 0; t < fadeTime; t += Time.deltaTime)
-        {
-            float normalizedTime = t / fadeTime;
-            for (int i = 0; i < images.Length; i++)
-            {
-                var color = images[i].color;
-                color.a = Mathf.Lerp(0, originalAlpha[i], normalizedTime);
-                images[i].color = color;
-            }
-            yield return null;
-        }
-
-        //Completa o Fade In
-        
-        foreach (var image in images)
-        {
-            var color = image.color;
-            color.a = originalAlpha[Array.IndexOf(images, image)];
-            image.color = color;
-        }
-
+        yield return FadeIn(images, originalAlpha, fadeTime);
 
         //Espera a cena carregar
         
-        AsyncOperation loadSceneOperation = SceneManager.LoadSceneAsync(sceneName);
+        yield return LoadSceneAsync(sceneName, loadingNextLevel);
 
+        //Espera input do Jogador
+
+        loadingText.text = "Press any key to continue.";
+
+        Time.timeScale = 0;
+
+        yield return WaitForInput(loadingNextLevel);
+
+        //Fade Out
+
+        yield return FadeOut(images, originalAlpha, fadeTime);
+
+        
+        if(!loadingNextLevel) isLoadingScene = false;
+
+        //Reseta os valores das imagens
+
+        SetImageAlphas(images, originalAlpha);
+    }
+
+
+    private IEnumerator LoadSceneAsync(string sceneName, bool loadingNextLevel)
+    {
+        AsyncOperation loadSceneOperation = SceneManager.LoadSceneAsync(sceneName);
         operationTime = 0;
 
         while (!loadSceneOperation.isDone)
@@ -320,20 +296,16 @@ public class GameManager : MonoBehaviour
                 operationTime += Time.unscaledDeltaTime;
                 if (operationTime > changeTime)
                 {
-                    statisticsText.text = randomTexts[UnityEngine.Random.Range(0, randomTexts.Count - 1)];
+                    statisticsText.text = randomTexts[UnityEngine.Random.Range(0, randomTexts.Count)];
                     operationTime = 0;
                 }
             }
             yield return null;
         }
+    }
 
-
-        //Espera input do Jogador
-
-        loadingText.text = "Press any key to continue.";
-
-        Time.timeScale = 0;
-
+    private IEnumerator WaitForInput(bool loadingNextLevel)
+    {
         while (!Input.anyKey || Input.GetMouseButton(0))
         {
             if (!loadingNextLevel)
@@ -348,16 +320,69 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        if(!loadingNextLevel) Time.timeScale = 1;
+        if (!loadingNextLevel) Time.timeScale = 1;
 
         else
         {
             buffScreen.SetActive(true);
             EventSystem.current.SetSelectedGameObject(buffButtonA.gameObject);
         }
+    }
 
-        //Fade Out nas imagens
-        
+    private void ResetStatistics()
+    {
+        actStatistics = "";
+        totalActTorment = Vector4.zero;
+        actRoomTime = 0;
+        actRunTime = 0;
+    }
+
+    private void UpdateStatistics(bool loadingNextLevel)
+    {
+        if (loadingNextLevel)
+        {
+            var confessionario = FindAnyObjectByType<Confessionario>();
+            if (confessionario == null)
+            {
+                Debug.LogError("Ce ta fazendo merda com o GameManager. " +
+                    "Ta tentando carregar o \"proximo nivel\" a partir um nivel que nao tem nem confessionario.");
+                return;
+            }
+
+            actStatistics += $"\n{confessionario.LevelStatistics()}\n";
+            totalActTorment += confessionario.TotalTorment();
+            actRoomTime += confessionario.RoomTime();
+            actRunTime += confessionario.RunTime();
+            PlayerPrefs.SetString("currentActStatistics", actStatistics);
+
+            if (confessionario.IsFinalRoom)
+            {
+                statisticsText.text = ActText;
+                ResetStatistics();
+            }
+            else
+            {
+                statisticsText.text = confessionario.LevelStatistics();
+            }
+            SetBuffButtonValues(confessionario.TotalTorment().y, confessionario.damageThreshold);
+        }
+        else
+        {
+            statisticsText.text = randomTexts[UnityEngine.Random.Range(0, randomTexts.Count - 1)];
+        }
+    }
+
+    private float[] PrepareLoadingScreen(Image[] images)
+    {
+        float[] originalAlpha = new float[images.Length];
+        for (int i = 0; i < images.Length; i++) originalAlpha[i] = images[i].color.a;
+        loadingText.text = "Loading...";
+        loadingScreen.SetActive(true);
+        return originalAlpha;
+    }
+
+    private IEnumerator FadeOut(Image[] images, float[] originalAlpha, float fadeTime)
+    {
         for (float t = 0; t < fadeTime; t += Time.unscaledDeltaTime)
         {
             float normalizedTime = t / fadeTime;
@@ -370,22 +395,36 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        foreach (var image in images)
-        {
-            var color = image.color;
-            color.a = 0;
-            image.color = color;
-        }
+        SetImageAlphas(images);
 
         loadingScreen.SetActive(false);
-        if(!loadingNextLevel) isLoadingScene = false;
+    }
 
-        //Reseta os valores das imagens
-        
+    private IEnumerator FadeIn(Image[] images, float[] originalAlpha, float fadeTime)
+    {
+        loadingScreen.SetActive(true);
+
+        for (float t = 0; t < fadeTime; t += Time.unscaledDeltaTime)
+        {
+            float normalizedTime = t / fadeTime;
+            for (int i = 0; i < images.Length; i++)
+            {
+                var color = images[i].color;
+                color.a = Mathf.Lerp(0, originalAlpha[i], normalizedTime);
+                images[i].color = color;
+            }
+            yield return null;
+        }
+
+        SetImageAlphas(images, originalAlpha);
+    }
+
+    private void SetImageAlphas(Image[] images, float[] intentedAlpha = null)
+    {
         for (int i = 0; i < images.Length; i++)
         {
             var color = images[i].color;
-            color.a = originalAlpha[i];
+            color.a = intentedAlpha != null ? intentedAlpha[i] : 0;
             images[i].color = color;
         }
     }
@@ -402,6 +441,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private List<BuffButtonValues> salvationBuffs;
     [SerializeField] private List<BuffButtonValues> reluctanceBuffs;
+
+    public void CloseBuffScreen() 
+    { 
+        if(buffScreen) buffScreen.SetActive(false); 
+        Time.timeScale = 1; 
+        isLoadingScene = false;
+    }
 
     private void SetBuffButtonValues(float lastRoomTorment, float lastRoomDmgThreshold)
     {
@@ -435,12 +481,6 @@ public class GameManager : MonoBehaviour
     
     public void EmptyDescriptionText() => descriptionTMP.text = "";
 
-    public void CloseBuffScreen() 
-    { 
-        if(buffScreen) buffScreen.SetActive(false); 
-        Time.timeScale = 1; 
-        isLoadingScene = false;
-    }
 }
 
 [System.Serializable]

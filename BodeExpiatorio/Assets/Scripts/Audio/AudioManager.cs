@@ -30,6 +30,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private string sfxVCAPath = "vca:/SFX";
     [SerializeField] private string musicVCAPath = "vca:/Music";
     public VCA generalVCA;
+    public VCA sfxVCA;
+    public VCA musicVCA;
     public List<EventInstance> eventInstances;
 
 
@@ -50,7 +52,19 @@ public class AudioManager : MonoBehaviour
     private IEnumerator InitializeVCAs()
     {
         yield return new WaitForSeconds(1f);
+
         generalVCA = RuntimeManager.GetVCA(generalVCAPath);
+        sfxVCA = RuntimeManager.GetVCA(sfxVCAPath);
+        musicVCA = RuntimeManager.GetVCA(musicVCAPath);
+
+        if (generalVCA.isValid() && sfxVCA.isValid() && musicVCA.isValid())
+        {
+            Debug.Log("VCAs inicializados com sucesso.");
+        }
+        else
+        {
+            Debug.LogError("Erro ao inicializar um ou mais VCAs.");
+        }
     }
 
     public void PlayerOneShot(EventReference sound, Vector3 worldPos) => RuntimeManager.PlayOneShot(sound, worldPos);

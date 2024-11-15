@@ -1,13 +1,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum RoomType
+{
+    CommonRoom,
+    FinalRoom,
+    ConfessionRoom,
+    Menu
+}
+
 public class Confessionario : MonoBehaviour
 {
     [SerializeField] private int roomIndex;
     [SerializeField] private bool checkpointStartsActive;
+    [Tooltip("Quando o Jogador morre, a vida máxima volta para o valor que estava quando entrou na câmara.")]
     [SerializeField] private bool recoverMaxHealthToStartingPoint = true;
+    [SerializeField] private bool inConfessionRoom;
+
+
     [SerializeField] private bool isFinalRoom;
     public bool IsFinalRoom { get => isFinalRoom; }
+
+    [SerializeField] private RoomType roomType = RoomType.CommonRoom;
+    public RoomType RoomType { get => roomType; }
 
     [SerializeField] private Transform respawnPoint;
     [SerializeField] private GameObject buffScreen;
@@ -25,9 +40,11 @@ public class Confessionario : MonoBehaviour
 
     private void Start()
     {
+        Spawn();
+        if (inConfessionRoom) return;
+        
         startingRoomTime = Time.time;
         startingRunTime = Time.time;
-        Spawn();
 
         GameManager gameManager = GameManager.Instance;
         gameManager.SetCurrentRoom(roomIndex);
@@ -54,19 +71,26 @@ public class Confessionario : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag("Player")) return;
+        other.GetComponent<ContagemRegressivaVidaJogador>().isCountDownActive = false;
         Entrada.Instance.OnKneelButtonDown += Pray;
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (!other.gameObject.CompareTag("Player")) return;
+        other.GetComponent<ContagemRegressivaVidaJogador>().isCountDownActive = true;
         Entrada.Instance.OnKneelButtonDown -= Pray;
     }
 
     private void Pray()
     {
-        GameManager.Instance.ActivateSceneCheckpoint(roomIndex);
-        SetUltimoAtivo();
+        if (!inConfessionRoom)
+        {
+            GameManager.Instance.ActivateSceneCheckpoint(roomIndex);
+            SetUltimoAtivo();
+            return;
+        }
+
     }
 
     private void SetUltimoAtivo() => ultimoAtivo = this;
@@ -94,7 +118,7 @@ public class Confessionario : MonoBehaviour
 
     private void GameOver() => GameManager.Instance.LoadDeathScene();
 
-    public string LevelStatistics() => $"--Level {roomIndex + 1} Statistics--\n\nRoomTime: {RoomTime()}; RunTime: {RunTime()}\n{player.Vida.DamageString}";
+    public string LevelStatistics() => $"--Level {roomIndex + 1} Statistics--\n\nRoomTime: {RoomTime()} seconds; RunTime: {RunTime()} seconds.\n{player.Vida.DamageString}";
 
     public float RoomTime() => Time.time - startingRoomTime;
 

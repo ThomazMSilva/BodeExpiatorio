@@ -9,6 +9,6 @@ public class PlataformaBrutal : MonoBehaviour
     {
         if (!collision.gameObject.TryGetComponent<Jogador>(out _player)) return;
 
-        _player.ApplyDamageEffect(damage, this.name);
+        _player.ApplyDamageEffect(damage, "Brasas");
     }
 }

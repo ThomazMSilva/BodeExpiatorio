@@ -19,13 +19,18 @@ public class Jogador : MonoBehaviour
     public VidaJogador Vida { get => life;  private set => life = value; }
     public MovimentoJogador Movimento { get => movement; private set => movement = value; }
 
-    public void ApplyDamageEffect(float damageAmount, object sender) => life.DamageHealth(damageAmount, sender);
+    public void ApplyDamageEffect(float damageAmount, object sender)
+    {
+        if (damageAmount == 0) return;
+        life.DamageHealth(damageAmount, sender);
+    }
 
     public void InstaKill(object sender, bool trueDamage = true) => life.DamageHealth(sender, trueDamage);
 
     public void ApplyDamageEffect(float damageAmount, Vector3 force, float stunSeconds, object sender, ForceMode forceMode = ForceMode.Impulse)
     {
-        life.DamageHealth(damageAmount, sender);
+        if(damageAmount > 0) life.DamageHealth(damageAmount, sender);
+
         movement.ApplyForce(force, forceMode);
         movement.Ragdoll(stunSeconds);
         //Debug.Log($"Dano: {damageAmount} Forca: {force} Stun: {stunSeconds}sec");

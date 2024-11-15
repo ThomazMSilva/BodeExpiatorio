@@ -78,16 +78,8 @@ public class SuplicioBrutal : MonoBehaviour
         }
     }
 
-    [SerializeField] private GameObject currCollided;
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject == currCollided) currCollided = null;
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
-        currCollided = collision.gameObject;
         if (collision.gameObject.layer == groundLayer)
         {
             if (isFalling) 
@@ -97,6 +89,21 @@ public class SuplicioBrutal : MonoBehaviour
                 brutalChainsEventInstance.keyOff();
             }
             
+            isFalling = !isFalling;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == groundLayer)
+        {
+            if (isFalling)
+            {
+                ShakeOnCollision();
+                waitForTime ??= StartCoroutine(Wait());
+                brutalChainsEventInstance.keyOff();
+            }
+
             isFalling = !isFalling;
         }
     }

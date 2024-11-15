@@ -1,5 +1,9 @@
 using UnityEngine;
 using System.Collections;
+using UnityEditor.AddressableAssets.HostingServices;
+using System.Linq;
+
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -101,16 +105,18 @@ public class VidaJogador : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.O)) FullyRecoverMaxHealth();
     }
 
-    private string damageString = "";
+    private string startingLife;
     public string DamageString 
     {
-        get => damageString + 
+        get => 
             $"\n\nTotal damage taken to the health: {totalDamageTaken}" +
             $"\nTotal damage to the fervor: {totalFervorTaken}" +
             $"\nDamage taken in run: {damageTakenInRun}" +
             $"\nFervor taken in run: {fervorTakenInRun}" +
+            $"\n{startingLife}" +
             $"\nCurrent life: {currentHealth}" +
-            $"\nCurrent fervor: {currentMaxHealth}";
+            $"\nCurrent fervor: {currentMaxHealth}" +
+            "\n\nCauses of damage:\n" + DamageCauses();
     }
 
     private float totalDamageTaken;
@@ -132,13 +138,34 @@ public class VidaJogador : MonoBehaviour
         CurrentFrontHealth = currentHealth;
         startingMaxHealth = CurrentMaxHealth;
         OnPlayerSaved += () => Debug.Log("Se safou de dano, por um fio!");
-        damageString += $"starting life: {currentHealth}\nstarting fervor: {currentMaxHealth}";
+        startingLife += $"starting life: {currentHealth}\nstarting fervor: {currentMaxHealth}";
     }
 
     public void ResetDamageTakenInRun()
     {
         damageTakenInRun = 0f;
         fervorTakenInRun = 0f;
+    }
+
+    private System.Collections.Generic.Dictionary<object, float> damageSenders = new();
+
+    private void AddDamageToString(object sender, float damage)
+    {
+        if (!damageSenders.ContainsKey(sender))
+        {
+            damageSenders.Add(sender, 0);
+        }
+        damageSenders[sender] += damage;
+    }
+
+    public string DamageCauses()
+    {
+        string str = "";
+        for (int i = 0; i < damageSenders.Count; i++)
+        {
+            str += $"\n{damageSenders.ElementAt(i).Key}: {damageSenders.ElementAt(i).Value} de saúde.";
+        }
+        return str;
     }
 
     public void DamageHealth(object sender, bool trueDamage = true)
@@ -156,7 +183,7 @@ public class VidaJogador : MonoBehaviour
             if (isIgnoreLethalDamageActive)
             {
                 OnPlayerSaved?.Invoke();
-                damageString += $"\n Survived the Judgement of {CurrentHealth - 1}. Praise {sender} for its mercy.";
+                AddDamageToString(sender, CurrentHealth - 1);
                 CurrentHealth = 1;
                 if (lethalCanBecomeInvulnerable)
                     StartCoroutine(InvulnerabilityTime());
@@ -164,7 +191,7 @@ public class VidaJogador : MonoBehaviour
             }
 
         }
-        damageString += $"\n Got smitten by The Hand. Praise {sender} for its Light.";
+        AddDamageToString(sender, CurrentHealth);
         CurrentHealth = 0;
     }
 
@@ -199,11 +226,16 @@ public class VidaJogador : MonoBehaviour
             CurrentHealth -= damageAmount;
             totalDamageTaken += damageAmount;
             damageTakenInRun += damageAmount;
-            damageString += $"\ntook {damageAmount} to the health from {sender}";
+
+            AddDamageToString(sender, damageAmount);
+            
             return;
         }
 
         CurrentFrontHealth -= damageAmount;
+
+        AddDamageToString(sender, damageAmount);
+
         currentDamageToCreep += damageAmount * creepingDamageMultiplier;
 
         creeping ??= StartCoroutine(CreepDamage());
@@ -247,7 +279,8 @@ public class VidaJogador : MonoBehaviour
         CurrentMaxHealth -= damageAmount; 
         totalFervorTaken += damageAmount;
         fervorTakenInRun += damageAmount;
-        damageString += $"\ntook {damageAmount} damage to the fervor";
+
+        AddDamageToString("Fervor", damageAmount);
     }
     
     public void CureMaxHealth(float cureAmount) => CurrentMaxHealth += cureAmount;

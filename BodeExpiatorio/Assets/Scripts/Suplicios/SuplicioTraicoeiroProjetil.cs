@@ -40,7 +40,7 @@ namespace Assets.Scripts.Suplicios
             GameObject go = collision.gameObject;
             if (go.CompareTag("Player"))
             {
-                player.ApplyDamageEffect(directDamage, this.name);
+                player.ApplyDamageEffect(directDamage, "Esporos");
                 gameObject.SetActive(false);
             }
 
@@ -74,7 +74,7 @@ namespace Assets.Scripts.Suplicios
             yield return new WaitForFixedUpdate();
             yield return new WaitForFixedUpdate();
             
-            player.ApplyDamageEffect(explosionDamage, direction.normalized * explosionForce, stunTime, this.name);
+            player.ApplyDamageEffect(explosionDamage, direction.normalized * explosionForce, stunTime, "Esporos");
             
             gameObject.SetActive(false);
         }

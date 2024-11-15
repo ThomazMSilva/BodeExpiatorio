@@ -105,7 +105,7 @@ public class MovimentoJogador : MonoBehaviour
 
     public bool IsClimbing { get => isClimbing; private set => isClimbing = value; }
 
-    //[SerializeField]
+    [SerializeField]
     private float
         horizontalInput,
         colliderExtentsX,
