@@ -149,6 +149,8 @@ public class MovimentoJogador : MonoBehaviour
     [Space(8f)]
     [SerializeField] private Entrada input;
 
+    [SerializeField] private bool isPaused = false;
+
     private void Start()
     {
         //rb = GetComponent<Rigidbody>();
@@ -170,7 +172,12 @@ public class MovimentoJogador : MonoBehaviour
         playerWalkingEventInstance = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.PlayerWalked);
         playerIdleEventInstance = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.PlayerIdle);
     }
-    
+
+    public void SetPaused(bool paused)
+    {
+        isPaused = paused;
+        rb.velocity = Vector3.zero;
+    }
     private void OnEnable()
     {
         input.OnJumpButtonDown += Instance_OnJumpButtonDown;
@@ -202,6 +209,13 @@ public class MovimentoJogador : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        if (isPaused)
+        {
+            rb.velocity = Vector3.zero; 
+            return;
+        }
+
         HandleWalkingSound();
         HandleAnimation();
 

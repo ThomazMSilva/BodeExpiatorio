@@ -32,20 +32,30 @@ public class ShowObjectMechanic : MonoBehaviour
     {
         isPaused = true;
 
-       
         if (contagemRegressiva != null) contagemRegressiva.isCountDownActive = false;
 
-       
+     
+        MovimentoJogador movimentoJogador = FindObjectOfType<MovimentoJogador>();
+        if (movimentoJogador != null)
+        {
+            movimentoJogador.SetPaused(true);
+        }
+
+      
         playerCamera.Priority = 0;
         focusCamera.Priority = 10;
 
-      
         yield return new WaitForSecondsRealtime(focusDuration);
 
-       
+      
+        if (movimentoJogador != null)
+        {
+            movimentoJogador.SetPaused(false);
+        }
+
         if (contagemRegressiva != null) contagemRegressiva.isCountDownActive = true;
 
-      
+       
         focusCamera.Priority = 0;
         playerCamera.Priority = 10;
 
