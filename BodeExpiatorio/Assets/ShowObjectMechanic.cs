@@ -12,6 +12,7 @@ public class ShowObjectMechanic : MonoBehaviour
     private bool isPaused = false; 
     private VidaJogador vidaJogador;
     private ContagemRegressivaVidaJogador contagemRegressiva;
+    public GameObject gatilho;
 
     private void Awake()
     {
@@ -48,6 +49,7 @@ public class ShowObjectMechanic : MonoBehaviour
         focusCamera.Priority = 0;
         playerCamera.Priority = 10;
 
+        gatilho.SetActive(false);
         isPaused = false;
     }
 }
