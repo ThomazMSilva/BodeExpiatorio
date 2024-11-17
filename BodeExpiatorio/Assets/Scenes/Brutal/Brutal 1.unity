@@ -1549,7 +1549,7 @@ Transform:
   m_GameObject: {fileID: 162294009}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.8, y: 4.282, z: -10}
+  m_LocalPosition: {x: -23.9, y: -11.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10593,9 +10593,10 @@ GameObject:
   - component: {fileID: 1309733406}
   - component: {fileID: 1309733405}
   - component: {fileID: 1309733404}
+  - component: {fileID: 1309733410}
   m_Layer: 0
   m_Name: CameraFocoThwomp
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10732,13 +10733,47 @@ Transform:
   m_GameObject: {fileID: 1309733402}
   serializedVersion: 2
   m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
-  m_LocalPosition: {x: -42.1, y: 28.4, z: -11.9}
+  m_LocalPosition: {x: -10.8, y: 4.282, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1448481904}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
+--- !u!114 &1309733410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309733402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowDebugText: 0
+  m_ShowCameraFrustum: 1
+  m_IgnoreTimeScale: 0
+  m_WorldUpOverride: {fileID: 0}
+  m_UpdateMethod: 2
+  m_BlendUpdateMethod: 1
+  m_DefaultBlend:
+    m_Style: 1
+    m_Time: 2
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  m_CustomBlends: {fileID: 0}
+  m_CameraCutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CameraActivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1324318504
 GameObject:
   m_ObjectHideFlags: 0
@@ -11463,7 +11498,7 @@ GameObject:
   - component: {fileID: 1448481904}
   - component: {fileID: 1448481903}
   m_Layer: 0
-  m_Name: Virtual Camera
+  m_Name: Virtual Camera Thwomp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11488,7 +11523,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 1309733409}
+  m_Follow: {fileID: 162294010}
   m_Lens:
     FieldOfView: 60.000004
     OrthographicSize: 5
@@ -11517,7 +11552,7 @@ Transform:
   m_GameObject: {fileID: 1448481902}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000000037252899, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.8715577, z: -9.961946}
+  m_LocalPosition: {x: -31.420849, y: 21.121424, z: -12.388243}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
