@@ -16,15 +16,15 @@ public class MovimentoJogador : MonoBehaviour
 
     [Tooltip("A velocidade maxima, em unidades/segundo, que o Jogador podera se mover pra qualquer direcao.")]
     [SerializeField] private float terminalVelocity = 30f;
-    
+
     [Space(7f)]
- 
+
     [Tooltip("Se ativo, o Jogador pode mudar de direcao no ar imediatamente com o Input Horizontal.\nSe inativo, ele vai acelerar gradualmente para a direcao do input.")]
     [SerializeField] private bool instantAirVelocityChange = true;
-    
+
     [Tooltip("So usar caso Instant Velocity Change esteja INATIVO. \nA aceleracao com que ele muda de direcao no ar")]
     [SerializeField] private float airAccelerationMultiplier = 3;
-    
+
     [Space(7f)]
 
     [Tooltip("Se ativo, o Jogador pode mudar de direcao no chao imediatamente com o Input Horizontal.\nSe inativo, ele vai acelerar gradualmente para a direcao do input.")]
@@ -64,7 +64,7 @@ public class MovimentoJogador : MonoBehaviour
     [SerializeField] private float raycastDistance = .75f;
 
     [SerializeField] LayerMask groundLayer;
-    
+
     [SerializeField] string fallingPlatformTag = "Marvada";
 
     [Space(5f)]
@@ -212,7 +212,7 @@ public class MovimentoJogador : MonoBehaviour
 
         if (isPaused)
         {
-            rb.velocity = Vector3.zero; 
+            rb.velocity = Vector3.zero;
             return;
         }
 
@@ -263,9 +263,9 @@ public class MovimentoJogador : MonoBehaviour
         //Color c = !isGrounded ? Color.magenta : Color.cyan;
         /*Debug.DrawRay(transform.position - colliderHorizontalRange, -Vector3.up * raycastDistance, c);
         Debug.DrawRay(transform.position + colliderHorizontalRange, -Vector3.up * raycastDistance, c);*/
-        
+
         transform.parent = hit.transform && !hit.transform.CompareTag(fallingPlatformTag) ? hit.transform : null;
-        
+
         coyoteTimeCurrent = isGrounded || isStuckInWire || isClimbing ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
 
         if (inRagdoll && isGrounded) inRagdoll = false;
@@ -320,15 +320,15 @@ public class MovimentoJogador : MonoBehaviour
         float speed = isKneeling ? moveSpeed * kneelSpeedMultiplier : moveSpeed;
         horizontalInput = input.HorizontalInput;
         moveForce.Set(horizontalInput * speed - rb.velocity.x, 0, 0);
-        
+
         bool wantToFlip = (isLookingRight ? horizontalInput < 0 : horizontalInput > 0) && !isStuckInWire;
         if (wantToFlip) FlipSprite();
 
-        Vector3 appliedForce = 
+        Vector3 appliedForce =
             moveForce * (
-                            (isGrounded && !instantGroundVelocityChange) 
+                            (isGrounded && !instantGroundVelocityChange)
                             ? groundAccelerationMultiplier
-                            : (!isGrounded && !instantAirVelocityChange) 
+                            : (!isGrounded && !instantAirVelocityChange)
                                 ? airAccelerationMultiplier
                                 : 1f
                         );
@@ -338,7 +338,7 @@ public class MovimentoJogador : MonoBehaviour
                             : ForceMode.Acceleration;
 
         rb.AddForce(appliedForce, mode);
-    
+
     }
 
     private void HandleWalkingSound()
@@ -350,27 +350,27 @@ public class MovimentoJogador : MonoBehaviour
             return;
         }
 
-        if(horizontalInput != 0)
+        if (horizontalInput != 0)
         {
             idlingCurrentTime = 0;
-            
+
             playerIdleEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
 
             playerWalkingEventInstance.getPlaybackState(out PLAYBACK_STATE walkingPbState);
-            
+
             if (walkingPbState.Equals(PLAYBACK_STATE.STOPPED)) playerWalkingEventInstance.start();
         }
         else
         {
             idlingCurrentTime += Time.fixedDeltaTime;
-            
+
             playerWalkingEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
-            
-            if(idlingCurrentTime > timeToPlayIdle)
+
+            if (idlingCurrentTime > timeToPlayIdle)
             {
                 playerIdleEventInstance.getPlaybackState(out PLAYBACK_STATE idlePbState);
-                
-                if(idlePbState.Equals(PLAYBACK_STATE.STOPPED)) playerIdleEventInstance.start();
+
+                if (idlePbState.Equals(PLAYBACK_STATE.STOPPED)) playerIdleEventInstance.start();
 
                 idlingCurrentTime = 0;
             }
@@ -380,7 +380,7 @@ public class MovimentoJogador : MonoBehaviour
     private void HandleClimb()
     {
         if (!isClimbing) return;
-     
+
         climbForce.y = input.VerticalInput * climbSpeed;
         rb.AddForce(climbForce, ForceMode.VelocityChange);
     }
@@ -424,7 +424,7 @@ public class MovimentoJogador : MonoBehaviour
     {
         if (isStuckInWire) { SetWiredState(false, isLookingRight); isKneeling = false; return; }
         if (isClimbing) { SetPlayerClimbing(false); return; }
-        
+
         if (!willKneel && Physics.Raycast(transform.position, transform.up, raycastDistance, groundLayer))
         {
             checkOverCoroutine ??= StartCoroutine(CheckOverHead());
@@ -444,7 +444,7 @@ public class MovimentoJogador : MonoBehaviour
     {
         bool isUnderStuff = true;
 
-        while(isUnderStuff)
+        while (isUnderStuff)
         {
             isUnderStuff = Physics.Raycast(transform.position, transform.up, raycastDistance, groundLayer);
             yield return null;

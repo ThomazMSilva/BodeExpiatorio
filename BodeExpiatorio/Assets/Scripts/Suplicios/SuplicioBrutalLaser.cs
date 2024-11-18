@@ -116,4 +116,5 @@ public class SuplicioBrutalLaser : MonoBehaviour
         Gizmos.color = Color.red; 
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * raycastDistance); 
     }
+  
 }
