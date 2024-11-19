@@ -34,7 +34,7 @@ public class SuplicioAnsiosoFonte : MonoBehaviour
 
         if (canSpitOut)
         {
-            _player.ApplyDamageEffect(spitDamage, spitDirection * spitForce, 2, this);
+            _player.ApplyDamageEffect(spitDamage, spitDirection * spitForce, 2, "Portal do Desejo");
             isPlayerInside = false;
         }
     }

@@ -3,11 +3,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System;
 using TMPro;
 using UnityEngine.EventSystems;
 using System.Linq;
-using FMODUnity;
 
 public class GameManager : MonoBehaviour
 {
@@ -33,7 +31,7 @@ public class GameManager : MonoBehaviour
     private static readonly string prefabPath = "Prefabs/_-GameManager-_";
     
     private static readonly string currentRoomPref = "CurrentRoom";
-    private static readonly string currentCheckpointPref = "CurrentCheckpoint";
+    //private static readonly string currentCheckpointPref = "CurrentCheckpoint";
     private static readonly string maxHealthPref = "MaxHealth";
     private static readonly string currentHealthPref = "CurrentHealth";
     private static readonly string currentActStatisticsPref = "CurrentActStatistics";
@@ -82,6 +80,7 @@ public class GameManager : MonoBehaviour
         currentRoom = rooms[0];
 
         PlayerPrefs.SetInt(currentRoomPref, 0);
+        PlayerPrefs.SetString(currentActStatisticsPref, "");
         SetHealth(100, 100);
 
         LoadCurrentRoom();
@@ -114,6 +113,11 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.HasKey(currentRoomPref)) currentRoom = rooms[PlayerPrefs.GetInt(currentRoomPref)];
 
         else PlayerPrefs.SetInt(currentRoomPref, 0);
+
+
+        if (PlayerPrefs.HasKey(currentActStatisticsPref)) actStatistics = PlayerPrefs.GetString(currentActStatisticsPref);
+
+        else PlayerPrefs.SetString(currentActStatisticsPref, "");
 
         LoadCurrentRoom();
     }
@@ -193,14 +197,18 @@ public class GameManager : MonoBehaviour
     {
         Jogador _player = FindAnyObjectByType<Jogador>();
         SetHealth(_player.Vida.CurrentMaxHealth, _player.Vida.CurrentHealth);
-        StartCoroutine(LoadScreen(confessionSceneName));
+        StartCoroutine(LoadScreen(confessionSceneName, true));
     }
 
     public void LoadDeathScene() => SceneManager.LoadScene(deathSceneName);
 
     public void LoadMainMenu() => StartCoroutine(LoadScreen("Menu 1"));
 
+
+
     //Loading
+
+
 
     [Header("Tela de Carregamento"), Space(8f)]
 
@@ -228,7 +236,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private Vector4 totalActTorment;
 
-
     private string ActText 
     { 
         get =>  
@@ -241,14 +248,19 @@ public class GameManager : MonoBehaviour
                 $"Total Run Time: {actRunTime}\n\n\n"+
                 $"Specifications:\n\n{actStatistics}";
     }
-
-    public void EndLoading() => isLoadingScene = false;
+    private Image[] images = new Image[0];
+    private float[] originalAlpha = new float[0];
 
     private IEnumerator LoadScreen(string sceneName, bool loadingNextLevel = false)
     {
         isLoadingScene = true;
-        var images = loadingScreen.GetComponentsInChildren<Image>();
-        float[] originalAlpha = PrepareLoadingScreen(images);
+
+        EventSystem.current.SetSelectedGameObject(null);
+
+        if (images.Length < 1) InitializeOriginalAlphas();
+
+        loadingText.text = "Loading...";
+        loadingScreen.SetActive(true);
 
         Time.timeScale = 1;
         
@@ -283,7 +295,6 @@ public class GameManager : MonoBehaviour
         SetImageAlphas(images, originalAlpha);
     }
 
-
     private IEnumerator LoadSceneAsync(string sceneName, bool loadingNextLevel)
     {
         AsyncOperation loadSceneOperation = SceneManager.LoadSceneAsync(sceneName);
@@ -306,6 +317,10 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator WaitForInput(bool loadingNextLevel)
     {
+        GameObject selectedObj = EventSystem.current.currentSelectedGameObject;
+
+        EventSystem.current.SetSelectedGameObject(null);
+
         while (!Input.anyKey || Input.GetMouseButton(0))
         {
             if (!loadingNextLevel)
@@ -320,6 +335,8 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
+        EventSystem.current.SetSelectedGameObject(selectedObj);
+
         if (!loadingNextLevel) Time.timeScale = 1;
 
         else
@@ -327,58 +344,6 @@ public class GameManager : MonoBehaviour
             buffScreen.SetActive(true);
             EventSystem.current.SetSelectedGameObject(buffButtonA.gameObject);
         }
-    }
-
-    private void ResetStatistics()
-    {
-        actStatistics = "";
-        totalActTorment = Vector4.zero;
-        actRoomTime = 0;
-        actRunTime = 0;
-    }
-
-    private void UpdateStatistics(bool loadingNextLevel)
-    {
-        if (loadingNextLevel)
-        {
-            var confessionario = FindAnyObjectByType<Confessionario>();
-            if (confessionario == null)
-            {
-                Debug.LogError("Ce ta fazendo merda com o GameManager. " +
-                    "Ta tentando carregar o \"proximo nivel\" a partir um nivel que nao tem nem confessionario.");
-                return;
-            }
-
-            actStatistics += $"\n{confessionario.LevelStatistics()}\n";
-            totalActTorment += confessionario.TotalTorment();
-            actRoomTime += confessionario.RoomTime();
-            actRunTime += confessionario.RunTime();
-            PlayerPrefs.SetString("currentActStatistics", actStatistics);
-
-            if (confessionario.IsFinalRoom)
-            {
-                statisticsText.text = ActText;
-                ResetStatistics();
-            }
-            else
-            {
-                statisticsText.text = confessionario.LevelStatistics();
-            }
-            SetBuffButtonValues(confessionario.TotalTorment().y, confessionario.damageThreshold);
-        }
-        else
-        {
-            statisticsText.text = randomTexts[UnityEngine.Random.Range(0, randomTexts.Count - 1)];
-        }
-    }
-
-    private float[] PrepareLoadingScreen(Image[] images)
-    {
-        float[] originalAlpha = new float[images.Length];
-        for (int i = 0; i < images.Length; i++) originalAlpha[i] = images[i].color.a;
-        loadingText.text = "Loading...";
-        loadingScreen.SetActive(true);
-        return originalAlpha;
     }
 
     private IEnumerator FadeOut(Image[] images, float[] originalAlpha, float fadeTime)
@@ -419,15 +384,76 @@ public class GameManager : MonoBehaviour
         SetImageAlphas(images, originalAlpha);
     }
 
-    private void SetImageAlphas(Image[] images, float[] intentedAlpha = null)
+    private void InitializeOriginalAlphas()
+    {
+        images = loadingScreen.GetComponentsInChildren<Image>();
+        originalAlpha = new float[images.Length];
+        for (int i = 0; i < images.Length; i++) originalAlpha[i] = images[i].color.a;
+    }
+
+    private void ResetStatistics()
+    {
+        actStatistics = "";
+        totalActTorment = Vector4.zero;
+        actRoomTime = 0;
+        actRunTime = 0;
+        PlayerPrefs.SetString(currentActStatisticsPref, actStatistics);
+    }
+
+    private void UpdateStatistics(bool loadingNextLevel)
+    {
+        if (loadingNextLevel)
+        {
+            var confessionario = FindAnyObjectByType<Confessionario>();
+            if (confessionario == null)
+            {
+                Debug.LogError("Ce ta fazendo merda com o GameManager. " +
+                    "Ta tentando carregar o \"proximo nivel\" a partir um nivel que nao tem nem confessionario.");
+                return;
+            }
+
+            //actStatistics = PlayerPrefs.GetString(currentActStatisticsPref);
+            actStatistics += $"\n{confessionario.LevelStatistics()}\n";
+            totalActTorment += confessionario.TotalTorment();
+            actRoomTime += confessionario.RoomTime();
+            actRunTime += confessionario.RunTime();
+
+            PlayerPrefs.SetString(currentActStatisticsPref, actStatistics);
+
+            if (confessionario.IsFinalRoom)
+            {
+                statisticsText.text = ActText;
+                ResetStatistics();
+            }
+            else
+            {
+                statisticsText.text = confessionario.LevelStatistics();
+            }
+            SetBuffButtonValues(confessionario.TotalTorment().y, confessionario.damageThreshold);
+        }
+        else
+        {
+            statisticsText.text = randomTexts[UnityEngine.Random.Range(0, randomTexts.Count - 1)];
+        }
+    }
+
+    private void SetImageAlphas(Image[] images, float[] intendedAlpha = null)
     {
         for (int i = 0; i < images.Length; i++)
         {
             var color = images[i].color;
-            color.a = intentedAlpha != null ? intentedAlpha[i] : 0;
+            color.a = intendedAlpha != null ? intendedAlpha[i] : 0;
             images[i].color = color;
         }
     }
+
+    public void EndLoading() => isLoadingScene = false;
+
+
+
+    //Buffs
+
+
 
     [Header("Tela de Buff"), Space(8f)]
 

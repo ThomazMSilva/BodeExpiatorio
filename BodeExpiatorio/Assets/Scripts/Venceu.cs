@@ -4,15 +4,17 @@ public class Venceu : MonoBehaviour
 {
     //[SerializeField] private GameObject telaVitoria;
     //[SerializeField] private Confessionario confessionario;
+
+    [SerializeField] private bool isLastFromAct;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Pau");
-            //telaVitoria.SetActive(true);
-            //Debug.Log(confessionario.name);
-            //confessionario.LevelStatistics();
-            GameManager.Instance.LoadNextRoom();
+            if(!isLastFromAct)
+                GameManager.Instance.LoadNextRoom();
+            else
+                GameManager.Instance.LoadConfessionBooth();
         }
     }
 }

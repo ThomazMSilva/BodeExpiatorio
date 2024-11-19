@@ -81,7 +81,7 @@ public class SuplicioAnsioso : MonoBehaviour
             damagePerSecond * Time.fixedDeltaTime, 
             -transform.right * currentForceMultiplier, 
             .01f,
-            "Portal da Ânsia",
+            "Tentação",
             ForceMode.Acceleration
         );
     }
