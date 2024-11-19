@@ -1,31 +1,33 @@
-// ShowObjectMechanic.cs
+
+
 using UnityEngine;
 using Cinemachine;
 using System.Collections;
 
 public class ShowObjectMechanic : MonoBehaviour
 {
-    [SerializeField] private Transform objectToFocus;
+    [SerializeField] private Transform objectToFocus; 
     [SerializeField] private CinemachineVirtualCamera playerCamera;
-    [SerializeField] private CinemachineVirtualCamera focusCamera;
+    [SerializeField] private CinemachineVirtualCamera focusCamera; 
     [SerializeField] private float focusDuration = 2f;
+    [SerializeField] private float extraWaitTime = 1f;  //Tempo de espera pra liberar o jogador pra se mexer 
+    [SerializeField] private MovimentoJogador movimentoJogador;
 
-    private bool isPaused = false;
     private VidaJogador vidaJogador;
     private ContagemRegressivaVidaJogador contagemRegressiva;
     public GameObject gatilho;
 
-    [SerializeField] private GameObject jogadorSprite; 
-
+    
     private void Awake()
     {
         vidaJogador = FindObjectOfType<VidaJogador>();
         contagemRegressiva = FindObjectOfType<ContagemRegressivaVidaJogador>();
+        movimentoJogador = FindObjectOfType<MovimentoJogador>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !isPaused)
+        if (other.CompareTag("Player"))
         {
             StartCoroutine(HandleFocus());
         }
@@ -33,19 +35,13 @@ public class ShowObjectMechanic : MonoBehaviour
 
     private IEnumerator HandleFocus()
     {
-        isPaused = true;
+        
 
         
-        if (jogadorSprite != null)
-        {
-            var movimentoScript = jogadorSprite.GetComponent<MovimentoJogador>();
-            if (movimentoScript != null)
-                movimentoScript.enabled = false;
-        }
+        if (movimentoJogador != null) movimentoJogador.SetPlayerBind(true);
 
-        
-        if (contagemRegressiva != null)
-            contagemRegressiva.isCountDownActive = false;
+       
+        if (contagemRegressiva != null) contagemRegressiva.isCountDownActive = false;
 
        
         playerCamera.Priority = 0;
@@ -53,22 +49,21 @@ public class ShowObjectMechanic : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(focusDuration);
 
-        
-        if (contagemRegressiva != null)
-            contagemRegressiva.isCountDownActive = true;
+       
+        if (contagemRegressiva != null) contagemRegressiva.isCountDownActive = true;
 
         focusCamera.Priority = 0;
         playerCamera.Priority = 10;
 
-     
-        if (jogadorSprite != null)
+        yield return new WaitForSecondsRealtime(extraWaitTime);
+
+        
+        if (movimentoJogador != null)
         {
-            var movimentoScript = jogadorSprite.GetComponent<MovimentoJogador>();
-            if (movimentoScript != null)
-                movimentoScript.enabled = true;
+            movimentoJogador.SetPlayerBind(false);
         }
 
         gatilho.SetActive(false);
-        isPaused = false;
+        
     }
 }
