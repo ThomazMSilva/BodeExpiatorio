@@ -257,7 +257,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 29.1, y: 37.88, z: -0.02921466}
-  m_LocalScale: {x: 5, y: 1, z: 2.697811}
+  m_LocalScale: {x: 12, y: 1, z: 2.697811}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1005700129}
@@ -555,10 +555,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 18739192}
     m_Modifications:
-    - target: {fileID: 7931890251873224542, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
-      propertyPath: risingVelocity
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 35157669115493325, guid: 5fc7453f8133a9d449de839a12430fb4, type: 3}
       propertyPath: m_Name
       value: BrutalThwomp_Auto (2)
@@ -631,6 +627,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3a4d703e07e101b4ba9563c07fd193f4, type: 2}
+    - target: {fileID: 7931890251873224542, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
+      propertyPath: risingVelocity
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5142029618590812435, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
     m_RemovedGameObjects: []
@@ -695,10 +695,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 18739192}
     m_Modifications:
-    - target: {fileID: 7931890251873224542, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
-      propertyPath: risingVelocity
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 35157669115493325, guid: 5fc7453f8133a9d449de839a12430fb4, type: 3}
       propertyPath: m_Name
       value: BrutalThwomp_Auto (11)
@@ -775,6 +771,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3a4d703e07e101b4ba9563c07fd193f4, type: 2}
+    - target: {fileID: 7931890251873224542, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
+      propertyPath: risingVelocity
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5142029618590812435, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
     m_RemovedGameObjects: []
@@ -3356,10 +3356,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 18739192}
     m_Modifications:
-    - target: {fileID: 7931890251873224542, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
-      propertyPath: risingVelocity
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 35157669115493325, guid: 5fc7453f8133a9d449de839a12430fb4, type: 3}
       propertyPath: m_Name
       value: BrutalThwomp_Auto (10)
@@ -3436,6 +3432,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3a4d703e07e101b4ba9563c07fd193f4, type: 2}
+    - target: {fileID: 7931890251873224542, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
+      propertyPath: risingVelocity
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5142029618590812435, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
     m_RemovedGameObjects: []
@@ -7791,6 +7791,34 @@ MonoBehaviour:
   pathType: 0
   pathMode: 0
   autoKill: 0
+--- !u!1 &668606913 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4899749357047618313, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+  m_PrefabInstance: {fileID: 762867590}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &668606915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668606913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &677157191
 GameObject:
   m_ObjectHideFlags: 0
@@ -8934,10 +8962,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 18739192}
     m_Modifications:
-    - target: {fileID: 7931890251873224542, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
-      propertyPath: risingVelocity
-      value: 0.8
-      objectReference: {fileID: 0}
     - target: {fileID: 35157669115493325, guid: 5fc7453f8133a9d449de839a12430fb4, type: 3}
       propertyPath: m_Name
       value: BrutalThwomp_Auto (3)
@@ -9014,6 +9038,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3a4d703e07e101b4ba9563c07fd193f4, type: 2}
+    - target: {fileID: 7931890251873224542, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
+      propertyPath: risingVelocity
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5142029618590812435, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
     m_RemovedGameObjects: []
@@ -9108,7 +9136,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4899749357047618313, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 668606915}
   m_SourcePrefab: {fileID: 100100000, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
 --- !u!1 &783718333
 GameObject:
@@ -9289,7 +9320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5366427368175944088, guid: 95b89324cf7329842a8151f0c010cceb, type: 3}
       propertyPath: tempoParaReaparecer
-      value: 0.5
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 6331251467941632221, guid: 95b89324cf7329842a8151f0c010cceb, type: 3}
       propertyPath: m_LocalScale.x
@@ -11239,7 +11270,6 @@ MonoBehaviour:
   TMPTexto: {fileID: 548286471}
   intervaloCaracteres: 0.1
   temFundoPreto: 0
-  fontName: Girassol-Regular SDF
   font: {fileID: 12800000, guid: 4329dfde72813e644a91e197862396ef, type: 3}
   OnDialogoAcabou:
     m_PersistentCalls:
@@ -11509,8 +11539,8 @@ Transform:
   m_GameObject: {fileID: 1007796163}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 52.58, y: 30.34, z: -0.02921466}
-  m_LocalScale: {x: 15, y: 1, z: 2.697811}
+  m_LocalPosition: {x: 49, y: 31, z: -0.02921466}
+  m_LocalScale: {x: 38, y: 1, z: 2.697811}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1005700129}
@@ -12175,10 +12205,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 18739192}
     m_Modifications:
-    - target: {fileID: 7931890251873224542, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
-      propertyPath: risingVelocity
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 35157669115493325, guid: 5fc7453f8133a9d449de839a12430fb4, type: 3}
       propertyPath: m_Name
       value: BrutalThwomp_Auto (12)
@@ -12251,6 +12277,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3a4d703e07e101b4ba9563c07fd193f4, type: 2}
+    - target: {fileID: 7931890251873224542, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
+      propertyPath: risingVelocity
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5142029618590812435, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
     m_RemovedGameObjects: []
@@ -12395,13 +12425,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1121641853}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.9063079, w: 0.42261827}
-  m_LocalPosition: {x: 297.25, y: 46, z: -0.02921466}
-  m_LocalScale: {x: 3, y: 1, z: 2.697811}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 298, y: 44, z: -0.02921466}
+  m_LocalScale: {x: 7, y: 1, z: 2.697811}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1005700129}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 130}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!114 &1121641855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14350,7 +14380,6 @@ MonoBehaviour:
   TMPTexto: {fileID: 693448473}
   intervaloCaracteres: 0.1
   temFundoPreto: 0
-  fontName: Girassol-Regular SDF
   font: {fileID: 12800000, guid: 4329dfde72813e644a91e197862396ef, type: 3}
   OnDialogoAcabou:
     m_PersistentCalls:
@@ -14539,7 +14568,6 @@ MonoBehaviour:
   TMPTexto: {fileID: 1507002368}
   intervaloCaracteres: 0.1
   temFundoPreto: 0
-  fontName: Girassol-Regular SDF
   font: {fileID: 12800000, guid: 4329dfde72813e644a91e197862396ef, type: 3}
   OnDialogoAcabou:
     m_PersistentCalls:
@@ -15122,7 +15150,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5366427368175944088, guid: 95b89324cf7329842a8151f0c010cceb, type: 3}
       propertyPath: tempoParaReaparecer
-      value: 0.5
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 6331251467941632221, guid: 95b89324cf7329842a8151f0c010cceb, type: 3}
       propertyPath: m_LocalScale.x
@@ -16338,10 +16366,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 18739192}
     m_Modifications:
-    - target: {fileID: 7931890251873224542, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
-      propertyPath: risingVelocity
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 35157669115493325, guid: 5fc7453f8133a9d449de839a12430fb4, type: 3}
       propertyPath: m_Name
       value: BrutalThwomp_Auto (7)
@@ -16414,6 +16438,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3a4d703e07e101b4ba9563c07fd193f4, type: 2}
+    - target: {fileID: 7931890251873224542, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
+      propertyPath: risingVelocity
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5142029618590812435, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
     m_RemovedGameObjects: []
@@ -19341,10 +19369,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 18739192}
     m_Modifications:
-    - target: {fileID: 7931890251873224542, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
-      propertyPath: risingVelocity
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 35157669115493325, guid: 5fc7453f8133a9d449de839a12430fb4, type: 3}
       propertyPath: m_Name
       value: BrutalThwomp_Auto (13)
@@ -19421,6 +19445,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3a4d703e07e101b4ba9563c07fd193f4, type: 2}
+    - target: {fileID: 7931890251873224542, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
+      propertyPath: risingVelocity
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5142029618590812435, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
     m_RemovedGameObjects: []
@@ -21666,11 +21694,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7304667388467233881, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 308.4
+      value: 79.43242
       objectReference: {fileID: 0}
     - target: {fileID: 7304667388467233881, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 42.3
+      value: 43.01531
       objectReference: {fileID: 0}
     - target: {fileID: 7304667388467233881, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -23460,10 +23488,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 18739192}
     m_Modifications:
-    - target: {fileID: 7931890251873224542, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
-      propertyPath: risingVelocity
-      value: 0.8
-      objectReference: {fileID: 0}
     - target: {fileID: 35157669115493325, guid: 5fc7453f8133a9d449de839a12430fb4, type: 3}
       propertyPath: m_Name
       value: BrutalThwomp_Auto (9)
@@ -23540,6 +23564,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3a4d703e07e101b4ba9563c07fd193f4, type: 2}
+    - target: {fileID: 7931890251873224542, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
+      propertyPath: risingVelocity
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5142029618590812435, guid: 6a9e1384b3096694d863d2adfb755724, type: 3}
     m_RemovedGameObjects: []
