@@ -68,14 +68,15 @@ public class Espinho : MonoBehaviour
         float forceRelativeToUp = launchForce * colDirMultiplier;
         float finalForce = !isVelocityRelevant ? forceRelativeToUp : forceRelativeToUp * forceMultiplier;
         float damage = !isVelocityRelevant ? damageAmount : damageAmount + (damageAmount * velPrctRelativeToTerminal);
-
+        Vector3 appliedForce = finalForce * transform.up;
+        appliedForce.z = 0;
         //Debug.Log($"velPrct: {velPrctRelativeToTerminal} forceMultiplier: {finalForce}");
 
         if(changeColorCoroutine != null) StopCoroutine(changeColorCoroutine);
         changeColorCoroutine = StartCoroutine(ChangeColor());
 
         AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.SpikeCollided, transform.position);
-        _player.ApplyDamageEffect(damage, finalForce * transform.up, timeStunned, "Espinhos");
+        _player.ApplyDamageEffect(damage, appliedForce, timeStunned, "Espinhos");
     }
 
 }

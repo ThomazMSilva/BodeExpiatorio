@@ -10,7 +10,7 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler
     [SerializeField] TextMeshProUGUI TMPTexto;
     [SerializeField] float intervaloCaracteres;
     [SerializeField] bool temFundoPreto;
-    [SerializeField] string fontName = "LiberationSans SDF";
+    //[SerializeField] string fontName = "LiberationSans SDF";
     [SerializeField] Font font;
     int indiceAtual;
     bool isTextoTerminado;
@@ -24,7 +24,7 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler
 
         if (!isTextoTerminado)
         {
-            TMPTexto.text = (temFundoPreto ? $"<font=\"{fontName}\"> <mark=#000000 padding=10,20,5,5>" : "") + falas[indiceAtual];
+            TMPTexto.text = (temFundoPreto ? $"<font=\"{font.name ?? "LiberationSans SDF"}\"> <mark=#000000 padding=10,20,5,5>" : "") + falas[indiceAtual];
             isTextoTerminado = true;
         }
 
@@ -52,7 +52,7 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler
 
         if (!isTextoTerminado)
         {
-            TMPTexto.text = (temFundoPreto ? $"<font=\"{fontName}\"> <mark=#000000 padding=10,20,5,5>" : "") + falas[indiceAtual];
+            TMPTexto.text = (temFundoPreto ? $"<font=\"{font.name ?? "LiberationSans SDF"}\"> <mark=#000000 padding=10,20,5,5>" : "") + falas[indiceAtual];
             isTextoTerminado = true;
         }
 
@@ -83,7 +83,7 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler
     public IEnumerator InvocaTexto(string textoNovo)
     {
         isTextoTerminado = false;
-        TMPTexto.text = temFundoPreto ? $"<font=\"{fontName}\"> <mark=#000000 padding=10,20,5,5>" : "";
+        TMPTexto.text = temFundoPreto ? $"<font=\"{font.name ?? "LiberationSans SDF"}\"> <mark=#000000 padding=10,20,5,5>" : "";
         WaitForSeconds intervalo = new(intervaloCaracteres);
 
         for (int i = 0; i < textoNovo.Length; i++)

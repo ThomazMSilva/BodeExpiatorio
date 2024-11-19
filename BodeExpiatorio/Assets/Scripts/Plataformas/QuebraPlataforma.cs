@@ -8,13 +8,14 @@ public class QuebraPlataforma : MonoBehaviour
     public float tempoParaReaparecer = 3f;
 
     [SerializeField] LayerMask playerLayerMask;
-    private float contadorQuebra; 
-    private float contadorReaparecer; 
+    
+    private float contadorQuebra;
+    private float contadorReaparecer;
     private bool abrindoAlcapao = false;
     private bool jogadorNaOverlapBox;
 
     [SerializeField] Collider platformCollider; 
-    Collider[] colliders = new Collider[4]; 
+    [SerializeField] Collider[] colliders = new Collider[16]; 
     [SerializeField] private Rigidbody frontPlatformRB;
     [SerializeField] private Rigidbody backPlatformRB;
     [SerializeField] private float openingAnimationDurationA = .3f;

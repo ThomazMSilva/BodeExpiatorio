@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundLayer: 3
+  trueDamageActive: 0
 --- !u!1 &35157669115493325
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,6 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFalling: 0
+  isWaiting: 0
   fallingVelocity: 1.5
   risingVelocity: 0.6
   waitTime: 0.5
@@ -225,6 +227,10 @@ MonoBehaviour:
   maxShakeIntensity: 10
   maxShakeTime: 0.4
   groundLayer: 3
+  currentVelocity: {x: 0, y: 0, z: 0}
+  timeStuck: 0
+  sqrMag: 0
+  sqrMagCap: 1
 --- !u!1 &737534446144056247
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,7 +280,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   rayDistance: 50
-  chainSize: 0.05
+  chainSize: 0.5
 --- !u!1 &3373943445650349651
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,6 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundLayer: 3
+  trueDamageActive: 0
 --- !u!1001 &6102492140131902407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -401,6 +408,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f69534c3e0b698d4fb6e6af58db49c4e, type: 3}
       propertyPath: m_Name
       value: twompplataforma (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1574290328502332769, guid: f69534c3e0b698d4fb6e6af58db49c4e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
