@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum RoomType
 {
@@ -33,6 +34,8 @@ public class Confessionario : MonoBehaviour
 
     private Jogador player;
     public Jogador Player { get => player; }
+
+    public UnityEvent OnConfessioned;
 
     public static Confessionario ultimoAtivo;
 
@@ -84,13 +87,13 @@ public class Confessionario : MonoBehaviour
 
     private void Pray()
     {
+        OnConfessioned?.Invoke();
         if (!inConfessionRoom)
         {
             GameManager.Instance.ActivateSceneCheckpoint(roomIndex);
             SetUltimoAtivo();
             return;
         }
-
     }
 
     private void SetUltimoAtivo() => ultimoAtivo = this;

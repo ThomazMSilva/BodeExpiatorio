@@ -580,6 +580,82 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &360575687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 360575689}
+  - component: {fileID: 360575688}
+  m_Layer: 0
+  m_Name: Dialogo Tra > Brutal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &360575688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360575687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 564e583313d607b49aff0a477ab4de04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterManager: {fileID: 11400000, guid: a4e284afea3ff1c40a426fc5e4ac6e3a, type: 2}
+  dialogueList:
+  - text: oi meu menome er jaca
+    typingDelaySpeed: 0.3
+    hasBackground: 0
+    characterMood: 1
+    characterKey: 0
+    characterPosition: 0
+  - text: jaca bei de blalbalba
+    typingDelaySpeed: 0.1
+    hasBackground: 0
+    characterMood: 1
+    characterKey: 0
+    characterPosition: 0
+  - text: que repugnante
+    typingDelaySpeed: 0.5
+    hasBackground: 0
+    characterMood: 2
+    characterKey: 1
+    characterPosition: 2
+  - text: cuzi
+    typingDelaySpeed: 0.3
+    hasBackground: 0
+    characterMood: 0
+    characterKey: 1
+    characterPosition: 2
+  disablesSelfOTF: 1
+  hidesImageOnDisable: 1
+  OnTextFinished:
+    m_PersistentCalls:
+      m_Calls: []
+  LevelUpAfter: 0
+--- !u!4 &360575689
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360575687}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.1098647, y: 39.81397, z: 3.897604}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &602307994
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,6 +719,82 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &628612268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 628612270}
+  - component: {fileID: 628612269}
+  m_Layer: 0
+  m_Name: Dialogo Brutal > ???
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &628612269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628612268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 564e583313d607b49aff0a477ab4de04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterManager: {fileID: 11400000, guid: a4e284afea3ff1c40a426fc5e4ac6e3a, type: 2}
+  dialogueList:
+  - text: oi meu menome er jaca
+    typingDelaySpeed: 0.3
+    hasBackground: 0
+    characterMood: 1
+    characterKey: 0
+    characterPosition: 0
+  - text: jaca bei de blalbalba
+    typingDelaySpeed: 0.1
+    hasBackground: 0
+    characterMood: 1
+    characterKey: 0
+    characterPosition: 0
+  - text: que repugnante
+    typingDelaySpeed: 0.5
+    hasBackground: 0
+    characterMood: 2
+    characterKey: 1
+    characterPosition: 2
+  - text: cuzi
+    typingDelaySpeed: 0.3
+    hasBackground: 0
+    characterMood: 0
+    characterKey: 1
+    characterPosition: 2
+  disablesSelfOTF: 1
+  hidesImageOnDisable: 1
+  OnTextFinished:
+    m_PersistentCalls:
+      m_Calls: []
+  LevelUpAfter: 0
+--- !u!4 &628612270
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628612268}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.1098647, y: 39.81397, z: 3.897604}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1237,6 +1389,125 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cc34861fdf413a47bca069fd80c282c, type: 3}
+--- !u!1 &955397332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 955397336}
+  - component: {fileID: 955397335}
+  - component: {fileID: 955397334}
+  - component: {fileID: 955397333}
+  - component: {fileID: 955397337}
+  m_Layer: 0
+  m_Name: Passar de Nivel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &955397333
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955397332}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &955397334
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955397332}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &955397335
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955397332}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &955397336
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955397332}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 19.0287, y: 48.5618, z: 0}
+  m_LocalScale: {x: 10.176039, y: 22.58768, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &955397337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955397332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d55685c5477e14499977dfec7f9de6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLastFromAct: 0
 --- !u!1 &968124991
 GameObject:
   m_ObjectHideFlags: 0
@@ -2512,12 +2783,44 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 106706764}
     - target: {fileID: 1161070638284259591, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
+      propertyPath: inConfessionRoom
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161070638284259591, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
       propertyPath: checkpointStartsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1161070638284259591, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
       propertyPath: recoverMaxHealthToStartingPoint
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161070638284259591, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
+      propertyPath: OnConfessioned.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161070638284259591, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
+      propertyPath: OnConfessioned.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161070638284259591, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
+      propertyPath: OnConfessioned.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2127673140}
+    - target: {fileID: 1161070638284259591, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
+      propertyPath: OnConfessioned.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161070638284259591, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
+      propertyPath: OnConfessioned.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ActivateCurrentDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161070638284259591, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
+      propertyPath: OnConfessioned.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Assets.Scripts.UI.Dialogo_Relacionado.DialogueList, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161070638284259591, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
+      propertyPath: OnConfessioned.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3451405146788370840, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2621,6 +2924,7 @@ GameObject:
   - component: {fileID: 2127673134}
   - component: {fileID: 2127673139}
   - component: {fileID: 2127673138}
+  - component: {fileID: 2127673140}
   m_Layer: 5
   m_Name: Dialogue_Canvas
   m_TagString: Untagged
@@ -2826,6 +3130,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2127673140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127673133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89b101a39164f55488a3b6edaab5d927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  act1to2: {fileID: 1021424724}
+  act2to3: {fileID: 360575687}
+  act3to4: {fileID: 628612268}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2845,5 +3164,8 @@ SceneRoots:
   - {fileID: 62199137}
   - {fileID: 740077396}
   - {fileID: 1021424725}
+  - {fileID: 360575689}
+  - {fileID: 628612270}
   - {fileID: 2127673137}
   - {fileID: 602307997}
+  - {fileID: 955397336}

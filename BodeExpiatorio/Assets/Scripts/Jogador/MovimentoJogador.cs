@@ -454,7 +454,11 @@ public class MovimentoJogador : MonoBehaviour
         checkOverCoroutine = null;
     }
 
-    public void ApplyForce(Vector3 force, ForceMode forceMode) => rb.AddForce(force, forceMode);
+    public void ApplyForce(Vector3 force, ForceMode forceMode)
+    {
+        if (isBind) return;
+        rb.AddForce(force, forceMode);
+    }
 
     public void Ragdoll(float stunTimeSecs)
     {
