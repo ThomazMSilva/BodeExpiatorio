@@ -1,56 +1,77 @@
 using UnityEngine;
 using UnityEngine.UI;
+using FMODUnity;
+using FMOD.Studio;
 
 public class VolumeManager : MonoBehaviour
 {
-    public Slider volumeSlider;
-    public Slider SFXSlider;   
+    [Header("Sliders")]
+    public Slider volumeSlider; 
+    public Slider SFXSlider;    
     public Slider MusicSlider;  
+
+    [Header("VCA Paths")]
+    public string generalVCAPath = "vca:/Master"; 
+    public string sfxVCAPath = "vca:/SFX";        
+    public string musicVCAPath = "vca:/Music";    
+
+    private VCA generalVCA;
+    private VCA sfxVCA;
+    private VCA musicVCA;
 
     private void Start()
     {
-        
+     
+        generalVCA = RuntimeManager.GetVCA(generalVCAPath);
+        sfxVCA = RuntimeManager.GetVCA(sfxVCAPath);
+        musicVCA = RuntimeManager.GetVCA(musicVCAPath);
+
+      
         float savedVolume = PlayerPrefs.GetFloat("GameVolume", 1f);
-        volumeSlider.value = savedVolume;
-        AudioManager.Instance.SetGeneralVolume(savedVolume);
-
-       
         float savedSFXVolume = PlayerPrefs.GetFloat("SFXVolume", 1f);
-        SFXSlider.value = savedSFXVolume;
-        AudioManager.Instance.SetSFXVolume(savedSFXVolume);
-
         float savedMusicVolume = PlayerPrefs.GetFloat("MusicVolume", 1f);
+
+    
+        volumeSlider.value = savedVolume;
+        SFXSlider.value = savedSFXVolume;
         MusicSlider.value = savedMusicVolume;
-        AudioManager.Instance.SetMusicVolume(savedMusicVolume);
+
+        
+        SetGeneralVolume(savedVolume);
+        SetSFXVolume(savedSFXVolume);
+        SetMusicVolume(savedMusicVolume);
 
        
-        volumeSlider.onValueChanged.AddListener(delegate { SetGeneralVolume(); });
-        SFXSlider.onValueChanged.AddListener(delegate { SetSFXVolume(); });
-        MusicSlider.onValueChanged.AddListener(delegate { SetMusicVolume(); });
+        volumeSlider.onValueChanged.AddListener(SetGeneralVolume);
+        SFXSlider.onValueChanged.AddListener(SetSFXVolume);
+        MusicSlider.onValueChanged.AddListener(SetMusicVolume);
     }
 
-    public void SetGeneralVolume()
+    public void SetGeneralVolume(float value)
     {
-        float value = volumeSlider.value;
-        AudioManager.Instance.SetGeneralVolume(value);
-        PlayerPrefs.SetFloat("GameVolume", value);
-        PlayerPrefs.Save();
+        if (generalVCA.isValid())
+        {
+            generalVCA.setVolume(value);
+            PlayerPrefs.SetFloat("GameVolume", value);
+        }
     }
 
-    public void SetSFXVolume()
+    public void SetSFXVolume(float value)
     {
-        float value = SFXSlider.value;
-        AudioManager.Instance.SetSFXVolume(value);
-        PlayerPrefs.SetFloat("SFXVolume", value);
-        PlayerPrefs.Save();
+        if (sfxVCA.isValid())
+        {
+            sfxVCA.setVolume(value);
+            PlayerPrefs.SetFloat("SFXVolume", value);
+        }
     }
 
-    public void SetMusicVolume()
+    public void SetMusicVolume(float value)
     {
-        float value = MusicSlider.value;
-        AudioManager.Instance.SetMusicVolume(value);
-        PlayerPrefs.SetFloat("MusicVolume", value);
-        PlayerPrefs.Save();
+        if (musicVCA.isValid())
+        {
+            musicVCA.setVolume(value);
+            PlayerPrefs.SetFloat("MusicVolume", value);
+        }
     }
 
     private void OnDestroy()
@@ -61,8 +82,4 @@ public class VolumeManager : MonoBehaviour
         PlayerPrefs.SetFloat("MusicVolume", MusicSlider.value);
     }
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
 }
