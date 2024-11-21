@@ -129,7 +129,7 @@ public class DialogueBehaviour : MonoBehaviour
         if (b) gameObject.SetActive(false);
     }
 
-    private IEnumerator TypeText(string newText, float typingInterval = 0.1f, bool hasBackground = false, CharacterKey characterKey = CharacterKey.Penitente, CharacterExpression characterMood = CharacterExpression.happy, CharacterPosition characterPosition = CharacterPosition.left)
+    private IEnumerator TypeText(string newText, float typingInterval = 0.1f, bool hasBackground = false, CharacterKey characterKey = CharacterKey.PenitentePadrao, CharacterExpression characterMood = CharacterExpression.happy, CharacterPosition characterPosition = CharacterPosition.left)
     {
         isTextFinished = false;
         textMeshPro.text = hasBackground ? "<font=\"Girassol Regular SDF\"> <mark=#000000 padding=10,20,5,5>" : "";

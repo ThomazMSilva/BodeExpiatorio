@@ -63,7 +63,7 @@ public class SuplicioAnsiosoFonte : MonoBehaviour
 
     private void BindPlayer()
     {
-        //_player.SetPosition(transform.position);
+        _player.SetPosition(transform.position);
         _player.Movimento.SetPlayerBind(true);
         hasBindPlayer = true;
     }

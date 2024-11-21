@@ -1641,6 +1641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathSceneName: Morte
+  confessionSceneName: Confessionario
   rooms:
   - sceneName: Desejo1
     sceneIndex: 0
@@ -1972,7 +1973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8129552117593584859, guid: 3b1c43ce0a86afc4280de2d0491aedcc, type: 3}
       propertyPath: m_Name
-      value: TesteTelaCarregamento
+      value: TelaCarregamento
       objectReference: {fileID: 0}
     - target: {fileID: 8129552117593584859, guid: 3b1c43ce0a86afc4280de2d0491aedcc, type: 3}
       propertyPath: m_IsActive

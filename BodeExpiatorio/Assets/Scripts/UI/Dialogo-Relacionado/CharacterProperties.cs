@@ -15,7 +15,10 @@ public class CharacterProperties
 [System.Serializable]
 public enum CharacterKey
 {
-    Penitente,
+    PenitentePadrao,
+    Penitente1,
+    Penitente2,
+    Penitente3,
     Padre,
     Outro
 }

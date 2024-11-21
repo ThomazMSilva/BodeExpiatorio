@@ -36,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -375, y: 170}
-  m_SizeDelta: {x: 30, y: 30}
+  m_AnchoredPosition: {x: -250, y: 200}
+  m_SizeDelta: {x: 197.7, y: 16.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8458038567176741461
 CanvasRenderer:
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.7791244, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -68,10 +68,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 23961d38a07bb4c43be73a4587a71335, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -89,7 +89,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dd58c5a6274eb4409c9c36fc01c28ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdownIMG: {fileID: 3583238209611956930}
+  countdownFillIMG: {fileID: 5795807768548492250}
+  countdownFrontIMG: {fileID: 3583238209611956930}
+  countdownFront100Sprite: {fileID: 21300000, guid: ba9fabd1a0eca9a4a8575ef8747dc028, type: 3}
+  countdownFront75Sprite: {fileID: 21300000, guid: 5b5ba58a2438ee84eb014cfdbea8db3b, type: 3}
+  countdownFront50Sprite: {fileID: 21300000, guid: 366776b565b99284786e06af564f6970, type: 3}
+  countdownFront25Sprite: {fileID: 21300000, guid: 3229bf22dfa554f47bc19a0cdb428331, type: 3}
 --- !u!1 &2285291717870481943
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,8 +306,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: -0.000015258789}
-  m_SizeDelta: {x: 30, y: 30}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8893265315380272274
 CanvasRenderer:
@@ -325,21 +330,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.92926645, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 23961d38a07bb4c43be73a4587a71335, type: 3}
-  m_Type: 3
+  m_Sprite: {fileID: 21300000, guid: ba9fabd1a0eca9a4a8575ef8747dc028, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 0
-  m_FillOrigin: 2
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!1 &6773695413097920729

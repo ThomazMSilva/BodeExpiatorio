@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TextMeshProHandler : MonoBehaviour, IPointerClickHandler
+public class TextMeshProHandler : MonoBehaviour, IPointerClickHandler, ISubmitHandler
 {
     public delegate void ClickAction();
     public static event ClickAction OnTextClickedEvent;
@@ -12,5 +12,10 @@ public class TextMeshProHandler : MonoBehaviour, IPointerClickHandler
         {
             OnTextClickedEvent?.Invoke();
         }
+    }
+
+    public void OnSubmit(BaseEventData eventData)
+    {
+        OnTextClickedEvent?.Invoke();
     }
 }
