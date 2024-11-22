@@ -138,6 +138,8 @@ public class MovimentoJogador : MonoBehaviour
     [SerializeField] private Animator playerAnim;
 
     private RaycastHit hit;
+    private RaycastHit hitLeft;
+    private RaycastHit hitRight;
 
     private EventInstance playerWalkingEventInstance;
     private EventInstance playerIdleEventInstance;
@@ -256,15 +258,16 @@ public class MovimentoJogador : MonoBehaviour
     private void CheckGrounded()
     {
         isGrounded =
-            Physics.Raycast(transform.position, -Vector3.up, out hit, raycastDistance, groundLayer)
-            /*|| Physics.Raycast(transform.position - colliderHorizontalRange, -Vector3.up, out hit, raycastDistance, groundLayer) ||
-            Physics.Raycast(transform.position + colliderHorizontalRange, -Vector3.up, out hit, raycastDistance, groundLayer)*/;
-        Debug.DrawRay(transform.position, -Vector3.up * raycastDistance, !isGrounded ? Color.magenta : Color.cyan);
-        //Color c = !isGrounded ? Color.magenta : Color.cyan;
-        /*Debug.DrawRay(transform.position - colliderHorizontalRange, -Vector3.up * raycastDistance, c);
-        Debug.DrawRay(transform.position + colliderHorizontalRange, -Vector3.up * raycastDistance, c);*/
+            Physics.Raycast(transform.position, -Vector3.up, out hit, raycastDistance, groundLayer) || 
+            Physics.Raycast(transform.position - colliderHorizontalRange, -Vector3.up, out hitLeft, raycastDistance, groundLayer) ||
+            Physics.Raycast(transform.position + colliderHorizontalRange, -Vector3.up, out hitRight, raycastDistance, groundLayer);
+        Color c = !isGrounded ? Color.magenta : Color.cyan;
+        Debug.DrawRay(transform.position, -Vector3.up * raycastDistance, c);
+        Debug.DrawRay(transform.position - colliderHorizontalRange, -Vector3.up * raycastDistance, c);
+        Debug.DrawRay(transform.position + colliderHorizontalRange, -Vector3.up * raycastDistance, c);
 
-        transform.parent = hit.transform && !hit.transform.CompareTag(fallingPlatformTag) ? hit.transform : null;
+        RaycastHit mainHit = hit.transform != null ? hit : hitLeft.transform != null ? hitLeft : hitRight;
+        transform.parent = mainHit.transform && !mainHit.transform.CompareTag(fallingPlatformTag) ? mainHit.transform : null;
 
         coyoteTimeCurrent = isGrounded || isStuckInWire || isClimbing ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
 
