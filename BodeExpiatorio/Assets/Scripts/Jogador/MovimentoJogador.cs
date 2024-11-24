@@ -167,7 +167,7 @@ public class MovimentoJogador : MonoBehaviour
         colliderBaseCenter = playerCollider.center;
         colliderKneelingCenter.Set(colliderBaseCenter.x, colliderBaseCenter.y - (colliderKneelingSize.y * 0.5f), colliderBaseCenter.z);
         raycastDistance = playerCollider.bounds.extents.y + .25f;
-        colliderHorizontalRange = new(playerCollider.bounds.extents.x, 0, 0);
+        colliderHorizontalRange = new(playerCollider.bounds.extents.x - .1f, 0, 0);
 
         gravity = Physics.gravity;
 
@@ -266,7 +266,13 @@ public class MovimentoJogador : MonoBehaviour
         Debug.DrawRay(transform.position - colliderHorizontalRange, -Vector3.up * raycastDistance, c);
         Debug.DrawRay(transform.position + colliderHorizontalRange, -Vector3.up * raycastDistance, c);
 
-        RaycastHit mainHit = hit.transform != null ? hit : hitLeft.transform != null ? hitLeft : hitRight;
+        RaycastHit mainHit = hit.transform != null
+                            ? hit
+                            : hitLeft.transform != null && hitLeft.point.y < transform.position.y - playerCollider.bounds.extents.y
+                                ? hitLeft 
+                                : hitRight.transform != null && hitRight.point.y < transform.position.y - playerCollider.bounds.extents.y
+                                    ? hitRight
+                                    : hit;
         transform.parent = mainHit.transform && !mainHit.transform.CompareTag(fallingPlatformTag) ? mainHit.transform : null;
 
         coyoteTimeCurrent = isGrounded || isStuckInWire || isClimbing ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
