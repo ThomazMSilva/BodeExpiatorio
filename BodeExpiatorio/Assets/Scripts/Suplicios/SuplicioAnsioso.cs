@@ -24,6 +24,10 @@ public class SuplicioAnsioso : MonoBehaviour
     public Jogador Player { get => _player; }
     private Entrada _input;
 
+    [SerializeField] private ParticleSystem portalParticleSystem;
+    [SerializeField] private ParticleSystem suctionParticleSystem;
+
+
     private IEnumerator InitializeSingletonReference()
     {
         while (_input == null)
@@ -56,6 +60,11 @@ public class SuplicioAnsioso : MonoBehaviour
         windEventInstance = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.LongingAttracted);
         windEventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
         originalAlpha = GetComponent<Renderer>().material.color.a;
+
+        var portalShapeModule = portalParticleSystem.shape;
+        portalShapeModule.length = transform.localScale.x;
+        var suctionShapeModule = suctionParticleSystem.shape;
+        suctionShapeModule.length = transform.localScale.x;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -86,12 +95,50 @@ public class SuplicioAnsioso : MonoBehaviour
         );
     }
 
+    Color fadedColor = Color.black;
+    Color unfadedColor = Color.white;
+
     private IEnumerator Attract()
     {
         while (true)
         {
             if (!isIntervalActive) yield return null;
-            GetComponent<Renderer>().material.DOFade(isAttracting ? 0 : originalAlpha, interval * fadeTimeRelativeToInterval);
+
+            ParticleSystem.Particle[] parentParticles = new ParticleSystem.Particle[portalParticleSystem.particleCount];
+            int parentCount = portalParticleSystem.GetParticles(parentParticles);
+            ParticleSystem.Particle[] suckParticles = new ParticleSystem.Particle[suctionParticleSystem.particleCount];
+            int suckCount = portalParticleSystem.GetParticles(suckParticles);
+
+            Color targetColor = isAttracting ? fadedColor : unfadedColor;
+
+            DOTween.To
+            (
+                () => parentParticles[0].startColor,
+                    color =>
+                    {
+                        for (int i = 0; i < parentCount; i++) parentParticles[i].startColor = color;
+                        portalParticleSystem.SetParticles(parentParticles, parentCount);
+                    },
+                    targetColor,
+                    interval * fadeTimeRelativeToInterval
+            );
+
+            DOTween.To
+            (
+                () => suckParticles[0].startColor,
+                    color =>
+                    {
+                        for (int i = 0; i < suckCount; i++) suckParticles[i].startColor = color;
+                        portalParticleSystem.SetParticles(suckParticles, suckCount);
+                    },
+                    targetColor,
+                    interval * fadeTimeRelativeToInterval
+            );
+
+            portalParticleSystem.SetParticles(parentParticles, parentCount);
+            suctionParticleSystem.SetParticles(suckParticles, suckCount);
+
+            //GetComponent<Renderer>().material.DOFade(isAttracting ? 0 : originalAlpha, interval * fadeTimeRelativeToInterval);
             isAttracting = !isAttracting;
 
             if (isAttracting) windEventInstance.start();
