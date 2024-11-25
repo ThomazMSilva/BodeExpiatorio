@@ -17,7 +17,6 @@ public class SuplicioAnsioso : MonoBehaviour
 
     private bool _isKneeling;
     private float currentForceMultiplier;
-    private float originalAlpha;
 
     private EventInstance windEventInstance;
     private Jogador _player;
@@ -26,7 +25,18 @@ public class SuplicioAnsioso : MonoBehaviour
 
     [SerializeField] private ParticleSystem portalParticleSystem;
     [SerializeField] private ParticleSystem suctionParticleSystem;
+    [SerializeField] private ParticleSystem vortexParticleSystem;
+    [SerializeField] private Renderer mirrorRenderer;
+    [SerializeField] private Material mirrorMatOpen;
+    [SerializeField] private Material mirrorMatClosed;
 
+
+    private ParticleSystem.EmissionModule portalEmission;
+    private ParticleSystem.EmissionModule suctionEmission;
+    private ParticleSystem.EmissionModule vortexEmission;
+    private ParticleSystem.MinMaxCurve originalPortalRate;
+    private ParticleSystem.MinMaxCurve originalSuctionRate;
+    private ParticleSystem.MinMaxCurve originalVortexRate;
 
     private IEnumerator InitializeSingletonReference()
     {
@@ -59,12 +69,24 @@ public class SuplicioAnsioso : MonoBehaviour
     {
         windEventInstance = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.LongingAttracted);
         windEventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
-        originalAlpha = GetComponent<Renderer>().material.color.a;
+        //mirrorOriginalAlpha = mirrorGO.GetComponent<Renderer>().material.color.a;
+        //mirrorOriginalColor = mirrorGO.GetComponent<Renderer>().material.color;
 
         var portalShapeModule = portalParticleSystem.shape;
         portalShapeModule.length = transform.localScale.x;
         var suctionShapeModule = suctionParticleSystem.shape;
         suctionShapeModule.length = transform.localScale.x;
+        var vortexShapeModule = vortexParticleSystem.shape;
+        vortexShapeModule.length = transform.localScale.x;
+
+        portalEmission= portalParticleSystem.emission;
+        suctionEmission = suctionParticleSystem.emission;
+        vortexEmission = vortexParticleSystem.emission;
+
+        originalPortalRate = portalEmission.rateOverTime;
+        originalSuctionRate = suctionEmission.rateOverTime;
+        originalVortexRate = vortexEmission.rateOverTime;
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -104,41 +126,13 @@ public class SuplicioAnsioso : MonoBehaviour
         {
             if (!isIntervalActive) yield return null;
 
-            ParticleSystem.Particle[] parentParticles = new ParticleSystem.Particle[portalParticleSystem.particleCount];
-            int parentCount = portalParticleSystem.GetParticles(parentParticles);
-            ParticleSystem.Particle[] suckParticles = new ParticleSystem.Particle[suctionParticleSystem.particleCount];
-            int suckCount = portalParticleSystem.GetParticles(suckParticles);
+            portalEmission.rateOverTime = isAttracting ? 0 : originalPortalRate;
+            suctionEmission.rateOverTime = isAttracting ? 0 : originalSuctionRate;
+            vortexEmission.rateOverTime = isAttracting ? 0 : originalVortexRate;
+            vortexEmission.burstCount = isAttracting ? 0 : 5;
 
-            Color targetColor = isAttracting ? fadedColor : unfadedColor;
-
-            DOTween.To
-            (
-                () => parentParticles[0].startColor,
-                    color =>
-                    {
-                        for (int i = 0; i < parentCount; i++) parentParticles[i].startColor = color;
-                        portalParticleSystem.SetParticles(parentParticles, parentCount);
-                    },
-                    targetColor,
-                    interval * fadeTimeRelativeToInterval
-            );
-
-            DOTween.To
-            (
-                () => suckParticles[0].startColor,
-                    color =>
-                    {
-                        for (int i = 0; i < suckCount; i++) suckParticles[i].startColor = color;
-                        portalParticleSystem.SetParticles(suckParticles, suckCount);
-                    },
-                    targetColor,
-                    interval * fadeTimeRelativeToInterval
-            );
-
-            portalParticleSystem.SetParticles(parentParticles, parentCount);
-            suctionParticleSystem.SetParticles(suckParticles, suckCount);
-
-            //GetComponent<Renderer>().material.DOFade(isAttracting ? 0 : originalAlpha, interval * fadeTimeRelativeToInterval);
+            mirrorRenderer.material = isAttracting ? mirrorMatClosed : mirrorMatOpen;
+            //mirrorGO.GetComponent<Renderer>().material.DOFade(isAttracting ? 0 : mirrorOriginalAlpha, interval * fadeTimeRelativeToInterval);
             isAttracting = !isAttracting;
 
             if (isAttracting) windEventInstance.start();
