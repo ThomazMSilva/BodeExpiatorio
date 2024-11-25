@@ -166,7 +166,7 @@ public class MovimentoJogador : MonoBehaviour
 
         colliderBaseCenter = playerCollider.center;
         colliderKneelingCenter.Set(colliderBaseCenter.x, colliderBaseCenter.y - (colliderKneelingSize.y * 0.5f), colliderBaseCenter.z);
-        raycastDistance = playerCollider.bounds.extents.y + .25f;
+        raycastDistance = playerCollider.bounds.extents.y + -(playerCollider.center.y - .1f);
         colliderHorizontalRange = new(playerCollider.bounds.extents.x - .1f, 0, 0);
 
         gravity = Physics.gravity;
@@ -536,4 +536,23 @@ public class MovimentoJogador : MonoBehaviour
         rb.useGravity = !bind;
         isBind = bind;
     }
+
+    /// <summary>
+    /// 00: Pau<br></br>
+    /// 01: P_Dying<br></br>
+    /// 02: P_Default_Damage<br></br>
+    /// 03: P_Spike<br></br>
+    /// 04: P_Thorns_Enter<br></br>
+    /// 05: P_Thorns_Leaving<br></br>
+    /// 06: P_Portal_Sucking<br></br>
+    /// 07: P_Portal_Spitting<br></br>
+    /// 08: P_Spore_Direct<br></br>
+    /// 09: P_Spore_Explosion<br></br>
+    /// 10: P_Burning<br></br>
+    /// 11: P_Crushing<br></br>
+    /// </summary>
+    /// <param name="damageType"></param>
+    public void SetDamageType(int damageType) => playerAnim.SetInteger("damageType", damageType);
+
+    public void SetDeathTrigger() => playerAnim.SetTrigger("playerDied");
 }

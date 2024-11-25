@@ -35,7 +35,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.52, y: 0.52, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9c4f0bce607d21847b866fcb7f452639, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d152600a5c535cc438083487ec972ab9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -111,8 +111,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2380352, y: 3.986659, z: 1}
-  m_Center: {x: -0.11901758, y: -0.07, z: 0}
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: -0.3, z: 0}
 --- !u!54 &4949242929930484042
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -259,10 +259,17 @@ MonoBehaviour:
   isStunned: 0
   isStuckInWire: 0
   isBind: 0
+  horizontalInput: 0
+  colliderExtentsX: 0
+  jumpBufferTimeCurrent: 0
+  coyoteTimeCurrent: 0
+  stunTimeRemaining: 0
+  wiredRagdollTime: 0
   playerCollider: {fileID: 1287762491101862042}
   rb: {fileID: 4949242929930484042}
   playerAnim: {fileID: 5920615976259816849}
   input: {fileID: 4163043874282635791}
+  isPaused: 0
 --- !u!114 &4163043874282635791
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -76,7 +76,7 @@ public class Espinho : MonoBehaviour
         changeColorCoroutine = StartCoroutine(ChangeColor());
 
         AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.SpikeCollided, transform.position);
-        _player.ApplyDamageEffect(damage, appliedForce, timeStunned, "Espinhos");
+        _player.ApplyDamageEffect(damage, appliedForce, timeStunned, "Espinhos", ForceMode.Impulse, 3);
     }
 
 }

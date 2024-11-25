@@ -48,6 +48,21 @@ public class SuplicioAnsioso : MonoBehaviour
         _input.OnKneelButtonDown += SetKneelingTrue;
         _input.OnKneelButtonUp += SetKneelingFalse;
 
+        var portalShapeModule = portalParticleSystem.shape;
+        portalShapeModule.length = transform.localScale.x;
+        var suctionShapeModule = suctionParticleSystem.shape;
+        suctionShapeModule.length = transform.localScale.x;
+        var vortexShapeModule = vortexParticleSystem.shape;
+        vortexShapeModule.length = transform.localScale.x;
+
+        portalEmission = portalParticleSystem.emission;
+        suctionEmission = suctionParticleSystem.emission;
+        vortexEmission = vortexParticleSystem.emission;
+
+        originalPortalRate = portalEmission.rateOverTime;
+        originalSuctionRate = suctionEmission.rateOverTime;
+        originalVortexRate = vortexEmission.rateOverTime;
+
         StartCoroutine(Attract());
     }
 
@@ -69,24 +84,6 @@ public class SuplicioAnsioso : MonoBehaviour
     {
         windEventInstance = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.LongingAttracted);
         windEventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
-        //mirrorOriginalAlpha = mirrorGO.GetComponent<Renderer>().material.color.a;
-        //mirrorOriginalColor = mirrorGO.GetComponent<Renderer>().material.color;
-
-        var portalShapeModule = portalParticleSystem.shape;
-        portalShapeModule.length = transform.localScale.x;
-        var suctionShapeModule = suctionParticleSystem.shape;
-        suctionShapeModule.length = transform.localScale.x;
-        var vortexShapeModule = vortexParticleSystem.shape;
-        vortexShapeModule.length = transform.localScale.x;
-
-        portalEmission= portalParticleSystem.emission;
-        suctionEmission = suctionParticleSystem.emission;
-        vortexEmission = vortexParticleSystem.emission;
-
-        originalPortalRate = portalEmission.rateOverTime;
-        originalSuctionRate = suctionEmission.rateOverTime;
-        originalVortexRate = vortexEmission.rateOverTime;
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -113,12 +110,10 @@ public class SuplicioAnsioso : MonoBehaviour
             -transform.right * currentForceMultiplier, 
             .01f,
             "Tentação",
-            ForceMode.Acceleration
+            ForceMode.Acceleration,
+            6
         );
     }
-
-    Color fadedColor = Color.black;
-    Color unfadedColor = Color.white;
 
     private IEnumerator Attract()
     {

@@ -195,6 +195,29 @@ public class VidaJogador : MonoBehaviour
         CurrentHealth = 0;
     }
 
+
+    /// <summary>
+    /// 00: Pau<br></br>
+    /// 01: P_Dying<br></br>
+    /// 02: P_Default_Damage_Standing<br></br>
+    /// 03: P_Default_Damage_Kneeling<br></br>
+    /// 04: P_Spike_Standing<br></br>
+    /// 05: P_Spike_Kneeling<br></br>
+    /// 06: P_Thorns_Enter_Standing<br></br>
+    /// 07: P_Thorns_Enter_Kneeling<br></br>
+    /// 08: P_Thorns_Leaving<br></br>
+    /// 09: P_Portal_Sucking_Standing<br></br>
+    /// 10: P_Portal_Sucking_Kneeling<br></br>
+    /// 11: P_Portal_Spitting<br></br>
+    /// 12: P_Spore_Direct_Standing<br></br>
+    /// 13: P_Spore_Direct_Kneeling<br></br>
+    /// 14: P_Spore_Explosion_Standing<br></br>
+    /// 15: P_Spore_Explosion_Kneeling<br></br>
+    /// 16: P_Burning_Standing<br></br>
+    /// 17: P_Burning_Kneeling<br></br>
+    /// 18: P_Crushing<br></br>
+    /// </summary>
+    /// <param name="damageType"></param>
     public void DamageHealth(float damageAmount, object sender)
     {
         if (isInvulnerable) return;

@@ -52,7 +52,7 @@ namespace Assets.Scripts.Suplicios
             if (changeColorCoroutine != null) StopCoroutine(changeColorCoroutine);
             changeColorCoroutine = StartCoroutine(ChangeColor());
             
-            _player.ApplyDamageEffect(damage, "Arames");
+            _player.ApplyDamageEffect(damage, "Arames", 4);
 
             AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.ThornCollided, transform.position);
         }
@@ -66,7 +66,7 @@ namespace Assets.Scripts.Suplicios
             if (changeColorCoroutine != null) StopCoroutine(changeColorCoroutine);
             changeColorCoroutine = StartCoroutine(ChangeColor());
 
-            _player.ApplyDamageEffect(damage, "Arames");
+            _player.ApplyDamageEffect(damage, "Arames", 5);
         }
     }
 }
