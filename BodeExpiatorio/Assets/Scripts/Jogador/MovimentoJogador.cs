@@ -223,7 +223,7 @@ public class MovimentoJogador : MonoBehaviour
 
         if (isBind)
         {
-            //rb.velocity = Vector3.zero;
+            rb.velocity = Vector3.zero;
             return;
         }
 
@@ -251,6 +251,7 @@ public class MovimentoJogador : MonoBehaviour
         playerAnim.SetBool("isKneeling", isKneeling);
         playerAnim.SetBool("jumpKeyHeld", jumpKeyHeld);
         playerAnim.SetBool("isGrounded", isGrounded);
+        playerAnim.SetBool("isWired", isStuckInWire);
         playerAnim.SetFloat("velocityX", MathF.Abs(rb.velocity.x));
         playerAnim.SetFloat("velocityY", rb.velocity.y);
     }
@@ -431,8 +432,19 @@ public class MovimentoJogador : MonoBehaviour
 
     private void HandleKneel(bool willKneel)
     {
-        if (isStuckInWire) { SetWiredState(false, isLookingRight); isKneeling = false; return; }
-        if (isClimbing) { SetPlayerClimbing(false); return; }
+        if (isStuckInWire) 
+        {
+            SetWiredState(false, isLookingRight); 
+            isKneeling = false;
+            SetDamageType(0);
+            return; 
+        }
+        if (isClimbing) 
+        {
+            SetPlayerClimbing(false);
+            isKneeling = false;
+            return; 
+        }
 
         if (!willKneel && Physics.Raycast(transform.position, transform.up, raycastDistance, groundLayer))
         {
@@ -495,6 +507,8 @@ public class MovimentoJogador : MonoBehaviour
         stunTimeRemaining = 0;
         isStunned = false;
         stunCoroutine = null;
+
+        if(!isStuckInWire) SetDamageType(0);
     }
 
     public void EnterWarp(Vector3 position)
@@ -521,6 +535,7 @@ public class MovimentoJogador : MonoBehaviour
     public void SetWiredState(bool isWired, bool lookingRight)
     {
         isStuckInWire = isWired;
+       
         if (lookingRight != isLookingRight) FlipSprite();
     }
     public void SetPlayerClimbing(bool climbing) => isClimbing = climbing;

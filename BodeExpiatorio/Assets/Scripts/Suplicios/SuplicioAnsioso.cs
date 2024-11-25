@@ -128,6 +128,9 @@ public class SuplicioAnsioso : MonoBehaviour
 
             mirrorRenderer.material = isAttracting ? mirrorMatClosed : mirrorMatOpen;
             //mirrorGO.GetComponent<Renderer>().material.DOFade(isAttracting ? 0 : mirrorOriginalAlpha, interval * fadeTimeRelativeToInterval);
+
+            if(isAttracting) yield return new WaitForSeconds(interval * fadeTimeRelativeToInterval);
+
             isAttracting = !isAttracting;
 
             if (isAttracting) windEventInstance.start();

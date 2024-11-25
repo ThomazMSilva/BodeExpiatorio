@@ -751,7 +751,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 8
-    angle: 30
+    angle: 0
     length: 25
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -1396,7 +1396,7 @@ ParticleSystem:
         serializedVersion: 2
         key0: {r: 1, g: 0, b: 1, a: 0}
         key1: {r: 0.49803922, g: 0, b: 1, a: 1}
-        key2: {r: 1, g: 0, b: 1, a: 0}
+        key2: {r: 1, g: 0, b: 1, a: 0.43137255}
         key3: {r: 1, g: 0, b: 1, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
@@ -1411,7 +1411,7 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 32382
+        atime1: 32768
         atime2: 65535
         atime3: 65535
         atime4: 0
@@ -3637,7 +3637,7 @@ ParticleSystem:
     separateAxes: 0
     range: {x: 0, y: 1}
   ColorBySpeedModule:
-    enabled: 1
+    enabled: 0
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -3713,7 +3713,8 @@ ParticleSystem:
     multiplyColliderForceByParticleSize: 0
     multiplyColliderForceByParticleSpeed: 0
     multiplyColliderForceByCollisionAngle: 1
-    m_Planes: []
+    m_Planes:
+    - {fileID: 4388303037016665306}
     m_Dampen:
       serializedVersion: 2
       minMaxState: 0
@@ -5195,7 +5196,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ffa6f91ca1d7b074fa73bb7292ba0359, type: 2}
+  - {fileID: 2100000, guid: d236df0d9af671345922186c9334d7ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5289,7 +5290,7 @@ MonoBehaviour:
   damagePerSecond: 2
   force: 100
   kneelingForceMultiplier: 0.09
-  fadeTimeRelativeToInterval: 0.5
+  fadeTimeRelativeToInterval: 0.4
   isIntervalActive: 1
   isAttracting: 0
   portalParticleSystem: {fileID: 328949667933320770}
@@ -6049,7 +6050,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.1
+      value: 1.25
       mode: 0
       spread: 0
       speed:
@@ -6112,7 +6113,7 @@ ParticleSystem:
       speed:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 1
+        scalar: 0
         minScalar: 1
         maxCurve:
           serializedVersion: 2
@@ -6168,7 +6169,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 100
+      scalar: 200
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -6285,13 +6286,13 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0.05405426
-          inSlope: 0
-          outSlope: 0
+          value: 0.20270602
+          inSlope: -0.58247805
+          outSlope: -0.58247805
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
-          outWeight: 0
+          outWeight: 0.18560603
         - serializedVersion: 3
           time: 1
           value: 1
@@ -11092,7 +11093,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 1.5
       mode: 0
       spread: 0
       speed:
