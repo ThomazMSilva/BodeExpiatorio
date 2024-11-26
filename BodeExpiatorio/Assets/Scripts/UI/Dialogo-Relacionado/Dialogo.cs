@@ -15,7 +15,7 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler
     int indiceAtual;
     bool isTextoTerminado;
     public UnityEvent OnDialogoAcabou;
-
+    [SerializeField] private UINavigationManager navigationManager;
 
 
     public void OnSubmit(BaseEventData eventData)
@@ -97,6 +97,13 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler
     }
     public void DestruaItem()
     {
-        gameObject.SetActive(false);
+        if (navigationManager == null)
+        {
+            Debug.LogError($"Não tem navigation manager referenciado no dialogo {gameObject.name}");
+            return;
+        }
+
+        navigationManager.ClosePanel();
+        //gameObject.SetActive(false);
     }
 }

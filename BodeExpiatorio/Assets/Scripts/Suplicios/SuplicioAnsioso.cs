@@ -76,7 +76,7 @@ public class SuplicioAnsioso : MonoBehaviour
         _input.OnKneelButtonDown -= SetKneelingTrue;
         _input.OnKneelButtonUp -= SetKneelingFalse;
         //StopCoroutine(Attract());
-        StopAllCoroutines();
+        StopCoroutine(Attract());
         windEventInstance.release();
     }
 

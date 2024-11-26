@@ -8,6 +8,7 @@ public class AbrirPause : MonoBehaviour
     [SerializeField] GameObject firstPauseButton;
     public bool Pausado;
     private Entrada input;
+    [SerializeField] private UINavigationManager navigationManager;
 
     private void Start() => pauseScreen.SetActive(false);
 
@@ -15,16 +16,19 @@ public class AbrirPause : MonoBehaviour
 
     public void PauseGame()
     {
-        pauseScreen.SetActive(true);
+        navigationManager.OpenPanel(pauseScreen);
+        /*pauseScreen.SetActive(true);
+        SetPauseSelected();*/
+      
         Time.timeScale = 0f; 
         Pausado = true;
-      
-        SetPauseSelected();
     }
 
     public void ResumeGame()
     {
-        pauseScreen.SetActive(false);
+        StopAllCoroutines();
+        StartCoroutine(ClosePauseScreen());
+        //pauseScreen.SetActive(false);
         Time.timeScale = 1f;   
         Pausado = false;
     }
@@ -51,14 +55,22 @@ public class AbrirPause : MonoBehaviour
     {
         if (Pausado)
         {
-            ResumeGame();
+           ResumeGame();
         }
         else
-        {
             PauseGame();
-        }
-
     }
+
+    private IEnumerator ClosePauseScreen() 
+    {
+        while (pauseScreen.activeSelf)
+        {
+            navigationManager.ClosePanel();
+            yield return null;
+        }
+    }
+
+
     public VidaJogador vidaJogador;
     public Jogador jogador;
 

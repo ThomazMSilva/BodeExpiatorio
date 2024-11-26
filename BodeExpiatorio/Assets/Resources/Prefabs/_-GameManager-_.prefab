@@ -1604,6 +1604,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8899518568228207616}
   - component: {fileID: 824672366573443616}
+  - component: {fileID: 5096824673580126618}
   m_Layer: 0
   m_Name: _-GameManager-_
   m_TagString: Untagged
@@ -1729,6 +1730,18 @@ MonoBehaviour:
     buffIcon: {fileID: 21300000, guid: 2ae95bd670401f9428feeeaa92726794, type: 3}
     buffDescription: "<b>Tranquilidade</b>\nPausa o temporizador do Fervor por alguns
       segundos toda vez que iniciar esta c\xE2mara."
+--- !u!114 &5096824673580126618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8291518985103027008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63b42926fa549ef478aa8dd970739190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8943587151897225731
 GameObject:
   m_ObjectHideFlags: 0

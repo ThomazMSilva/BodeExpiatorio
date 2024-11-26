@@ -1005,6 +1005,7 @@ MonoBehaviour:
   pauseScreen: {fileID: 3839960019656829596}
   firstPauseButton: {fileID: 2597958968774772321}
   Pausado: 0
+  navigationManager: {fileID: 4674643446696424045}
   vidaJogador: {fileID: 0}
   jogador: {fileID: 0}
 --- !u!1 &447540498978541137
@@ -1053,6 +1054,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeSlider: {fileID: 8454704819410997567}
+  SFXSlider: {fileID: 0}
+  MusicSlider: {fileID: 0}
+  generalVCAPath: vca:/Master
+  sfxVCAPath: vca:/SFX
+  musicVCAPath: vca:/Music
 --- !u!1 &561899358150487994
 GameObject:
   m_ObjectHideFlags: 0
@@ -3553,6 +3559,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2506717913606190029}
+  - component: {fileID: 5928502107628249449}
   m_Layer: 5
   m_Name: MenuPrincipal_Screen
   m_TagString: Untagged
@@ -3585,6 +3592,19 @@ RectTransform:
   m_AnchoredPosition: {x: 3.7339096, y: -100.07881}
   m_SizeDelta: {x: 800.00006, y: 449.76077}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5928502107628249449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734294324165380965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a07e933546a44e4f86fda414977d573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _navigationManager: {fileID: 4674643446696424045}
 --- !u!1 &1905077989158844101
 GameObject:
   m_ObjectHideFlags: 0
@@ -6016,6 +6036,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeSlider: {fileID: 8525039263240115694}
+  SFXSlider: {fileID: 0}
+  MusicSlider: {fileID: 0}
+  generalVCAPath: vca:/Master
+  sfxVCAPath: vca:/SFX
+  musicVCAPath: vca:/Music
 --- !u!114 &8035827608432666256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6966,6 +6991,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeSlider: {fileID: 6215370757272821542}
+  SFXSlider: {fileID: 0}
+  MusicSlider: {fileID: 0}
+  generalVCAPath: vca:/Master
+  sfxVCAPath: vca:/SFX
+  musicVCAPath: vca:/Music
 --- !u!114 &1008253930709329556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7789,6 +7819,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7776319930347997571}
   - component: {fileID: 8708236539850821542}
+  - component: {fileID: 4674643446696424045}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -7823,6 +7854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f7de15c4c032894083949e2949f4c49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  navigationManager: {fileID: 4674643446696424045}
   pauseMenuScreen: {fileID: 3839960019656829596}
   mainMenuScreen: {fileID: 1734294324165380965}
   optionsScreen: {fileID: 2700703290900820837}
@@ -7830,13 +7862,19 @@ MonoBehaviour:
   graphicsScreen: {fileID: 5365965263957836380}
   soundScreen: {fileID: 1616223642057030070}
   accessiblityScreen: {fileID: 1522935037100252451}
-  firstMainMenuOption: {fileID: 4080266726235448747}
-  firstPauseMenuOption: {fileID: 2597958968774772321}
-  firstConfigOption: {fileID: 4591531333121372517}
-  creditsReturnBTN: {fileID: 8431700523539614681}
-  firstGraphicsBTN: {fileID: 8287416166228663183}
-  firstSoundBTN: {fileID: 7870926309440605652}
-  firstAccessibilityBTN: {fileID: 5732852163642979159}
+--- !u!114 &4674643446696424045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3561688494739623159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63b42926fa549ef478aa8dd970739190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuScreen: {fileID: 1734294324165380965}
 --- !u!1 &3659410638050689969
 GameObject:
   m_ObjectHideFlags: 0
@@ -15380,6 +15418,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeSlider: {fileID: 2590211298075487156}
+  SFXSlider: {fileID: 0}
+  MusicSlider: {fileID: 0}
+  generalVCAPath: vca:/Master
+  sfxVCAPath: vca:/SFX
+  musicVCAPath: vca:/Music
 --- !u!114 &4110793928400806650
 MonoBehaviour:
   m_ObjectHideFlags: 0
