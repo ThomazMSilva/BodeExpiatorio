@@ -132,7 +132,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: d283003480d5fff4b8ca7e7769383b68, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.011212602
+      value: 0.012754336
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d283003480d5fff4b8ca7e7769383b68, type: 3}
       propertyPath: m_LocalPosition.x
@@ -140,7 +140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d283003480d5fff4b8ca7e7769383b68, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.82
+      value: 7.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d283003480d5fff4b8ca7e7769383b68, type: 3}
       propertyPath: m_LocalPosition.z
@@ -584,15 +584,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4609566080911235680, guid: 1fbaf686d1417714a9d4a6a0164211db, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 129.53
+      value: 129.38
       objectReference: {fileID: 0}
     - target: {fileID: 4609566080911235680, guid: 1fbaf686d1417714a9d4a6a0164211db, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 27.639996
+      value: 27.634
       objectReference: {fileID: 0}
     - target: {fileID: 4609566080911235680, guid: 1fbaf686d1417714a9d4a6a0164211db, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.74
+      value: 1.524
       objectReference: {fileID: 0}
     - target: {fileID: 4609566080911235680, guid: 1fbaf686d1417714a9d4a6a0164211db, type: 3}
       propertyPath: m_LocalRotation.w
@@ -917,6 +917,7 @@ Transform:
   m_Children:
   - {fileID: 931914556}
   - {fileID: 111587534}
+  - {fileID: 1338981200}
   - {fileID: 35557092}
   - {fileID: 1951971740}
   - {fileID: 703424398}
@@ -1161,15 +1162,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4609566080911235680, guid: 1fbaf686d1417714a9d4a6a0164211db, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 70.6
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 4609566080911235680, guid: 1fbaf686d1417714a9d4a6a0164211db, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.469997
+      value: 18.448
       objectReference: {fileID: 0}
     - target: {fileID: 4609566080911235680, guid: 1fbaf686d1417714a9d4a6a0164211db, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.62
+      value: 1.12
       objectReference: {fileID: 0}
     - target: {fileID: 4609566080911235680, guid: 1fbaf686d1417714a9d4a6a0164211db, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1524,7 +1525,7 @@ Transform:
   m_GameObject: {fileID: 217798004}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 26.51, y: 15.3, z: 1.0134625}
+  m_LocalPosition: {x: 26.51, y: 13.6, z: 1.0134625}
   m_LocalScale: {x: 10.127406, y: 2.243561, z: 2.243561}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2023,7 +2024,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "Daqui em diante a fase se torna bem escura e sombria, com armadilhas escondidas
+    e muitas partes mal iluminadas. Acho que vale manter \"pouca\" decora\xE7\xE3o
+    tamb\xE9m, particularmente acredito que uma \xE1rea mais vazia vai causar mais
+    estranhamento e uma sensa\xE7\xE3o de solid\xE3o, talvez. Usar mais ra\xEDzes
+    e decora\xE7\xF5es mais espa\xE7adas."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2205,11 +2210,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.439997
+      value: 12.431
       objectReference: {fileID: 0}
     - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.86926
+      value: 1.59
       objectReference: {fileID: 0}
     - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3136,7 +3141,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 17.439903, y: 1.243477, z: 0}
-  m_LocalScale: {x: 0.7274365, y: 0.03549232, z: 0.1808}
+  m_LocalScale: {x: 0.7274365, y: 0.03549232, z: 0.73714066}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 664741216}
@@ -3716,7 +3721,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "Esse po\xE7o absolutamente escuro, exceto pelo comecinho dele que tem
+    o item de lore e uns corpos pendurados."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3871,15 +3877,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4609566080911235680, guid: 1fbaf686d1417714a9d4a6a0164211db, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 241.83
+      value: 243.269
       objectReference: {fileID: 0}
     - target: {fileID: 4609566080911235680, guid: 1fbaf686d1417714a9d4a6a0164211db, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.550003
+      value: -7.54
       objectReference: {fileID: 0}
     - target: {fileID: 4609566080911235680, guid: 1fbaf686d1417714a9d4a6a0164211db, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 66.01
+      value: 1.857
       objectReference: {fileID: 0}
     - target: {fileID: 4609566080911235680, guid: 1fbaf686d1417714a9d4a6a0164211db, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4134,15 +4140,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4609566080911235680, guid: 1fbaf686d1417714a9d4a6a0164211db, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 227.63
+      value: 228.746
       objectReference: {fileID: 0}
     - target: {fileID: 4609566080911235680, guid: 1fbaf686d1417714a9d4a6a0164211db, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.500003
+      value: -9.57
       objectReference: {fileID: 0}
     - target: {fileID: 4609566080911235680, guid: 1fbaf686d1417714a9d4a6a0164211db, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 60.92
+      value: 1.948
       objectReference: {fileID: 0}
     - target: {fileID: 4609566080911235680, guid: 1fbaf686d1417714a9d4a6a0164211db, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4345,7 +4351,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "No come\xE7o da fase, a luz do portal deve ser o suficiente para ajudar
+    a guiar o jogador pelo n\xEDvel. As plataformas que tem uma pequena \xE1rea iluminada
+    em volta s\xE3o cogumelos bioluminescentes que iluminam somente ao redor da plataforma.
+    O \xFAltimo espinho da sala (o de n\xFAmero 6) pode tanto ser mal iluminado quanto,
+    de prefer\xEAncia, escondido, enquanto o arame ao lado dele deve estar iluminado.
+    O contr\xE1rio tamb\xE9m funciona, pode ser como for mais pr\xE1tico/ficar visualmente
+    mais agrad\xE1vel. Por fim, a \xE1rea coberta de azul escuro/roxo *deve* ser
+    um breu."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4893,8 +4906,8 @@ Transform:
   m_GameObject: {fileID: 855879678}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.713, y: 0.231, z: 0}
-  m_LocalScale: {x: 2.8573525, y: 1.0354688, z: 1}
+  m_LocalPosition: {x: -2.713, y: 0.759, z: 0}
+  m_LocalScale: {x: 2.8573525, y: 2.096177, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 664741216}
@@ -5478,7 +5491,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "O que importa aqui \xE9 iluminar o caminho do jogador. O cen\xE1rio pode
-    ter mais luzes,"
+    ter mais luzes, mas os lugares que est\xE3o marcados realmente precisam estar
+    iluminados. D\xE1 pra mander a vibe de dungeon do trai\xE7\xE3o 1, especialmente
+    no come\xE7o da fase onde poderia dar a entender que \xE9 uma sequ\xEAncia direta
+    da sala anterior. Acredito que a ilumina\xE7\xE3o possa ser feita atrav\xE9s
+    de fontes de luz penduradas ou cogumelos bioluminescentes. grudados nas plataformas
+    que caem (dessa forma eles grudam nas plataformas e acompanham o movimento delas."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6493,7 +6511,7 @@ Transform:
   m_GameObject: {fileID: 1065996912}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 106.51, y: -0.37, z: 1.0134625}
+  m_LocalPosition: {x: 106.51, y: -2.0699992, z: 1.0134625}
   m_LocalScale: {x: 130.53305, y: 2.243561, z: 2.243561}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7343,7 +7361,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 22.475, y: 1.564277, z: 0}
-  m_LocalScale: {x: 0.7274365, y: 0.03549232, z: 0.1808}
+  m_LocalScale: {x: 0.7274365, y: 0.03549232, z: 0.9086408}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 664741216}
@@ -8267,6 +8285,72 @@ Transform:
   - {fileID: 1794079109}
   m_Father: {fileID: 251989133}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1338981199
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 52384016}
+    m_Modifications:
+    - target: {fileID: 620297403069657021, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
+      propertyPath: m_Name
+      value: Poste brutalidade v1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -20.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -17.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.43431535
+      objectReference: {fileID: 0}
+    - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.90076095
+      objectReference: {fileID: 0}
+    - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 231.483
+      objectReference: {fileID: 0}
+    - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8902254901995425557, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
+--- !u!4 &1338981200 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
+  m_PrefabInstance: {fileID: 1338981199}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1350309541
 GameObject:
   m_ObjectHideFlags: 0
@@ -8470,15 +8554,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 99.93
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 25.239998
+      value: 25.22
       objectReference: {fileID: 0}
     - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.86926
+      value: 1.77
       objectReference: {fileID: 0}
     - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9364,8 +9448,8 @@ Transform:
   m_GameObject: {fileID: 1545732248}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.528, y: 1.792057, z: 0}
-  m_LocalScale: {x: 1.6923425, y: 0.032110844, z: 0.1808}
+  m_LocalPosition: {x: 13.82, y: 1.792057, z: 0}
+  m_LocalScale: {x: 30.410454, y: 0.032110844, z: 0.1808}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 664741216}
@@ -9494,11 +9578,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -29.780003
+      value: -29.81
       objectReference: {fileID: 0}
     - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 41.1
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9663,7 +9747,7 @@ Transform:
   m_GameObject: {fileID: 1619374609}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 57.86, y: 0.8600011, z: 1.0134625}
+  m_LocalPosition: {x: 57.86, y: -0.8399981, z: 1.0134625}
   m_LocalScale: {x: 11.194943, y: 2.243561, z: 2.243561}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10743,11 +10827,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -18.780003
+      value: -18.79
       objectReference: {fileID: 0}
     - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 41.1
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 6362312383430433256, guid: 9d12a0ffb5b376e4bb840bc5b754902f, type: 3}
       propertyPath: m_LocalRotation.w
