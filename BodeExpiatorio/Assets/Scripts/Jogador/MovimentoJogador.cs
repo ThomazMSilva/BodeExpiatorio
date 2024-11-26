@@ -165,7 +165,12 @@ public class MovimentoJogador : MonoBehaviour
         colliderKneelingSize.Set(colliderBaseSize.x, colliderBaseSize.y * kneelHeightMultiplier, colliderBaseSize.z);
 
         colliderBaseCenter = playerCollider.center;
-        colliderKneelingCenter.Set(colliderBaseCenter.x, colliderBaseCenter.y - (colliderKneelingSize.y * 0.5f), colliderBaseCenter.z);
+        colliderKneelingCenter.Set
+        (
+            colliderBaseCenter.x, 
+            colliderBaseCenter.y - (colliderBaseSize.y - colliderKneelingSize.y) * .5f, 
+            colliderBaseCenter.z
+        );
         raycastDistance = playerCollider.bounds.extents.y + -(playerCollider.center.y - .1f);
         colliderHorizontalRange = new(playerCollider.bounds.extents.x - .1f, 0, 0);
 
@@ -253,6 +258,7 @@ public class MovimentoJogador : MonoBehaviour
         playerAnim.SetBool("isGrounded", isGrounded);
         playerAnim.SetBool("isWired", isStuckInWire);
         playerAnim.SetFloat("velocityX", MathF.Abs(rb.velocity.x));
+        playerAnim.SetFloat("velocityScale", rb.velocity.x / moveSpeed);
         playerAnim.SetFloat("velocityY", rb.velocity.y);
     }
 
