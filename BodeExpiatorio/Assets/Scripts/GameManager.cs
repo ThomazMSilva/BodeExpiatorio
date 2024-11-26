@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private string deathSceneName = "Morte";
     [SerializeField] private string confessionSceneName = "Confessionario";
+    [SerializeField] private string menuSceneName = "Menu Inicial";
 
     [SerializeField] private List<Sala> rooms;
 
@@ -202,7 +203,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadDeathScene() => SceneManager.LoadScene(deathSceneName);
 
-    public void LoadMainMenu() => StartCoroutine(LoadScreen("Menu 1"));
+    public void LoadMainMenu() => StartCoroutine(LoadScreen(menuSceneName));
 
 
 
