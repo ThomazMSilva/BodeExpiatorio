@@ -1644,20 +1644,23 @@ MonoBehaviour:
   deathSceneName: Morte
   confessionSceneName: Confessionario
   rooms:
-  - sceneName: Desejo1
+  - sceneName: Desejo 1
     sceneIndex: 0
     isCheckpointActive: 1
-  - sceneName: Desejo2
+  - sceneName: Desejo 2
     sceneIndex: 1
     isCheckpointActive: 0
   - sceneName: Traicao 1
     sceneIndex: 2
     isCheckpointActive: 0
-  - sceneName: Brutal 1 Modelos Novos
+  - sceneName: Traicao 2
     sceneIndex: 3
     isCheckpointActive: 0
-  - sceneName: Brutal 2 Mobiliada
+  - sceneName: Brutal 1
     sceneIndex: 4
+    isCheckpointActive: 0
+  - sceneName: Brutal 2
+    sceneIndex: 5
     isCheckpointActive: 0
   currentRoom:
     sceneName: 
@@ -1742,6 +1745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63b42926fa549ef478aa8dd970739190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuScreen: {fileID: 0}
 --- !u!1 &8943587151897225731
 GameObject:
   m_ObjectHideFlags: 0
