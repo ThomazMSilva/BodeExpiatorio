@@ -35,6 +35,10 @@ public class Entrada : MonoBehaviour
     {
         if (GameManager.Instance.IsLoading) return;
 
+        if (Input.GetButtonDown(pauseAxis)) OnPauseButtonDown?.Invoke();
+
+        if (Pause.Pausado) return;
+
         horizontalInput = Input.GetAxis(horizontalAxis);
         verticalInput = Input.GetAxisRaw(verticalAxis);
 
@@ -46,6 +50,5 @@ public class Entrada : MonoBehaviour
 
         if (Input.GetButtonUp(kneelAxis)) OnKneelButtonUp?.Invoke();
 
-        if (Input.GetButtonDown(pauseAxis)) OnPauseButtonDown?.Invoke();
     }
 }

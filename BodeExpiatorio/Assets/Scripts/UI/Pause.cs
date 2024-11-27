@@ -2,11 +2,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AbrirPause : MonoBehaviour
+public class Pause : MonoBehaviour
 {
     public GameObject pauseScreen;
     [SerializeField] GameObject firstPauseButton;
-    public bool Pausado;
+    public static bool Pausado;
     private Entrada input;
     [SerializeField] private UINavigationManager navigationManager;
 
@@ -26,8 +26,9 @@ public class AbrirPause : MonoBehaviour
 
     public void ResumeGame()
     {
-        StopAllCoroutines();
-        StartCoroutine(ClosePauseScreen());
+        navigationManager.CloseAllPanels();
+        /*StopAllCoroutines();
+        StartCoroutine(ClosePauseScreen());*/
         //pauseScreen.SetActive(false);
         Time.timeScale = 1f;   
         Pausado = false;

@@ -32,7 +32,7 @@ public class AudioManager : MonoBehaviour
     public VCA generalVCA;
     public VCA sfxVCA;
     public VCA musicVCA;
-    public List<EventInstance> eventInstances;
+    public List<EventInstance> eventInstances = new();
 
 
     private void Awake()
@@ -46,7 +46,7 @@ public class AudioManager : MonoBehaviour
 
         eventInstances = new();
 
-        StartCoroutine(InitializeVCAs());
+        //StartCoroutine(InitializeVCAs());
     }
 
     private IEnumerator InitializeVCAs()
@@ -71,7 +71,9 @@ public class AudioManager : MonoBehaviour
 
     public EventInstance CreateEventInstance(EventReference eventReference)
     {
+        Debug.Log($"Comecou a tentar criar instancia de {eventReference}");
         EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
+        Debug.Log($"O que saiu foi a instancia {eventInstance}");
         eventInstances.Add(eventInstance);
         return eventInstance;
     }

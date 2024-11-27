@@ -2614,6 +2614,56 @@ RectTransform:
   m_AnchoredPosition: {x: 68.5314, y: -35.28128}
   m_SizeDelta: {x: 400, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1532180779520505687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5707145131194921110}
+  - component: {fileID: 335728645346666519}
+  m_Layer: 0
+  m_Name: VolumeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5707145131194921110
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532180779520505687}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8828487000331988847}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &335728645346666519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532180779520505687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78435115991a1ba45a61cf039a870d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 2590211298075487156}
+  SFXSlider: {fileID: 8525039263240115694}
+  MusicSlider: {fileID: 6215370757272821542}
+  generalVCAPath: vca:/Ambiental
+  sfxVCAPath: vca:/SFX
+  musicVCAPath: vca:/Musicas
 --- !u!1 &1544545120280164525
 GameObject:
   m_ObjectHideFlags: 0
@@ -5998,7 +6048,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1536057437297868167}
-  - component: {fileID: 7048697573458654522}
   - component: {fileID: 8035827608432666256}
   m_Layer: 0
   m_Name: EfeitosSBarra
@@ -6023,24 +6072,6 @@ Transform:
   - {fileID: 6867737651043087646}
   m_Father: {fileID: 8369074250434343828}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7048697573458654522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2653378504957561305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78435115991a1ba45a61cf039a870d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volumeSlider: {fileID: 8525039263240115694}
-  SFXSlider: {fileID: 0}
-  MusicSlider: {fileID: 0}
-  generalVCAPath: vca:/Master
-  sfxVCAPath: vca:/SFX
-  musicVCAPath: vca:/Music
 --- !u!114 &8035827608432666256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6753,6 +6784,7 @@ Transform:
   - {fileID: 7776319930347997571}
   - {fileID: 3355760303830595611}
   - {fileID: 5144262647179509170}
+  - {fileID: 5707145131194921110}
   - {fileID: 6495750719102793798}
   - {fileID: 9141374521687572595}
   m_Father: {fileID: 0}
@@ -6953,7 +6985,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1420774931289008280}
-  - component: {fileID: 7746083751393542954}
   - component: {fileID: 1008253930709329556}
   m_Layer: 0
   m_Name: MusicaBarra
@@ -6978,24 +7009,6 @@ Transform:
   - {fileID: 677219683253159560}
   m_Father: {fileID: 8369074250434343828}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7746083751393542954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3206372286204422846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78435115991a1ba45a61cf039a870d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volumeSlider: {fileID: 6215370757272821542}
-  SFXSlider: {fileID: 0}
-  MusicSlider: {fileID: 0}
-  generalVCAPath: vca:/Master
-  sfxVCAPath: vca:/SFX
-  musicVCAPath: vca:/Music
 --- !u!114 &1008253930709329556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7127,7 +7140,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7048697573458654522}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: VolumeManager, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 1
@@ -7589,7 +7602,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7746083751393542954}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: VolumeManager, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 1
@@ -15380,7 +15393,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 334711572119623552}
-  - component: {fileID: 3748058590499823546}
   - component: {fileID: 4110793928400806650}
   m_Layer: 0
   m_Name: GeralBarra
@@ -15405,24 +15417,6 @@ Transform:
   - {fileID: 2118673617655121226}
   m_Father: {fileID: 8369074250434343828}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3748058590499823546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6874109846554663550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78435115991a1ba45a61cf039a870d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volumeSlider: {fileID: 2590211298075487156}
-  SFXSlider: {fileID: 0}
-  MusicSlider: {fileID: 0}
-  generalVCAPath: vca:/Master
-  sfxVCAPath: vca:/SFX
-  musicVCAPath: vca:/Music
 --- !u!114 &4110793928400806650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17276,7 +17270,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3748058590499823546}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: VolumeManager, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 1

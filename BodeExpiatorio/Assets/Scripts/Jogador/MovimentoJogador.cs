@@ -177,7 +177,7 @@ public class MovimentoJogador : MonoBehaviour
         gravity = Physics.gravity;
 
         playerWalkingEventInstance = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.PlayerWalked);
-        playerIdleEventInstance = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.PlayerIdle);
+        //playerIdleEventInstance = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.PlayerIdle);
     }
 
     public void SetPaused(bool paused)
