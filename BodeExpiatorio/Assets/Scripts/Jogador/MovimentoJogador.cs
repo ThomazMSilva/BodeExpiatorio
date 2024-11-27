@@ -142,6 +142,7 @@ public class MovimentoJogador : MonoBehaviour
     private RaycastHit hitRight;
 
     private EventInstance playerWalkingEventInstance;
+    private EventInstance playerKneelingEventInstance;
     private EventInstance playerIdleEventInstance;
 
     public delegate void EventHandler(bool boolean);
@@ -177,6 +178,7 @@ public class MovimentoJogador : MonoBehaviour
         gravity = Physics.gravity;
 
         playerWalkingEventInstance = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.PlayerWalked);
+        playerKneelingEventInstance = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.PlayerKnelt);
         //playerIdleEventInstance = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.PlayerIdle);
     }
 
@@ -359,24 +361,38 @@ public class MovimentoJogador : MonoBehaviour
 
     private void HandleWalkingSound()
     {
-        if (!isGrounded || isKneeling)
+        if (!isGrounded || horizontalInput == 0)
         {
+            //playerIdleEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
             playerWalkingEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
-            playerIdleEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
+            playerKneelingEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
             return;
         }
 
-        if (horizontalInput != 0)
+        if (horizontalInput != 0 && !isKneeling)
         {
-            idlingCurrentTime = 0;
+            //idlingCurrentTime = 0;
 
-            playerIdleEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
+            //playerIdleEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
 
+            playerKneelingEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
             playerWalkingEventInstance.getPlaybackState(out PLAYBACK_STATE walkingPbState);
 
             if (walkingPbState.Equals(PLAYBACK_STATE.STOPPED)) playerWalkingEventInstance.start();
         }
-        else
+
+        else if (horizontalInput != 0 && isKneeling)
+        {
+            //idlingCurrentTime = 0;
+
+            //playerIdleEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
+
+            playerWalkingEventInstance.stop(STOP_MODE.ALLOWFADEOUT);
+            playerKneelingEventInstance.getPlaybackState(out PLAYBACK_STATE kneelingPbState);
+
+            if (kneelingPbState.Equals(PLAYBACK_STATE.STOPPED)) playerKneelingEventInstance.start();
+        }
+        /*else
         {
             idlingCurrentTime += Time.fixedDeltaTime;
 
@@ -390,7 +406,7 @@ public class MovimentoJogador : MonoBehaviour
 
                 idlingCurrentTime = 0;
             }
-        }
+        }*/
     }
 
     private void HandleClimb()
@@ -460,7 +476,7 @@ public class MovimentoJogador : MonoBehaviour
 
 
         //playerAnim.SetBool("kneeling", willKneel);
-        AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerKnelt, transform.position);
+        //AudioManager.Instance.PlayerOneShot(FMODEvents.Instance.PlayerKnelt, transform.position);
         OnPlayerKnelt?.Invoke(willKneel);
         playerCollider.size = willKneel ? colliderKneelingSize : colliderBaseSize;
         playerCollider.center = willKneel ? colliderKneelingCenter : colliderBaseCenter;

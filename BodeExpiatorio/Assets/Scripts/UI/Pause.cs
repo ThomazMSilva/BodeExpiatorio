@@ -10,7 +10,7 @@ public class Pause : MonoBehaviour
     private Entrada input;
     [SerializeField] private UINavigationManager navigationManager;
 
-    private void Start() => pauseScreen.SetActive(false);
+    //private void Start() => pauseScreen.SetActive(false);
 
     public void SetPauseSelected() => UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(firstPauseButton);
 
