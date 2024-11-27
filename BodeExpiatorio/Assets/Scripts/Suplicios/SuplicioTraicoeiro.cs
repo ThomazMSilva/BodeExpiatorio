@@ -84,7 +84,7 @@ namespace Assets.Scripts.Suplicios
             {
                 if (CanShoot())
                 {
-                    GameObject go = PoolManager.Instance.InstantiateFromPool(sporePrefab, sporeDispenser.position, Quaternion.identity);
+                    GameObject go = PoolManager.Instance.InstantiateFromPool(sporePrefab, sporeDispenser.position, transform.rotation);
                     Rigidbody sporeRB = go.GetComponent<Rigidbody>();
                     sporeRB.velocity = Vector3.zero;
                     sporeRB.AddForce(transformDirection * sporeSpeed, ForceMode.Impulse);

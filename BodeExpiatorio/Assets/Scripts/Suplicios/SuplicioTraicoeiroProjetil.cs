@@ -24,6 +24,7 @@ namespace Assets.Scripts.Suplicios
 
         [SerializeField] private Material explosionDisplayColor;
         [SerializeField] private float explosionDisplayDuration;
+        [SerializeField] private ParticleSystem explosionDisplayParticles;
 
         private void Start()
         {
