@@ -24,7 +24,8 @@ namespace Assets.Scripts.Suplicios
 
         [SerializeField] private Material explosionDisplayColor;
         [SerializeField] private float explosionDisplayDuration;
-        [SerializeField] private ParticleSystem explosionDisplayParticles;
+        [SerializeField] private float explosionParticlesDuration = 5f;
+        [SerializeField] private GameObject explosionParticlesPrefab;
 
         private void Start()
         {
@@ -87,10 +88,12 @@ namespace Assets.Scripts.Suplicios
             Destroy(displaySphere.GetComponent<SphereCollider>());
             displaySphere.transform.position = transform.position;
             displaySphere.transform.localScale = explosionRadius * 2 * Vector3.one;
+            GameObject particles = Instantiate(explosionParticlesPrefab, displaySphere.transform.position, displaySphere.transform.rotation);
             displaySphere.SetActive(true);
             displaySphere.GetComponent<Renderer>().material = explosionDisplayColor;
             displaySphere.GetComponent<Renderer>().material.DOFade(0, explosionDisplayDuration);
             Destroy(displaySphere, explosionDisplayDuration);
+            Destroy(particles, explosionParticlesDuration);
         }
         private IEnumerator Decay()
         {
