@@ -40199,9 +40199,9 @@ GameObject:
   - component: {fileID: 1153393531}
   - component: {fileID: 1153393530}
   - component: {fileID: 1153393529}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61410,6 +61410,10 @@ PrefabInstance:
       propertyPath: confessionario
       value: 
       objectReference: {fileID: 1626798250}
+    - target: {fileID: 3945695311662194199, guid: 77cd05b98de889547bce88fadf54a199, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8995350554505572058, guid: 77cd05b98de889547bce88fadf54a199, type: 3}
       propertyPath: m_Name
       value: Venceu

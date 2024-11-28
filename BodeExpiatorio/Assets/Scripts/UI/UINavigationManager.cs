@@ -5,7 +5,9 @@ using UnityEngine.EventSystems;
 public class UINavigationManager : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenuScreen;
-    private Stack<GameObject> panelStack = new Stack<GameObject>();
+    private Stack<GameObject> panelStack;
+
+    private void Awake() => panelStack = new();
 
     private void Update()
     {
