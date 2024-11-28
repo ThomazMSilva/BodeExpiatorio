@@ -80,6 +80,7 @@ public class Entrada : MonoBehaviour
     private void PauseAction_performed(InputAction.CallbackContext obj)
     {
         if (GameManager.Instance.IsLoading) return;
+        pauseCount++;
         Debug.Log($"Evento de pause tocado {pauseCount} vezes");
         OnPauseButtonDown?.Invoke();
     }

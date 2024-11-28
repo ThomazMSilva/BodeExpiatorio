@@ -47,6 +47,7 @@ namespace Assets.Scripts.Suplicios
             if (!other.gameObject.TryGetComponent<Jogador>(out _player)) return;
             
             _player.SetPlayerWired(true, willLookRight);
+            _player.transform.parent = transform;
             _player.SetWiredForceAndRagdoll(forceAmountX, forceAmountY, stunTime);
 
             if (changeColorCoroutine != null) StopCoroutine(changeColorCoroutine);

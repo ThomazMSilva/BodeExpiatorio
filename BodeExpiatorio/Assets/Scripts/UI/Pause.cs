@@ -16,22 +16,22 @@ public class Pause : MonoBehaviour
 
     public void PauseGame()
     {
+        Time.timeScale = 0f; 
+        Pausado = true;
         navigationManager.OpenPanel(pauseScreen);
         /*pauseScreen.SetActive(true);
         SetPauseSelected();*/
       
-        Time.timeScale = 0f; 
-        Pausado = true;
     }
 
     public void ResumeGame()
     {
+        Time.timeScale = 1f;   
+        Pausado = false;
         navigationManager.CloseAllPanels();
         /*StopAllCoroutines();
         StartCoroutine(ClosePauseScreen());*/
         //pauseScreen.SetActive(false);
-        Time.timeScale = 1f;   
-        Pausado = false;
     }
 
     private void OnEnable() => StartCoroutine(InitializeReference());

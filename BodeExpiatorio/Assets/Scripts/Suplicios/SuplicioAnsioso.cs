@@ -48,10 +48,12 @@ public class SuplicioAnsioso : MonoBehaviour
         _input.OnKneelButtonDown += SetKneelingTrue;
         _input.OnKneelButtonUp += SetKneelingFalse;
 
+        var collider = GetComponent<Collider>();
+
         var portalShapeModule = portalParticleSystem.shape;
         portalShapeModule.length = transform.localScale.x;
         var suctionShapeModule = suctionParticleSystem.shape;
-        suctionShapeModule.length = transform.localScale.x;
+        suctionShapeModule.length = transform.localScale.x;//collider.bounds.size.x;
         var vortexShapeModule = vortexParticleSystem.shape;
         vortexShapeModule.length = transform.localScale.x;
 

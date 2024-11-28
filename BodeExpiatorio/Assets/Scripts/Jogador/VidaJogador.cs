@@ -309,6 +309,8 @@ public class VidaJogador : MonoBehaviour
 
     public void CureMaxHealth() => CurrentMaxHealth = startingMaxHealth;
 
+    public void CureMaxHealthToBase() => CurrentMaxHealth = BaseHealth;
+
     public event HealthChangedHandler OnHealthChanged;
     public event HealthChangedHandler OnMaxHealthChanged;
     public event HealthChangedHandler OnFrontHealthChanged;

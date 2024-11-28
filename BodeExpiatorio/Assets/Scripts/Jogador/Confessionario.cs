@@ -44,7 +44,13 @@ public class Confessionario : MonoBehaviour
     private void Start()
     {
         Spawn();
-        if (inConfessionRoom) return;
+
+        if (!IsFinalRoom) GameManager.Instance.SetHealth(player.Vida.BaseHealth, GameManager.Instance.GetCurrentHealth());
+
+        if (inConfessionRoom)
+        {
+            return;
+        }
         
         startingRoomTime = Time.time;
         startingRunTime = Time.time;

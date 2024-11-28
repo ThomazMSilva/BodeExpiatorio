@@ -5623,7 +5623,6 @@ GameObject:
   - component: {fileID: 9003064230990377587}
   - component: {fileID: 4058369914998336430}
   - component: {fileID: 605131331586168744}
-  - component: {fileID: 8888783248528880224}
   m_Layer: 5
   m_Name: "Bot\xE3oMenuInicial"
   m_TagString: Untagged
@@ -5785,35 +5784,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
---- !u!114 &8888783248528880224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2364310846687740016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 16
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4674643446696424045}
-          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
-          m_MethodName: ClosePanel
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &2495429606621835953
 GameObject:
   m_ObjectHideFlags: 0
@@ -6252,7 +6222,6 @@ GameObject:
   - component: {fileID: 3612593783296214666}
   - component: {fileID: 4583522069657023729}
   - component: {fileID: 577145122693380722}
-  - component: {fileID: 4418336167074452257}
   m_Layer: 5
   m_Name: "Bot\xE3oContinuar"
   m_TagString: Untagged
@@ -6414,35 +6383,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
---- !u!114 &4418336167074452257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2597958968774772321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 16
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4674643446696424045}
-          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
-          m_MethodName: ClosePanel
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &2627716937083798051
 GameObject:
   m_ObjectHideFlags: 0
@@ -9040,7 +8980,6 @@ GameObject:
   - component: {fileID: 2035831482070226078}
   - component: {fileID: 8061999611421704489}
   - component: {fileID: 3690263073744826090}
-  - component: {fileID: 4344037696248897225}
   m_Layer: 5
   m_Name: UltimoConfessionario
   m_TagString: Untagged
@@ -9202,35 +9141,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
---- !u!114 &4344037696248897225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3676400003929228935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 16
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4674643446696424045}
-          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
-          m_MethodName: ClosePanel
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &3751950046715268174
 GameObject:
   m_ObjectHideFlags: 0
@@ -18360,7 +18270,6 @@ GameObject:
   - component: {fileID: 6841227039111935073}
   - component: {fileID: 3422874310361454749}
   - component: {fileID: 762010230485023243}
-  - component: {fileID: 1857661539512965009}
   m_Layer: 5
   m_Name: 'ReiniciarNivel '
   m_TagString: Untagged
@@ -18522,35 +18431,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
---- !u!114 &1857661539512965009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7280768696998156186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 16
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4674643446696424045}
-          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
-          m_MethodName: ClosePanel
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &7282959078762499264
 GameObject:
   m_ObjectHideFlags: 0
@@ -18950,7 +18830,6 @@ GameObject:
   - component: {fileID: 2824105289468287852}
   - component: {fileID: 8342689956529868736}
   - component: {fileID: 5536903155296546456}
-  - component: {fileID: 516370773989518906}
   m_Layer: 5
   m_Name: "Bot\xE3oOp\xE7\xF5es"
   m_TagString: Untagged
@@ -19112,35 +18991,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
---- !u!114 &516370773989518906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7725948864608024325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 16
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4674643446696424045}
-          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
-          m_MethodName: ClosePanel
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &7836646419702355359
 GameObject:
   m_ObjectHideFlags: 0

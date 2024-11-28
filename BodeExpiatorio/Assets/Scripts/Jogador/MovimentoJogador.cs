@@ -266,6 +266,8 @@ public class MovimentoJogador : MonoBehaviour
 
     private void CheckGrounded()
     {
+        if (isStuckInWire) return;
+
         isGrounded =
             Physics.Raycast(transform.position, -Vector3.up, out hit, raycastDistance, groundLayer) || 
             Physics.Raycast(transform.position - colliderHorizontalRange, -Vector3.up, out hitLeft, raycastDistance, groundLayer) ||
@@ -296,7 +298,7 @@ public class MovimentoJogador : MonoBehaviour
     {
 
         if (isStuckInWire || isClimbing)
-        {
+        {           
             rb.useGravity = false;
             rb.velocity = Vector3.zero;
             return;
