@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -22,7 +24,8 @@ public enum CharacterPosition
 public class Dialogue
 {
     [TextArea] public string text;
-    [SerializeField] public float typingDelaySpeed;
+    public float typingDelaySpeed;
+    [field: SerializeField] public EventReference DialogueEventReference;
     public bool hasBackground;
     public CharacterExpression characterMood;
     public CharacterKey characterKey;
@@ -126,10 +129,18 @@ public class DialogueBehaviour : MonoBehaviour
     public void FinishDialogue(bool b)
     {
         OnTextFinished?.Invoke();
+        currentAudioEventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         if (b) gameObject.SetActive(false);
     }
 
-    private IEnumerator TypeText(string newText, float typingInterval = 0.1f, bool hasBackground = false, CharacterKey characterKey = CharacterKey.PenitentePadrao, CharacterExpression characterMood = CharacterExpression.happy, CharacterPosition characterPosition = CharacterPosition.left)
+    private IEnumerator TypeText
+        (string newText,
+        float typingInterval = 0.1f, 
+        bool hasBackground = false, 
+        CharacterKey characterKey = CharacterKey.PenitentePadrao,
+        CharacterExpression characterMood = CharacterExpression.happy, 
+        CharacterPosition characterPosition = CharacterPosition.left
+        )
     {
         isTextFinished = false;
         textMeshPro.text = hasBackground ? "<font=\"Girassol Regular SDF\"> <mark=#000000 padding=10,20,5,5>" : "";
@@ -137,6 +148,7 @@ public class DialogueBehaviour : MonoBehaviour
 
         ChangeSprite(characterKey, characterMood, characterPosition);
 
+        //audioEventReference.start();
 
         for (int i = 0; i < newText.Length; i++)
         {
@@ -146,8 +158,8 @@ public class DialogueBehaviour : MonoBehaviour
             }
             else
             {
-                if (newText[i] != ' ')
-                    PlaySound(characterKey);
+                /*if (newText[i] != ' ')
+                    PlaySound(characterKey);*/
                 textMeshPro.text += newText[i];
             }
 
@@ -158,10 +170,20 @@ public class DialogueBehaviour : MonoBehaviour
         yield return null;
     }
 
+    EventInstance currentAudioEventInstance;
+
     private void StartTypingCurrentDialogue()
     {
         //Debug.Log($"Comecou a digitar uma fala de {gameObject.name}");
         Dialogue currentDialogue = dialogueList[currentIndex];
+
+        if (!currentDialogue.DialogueEventReference.IsNull) 
+        {
+            if (currentAudioEventInstance.isValid())
+                currentAudioEventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            currentAudioEventInstance = AudioManager.Instance.CreateEventInstance(currentDialogue.DialogueEventReference);
+            currentAudioEventInstance.start();
+        }
 
         characterA_IMG.color = currentDialogue.characterPosition != CharacterPosition.left ? Color.gray : Color.white; ;
 
