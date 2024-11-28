@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8762154962188631303}
   - component: {fileID: 4299503597558574766}
   - component: {fileID: 3511028731675654354}
+  - component: {fileID: 197319883812594567}
   m_Layer: 5
   m_Name: Som_VoltarAoPause
   m_TagString: Untagged
@@ -174,6 +175,35 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &197319883812594567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57128310945285420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &124103655228642582
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,6 +1137,7 @@ GameObject:
   - component: {fileID: 516324306394738853}
   - component: {fileID: 2108052044268430352}
   - component: {fileID: 507094654951513210}
+  - component: {fileID: 6276082324445687122}
   m_Layer: 5
   m_Name: "Bot\xE3oProMGraficos"
   m_TagString: Untagged
@@ -1268,6 +1299,35 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &6276082324445687122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614928199229492930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &642969566001232049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1317,6 +1377,7 @@ GameObject:
   - component: {fileID: 6444773207567028981}
   - component: {fileID: 4831683104320728515}
   - component: {fileID: 5087371596168622303}
+  - component: {fileID: 6018646541285149692}
   m_Layer: 5
   m_Name: Acessibilidade_VoltarAoPause
   m_TagString: Untagged
@@ -1478,6 +1539,35 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &6018646541285149692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658542554708936791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &705718745351416387
 GameObject:
   m_ObjectHideFlags: 0
@@ -5265,6 +5355,7 @@ GameObject:
   - component: {fileID: 9003064230990377587}
   - component: {fileID: 4058369914998336430}
   - component: {fileID: 605131331586168744}
+  - component: {fileID: 8888783248528880224}
   m_Layer: 5
   m_Name: "Bot\xE3oMenuInicial"
   m_TagString: Untagged
@@ -5426,6 +5517,35 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &8888783248528880224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2364310846687740016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2495429606621835953
 GameObject:
   m_ObjectHideFlags: 0
@@ -5864,6 +5984,7 @@ GameObject:
   - component: {fileID: 3612593783296214666}
   - component: {fileID: 4583522069657023729}
   - component: {fileID: 577145122693380722}
+  - component: {fileID: 4418336167074452257}
   m_Layer: 5
   m_Name: "Bot\xE3oContinuar"
   m_TagString: Untagged
@@ -6025,6 +6146,35 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &4418336167074452257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2597958968774772321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2627716937083798051
 GameObject:
   m_ObjectHideFlags: 0
@@ -6169,6 +6319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1536057437297868167}
   - component: {fileID: 8035827608432666256}
+  - component: {fileID: 8944459795090716864}
   m_Layer: 0
   m_Name: EfeitosSBarra
   m_TagString: Untagged
@@ -6232,6 +6383,35 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &8944459795090716864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2653378504957561305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2700703290900820837
 GameObject:
   m_ObjectHideFlags: 0
@@ -6902,11 +7082,12 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6846899296007544458}
-  - {fileID: 7776319930347997571}
   - {fileID: 3355760303830595611}
   - {fileID: 5144262647179509170}
   - {fileID: 5707145131194921110}
   - {fileID: 8993602593650114098}
+  - {fileID: 8618699986391747273}
+  - {fileID: 7776319930347997571}
   - {fileID: 6495750719102793798}
   - {fileID: 9141374521687572595}
   m_Father: {fileID: 0}
@@ -7109,16 +7290,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3162826588264030304}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -11.863806}
+  m_LocalScale: {x: 1.2037499, y: 1.2037499, z: 1.2037499}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2251657957180588863}
+  m_Father: {fileID: 8828487000331988847}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 11.000024}
+  m_AnchoredPosition: {x: 68.5314, y: -22.040005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5012780370108887426
@@ -7144,6 +7325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1420774931289008280}
   - component: {fileID: 1008253930709329556}
+  - component: {fileID: 2536496898416476450}
   m_Layer: 0
   m_Name: MusicaBarra
   m_TagString: Untagged
@@ -7207,6 +7389,35 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &2536496898416476450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3206372286204422846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3264255227166365347
 GameObject:
   m_ObjectHideFlags: 0
@@ -8427,6 +8638,7 @@ GameObject:
   - component: {fileID: 2035831482070226078}
   - component: {fileID: 8061999611421704489}
   - component: {fileID: 3690263073744826090}
+  - component: {fileID: 4344037696248897225}
   m_Layer: 5
   m_Name: UltimoConfessionario
   m_TagString: Untagged
@@ -8588,6 +8800,35 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &4344037696248897225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3676400003929228935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3751950046715268174
 GameObject:
   m_ObjectHideFlags: 0
@@ -9488,6 +9729,7 @@ GameObject:
   - component: {fileID: 3855702225154987938}
   - component: {fileID: 4215421596271382677}
   - component: {fileID: 3190768343325705738}
+  - component: {fileID: 6922892161678132132}
   m_Layer: 5
   m_Name: Graficos_VoltarAoPause
   m_TagString: Untagged
@@ -9649,6 +9891,35 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &6922892161678132132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4069435860288029342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &4080266726235448747
 GameObject:
   m_ObjectHideFlags: 0
@@ -10641,6 +10912,7 @@ GameObject:
   - component: {fileID: 8783524636668439248}
   - component: {fileID: 8649130579963774823}
   - component: {fileID: 3011532137690560069}
+  - component: {fileID: 7741625595690626560}
   m_Layer: 5
   m_Name: "Bot\xE3oProMSom"
   m_TagString: Untagged
@@ -10802,6 +11074,35 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &7741625595690626560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4591531333121372517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &4622447829456911190
 GameObject:
   m_ObjectHideFlags: 0
@@ -12771,7 +13072,6 @@ RectTransform:
   - {fileID: 2488791741276229684}
   - {fileID: 7505715384450476997}
   - {fileID: 116566296703907944}
-  - {fileID: 8618699986391747273}
   - {fileID: 7651465964264338215}
   m_Father: {fileID: 6495750719102793798}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13382,6 +13682,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7505715384450476997}
   - component: {fileID: 1342369243999509962}
+  - component: {fileID: 6434635749381156628}
   m_Layer: 5
   m_Name: BrilhoSliderVolume
   m_TagString: Untagged
@@ -13476,6 +13777,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6434635749381156628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5677602191392975762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &5732852163642979159
 GameObject:
   m_ObjectHideFlags: 0
@@ -13487,6 +13817,7 @@ GameObject:
   - component: {fileID: 5947342569608774608}
   - component: {fileID: 3880870805845417160}
   - component: {fileID: 3616355527012740135}
+  - component: {fileID: 7063793425701696885}
   m_Layer: 5
   m_Name: "Bot\xE3oCameraShake"
   m_TagString: Untagged
@@ -13588,6 +13919,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toggleCheckbox: {fileID: 3880870805845417160}
+--- !u!114 &7063793425701696885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5732852163642979159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &5738651202126281784
 GameObject:
   m_ObjectHideFlags: 0
@@ -15656,6 +16016,7 @@ GameObject:
   - component: {fileID: 2819764267123528949}
   - component: {fileID: 6264550557915096447}
   - component: {fileID: 3714354848216775670}
+  - component: {fileID: 8933890711391204974}
   m_Layer: 5
   m_Name: VoltarAoPause
   m_TagString: Untagged
@@ -15817,6 +16178,35 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &8933890711391204974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6663544659922102684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6686103722038262150
 GameObject:
   m_ObjectHideFlags: 0
@@ -16170,6 +16560,7 @@ GameObject:
   m_Component:
   - component: {fileID: 334711572119623552}
   - component: {fileID: 4110793928400806650}
+  - component: {fileID: 6321396200062418800}
   m_Layer: 0
   m_Name: GeralBarra
   m_TagString: Untagged
@@ -16233,6 +16624,35 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &6321396200062418800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6874109846554663550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6898092454856392305
 GameObject:
   m_ObjectHideFlags: 0
@@ -16357,6 +16777,7 @@ GameObject:
   - component: {fileID: 8271918507495513756}
   - component: {fileID: 650983941315710886}
   - component: {fileID: 4389923358263985718}
+  - component: {fileID: 3498648117216788006}
   m_Layer: 5
   m_Name: DropdownLinguas
   m_TagString: Untagged
@@ -16502,6 +16923,35 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_AlphaFadeSpeed: 0.15
+--- !u!114 &3498648117216788006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6948204998059161237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &7022882414160865185
 GameObject:
   m_ObjectHideFlags: 0
@@ -17100,6 +17550,7 @@ GameObject:
   - component: {fileID: 6841227039111935073}
   - component: {fileID: 3422874310361454749}
   - component: {fileID: 762010230485023243}
+  - component: {fileID: 1857661539512965009}
   m_Layer: 5
   m_Name: 'ReiniciarNivel '
   m_TagString: Untagged
@@ -17261,6 +17712,35 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &1857661539512965009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7280768696998156186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &7282959078762499264
 GameObject:
   m_ObjectHideFlags: 0
@@ -17660,6 +18140,7 @@ GameObject:
   - component: {fileID: 2824105289468287852}
   - component: {fileID: 8342689956529868736}
   - component: {fileID: 5536903155296546456}
+  - component: {fileID: 516370773989518906}
   m_Layer: 5
   m_Name: "Bot\xE3oOp\xE7\xF5es"
   m_TagString: Untagged
@@ -17821,6 +18302,35 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &516370773989518906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7725948864608024325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &7836646419702355359
 GameObject:
   m_ObjectHideFlags: 0
@@ -18999,6 +19509,7 @@ GameObject:
   - component: {fileID: 449866400918991792}
   - component: {fileID: 6864949763951415816}
   - component: {fileID: 5082582469007719361}
+  - component: {fileID: 7858034877482360465}
   m_Layer: 5
   m_Name: "DropdownResolu\xE7\xE3o"
   m_TagString: Untagged
@@ -19138,6 +19649,35 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_AlphaFadeSpeed: 0.15
+--- !u!114 &7858034877482360465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8287416166228663183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &8288957887704685297
 GameObject:
   m_ObjectHideFlags: 0
@@ -19333,6 +19873,7 @@ GameObject:
   - component: {fileID: 427144902500865633}
   - component: {fileID: 2496159181703929568}
   - component: {fileID: 1873122895828417497}
+  - component: {fileID: 5229675819785741111}
   m_Layer: 5
   m_Name: Creditos_Voltar_BTN
   m_TagString: Untagged
@@ -19454,6 +19995,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+--- !u!114 &5229675819785741111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8431700523539614681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &8488174260583621114
 GameObject:
   m_ObjectHideFlags: 0
@@ -19601,6 +20171,7 @@ GameObject:
   - component: {fileID: 33153119350946963}
   - component: {fileID: 4644145252393742947}
   - component: {fileID: 8656394893274326457}
+  - component: {fileID: 5999425401390638293}
   m_Layer: 5
   m_Name: "Bot\xE3oProMAcessibilidade"
   m_TagString: Untagged
@@ -19762,6 +20333,35 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &5999425401390638293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8490494903345737421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4674643446696424045}
+          m_TargetAssemblyTypeName: UINavigationManager, Assembly-CSharp
+          m_MethodName: ClosePanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &8543712794783864445
 GameObject:
   m_ObjectHideFlags: 0

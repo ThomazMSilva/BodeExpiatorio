@@ -13,9 +13,9 @@ public class Entrada : MonoBehaviour
 
     [SerializeField] private string jumpAxis = "Jump";
 
-    [SerializeField] private string kneelAxis = "Fire3";
+    [SerializeField] private string kneelAxis = "Kneel";
 
-    [SerializeField] private string pauseAxis = "Cancel";
+    [SerializeField] private string pauseAxis = "Pause";
 
     private float horizontalInput;
     private float verticalInput;

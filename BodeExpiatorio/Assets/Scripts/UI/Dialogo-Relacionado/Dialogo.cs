@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler
+public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICancelHandler
 {
     [TextArea, SerializeField] string[] falas;
     [SerializeField] TextMeshProUGUI TMPTexto;
@@ -17,8 +17,7 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler
     public UnityEvent OnDialogoAcabou;
     [SerializeField] private UINavigationManager navigationManager;
 
-
-    public void OnSubmit(BaseEventData eventData)
+    public void AvancaDialogo()
     {
         StopAllCoroutines();
 
@@ -45,39 +44,30 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler
         }
     }
 
+
+    public void OnSubmit(BaseEventData eventData)
+    {
+        AvancaDialogo();
+    }
+
+
+
     //eu nao entendi pq isso funciona e o OnMouseDown nao, mas n conheco mt de EventSystems, achei essa interface na internet
     public void OnPointerClick(PointerEventData pointerEventData)
     {
-        StopAllCoroutines();
-
-        if (!isTextoTerminado)
-        {
-            TMPTexto.text = (temFundoPreto ? $"<font=\"{font.name ?? "LiberationSans SDF"}\"> <mark=#000000 padding=10,20,5,5>" : "") + falas[indiceAtual];
-            isTextoTerminado = true;
-        }
-
-        else
-        {
-            TMPTexto.text = "";
-
-            if (indiceAtual + 1 < falas.Length)
-            {
-                indiceAtual++;
-                StartCoroutine(InvocaTexto(falas[indiceAtual]));
-            }
-            else
-            {
-                OnDialogoAcabou?.Invoke();
-            }
-
-        }
+        AvancaDialogo();
     }
 
     private void OnEnable()
     {
         indiceAtual = 0;
         StartCoroutine(InvocaTexto(falas[indiceAtual]));
-        EventSystem.current.SetSelectedGameObject(gameObject);
+        //EventSystem.current.SetSelectedGameObject(gameObject);
+    }
+
+    public void OnCancel(BaseEventData eventData)
+    {
+        AvancaDialogo();
     }
 
     public IEnumerator InvocaTexto(string textoNovo)
@@ -95,6 +85,7 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler
 
         yield return null;
     }
+
     public void DestruaItem()
     {
         if (navigationManager == null)
@@ -106,4 +97,5 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler
         navigationManager.ClosePanel();
         //gameObject.SetActive(false);
     }
+
 }
