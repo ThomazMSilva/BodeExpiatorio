@@ -73,9 +73,11 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F10)) SceneManager.LoadScene("Teste Semeltr");
         if (Input.GetKeyDown(KeyCode.F11)) SceneManager.LoadScene("Teste Arame");
         if (Input.GetKeyDown(KeyCode.F12)) LoadDeathScene();
-
+        if (Input.GetKeyDown(KeyCode.PageDown)) ResetPlayerConfigs();
         //Debug.Log(Time.timeScale);
     }
+
+    public void ResetPlayerConfigs() => PlayerPrefs.DeleteAll();
 
     public void NewGame()
     {
@@ -151,7 +153,7 @@ public class GameManager : MonoBehaviour
     public void SetCurrentFirstFromAct(int scene)
     {
         Debug.Log($"A cena atual é a {scene}");
-        currentRoom = rooms[scene];
+        currentFirstFromAct = rooms[scene];
         ResetCheckpointsOver(scene);
         PlayerPrefs.SetInt(currentFirstRoomPref, scene);
     }
@@ -187,6 +189,12 @@ public class GameManager : MonoBehaviour
 
     public void LoadLastCheckpoint()
     {
+        if (currentFirstFromAct.sceneName == string.Empty)
+        {
+            Debug.LogWarning("Nao encontrada \"Primeira sala do Ato Atual\". Carregando primeiro nivel.");
+            StartCoroutine(LoadScreen(rooms[0].sceneName));
+            return;
+        }
         StartCoroutine(LoadScreen(currentFirstFromAct.sceneName));
     }
 
@@ -438,7 +446,7 @@ public class GameManager : MonoBehaviour
 
             PlayerPrefs.SetString(currentActStatisticsPref, actStatistics);
 
-            if (confessionario.IsFinalRoom)
+            if (!confessionario.IsFirstFromAct)
             {
                 statisticsText.text = ActText;
                 ResetStatistics();
@@ -447,7 +455,7 @@ public class GameManager : MonoBehaviour
             {
                 statisticsText.text = confessionario.LevelStatistics();
             }
-            SetBuffButtonValues(confessionario.TotalTorment().y, confessionario.damageThreshold);
+            SetBuffButtonValues(confessionario.TotalTorment().y, confessionario.DamageThreshold);
         }
         else
         {

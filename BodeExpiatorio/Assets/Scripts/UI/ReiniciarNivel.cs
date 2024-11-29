@@ -14,7 +14,8 @@ public class ReiniciarNivel : MonoBehaviour
 
     public void OnReturnToLastCheckpoint()
     {
-        if (Confessionario.ultimoAtivo != null)
+        Debug.LogWarning($"Esse método é debilitado. Está sendo usado pelo objeto {gameObject.name} na cena");
+        /*if (Confessionario.ultimoAtivo != null)
         {
             Transform respawnPoint = Confessionario.ultimoAtivo.GetRespawnPoint();
             jogador.SetPosition(respawnPoint.position);
@@ -23,6 +24,6 @@ public class ReiniciarNivel : MonoBehaviour
         else
         {
             Debug.LogWarning("nenhum confessionario encontrado");
-        }
+        }*/
     }
 }

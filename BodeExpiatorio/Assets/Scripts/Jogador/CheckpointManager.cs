@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class CheckpointManager : MonoBehaviour
@@ -29,6 +30,7 @@ public class CheckpointManager : MonoBehaviour
 
     private void Start()
     {
+        roomIndex = SceneManager.GetActiveScene().buildIndex;
         checkpointList[0].isActive = true;
         for (int i = 1; i < checkpointList.Count; i++)
         {

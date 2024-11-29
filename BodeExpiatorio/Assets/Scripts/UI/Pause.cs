@@ -38,6 +38,7 @@ public class Pause : MonoBehaviour
     
     private void OnDisable()
     {
+        if (!input) return;
         input.OnPauseButtonDown -= EscapePressed;
         if (pauseScreen.activeSelf) ResumeGame();
     }

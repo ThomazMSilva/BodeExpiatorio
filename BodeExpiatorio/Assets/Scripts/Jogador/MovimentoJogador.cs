@@ -260,7 +260,7 @@ public class MovimentoJogador : MonoBehaviour
         playerAnim.SetBool("isGrounded", isGrounded);
         playerAnim.SetBool("isWired", isStuckInWire);
         playerAnim.SetFloat("velocityX", MathF.Abs(rb.velocity.x));
-        playerAnim.SetFloat("velocityScale", rb.velocity.x / moveSpeed);
+        playerAnim.SetFloat("velocityScale", Mathf.Abs(rb.velocity.x / moveSpeed));
         playerAnim.SetFloat("velocityY", rb.velocity.y);
     }
 
