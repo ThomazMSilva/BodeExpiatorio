@@ -287,7 +287,7 @@ public class MovimentoJogador : MonoBehaviour
                                 : hitRight.transform != null && hitRight.point.y < transform.position.y - playerCollider.bounds.extents.y
                                     ? hitRight
                                     : hit;
-        transform.parent = mainHit.transform && !mainHit.transform.CompareTag(fallingPlatformTag) ? mainHit.transform : null;
+        transform.parent = mainHit.transform ? mainHit.transform : null;
 
         coyoteTimeCurrent = isGrounded || isClimbing ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
 

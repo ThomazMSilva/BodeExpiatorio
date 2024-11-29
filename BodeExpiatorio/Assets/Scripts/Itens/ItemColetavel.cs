@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,8 +18,10 @@ namespace Assets.Scripts.Itens
         [SerializeField] private bool recollectableOnPlayerDeath = true;
         [SerializeField] private bool recollectableOnTimer;
         [SerializeField] private float reactivationTimer = 20f;
+        [field: SerializeField] private EventReference interactionAudioEventReference;
         public UnityEvent OnCollected;
         public UnityEvent OnLeftTrigger;
+
 
         private void Start()
         {
@@ -41,6 +44,9 @@ namespace Assets.Scripts.Itens
         {
             OnCollected?.Invoke();
 
+            if(!interactionAudioEventReference.IsNull) 
+                AudioManager.Instance.PlayerOneShot(interactionAudioEventReference, transform.position);
+
             if (!keepActiveOnCollection)
                 isCollectable = false;
 
@@ -61,7 +67,6 @@ namespace Assets.Scripts.Itens
         {
             if (!other.gameObject.CompareTag("Player")) return;
 
-            Debug.Log($"colidiu com {other.gameObject.name}");
             Collect();
         }
         private void OnTriggerExit(Collider other)

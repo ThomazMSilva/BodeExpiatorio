@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Sala> rooms;
 
     public Sala currentRoom;
-    public Sala currentFirstFromAct;
+    public Sala currentFirstRoomFromAct;
 
     public Sala lastCheckpoint;
     [SerializeField] private int checkpointsPerRoom = 11;
@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
     public void SetCurrentFirstFromAct(int scene)
     {
         Debug.Log($"A cena atual é a {scene}");
-        currentFirstFromAct = rooms[scene];
+        currentFirstRoomFromAct = rooms[scene];
         ResetCheckpointsOver(scene);
         PlayerPrefs.SetInt(currentFirstRoomPref, scene);
     }
@@ -189,13 +189,13 @@ public class GameManager : MonoBehaviour
 
     public void LoadLastCheckpoint()
     {
-        if (currentFirstFromAct.sceneName == string.Empty)
+        if (currentFirstRoomFromAct.sceneName == string.Empty)
         {
             Debug.LogWarning("Nao encontrada \"Primeira sala do Ato Atual\". Carregando primeiro nivel.");
             StartCoroutine(LoadScreen(rooms[0].sceneName));
             return;
         }
-        StartCoroutine(LoadScreen(currentFirstFromAct.sceneName));
+        StartCoroutine(LoadScreen(currentFirstRoomFromAct.sceneName));
     }
 
     public void LoadNextRoom()
