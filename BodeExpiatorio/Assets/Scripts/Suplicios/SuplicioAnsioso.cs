@@ -19,8 +19,8 @@ public class SuplicioAnsioso : MonoBehaviour
     private float currentForceMultiplier;
 
     private EventInstance windEventInstance;
-    private Jogador _player;
-    public Jogador Player { get => _player; }
+    private JogadorReference _player;
+    public JogadorReference Player { get => _player; }
     private Entrada _input;
 
     [SerializeField] private ParticleSystem portalParticleSystem;
@@ -91,7 +91,7 @@ public class SuplicioAnsioso : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag("Player")) return;
-        other.TryGetComponent<Jogador>(out _player);
+        other.TryGetComponent<JogadorReference>(out _player);
         _player.Movimento.SetInstantVelocityChange(false);
     }
 

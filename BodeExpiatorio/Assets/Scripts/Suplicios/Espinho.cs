@@ -52,7 +52,7 @@ public class Espinho : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.TryGetComponent<Jogador>(out Jogador _player)) return;
+        if (!collision.gameObject.TryGetComponent<JogadorReference>(out JogadorReference _player)) return;
 
         Vector3 relativeVel = collision.relativeVelocity;
         float colDotToUp = Vector3.Dot(relativeVel, -transform.up); //Produto vetorial do quão de frente foi a colisão

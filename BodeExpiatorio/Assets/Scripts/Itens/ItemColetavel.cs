@@ -8,7 +8,7 @@ namespace Assets.Scripts.Itens
     public class ItemColetavel : MonoBehaviour
     {
 
-        Jogador _player;
+        JogadorReference _player;
         Vector3 originalPosition;
         Tween hoverTween;
         private bool isCollectable = true;
@@ -22,7 +22,7 @@ namespace Assets.Scripts.Itens
         {
             if (recollectableOnPlayerDeath)
             {
-                _player = FindAnyObjectByType<Jogador>();
+                _player = FindAnyObjectByType<JogadorReference>();
                 _player.Vida.OnPlayerDeath += Reactivate;
             }
             originalPosition = transform.position;

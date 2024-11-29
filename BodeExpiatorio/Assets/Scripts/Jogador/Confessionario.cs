@@ -2,14 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum RoomType
-{
-    CommonRoom,
-    FinalRoom,
-    ConfessionRoom,
-    Menu
-}
-
 public class Confessionario : MonoBehaviour
 {
     [SerializeField] private int roomIndex;
@@ -22,9 +14,6 @@ public class Confessionario : MonoBehaviour
     [SerializeField] private bool isFinalRoom;
     public bool IsFinalRoom { get => isFinalRoom; }
 
-    [SerializeField] private RoomType roomType = RoomType.CommonRoom;
-    public RoomType RoomType { get => roomType; }
-
     [SerializeField] private Transform respawnPoint;
     [SerializeField] private GameObject buffScreen;
 
@@ -32,14 +21,14 @@ public class Confessionario : MonoBehaviour
     private float startingRoomTime;
     private float startingRunTime;
 
-    private Jogador player;
-    public Jogador Player { get => player; }
+    private JogadorReference player;
+    public JogadorReference Player { get => player; }
 
     public UnityEvent OnConfessioned;
 
     public static Confessionario ultimoAtivo;
 
-    private void Awake() => player = FindAnyObjectByType<Jogador>();
+    private void Awake() => player = FindAnyObjectByType<JogadorReference>();
 
     private void Start()
     {
@@ -67,6 +56,7 @@ public class Confessionario : MonoBehaviour
 
     private void OnEnable()
     {
+        //if (ultimoAtivo != this) return;
         player.Vida.OnPlayerDeath += Respawn;
         player.Vida.OnPlayerTrueDeath += GameOver;
     }

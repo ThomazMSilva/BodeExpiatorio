@@ -6,7 +6,7 @@ namespace Assets.Scripts.Suplicios
 {
     public class SuplicioTraicoeiroProjetil : MonoBehaviour
     {
-        private Jogador player;
+        private JogadorReference player;
 
         [SerializeField] private float decayTime = 7f;
         //private WaitForSeconds waitForDecay;
@@ -30,7 +30,7 @@ namespace Assets.Scripts.Suplicios
         private void Start()
         {
             //waitForDecay = new(decayTime);
-            player = FindAnyObjectByType<Jogador>();
+            player = FindAnyObjectByType<JogadorReference>();
         }
 
         private Vector3 direction;

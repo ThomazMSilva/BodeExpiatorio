@@ -9,14 +9,14 @@ public class SuplicioAnsiosoFonte : MonoBehaviour
     [SerializeField] private bool hasBindPlayer;
     [SerializeField] private bool isPlayerInside;
     private Vector3 spitDirection;
-    private Jogador _player;
+    private JogadorReference _player;
 
     private void Start()
     {
         suplicioEfeito.OnChangedAttractingState += AttractingStateHasChanged;
         spitDirection.Set(transform.right.x, .5f, 0);
 
-        _player = FindAnyObjectByType<Jogador>();
+        _player = FindAnyObjectByType<JogadorReference>();
         _player.Vida.OnPlayerDeath += SetPlayerOutside;
     }
 

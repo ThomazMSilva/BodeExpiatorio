@@ -28,7 +28,7 @@ public class SuplicioBrutalLaser : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         gravity = Physics.gravity;
         initialPosition = transform.position; 
-        playerTransform = FindAnyObjectByType<Jogador>().transform;
+        playerTransform = FindAnyObjectByType<JogadorReference>().transform;
     }
 
     void FixedUpdate()

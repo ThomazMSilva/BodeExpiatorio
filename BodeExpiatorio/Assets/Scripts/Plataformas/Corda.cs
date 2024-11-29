@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Corda : MonoBehaviour
 {
-    private Jogador player;
+    private JogadorReference player;
     private bool jumpButtonDown;
 
     private void OnEnable()
@@ -15,7 +15,7 @@ public class Corda : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.TryGetComponent<Jogador>(out player);
+            other.TryGetComponent<JogadorReference>(out player);
             player.SetPlayerClimbing(true);
         }
     }

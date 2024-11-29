@@ -6,7 +6,7 @@ namespace Assets.Scripts.Suplicios
     public class Arame : MonoBehaviour
     {
         [SerializeField] private bool willLookRight;
-        private Jogador _player;
+        private JogadorReference _player;
         [SerializeField] private float damage = 4f;
         [SerializeField] private float forceAmountX = 10f;
         [SerializeField] private float forceAmountY = 1.5f;
@@ -44,7 +44,7 @@ namespace Assets.Scripts.Suplicios
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.gameObject.TryGetComponent<Jogador>(out _player)) return;
+            if (!other.gameObject.TryGetComponent<JogadorReference>(out _player)) return;
             
             _player.SetPlayerWired(true, willLookRight);
             _player.transform.parent = transform;

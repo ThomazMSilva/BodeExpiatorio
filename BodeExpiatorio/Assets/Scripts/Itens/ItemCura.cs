@@ -5,12 +5,12 @@ namespace Assets.Scripts.Itens
 {
     public class ItemCura : MonoBehaviour
     {
-        Jogador _player;
+        JogadorReference _player;
         Vector3 originalPosition;
         Tween hoverTween;
         private void Start()
         {
-            _player = FindAnyObjectByType<Jogador>();
+            _player = FindAnyObjectByType<JogadorReference>();
             _player.Vida.OnPlayerDeath += () => gameObject.SetActive(true);
             originalPosition = transform.position;
             Hover();

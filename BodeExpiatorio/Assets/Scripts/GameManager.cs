@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     private bool isLoadingScene;
     public bool IsLoading { get => isLoadingScene; }
 
-    [SerializeField] private Jogador player;
+    [SerializeField] private JogadorReference player;
 
     private void Update()
     {
@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt(currentRoomPref, scene);
     }
 
-    public void SetCurrentPlayer(Jogador p) => player = p;
+    public void SetCurrentPlayer(JogadorReference p) => player = p;
 
     public void ActivateSceneCheckpoint(int scene)
     {
@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviour
             Debug.Log($"Tentando carregar sala que não existe na lista do Game Manager; CurrentScene: {currentRoom}; CurrentUIndex: {currentRoom.sceneIndex};  Tried Index: {nextRoom}");
             return;
         }
-        Jogador _player = FindAnyObjectByType<Jogador>();
+        JogadorReference _player = FindAnyObjectByType<JogadorReference>();
         SetHealth(_player.Vida.CurrentMaxHealth, _player.Vida.CurrentHealth);
 
         StartCoroutine(LoadScreen(rooms[currentRoom.sceneIndex + 1].sceneName, true));
@@ -196,7 +196,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadConfessionBooth()
     {
-        Jogador _player = FindAnyObjectByType<Jogador>();
+        JogadorReference _player = FindAnyObjectByType<JogadorReference>();
         SetHealth(_player.Vida.CurrentMaxHealth, _player.Vida.CurrentHealth);
         StartCoroutine(LoadScreen(confessionSceneName, true));
     }
@@ -276,7 +276,7 @@ public class GameManager : MonoBehaviour
         
         yield return LoadSceneAsync(sceneName, loadingNextLevel);
 
-        //Espera input do Jogador
+        //Espera input do JogadorReference
 
         loadingText.text = "Press any key to continue.";
 
@@ -499,7 +499,7 @@ public class GameManager : MonoBehaviour
     
     public void ActivateBuff(BuffButton buff)
     {
-        Jogador player = FindAnyObjectByType<Jogador>();
+        JogadorReference player = FindAnyObjectByType<JogadorReference>();
         player.ActivateBuff(buff.buffButton.buffType);
         CloseBuffScreen();
     }

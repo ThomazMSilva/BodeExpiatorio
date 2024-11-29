@@ -3,7 +3,7 @@ using UnityEngine;
 public class ReiniciarNivel : MonoBehaviour
 {
     public VidaJogador vidaJogador;
-    public Jogador jogador;
+    public JogadorReference jogador;
 
     public void OnReiniciarNivel()
     {

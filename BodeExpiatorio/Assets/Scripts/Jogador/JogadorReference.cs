@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(MovimentoJogador),typeof(VidaJogador))]
-public class Jogador : MonoBehaviour
+public class JogadorReference : MonoBehaviour
 {
     [SerializeField] private MovimentoJogador movement;
     [SerializeField] private VidaJogador life;

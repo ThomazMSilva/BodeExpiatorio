@@ -29,7 +29,7 @@ public class SuplicioBrutal : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         gravity = Physics.gravity;
-        playerTransform = FindAnyObjectByType<Jogador>().transform;
+        playerTransform = FindAnyObjectByType<JogadorReference>().transform;
         
         waitForSeconds = new(waitTime);
 

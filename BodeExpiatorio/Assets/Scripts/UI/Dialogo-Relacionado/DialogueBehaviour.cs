@@ -99,6 +99,7 @@ public class DialogueBehaviour : MonoBehaviour
 
     public void ChangeText()
     {
+        Debug.Log("OnTextClickedEvent");
         StopAllCoroutines();
 
         if (!isTextFinished)
