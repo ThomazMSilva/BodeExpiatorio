@@ -24,7 +24,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("Player")) return;
 
-        if (activateHintScreen)
+        if (activateHintScreen && !isActive)
             hintScreen.SetActive(true);
 
         other.GetComponent<ContagemRegressivaVidaJogador>().isCountDownActive = false;
