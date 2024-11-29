@@ -613,6 +613,13 @@ MonoBehaviour:
   dialogueList:
   - text: Padre, eu pequei! Obriguei minha amante a abortar o nosso filho.
     typingDelaySpeed: 0.1
+    DialogueEventReference:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
     hasBackground: 0
     characterMood: 1
     characterKey: 2
@@ -620,6 +627,13 @@ MonoBehaviour:
   - text: "Eu te absolvo de teu pecado em nome do Senhor! Continue seu caminho e
       logo ser\xE1 perdoado."
     typingDelaySpeed: 0.1
+    DialogueEventReference:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
     hasBackground: 0
     characterMood: 2
     characterKey: 2
@@ -645,6 +659,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &464660213 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2386779126760298655, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+  m_PrefabInstance: {fileID: 1106109276}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &464660214
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464660213}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 16.843979, z: 2.333429}
+  m_Center: {x: 0, y: 5.488018, z: 0.056307197}
 --- !u!1 &602307994
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,6 +787,13 @@ MonoBehaviour:
   - text: "Padre, eu pequei! Fui eu! Eu matei minha amante e meu filho! Aquela po\xE7\xE3o
       de infertilidade era venenosa!"
     typingDelaySpeed: 0.1
+    DialogueEventReference:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
     hasBackground: 0
     characterMood: 0
     characterKey: 3
@@ -754,6 +801,13 @@ MonoBehaviour:
   - text: "A penit\xEAncia absolve todos os pecados! Caminhaste at\xE9 aqui em nome
       do perd\xE3o e agora est\xE1 a um passo dele."
     typingDelaySpeed: 0.1
+    DialogueEventReference:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
     hasBackground: 0
     characterMood: 1
     characterKey: 3
@@ -841,6 +895,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8828487000331988847, guid: ba63e1051ccfdb4488b76b6e1acb0d46, type: 3}
   m_PrefabInstance: {fileID: 644840781}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &680407256 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4674643446696424045, guid: ba63e1051ccfdb4488b76b6e1acb0d46, type: 3}
+  m_PrefabInstance: {fileID: 644840781}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63b42926fa549ef478aa8dd970739190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &740077396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6575,6 +6640,13 @@ MonoBehaviour:
   dialogueList:
   - text: "Padre, eu pequei e gerei um filho fora dos la\xE7os de casamento."
     typingDelaySpeed: 0.1
+    DialogueEventReference:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
     hasBackground: 0
     characterMood: 1
     characterKey: 1
@@ -6582,6 +6654,13 @@ MonoBehaviour:
   - text: "Eu te absolvo de teu pecado em nome do Senhor! Continue seu caminho e
       logo ser\xE1 perdoado."
     typingDelaySpeed: 0.1
+    DialogueEventReference:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
     hasBackground: 0
     characterMood: 2
     characterKey: 4
@@ -6592,6 +6671,213 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   LevelUpAfter: 0
+--- !u!1001 &1080336405
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2127673137}
+    m_Modifications:
+    - target: {fileID: 1330841806655807827, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: falas.Array.data[0]
+      value: "O padre est\xE1 ali! Talvez  eu deva me ajoelhar e confessar os meus
+        pecados...\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1330841806655807827, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: disappearAutomatically
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236311436065129498, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_Name
+      value: Tutorial 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7793086281486903018, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+      propertyPath: m_Name
+      value: MenuDeDialogos
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+--- !u!224 &1080336406 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+  m_PrefabInstance: {fileID: 1080336405}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1106109276
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1784752333846623175, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      propertyPath: OnCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784752333846623175, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      propertyPath: OnCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 680407256}
+    - target: {fileID: 1784752333846623175, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      propertyPath: OnCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784752333846623175, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      propertyPath: OnCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UINavigationManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784752333846623175, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      propertyPath: OnCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1168744084}
+    - target: {fileID: 1784752333846623175, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      propertyPath: OnCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2386779126760298655, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      propertyPath: m_Name
+      value: Tutorial 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3136254644766150275, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6827518216943659410, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813638958755896934, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813638958755896934, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 40.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813638958755896934, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813638958755896934, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813638958755896934, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813638958755896934, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813638958755896934, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813638958755896934, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813638958755896934, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813638958755896934, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2386779126760298655, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 464660214}
+  m_SourcePrefab: {fileID: 100100000, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
 --- !u!1001 &1159385774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6661,6 +6947,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cc34861fdf413a47bca069fd80c282c, type: 3}
+--- !u!1 &1168744084 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2236311436065129498, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
+  m_PrefabInstance: {fileID: 1080336405}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1197513036
 GameObject:
   m_ObjectHideFlags: 0
@@ -7808,6 +8099,7 @@ RectTransform:
   - {fileID: 1648042072}
   - {fileID: 1197513037}
   - {fileID: 348229135}
+  - {fileID: 1080336406}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7968,3 +8260,4 @@ SceneRoots:
   - {fileID: 602307997}
   - {fileID: 955397336}
   - {fileID: 891577096}
+  - {fileID: 1106109276}
