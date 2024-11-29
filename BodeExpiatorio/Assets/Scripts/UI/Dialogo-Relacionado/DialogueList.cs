@@ -21,11 +21,11 @@ namespace Assets.Scripts.UI.Dialogo_Relacionado
 
                 case 2: 
                 case 3:
-                    act1to2.SetActive(true);
+                    act2to3.SetActive(true);
                     break;
 
                 case 5:
-                    act1to2.SetActive(true);
+                    act3to4.SetActive(true);
                     break;
                 default:
                     Debug.LogError("Entered confession from a scene different from the last level of an act.");
