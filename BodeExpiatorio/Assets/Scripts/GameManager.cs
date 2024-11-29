@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     private static readonly string prefabPath = "Prefabs/_-GameManager-_";
     
     private static readonly string currentRoomPref = "CurrentRoom";
+    private static readonly string currentFirstRoomPref = "CurrentFirstFromAct";
     //private static readonly string currentCheckpointPref = "CurrentCheckpoint";
     private static readonly string maxHealthPref = "MaxHealth";
     private static readonly string currentHealthPref = "CurrentHealth";
@@ -43,8 +44,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Sala> rooms;
 
     public Sala currentRoom;
+    public Sala currentFirstFromAct;
 
     public Sala lastCheckpoint;
+    [SerializeField] private int checkpointsPerRoom = 11;
 
     private bool isLoadingScene;
     public bool IsLoading { get => isLoadingScene; }
@@ -93,6 +96,11 @@ public class GameManager : MonoBehaviour
         for (int i = initialIndex; i < rooms.Count; i++)
         {
             string checkpointIndex = $"Checkpoint {i}";
+            for (int j = 1; j < checkpointsPerRoom; j++) 
+            { 
+                string checkpointLevel = $"Checkpoint_Level_{i}.{j}";
+                PlayerPrefs.SetInt(checkpointLevel, 0);
+            }
 
             PlayerPrefs.SetInt(checkpointIndex, 0);
 
@@ -140,6 +148,14 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt(currentRoomPref, scene);
     }
 
+    public void SetCurrentFirstFromAct(int scene)
+    {
+        Debug.Log($"A cena atual é a {scene}");
+        currentRoom = rooms[scene];
+        ResetCheckpointsOver(scene);
+        PlayerPrefs.SetInt(currentFirstRoomPref, scene);
+    }
+
     public void SetCurrentPlayer(JogadorReference p) => player = p;
 
     public void ActivateSceneCheckpoint(int scene)
@@ -171,12 +187,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadLastCheckpoint()
     {
-        int mostAdvancedRoom = 0;
-        for (int i = 0; i < rooms.Count; i++)
-        {
-            if (rooms[i].isCheckpointActive) mostAdvancedRoom = i;
-        }
-        StartCoroutine(LoadScreen(rooms[mostAdvancedRoom].sceneName));
+        StartCoroutine(LoadScreen(currentFirstFromAct.sceneName));
     }
 
     public void LoadNextRoom()
@@ -410,6 +421,12 @@ public class GameManager : MonoBehaviour
             {
                 Debug.LogError("Ce ta fazendo merda com o GameManager. " +
                     "Ta tentando carregar o \"proximo nivel\" a partir um nivel que nao tem nem confessionario.");
+                return;
+            }
+
+            if (confessionario.InConfessionRoom)
+            {
+                statisticsText.text = randomTexts[UnityEngine.Random.Range(0, randomTexts.Count - 1)];
                 return;
             }
 

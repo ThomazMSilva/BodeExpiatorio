@@ -9,7 +9,7 @@ public class Confessionario : MonoBehaviour
     [Tooltip("Quando o Jogador morre, a vida máxima volta para o valor que estava quando entrou na câmara.")]
     [SerializeField] private bool recoverMaxHealthToStartingPoint = true;
     [SerializeField] private bool inConfessionRoom;
-
+    public bool InConfessionRoom { get => inConfessionRoom; }
 
     [SerializeField] private bool isFinalRoom;
     public bool IsFinalRoom { get => isFinalRoom; }

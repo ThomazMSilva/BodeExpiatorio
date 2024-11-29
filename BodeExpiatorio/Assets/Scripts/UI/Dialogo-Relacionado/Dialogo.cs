@@ -58,10 +58,13 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICan
         AvancaDialogo();
     }
 
-
-
     //eu nao entendi pq isso funciona e o OnMouseDown nao, mas n conheco mt de EventSystems, achei essa interface na internet
     public void OnPointerClick(PointerEventData pointerEventData)
+    {
+        AvancaDialogo();
+    }
+
+    public void OnCancel(BaseEventData eventData)
     {
         AvancaDialogo();
     }
@@ -95,10 +98,6 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICan
         //gameObject.SetActive(false);
     }
 
-    public void OnCancel(BaseEventData eventData)
-    {
-        AvancaDialogo();
-    }
 
     public IEnumerator InvocaTexto(string textoNovo)
     {

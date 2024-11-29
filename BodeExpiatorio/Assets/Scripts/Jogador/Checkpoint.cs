@@ -8,10 +8,13 @@ public class Checkpoint : MonoBehaviour
 
     private JogadorReference player;
     private void Awake() => player = FindAnyObjectByType<JogadorReference>();
+    public delegate void OnPrayedHandler(Checkpoint checkpoint);
+    public event OnPrayedHandler OnPrayed;
 
     private void Pray()
     {
         isActive = true;
+        OnPrayed?.Invoke(this);
     }
 
     private void OnTriggerEnter(Collider other)
