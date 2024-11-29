@@ -611,7 +611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterManager: {fileID: 11400000, guid: a4e284afea3ff1c40a426fc5e4ac6e3a, type: 2}
   dialogueList:
-  - text: Padre, eu pequei! Obriguei minha amante a abortar o nosso filho.
+  - text: Padre...
     typingDelaySpeed: 0.05
     DialogueEventReference:
       Guid:
@@ -624,20 +624,20 @@ MonoBehaviour:
     characterMood: 1
     characterKey: 2
     characterPosition: 0
-  - text: Padre, eu pequei! Obriguei minha amante a abortar o nosso filho.
+  - text: Eu pequei.
     typingDelaySpeed: 0.05
     DialogueEventReference:
       Guid:
-        Data1: 1494049716
-        Data2: 1080303168
-        Data3: 1204639386
-        Data4: 310355148
-      Path: event:/Confessionarios/Conf2Padr1
+        Data1: 555391751
+        Data2: 1179964666
+        Data3: -1049742163
+        Data4: 234176684
+      Path: event:/Confessionarios/Conf2Pen2
     hasBackground: 0
     characterMood: 2
     characterKey: 2
     characterPosition: 0
-  - text: Padre, eu pequei! Obriguei minha amante a abortar o nosso filho.
+  - text: Obriguei minha amante a abortar o nosso filho!
     typingDelaySpeed: 0.05
     DialogueEventReference:
       Guid:
@@ -747,8 +747,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 16.843979, z: 2.333429}
-  m_Center: {x: 0, y: 5.488018, z: 0.056307197}
+  m_Size: {x: 13.514896, y: 16.843979, z: 6.4400263}
+  m_Center: {x: -2.9584827, y: 5.488018, z: 2.1096053}
 --- !u!1 &602307994
 GameObject:
   m_ObjectHideFlags: 0
@@ -848,8 +848,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterManager: {fileID: 11400000, guid: a4e284afea3ff1c40a426fc5e4ac6e3a, type: 2}
   dialogueList:
-  - text: "Padre, eu pequei! Fui eu! Eu matei minha amante e meu filho! Aquela po\xE7\xE3o
-      de infertilidade era venenosa!"
+  - text: Padre, eu...
     typingDelaySpeed: 0.05
     DialogueEventReference:
       Guid:
@@ -862,8 +861,7 @@ MonoBehaviour:
     characterMood: 2
     characterKey: 3
     characterPosition: 0
-  - text: "Padre, eu pequei! Fui eu! Eu matei minha amante e meu filho! Aquela po\xE7\xE3o
-      de infertilidade era venenosa!"
+  - text: 'Eu pequei! '
     typingDelaySpeed: 0.05
     DialogueEventReference:
       Guid:
@@ -876,8 +874,7 @@ MonoBehaviour:
     characterMood: 2
     characterKey: 3
     characterPosition: 0
-  - text: "Padre, eu pequei! Fui eu! Eu matei minha amante e meu filho! Aquela po\xE7\xE3o
-      de infertilidade era venenosa!"
+  - text: 'Fui eu! '
     typingDelaySpeed: 0.05
     DialogueEventReference:
       Guid:
@@ -890,8 +887,7 @@ MonoBehaviour:
     characterMood: 2
     characterKey: 3
     characterPosition: 0
-  - text: "Padre, eu pequei! Fui eu! Eu matei minha amante e meu filho! Aquela po\xE7\xE3o
-      de infertilidade era venenosa!"
+  - text: 'Eu matei minha amante e meu filho! '
     typingDelaySpeed: 0.05
     DialogueEventReference:
       Guid:
@@ -904,8 +900,7 @@ MonoBehaviour:
     characterMood: 2
     characterKey: 3
     characterPosition: 0
-  - text: "Padre, eu pequei! Fui eu! Eu matei minha amante e meu filho! Aquela po\xE7\xE3o
-      de infertilidade era venenosa!"
+  - text: "Aquela po\xE7\xE3o de infertilidade..."
     typingDelaySpeed: 0.05
     DialogueEventReference:
       Guid:
@@ -918,8 +913,7 @@ MonoBehaviour:
     characterMood: 2
     characterKey: 3
     characterPosition: 0
-  - text: "Padre, eu pequei! Fui eu! Eu matei minha amante e meu filho! Aquela po\xE7\xE3o
-      de infertilidade era venenosa!"
+  - text: Ela era venenosa!
     typingDelaySpeed: 0.05
     DialogueEventReference:
       Guid:
@@ -932,58 +926,41 @@ MonoBehaviour:
     characterMood: 2
     characterKey: 3
     characterPosition: 0
-  - text: "A penit\xEAncia absolve todos os pecados! Caminhaste at\xE9 aqui em nome
-      do perd\xE3o e agora est\xE1 a um passo dele."
-    typingDelaySpeed: 0.05
+  - text: "A penit\xEAncia absolve todos os pecados."
+    typingDelaySpeed: 0.03
     DialogueEventReference:
       Guid:
-        Data1: 1494049716
-        Data2: 1080303168
-        Data3: 1204639386
-        Data4: 310355148
-      Path: event:/Confessionarios/Conf2Padr1
+        Data1: 712981097
+        Data2: 1143456933
+        Data3: 332395193
+        Data4: 1375285884
+      Path: event:/Confessionarios/Conf1Padr1
     hasBackground: 0
     characterMood: 0
     characterKey: 4
     characterPosition: 2
-  - text: "A penit\xEAncia absolve todos os pecados! Caminhaste at\xE9 aqui em nome
-      do perd\xE3o e agora est\xE1 a um passo dele."
-    typingDelaySpeed: 0.05
+  - text: "Caminhaste at\xE9 aqui em nome do perd\xE3o."
+    typingDelaySpeed: 0.03
     DialogueEventReference:
       Guid:
-        Data1: -2045699153
-        Data2: 1097260879
-        Data3: -466268776
-        Data4: 180687598
-      Path: event:/Confessionarios/Conf2Padr2
+        Data1: -1010700699
+        Data2: 1207280791
+        Data3: 958980792
+        Data4: 1885620909
+      Path: event:/Confessionarios/Conf1Padr2
     hasBackground: 0
     characterMood: 0
     characterKey: 4
     characterPosition: 2
-  - text: "A penit\xEAncia absolve todos os pecados! Caminhaste at\xE9 aqui em nome
-      do perd\xE3o e agora est\xE1 a um passo dele."
-    typingDelaySpeed: 0.05
+  - text: "E agora est\xE1 a um passo dele!"
+    typingDelaySpeed: 0.03
     DialogueEventReference:
       Guid:
-        Data1: -1610502340
-        Data2: 1280996315
-        Data3: 1665403575
-        Data4: -1800013569
-      Path: event:/Confessionarios/Conf2Padr3
-    hasBackground: 0
-    characterMood: 0
-    characterKey: 4
-    characterPosition: 2
-  - text: "A penit\xEAncia absolve todos os pecados! Caminhaste at\xE9 aqui em nome
-      do perd\xE3o e agora est\xE1 a um passo dele."
-    typingDelaySpeed: 0.05
-    DialogueEventReference:
-      Guid:
-        Data1: -1280507892
-        Data2: 1306732184
-        Data3: -1304535149
-        Data4: -1600162596
-      Path: event:/Confessionarios/Conf2Padr4
+        Data1: -643057486
+        Data2: 1231143882
+        Data3: 704081577
+        Data4: -333590857
+      Path: event:/Confessionarios/Conf1Padr3
     hasBackground: 0
     characterMood: 0
     characterKey: 4
@@ -6973,7 +6950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2236311436065129498, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
       propertyPath: m_Name
-      value: Tutorial 5 Monologo
+      value: Tutorial 6
       objectReference: {fileID: 0}
     - target: {fileID: 2726024638850394327, guid: 6aa364b5a62de5446aae2aa836a99779, type: 3}
       propertyPath: m_Pivot.x
@@ -7103,7 +7080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2386779126760298655, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
       propertyPath: m_Name
-      value: Tutorial 5 Coletavel
+      value: Trigger Tutorial 6
       objectReference: {fileID: 0}
     - target: {fileID: 3136254644766150275, guid: d13c6331587944f4086d91039ea1ec1d, type: 3}
       propertyPath: m_Enabled
@@ -8226,6 +8203,10 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3357985578301581581, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
+      propertyPath: checkpointTransform
+      value: 
+      objectReference: {fileID: 1750730748}
+    - target: {fileID: 3357985578301581581, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
       propertyPath: OnInteracted.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -8310,6 +8291,57 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
+--- !u!1 &1750730747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1750730748}
+  - component: {fileID: 1750730749}
+  m_Layer: 0
+  m_Name: Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1750730748
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750730747}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.99, y: 41, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1750730749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750730747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91b9c0c3ebe738418ad1fa4e38881f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateHintScreen: 1
+  hintScreen: {fileID: 0}
+  checkpointTransform: {fileID: 0}
+  isActive: 0
+  OnInteracted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1913272601
 GameObject:
   m_ObjectHideFlags: 0
@@ -8600,3 +8632,4 @@ SceneRoots:
   - {fileID: 955397336}
   - {fileID: 891577096}
   - {fileID: 1106109276}
+  - {fileID: 1750730748}
