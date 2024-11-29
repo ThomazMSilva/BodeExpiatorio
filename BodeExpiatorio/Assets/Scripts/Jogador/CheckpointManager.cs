@@ -60,7 +60,7 @@ public class CheckpointManager : MonoBehaviour
         PlayerPrefs.SetInt($"Checkpoint_Level_{roomIndex}.{checkpointList.IndexOf(checkpoint)}", 1);
     }
 
-    /*private void ResetCheckpoints()
+    private void ResetCheckpoints()
     {
         checkpointList[0].isActive = true;
         PlayerPrefs.SetInt($"Checkpoint_Level_{roomIndex}.{checkpointList[0]}", 1);
@@ -69,7 +69,7 @@ public class CheckpointManager : MonoBehaviour
             checkpointList[i].isActive = false;
             PlayerPrefs.SetInt($"Checkpoint_Level_{roomIndex}.{checkpointList.IndexOf(checkpointList[i])}", 0);
         }
-    }*/
+    }
 
     public void LoadLastActiveCheckpoint()
     {
