@@ -12,11 +12,13 @@ namespace Assets.Scripts.Itens
         Vector3 originalPosition;
         Tween hoverTween;
         private bool isCollectable = true;
+        [SerializeField] private bool activeWhileInside;
         [SerializeField] private bool keepActiveOnCollection;
         [SerializeField] private bool recollectableOnPlayerDeath = true;
         [SerializeField] private bool recollectableOnTimer;
         [SerializeField] private float reactivationTimer = 20f;
         public UnityEvent OnCollected;
+        public UnityEvent OnLeftTrigger;
 
         private void Start()
         {
@@ -59,8 +61,16 @@ namespace Assets.Scripts.Itens
         {
             if (!other.gameObject.CompareTag("Player")) return;
 
+            Debug.Log($"colidiu com {other.gameObject.name}");
             Collect();
         }
+        private void OnTriggerExit(Collider other)
+        {
+            if (!activeWhileInside || !other.gameObject.CompareTag("Player")) return;
+
+            OnLeftTrigger?.Invoke();
+        }
+
 
         private void Hover()
         {

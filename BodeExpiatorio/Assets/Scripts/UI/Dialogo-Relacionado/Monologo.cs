@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using DG.Tweening;
 
-public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICancelHandler
+public class Monologo : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICancelHandler
 {
     [TextArea, SerializeField] string[] falas;
     [SerializeField] TextMeshProUGUI TMPTexto;
