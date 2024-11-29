@@ -3,11 +3,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+using DG.Tweening;
 
 public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICancelHandler
 {
     [TextArea, SerializeField] string[] falas;
     [SerializeField] TextMeshProUGUI TMPTexto;
+    [SerializeField] float typeCharacters;
     [SerializeField] float intervaloCaracteres;
     [SerializeField] bool temFundoPreto;
     //[SerializeField] string fontName = "LiberationSans SDF";
@@ -18,6 +20,10 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICan
     [SerializeField] private UINavigationManager navigationManager;
     [SerializeField] private bool disappearAutomatically;
     [SerializeField] private float timeToDisappear = 3f;
+    [SerializeField] private bool typeInstantly;
+    [SerializeField] private bool canFade;
+    [SerializeField] private float fadeInTime = 1f;
+    [SerializeField] private float fadeOutTime = 1f;
 
     public void AvancaDialogo()
     {
@@ -63,6 +69,20 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICan
     private void OnEnable()
     {
         indiceAtual = 0;
+
+        if (canFade)
+        {
+            TMPTexto.color = new(TMPTexto.color.r, TMPTexto.color.g, TMPTexto.color.b, 0);
+
+            DOTween.To
+            (
+                () => TMPTexto.color.a,
+                    alpha => TMPTexto.color = new(TMPTexto.color.r, TMPTexto.color.g, TMPTexto.color.b, alpha),
+                    1,
+                    fadeInTime
+            );
+        }
+
         StartCoroutine(InvocaTexto(falas[indiceAtual]));
         if (disappearAutomatically) StartCoroutine(Disappear());
         //EventSystem.current.SetSelectedGameObject(gameObject);
@@ -71,7 +91,8 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICan
     private IEnumerator Disappear()
     {
         yield return new WaitForSeconds(timeToDisappear);
-        gameObject.SetActive(false);
+        DestruaItem();
+        //gameObject.SetActive(false);
     }
 
     public void OnCancel(BaseEventData eventData)
@@ -83,16 +104,22 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICan
     {
         isTextoTerminado = false;
         TMPTexto.text = temFundoPreto ? $"<font=\"{font.name ?? "LiberationSans SDF"}\"> <mark=#000000 padding=10,20,5,5>" : "";
-        WaitForSeconds intervalo = new(intervaloCaracteres);
 
-        for (int i = 0; i < textoNovo.Length; i++)
+        if (!typeInstantly)
         {
-            TMPTexto.text += textoNovo[i];
-            yield return intervalo;
+            WaitForSeconds intervalo = new(intervaloCaracteres);
+
+            for (int i = 0; i < textoNovo.Length; i++)
+            {
+                TMPTexto.text += textoNovo[i];
+                yield return intervalo;
+            }
+        }
+        else
+        {
+            TMPTexto.text = textoNovo;
         }
         isTextoTerminado = true;
-
-        yield return null;
     }
 
     public void DestruaItem()
@@ -103,7 +130,19 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICan
             return;
         }
 
-        navigationManager.ClosePanel();
+        if (!canFade)
+        {
+            navigationManager.ClosePanel();
+            return;
+        }
+        DOTween.To
+            (
+                () => TMPTexto.color.a,
+                    alpha => TMPTexto.color = new(TMPTexto.color.r, TMPTexto.color.g, TMPTexto.color.b, alpha),
+                    0,
+                    fadeOutTime
+            ).OnComplete(navigationManager.ClosePanel);
+        //TMPTexto.material.DOFade(0, fadeOutTime).OnComplete(navigationManager.ClosePanel);
         //gameObject.SetActive(false);
     }
 

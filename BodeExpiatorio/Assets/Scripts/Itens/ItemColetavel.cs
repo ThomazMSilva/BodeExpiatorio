@@ -11,23 +11,55 @@ namespace Assets.Scripts.Itens
         Jogador _player;
         Vector3 originalPosition;
         Tween hoverTween;
+        private bool isCollectable = true;
+        [SerializeField] private bool keepActiveOnCollection;
+        [SerializeField] private bool recollectableOnPlayerDeath = true;
+        [SerializeField] private bool recollectableOnTimer;
+        [SerializeField] private float reactivationTimer = 20f;
         public UnityEvent OnCollected;
 
         private void Start()
         {
-            _player = FindAnyObjectByType<Jogador>();
-            _player.Vida.OnPlayerDeath += () => gameObject.SetActive(true);
+            if (recollectableOnPlayerDeath)
+            {
+                _player = FindAnyObjectByType<Jogador>();
+                _player.Vida.OnPlayerDeath += Reactivate;
+            }
             originalPosition = transform.position;
             Hover();
+        }
+
+        private void Reactivate()
+        {
+            isCollectable = true;
+            gameObject.SetActive(true);
+        }
+
+        private void Collect()
+        {
+            OnCollected?.Invoke();
+
+            if (!keepActiveOnCollection)
+                isCollectable = false;
+
+            if(recollectableOnTimer)
+                StartCoroutine(StartTimer());
+
+            if(!keepActiveOnCollection)
+                gameObject.SetActive(false);
+        }
+
+        private IEnumerator StartTimer()
+        {
+            yield return new WaitForSeconds(reactivationTimer);
+            Reactivate();
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (!other.gameObject.CompareTag("Player")) return;
 
-            OnCollected?.Invoke();
-
-            gameObject.SetActive(false);
+            Collect();
         }
 
         private void Hover()
