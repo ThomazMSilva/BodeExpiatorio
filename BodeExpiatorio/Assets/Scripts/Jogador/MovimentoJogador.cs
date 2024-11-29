@@ -266,8 +266,11 @@ public class MovimentoJogador : MonoBehaviour
 
     private void CheckGrounded()
     {
-        if (isStuckInWire) return;
-
+        if (isStuckInWire)
+        {
+            coyoteTimeCurrent = coyoteTimeMax;
+            return;
+        }
         isGrounded =
             Physics.Raycast(transform.position, -Vector3.up, out hit, raycastDistance, groundLayer) || 
             Physics.Raycast(transform.position - colliderHorizontalRange, -Vector3.up, out hitLeft, raycastDistance, groundLayer) ||
@@ -286,7 +289,7 @@ public class MovimentoJogador : MonoBehaviour
                                     : hit;
         transform.parent = mainHit.transform && !mainHit.transform.CompareTag(fallingPlatformTag) ? mainHit.transform : null;
 
-        coyoteTimeCurrent = isGrounded || isStuckInWire || isClimbing ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
+        coyoteTimeCurrent = isGrounded || isClimbing ? coyoteTimeMax : coyoteTimeCurrent - Time.fixedDeltaTime;
 
         if (inRagdoll && isGrounded) inRagdoll = false;
 
