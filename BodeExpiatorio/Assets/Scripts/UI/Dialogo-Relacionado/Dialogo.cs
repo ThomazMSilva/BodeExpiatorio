@@ -16,6 +16,8 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICan
     bool isTextoTerminado;
     public UnityEvent OnDialogoAcabou;
     [SerializeField] private UINavigationManager navigationManager;
+    [SerializeField] private bool disappearAutomatically;
+    [SerializeField] private float timeToDisappear = 3f;
 
     public void AvancaDialogo()
     {
@@ -62,7 +64,14 @@ public class Dialogo : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICan
     {
         indiceAtual = 0;
         StartCoroutine(InvocaTexto(falas[indiceAtual]));
+        if (disappearAutomatically) StartCoroutine(Disappear());
         //EventSystem.current.SetSelectedGameObject(gameObject);
+    }
+
+    private IEnumerator Disappear()
+    {
+        yield return new WaitForSeconds(timeToDisappear);
+        gameObject.SetActive(false);
     }
 
     public void OnCancel(BaseEventData eventData)

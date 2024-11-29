@@ -30,6 +30,7 @@ public class MovimentoJogadorEditor : Editor
     SerializedProperty kneelSpeedMultiplier;
     SerializedProperty timeToPlayIdle;
     SerializedProperty isGrounded;
+    SerializedProperty isWired;
     SerializedProperty isBind;
     SerializedProperty isRagdolling;
     SerializedProperty isLookingRight;
@@ -67,6 +68,7 @@ public class MovimentoJogadorEditor : Editor
         kneelSpeedMultiplier = serializedObject.FindProperty("kneelSpeedMultiplier");
         timeToPlayIdle = serializedObject.FindProperty("timeToPlayIdle");
         isGrounded = serializedObject.FindProperty("isGrounded");
+        isWired = serializedObject.FindProperty("isStuckInWire");
         isBind = serializedObject.FindProperty("isBind");
         isRagdolling = serializedObject.FindProperty("inRagdoll");
         isLookingRight = serializedObject.FindProperty("isLookingRight");
@@ -152,6 +154,7 @@ public class MovimentoJogadorEditor : Editor
         EditorGUILayout.Space();
 
         EditorGUILayout.PropertyField(isGrounded);
+        EditorGUILayout.PropertyField(isWired);
         EditorGUILayout.PropertyField(isBind);
         EditorGUILayout.PropertyField(isRagdolling);
         EditorGUILayout.PropertyField(isLookingRight);

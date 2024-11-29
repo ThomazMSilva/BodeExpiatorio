@@ -1,7 +1,6 @@
 using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
-using System.Collections;
 using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
@@ -25,13 +24,6 @@ public class AudioManager : MonoBehaviour
             return _Instance;
         }
     }
-
-    [SerializeField] private string generalVCAPath = "vca:/SFX";
-    [SerializeField] private string sfxVCAPath = "vca:/SFX";
-    [SerializeField] private string musicVCAPath = "vca:/Music";
-    public VCA generalVCA;
-    public VCA sfxVCA;
-    public VCA musicVCA;
     public List<EventInstance> eventInstances = new();
 
 
@@ -45,26 +37,47 @@ public class AudioManager : MonoBehaviour
         else _Instance = this;
 
         eventInstances = new();
-
-        //StartCoroutine(InitializeVCAs());
     }
 
-    private IEnumerator InitializeVCAs()
+    public void PlayerOneShot(EventReference sound, Vector3 worldPos) => RuntimeManager.PlayOneShot(sound, worldPos);
+
+    public EventInstance CreateEventInstance(EventReference eventReference)
     {
-        yield return new WaitForSeconds(1f);
+        EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
+        eventInstances.Add(eventInstance);
+        return eventInstance;
+    }
 
-        generalVCA = RuntimeManager.GetVCA(generalVCAPath);
-        sfxVCA = RuntimeManager.GetVCA(sfxVCAPath);
-        musicVCA = RuntimeManager.GetVCA(musicVCAPath);
+    private void CleanEventInstanceList()
+    {
+        foreach(var eventInstance in eventInstances)
+        {
+            eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            eventInstance.release();
+        }
+    }
 
-        if (generalVCA.isValid() && sfxVCA.isValid() && musicVCA.isValid())
-        {
-            Debug.Log("VCAs inicializados com sucesso.");
-        }
-        else
-        {
-            Debug.LogError("Erro ao inicializar um ou mais VCAs.");
-        }
+    private void OnDestroy() => CleanEventInstanceList();
+}
+
+
+/*
+using UnityEngine;
+using FMODUnity;
+using FMOD.Studio;
+using System.Collections.Generic;
+
+public class AudioManager : MonoBehaviour
+{
+    private static AudioManager _Instance;
+    public static AudioManager Instance { get => _Instance; }
+    public List<EventInstance> eventInstances = new();
+
+    private void Awake()
+    {
+        _Instance = this;
+
+        eventInstances = new();
     }
 
     public void PlayerOneShot(EventReference sound, Vector3 worldPos) => RuntimeManager.PlayOneShot(sound, worldPos);
@@ -87,9 +100,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void SetGeneralVolume(float volume) => generalVCA.setVolume(volume);
-    public void SetSFXVolume(float volume) => sfxVCA.setVolume(volume);
-    public void SetMusicVolume(float volume) => musicVCA.setVolume(volume);
-
     private void OnDestroy() => CleanEventInstanceList();
 }
+ */

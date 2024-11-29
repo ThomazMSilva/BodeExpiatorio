@@ -19,7 +19,6 @@ public class BrilhoManager : MonoBehaviour
     public void SetBrightness(float intensity)
     {
         PlayerPrefs.SetFloat(brightnessKey, intensity);
-        Debug.Log($"setting {directionalLight.gameObject.name}'s intensity from {directionalLight.intensity} to {Mathf.Lerp(minimumIntensity, maximumIntensity, intensity)}");
         directionalLight.intensity = Mathf.Lerp(minimumIntensity, maximumIntensity, intensity);
     }
 }

@@ -19,7 +19,7 @@ public class Entrada : MonoBehaviour
     private InputAction jumpAction;
     private InputAction pauseAction;
 
-    [Space(8f), Header("Old Input System")]
+    /*[Space(8f), Header("Old Input System")]
     [SerializeField] private string horizontalAxis = "Horizontal";
 
     [SerializeField] private string verticalAxis = "Vertical";
@@ -28,7 +28,7 @@ public class Entrada : MonoBehaviour
 
     [SerializeField] private string kneelAxis = "Kneel";
 
-    [SerializeField] private string pauseAxis = "Pause";
+    [SerializeField] private string pauseAxis = "Pause";*/
 
     private Vector2 movementInput;
     private float horizontalInput;
