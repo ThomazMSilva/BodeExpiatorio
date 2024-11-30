@@ -212,7 +212,8 @@ public class GameManager : MonoBehaviour
         int nextRoom = currentRoom.sceneIndex + 1;
         if (nextRoom > rooms.Count - 1)
         {
-            Debug.Log($"Tentando carregar sala que não existe na lista do Game Manager; CurrentScene: {currentRoom}; CurrentUIndex: {currentRoom.sceneIndex};  Tried Index: {nextRoom}");
+            //Debug.Log($"Tentando carregar sala que não existe na lista do Game Manager; CurrentScene: {currentRoom}; CurrentUIndex: {currentRoom.sceneIndex};  Tried Index: {nextRoom}");
+            LoadFinalScene();
             return;
         }
         JogadorReference _player = FindAnyObjectByType<JogadorReference>();
