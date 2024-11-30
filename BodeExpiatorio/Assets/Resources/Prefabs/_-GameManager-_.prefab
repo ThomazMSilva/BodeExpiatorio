@@ -1660,10 +1660,17 @@ MonoBehaviour:
   - sceneName: Brutal 1
     sceneIndex: 4
     isCheckpointActive: 0
-  - sceneName: Brutal 3
+  - sceneName: Brutal 2
     sceneIndex: 5
     isCheckpointActive: 0
+  - sceneName: Final
+    sceneIndex: 6
+    isCheckpointActive: 0
   currentRoom:
+    sceneName: 
+    sceneIndex: 0
+    isCheckpointActive: 0
+  currentFirstRoomFromAct:
     sceneName: 
     sceneIndex: 0
     isCheckpointActive: 0
@@ -1671,6 +1678,7 @@ MonoBehaviour:
     sceneName: 
     sceneIndex: 0
     isCheckpointActive: 0
+  checkpointsPerRoom: 11
   player: {fileID: 0}
   loadingScreen: {fileID: 4730260065599010305}
   loadingText: {fileID: 8393228932161871613}
