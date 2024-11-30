@@ -57,8 +57,6 @@ public class Confessionario : MonoBehaviour
             checkpointList[i].isActive = PlayerPrefs.GetInt($"Checkpoint_Level_{roomIndex}.{i}") == 1;
         }
 
-        Spawn();
-
         if (player.Vida.CurrentMaxHealth < minimumDamagePossible + possibleDamageMargin) 
         {
             if (player.Vida.CurrentMaxHealth > minimumDamagePossible)
@@ -81,6 +79,7 @@ public class Confessionario : MonoBehaviour
             GameManager.Instance.SetHealth(player.Vida.BaseHealth, GameManager.Instance.GetCurrentHealth());
             gameManager.SetCurrentFirstFromAct(roomIndex);
             gameManager.ActivateSceneCheckpoint(roomIndex);
+            gameManager.SetCurrentPlayer(player);
         }
 
         startingRoomTime = Time.time;
@@ -88,8 +87,7 @@ public class Confessionario : MonoBehaviour
 
         
         gameManager.SetCurrentRoom(roomIndex);
-        if (IsFirstFromAct) 
-        gameManager.SetCurrentPlayer(player);
+        Spawn();
     }
 
     private void Checkpoint_OnPrayed(Checkpoint checkpoint)
