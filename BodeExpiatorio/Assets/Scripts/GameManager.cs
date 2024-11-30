@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 using System.Linq;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class GameManager : MonoBehaviour
 {
@@ -36,10 +38,12 @@ public class GameManager : MonoBehaviour
     private static readonly string maxHealthPref = "MaxHealth";
     private static readonly string currentHealthPref = "CurrentHealth";
     private static readonly string currentActStatisticsPref = "CurrentActStatistics";
+    private static readonly string totalStatisticsPref = "TotalStatistics";
     
     [SerializeField] private string deathSceneName = "Morte";
     [SerializeField] private string confessionSceneName = "Confessionario";
     [SerializeField] private string menuSceneName = "Menu Inicial";
+    [SerializeField] private string finalSceneName = "Final";
 
     [SerializeField] private List<Sala> rooms;
 
@@ -129,6 +133,11 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.HasKey(currentActStatisticsPref)) actStatistics = PlayerPrefs.GetString(currentActStatisticsPref);
 
         else PlayerPrefs.SetString(currentActStatisticsPref, "");
+
+
+        if (PlayerPrefs.HasKey(totalStatisticsPref)) totalPenitence = PlayerPrefs.GetString(totalStatisticsPref);
+        
+        else PlayerPrefs.SetString(totalStatisticsPref, "");
 
         LoadCurrentRoom();
     }
@@ -220,11 +229,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadScreen(confessionSceneName, true));
     }
 
-    public void LoadDeathScene() => SceneManager.LoadScene(deathSceneName);
-
     public void LoadMainMenu() => StartCoroutine(LoadScreen(menuSceneName));
 
+    public void LoadDeathScene() => SceneManager.LoadScene(deathSceneName);
 
+    public void LoadFinalScene() => SceneManager.LoadScene(finalSceneName);
 
     //Loading
 
@@ -235,6 +244,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private TextMeshProUGUI loadingText;
     [SerializeField] private TextMeshProUGUI statisticsText;
+    [SerializeField] private Scrollbar statisticsScrollbar;
 
     [SerializeField, TextArea] List<string> randomTexts = new();
 
@@ -244,10 +254,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] float changeTime = 3;
 
     private string actStatistics = "";
+    private string currentActName = "";
+    private string CurrentActName(int index) =>
+        index switch
+        {
+            2 => "Traição",
+            3 => "Brutalidade",
+            _ => "Desejo"
+        };
 
     private float actRunTime;
     private float actRoomTime;
 
+    private string totalPenitence;
     /// <summary>
     /// x = room damage
     /// y = run damage
@@ -255,11 +274,20 @@ public class GameManager : MonoBehaviour
     /// w = run fervor
     /// </summary>
     private Vector4 totalActTorment;
+    /// <summary>
+    /// x = room damage
+    /// y = run damage
+    /// z = room fervor
+    /// w = run fervor
+    /// </summary>
+    private Vector4 totalGameTorment;
+
+    public bool InPathOfRenitence(TormentType tormentType, float threshold) => totalGameTorment[(int)tormentType] < threshold;
 
     private string ActText 
     { 
         get =>  
-                $"Estatisticas do Ato: \n\n" +
+                $"Estatisticas do Ato de {currentActName}: \n\n" +
                 $"Total Damage Taken: {totalActTorment.x}\n" +
                 $"Total Damage in Run: {totalActTorment.y}\n" +
                 $"Total Fervor Taken: {totalActTorment.z}\n" +
@@ -268,6 +296,8 @@ public class GameManager : MonoBehaviour
                 $"Total Run Time: {actRunTime}\n\n\n"+
                 $"Specifications:\n\n{actStatistics}";
     }
+
+    
     private Image[] images = new Image[0];
     private float[] originalAlpha = new float[0];
 
@@ -275,7 +305,8 @@ public class GameManager : MonoBehaviour
     {
         isLoadingScene = true;
 
-        EventSystem.current.SetSelectedGameObject(null);
+        //EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(statisticsScrollbar.gameObject);
 
         if (images.Length < 1) InitializeOriginalAlphas();
 
@@ -320,6 +351,7 @@ public class GameManager : MonoBehaviour
         AsyncOperation loadSceneOperation = SceneManager.LoadSceneAsync(sceneName);
         operationTime = 0;
 
+
         while (!loadSceneOperation.isDone)
         {
             if (!loadingNextLevel)
@@ -339,31 +371,76 @@ public class GameManager : MonoBehaviour
     {
         GameObject selectedObj = EventSystem.current.currentSelectedGameObject;
 
-        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(statisticsScrollbar.gameObject);
 
-        while (!Input.anyKey || Input.GetMouseButton(0))
+        while (!IsNonNavigationInputPressed())
         {
             if (!loadingNextLevel)
             {
                 operationTime += Time.unscaledDeltaTime;
                 if (operationTime > changeTime)
                 {
-                    statisticsText.text = randomTexts[UnityEngine.Random.Range(0, randomTexts.Count - 1)]; ;
+                    statisticsText.text = randomTexts[UnityEngine.Random.Range(0, randomTexts.Count)];
                     operationTime = 0;
                 }
             }
+
             yield return null;
         }
 
         EventSystem.current.SetSelectedGameObject(selectedObj);
 
         if (!loadingNextLevel) Time.timeScale = 1;
-
+        
         else
         {
             buffScreen.SetActive(true);
             EventSystem.current.SetSelectedGameObject(buffButtonA.gameObject);
         }
+    }
+
+    private bool IsNonNavigationInputPressed()
+    {
+        if (Keyboard.current.anyKey.isPressed && !IsUINavigationKeyPressed())
+            return true;
+
+        if (Gamepad.all.Count > 0)
+        {
+            foreach (var gamepad in Gamepad.all)
+            {
+                if (gamepad.allControls.Any(control =>
+                    control is ButtonControl button &&
+                    button.IsPressed() &&
+                    !button.synthetic &&
+                    !IsUINavigationButton(button)))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private bool IsUINavigationKeyPressed()
+    {
+        return Keyboard.current.upArrowKey.isPressed ||
+               Keyboard.current.downArrowKey.isPressed ||
+               Keyboard.current.leftArrowKey.isPressed ||
+               Keyboard.current.rightArrowKey.isPressed ||
+               Keyboard.current.tabKey.isPressed;
+    }
+
+    private bool IsUINavigationButton(ButtonControl button)
+    {
+        return button == Gamepad.current.dpad.up ||
+               button == Gamepad.current.dpad.down ||
+               button == Gamepad.current.dpad.left ||
+               button == Gamepad.current.dpad.right ||
+               button == Gamepad.current.leftStick.up ||
+               button == Gamepad.current.leftStick.down ||
+               button == Gamepad.current.leftStick.left ||
+               button == Gamepad.current.leftStick.right;
     }
 
     private IEnumerator FadeOut(Image[] images, float[] originalAlpha, float fadeTime)
@@ -420,6 +497,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetString(currentActStatisticsPref, actStatistics);
     }
 
+
     private void UpdateStatistics(bool loadingNextLevel)
     {
         if (loadingNextLevel)
@@ -439,17 +517,22 @@ public class GameManager : MonoBehaviour
             }
 
             //actStatistics = PlayerPrefs.GetString(currentActStatisticsPref);
+            currentActName = CurrentActName(confessionario.roomActIndex);
             actStatistics += $"\n{confessionario.LevelStatistics()}\n";
             totalActTorment += confessionario.TotalTorment();
             actRoomTime += confessionario.RoomTime();
             actRunTime += confessionario.RunTime();
+            totalGameTorment += confessionario.TotalTorment();
 
-            PlayerPrefs.SetString(currentActStatisticsPref, actStatistics);
+            PlayerPrefs.SetString(currentActStatisticsPref, ActText);
+            
 
             if (!confessionario.IsFirstFromAct)
             {
                 statisticsText.text = ActText;
-                ResetStatistics();
+                totalPenitence += statisticsText.text;
+                ResetStatistics(); 
+                PlayerPrefs.SetString(totalStatisticsPref, totalPenitence);
             }
             else
             {
@@ -474,8 +557,6 @@ public class GameManager : MonoBehaviour
     }
 
     public void EndLoading() => isLoadingScene = false;
-
-
 
     //Buffs
 
@@ -541,4 +622,13 @@ public class Sala
     public string sceneName;
     public int sceneIndex;
     public bool isCheckpointActive;
+}
+
+[System.Serializable]
+public enum TormentType
+{
+    CheckRoomDamage,
+    CheckRunDamage,
+    CheckRoomFervor,
+    CheckRunFervor
 }

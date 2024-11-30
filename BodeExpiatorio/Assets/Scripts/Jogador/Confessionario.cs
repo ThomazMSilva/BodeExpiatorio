@@ -13,6 +13,7 @@ public class Confessionario : MonoBehaviour
     [Space(8f)]
 
     [SerializeField] private int roomIndex;
+    public int roomActIndex { get;  private set; }
 
     [SerializeField] private bool isFirstFromAct;
     public bool IsFirstFromAct { get => isFirstFromAct; }
@@ -20,7 +21,11 @@ public class Confessionario : MonoBehaviour
     [SerializeField] private bool inConfessionRoom;
     public bool InConfessionRoom { get => inConfessionRoom;}
 
-    [SerializeField] private float damageThreshold;
+    [SerializeField] private float minimumDamagePossible = 100;
+    public float MinimumDamagePossible { get => minimumDamagePossible; }
+    [SerializeField] private float possibleDamageMargin = 20;
+
+    [SerializeField] private float damageThreshold = 50;
     public float DamageThreshold { get=> damageThreshold;}
 
     private float startingRunTime;
@@ -43,6 +48,8 @@ public class Confessionario : MonoBehaviour
         isFirstFromAct = roomIndex % 2 == 0;
         inConfessionRoom = roomIndex == 8;
 
+        roomActIndex = (roomIndex / 2) + 1;
+
         checkpointList[0].isActive = true;
         for (int i = 1; i < checkpointList.Count; i++)
         {
@@ -51,6 +58,14 @@ public class Confessionario : MonoBehaviour
         }
 
         Spawn();
+
+        if (player.Vida.CurrentMaxHealth < minimumDamagePossible + possibleDamageMargin) 
+        {
+            if (player.Vida.CurrentMaxHealth > minimumDamagePossible)
+                Debug.LogWarning("Sua vida máxima tá no limite do que dá pra passar nesse nível. Você pode querer considerar voltar do começo do Ato, usando o menu de pause.");
+            else
+                Debug.LogWarning("Sua vida máxima é insuficiente pra passar nível. Retorne ao confessionário do comeco do Ato, usando o menu de pause.");
+        }
         //PlayerPrefs.SetInt($"Checkpoint_Level_{roomIndex}.{0}", 0);
 
 

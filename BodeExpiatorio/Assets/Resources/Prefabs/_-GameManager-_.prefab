@@ -1644,6 +1644,7 @@ MonoBehaviour:
   deathSceneName: Morte
   confessionSceneName: Confessionario
   menuSceneName: Menu Inicial
+  finalSceneName: Final
   rooms:
   - sceneName: Desejo 1
     sceneIndex: 0
@@ -1663,9 +1664,6 @@ MonoBehaviour:
   - sceneName: Brutal 2
     sceneIndex: 5
     isCheckpointActive: 0
-  - sceneName: Final
-    sceneIndex: 6
-    isCheckpointActive: 0
   currentRoom:
     sceneName: 
     sceneIndex: 0
@@ -1683,6 +1681,7 @@ MonoBehaviour:
   loadingScreen: {fileID: 4730260065599010305}
   loadingText: {fileID: 8393228932161871613}
   statisticsText: {fileID: 6503915944424996634}
+  statisticsScrollbar: {fileID: 3793369543248742037}
   randomTexts:
   - "Os itens encontrados no Caminho da Penit\xEAncia revelam uma parte do passado
     do Penitente."
@@ -2043,6 +2042,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2703246313618447741, guid: 3b1c43ce0a86afc4280de2d0491aedcc, type: 3}
   m_PrefabInstance: {fileID: 3563678691710862042}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3793369543248742037 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 418970433936589903, guid: 3b1c43ce0a86afc4280de2d0491aedcc, type: 3}
+  m_PrefabInstance: {fileID: 3563678691710862042}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4730260065599010305 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8129552117593584859, guid: 3b1c43ce0a86afc4280de2d0491aedcc, type: 3}
