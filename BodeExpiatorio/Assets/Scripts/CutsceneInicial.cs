@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine.Video;
+using System.Linq;
 
 public class CutsceneInicial : MonoBehaviour
 {
@@ -14,11 +17,36 @@ public class CutsceneInicial : MonoBehaviour
 
     private void Update()
     {
-        if (Input.anyKeyDown)
+        if (IsAnyInputPressed())
         {
             videoPlayer.Stop();
         }
 
+    }
+
+    private bool IsAnyInputPressed()
+    {
+        if (Keyboard.current.anyKey.isPressed)
+            return true;
+
+        if (Mouse.current.leftButton.isPressed || Mouse.current.rightButton.isPressed || Mouse.current.middleButton.isPressed)
+            return true;
+        
+        if (Gamepad.all.Count > 0)
+        {
+            foreach (var gamepad in Gamepad.all)
+            {
+                if (gamepad.allControls.Any(control =>
+                    control is ButtonControl button &&
+                    button.IsPressed() &&
+                    !button.synthetic))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     IEnumerator CheckPlayingState()
