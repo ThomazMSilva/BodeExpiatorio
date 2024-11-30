@@ -212,9 +212,14 @@ public class GameManager : MonoBehaviour
         int nextRoom = currentRoom.sceneIndex + 1;
         if (nextRoom > rooms.Count - 1)
         {
+            var confessionario = FindAnyObjectByType<Confessionario>();
+            if (confessionario.InConfessionRoom)
+            {
+               LoadFinalScene();
+               return;
+            }
             //Debug.Log($"Tentando carregar sala que não existe na lista do Game Manager; CurrentScene: {currentRoom}; CurrentUIndex: {currentRoom.sceneIndex};  Tried Index: {nextRoom}");
-            LoadFinalScene();
-            return;
+            
         }
         JogadorReference _player = FindAnyObjectByType<JogadorReference>();
         SetHealth(_player.Vida.CurrentMaxHealth, _player.Vida.CurrentHealth);
