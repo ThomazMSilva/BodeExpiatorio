@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 public enum CharacterExpression
 {
@@ -25,6 +27,7 @@ public class Dialogue
 {
     [TextArea] public string text;
     public float typingDelaySpeed;
+    public LocalizedString localizedText; // Texto traduzido usando LocalizedString
     [field: SerializeField] public EventReference DialogueEventReference;
     public bool hasBackground;
     public CharacterExpression characterMood;
