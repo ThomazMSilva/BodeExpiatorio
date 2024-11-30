@@ -45,7 +45,7 @@ public class Confessionario : MonoBehaviour
     private void Start()
     {
         roomIndex = SceneManager.GetActiveScene().buildIndex - 1;
-        isFirstFromAct = roomIndex % 2 == 0;
+        isFirstFromAct = roomIndex % 2 != 0;
         inConfessionRoom = roomIndex == 8;
 
         roomActIndex = (roomIndex / 2) + 1;
@@ -62,9 +62,9 @@ public class Confessionario : MonoBehaviour
         if (player.Vida.CurrentMaxHealth < minimumDamagePossible + possibleDamageMargin) 
         {
             if (player.Vida.CurrentMaxHealth > minimumDamagePossible)
-                Debug.LogWarning("Sua vida máxima tá no limite do que dá pra passar nesse nível. Você pode querer considerar voltar do começo do Ato, usando o menu de pause.");
+                Debug.LogWarning("Sua vida mÃ¡xima tÃ¡ no limite do que dÃ¡ pra passar nesse nÃ­vel. VocÃª pode querer considerar voltar do comeÃ§o do Ato, usando o menu de pause.");
             else
-                Debug.LogWarning("Sua vida máxima é insuficiente pra passar nível. Retorne ao confessionário do comeco do Ato, usando o menu de pause.");
+                Debug.LogWarning("Sua vida mÃ¡xima Ã© insuficiente pra passar nÃ­vel. Retorne ao confessionÃ¡rio do comeco do Ato, usando o menu de pause.");
         }
         //PlayerPrefs.SetInt($"Checkpoint_Level_{roomIndex}.{0}", 0);
 
@@ -180,7 +180,7 @@ public class Confessionario : MonoBehaviour
 {
     [SerializeField] private int roomIndex;
     [SerializeField] private bool checkpointStartsActive;
-    [Tooltip("Quando o Jogador morre, a vida máxima volta para o valor que estava quando entrou na câmara.")]
+    [Tooltip("Quando o Jogador morre, a vida mÃ¡xima volta para o valor que estava quando entrou na cÃ¢mara.")]
     [SerializeField] private bool recoverMaxHealthToStartingPoint = true;
     [SerializeField] private bool inConfessionRoom;
     public bool InConfessionRoom { get => inConfessionRoom; }
