@@ -6,6 +6,7 @@ public class UINavigationManager : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenuScreen;
     private Stack<GameObject> panelStack = new();
+    public Stack<GameObject> UIPanelsStack { get { return panelStack; } }
 
     //private void Awake() => panelStack = new();
 

@@ -29777,6 +29777,10 @@ PrefabInstance:
       propertyPath: vidaJogador
       value: 
       objectReference: {fileID: 953168362}
+    - target: {fileID: 1150023701036600931, guid: ba63e1051ccfdb4488b76b6e1acb0d46, type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2957699566779685456, guid: ba63e1051ccfdb4488b76b6e1acb0d46, type: 3}
       propertyPath: m_Name
       value: Pause
@@ -46436,7 +46440,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -53861,7 +53865,7 @@ PrefabInstance:
     - target: {fileID: 2532576451600767624, guid: 77cd05b98de889547bce88fadf54a199, type: 3}
       propertyPath: confessionario
       value: 
-      objectReference: {fileID: 1626798250}
+      objectReference: {fileID: 0}
     - target: {fileID: 8995350554505572058, guid: 77cd05b98de889547bce88fadf54a199, type: 3}
       propertyPath: m_Name
       value: Venceu
@@ -56946,17 +56950,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
---- !u!114 &1626798250 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1161070638284259591, guid: 7cc065f5970b4ba48a2abb6361665a3a, type: 3}
-  m_PrefabInstance: {fileID: 1626798249}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18c368781a8bdc34980d74976157d5ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1628972740
 GameObject:
   m_ObjectHideFlags: 0

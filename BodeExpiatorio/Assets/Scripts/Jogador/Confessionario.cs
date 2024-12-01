@@ -46,7 +46,7 @@ public class Confessionario : MonoBehaviour
     {
         roomIndex = SceneManager.GetActiveScene().buildIndex - 1;
         isFirstFromAct = roomIndex % 2 == 0;
-        inConfessionRoom = roomIndex == 8;
+        inConfessionRoom = roomIndex == 7;
 
         roomActIndex = (roomIndex / 2) + 1;
 
@@ -69,6 +69,7 @@ public class Confessionario : MonoBehaviour
 
         if (inConfessionRoom)
         {
+            Spawn();
             return;
         }
 

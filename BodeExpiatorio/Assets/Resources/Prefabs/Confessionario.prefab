@@ -119,7 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c91b9c0c3ebe738418ad1fa4e38881f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hintScreen: {fileID: 7687350916845382796}
+  activateHintScreen: 1
+  hintScreen: {fileID: 1052734516067855552}
   checkpointTransform: {fileID: 3451405146788370840}
   isActive: 0
   OnInteracted:
@@ -143,7 +144,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &687306980905838213
 RectTransform:
   m_ObjectHideFlags: 0
@@ -244,7 +245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &805535309926808295
 RectTransform:
   m_ObjectHideFlags: 0
@@ -412,6 +413,8 @@ MonoBehaviour:
   roomIndex: 0
   isFirstFromAct: 0
   inConfessionRoom: 0
+  minimumDamagePossible: 100
+  possibleDamageMargin: 20
   damageThreshold: 50
 --- !u!1001 &4870771479419389867
 PrefabInstance:

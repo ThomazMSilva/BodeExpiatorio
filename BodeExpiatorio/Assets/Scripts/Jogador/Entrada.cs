@@ -81,7 +81,7 @@ public class Entrada : MonoBehaviour
     {
         if (GameManager.Instance.IsLoading) return;
         pauseCount++;
-        Debug.Log($"Evento de pause tocado {pauseCount} vezes");
+        //Debug.Log($"Evento de pause tocado {pauseCount} vezes");
         OnPauseButtonDown?.Invoke();
     }
 

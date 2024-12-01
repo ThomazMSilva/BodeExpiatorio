@@ -18,12 +18,14 @@ public class Monologo : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICa
     bool isTextoTerminado;
     public UnityEvent OnDialogoAcabou;
     [SerializeField] private UINavigationManager navigationManager;
+    [SerializeField] private bool skipMonologueWithSubmit;
     [SerializeField] private bool disappearAutomatically;
     [SerializeField] private float timeToDisappear = 3f;
     [SerializeField] private bool typeInstantly;
     [SerializeField] private bool canFade;
     [SerializeField] private float fadeInTime = 1f;
     [SerializeField] private float fadeOutTime = 1f;
+    private Coroutine disappearAutomaticallyRoutine;
 
     public void AvancaDialogo()
     {
@@ -54,19 +56,22 @@ public class Monologo : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICa
 
 
     public void OnSubmit(BaseEventData eventData)
-    {
-        AvancaDialogo();
+    { 
+        if(skipMonologueWithSubmit)
+          AvancaDialogo();
     }
 
     //eu nao entendi pq isso funciona e o OnMouseDown nao, mas n conheco mt de EventSystems, achei essa interface na internet
     public void OnPointerClick(PointerEventData pointerEventData)
     {
-        AvancaDialogo();
+        if (skipMonologueWithSubmit)
+            AvancaDialogo();
     }
 
     public void OnCancel(BaseEventData eventData)
     {
-        AvancaDialogo();
+        if (skipMonologueWithSubmit)
+            AvancaDialogo();
     }
 
     private void OnEnable()
@@ -87,7 +92,7 @@ public class Monologo : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICa
         }
 
         StartCoroutine(InvocaTexto(falas[indiceAtual]));
-        if (disappearAutomatically) StartCoroutine(Disappear());
+        if (disappearAutomatically) disappearAutomaticallyRoutine = StartCoroutine(Disappear());
         //EventSystem.current.SetSelectedGameObject(gameObject);
     }
 
@@ -123,6 +128,9 @@ public class Monologo : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICa
 
     public void DestruaItem()
     {
+        if (disappearAutomaticallyRoutine != null)
+            StopCoroutine(disappearAutomaticallyRoutine);
+
         if (navigationManager == null)
         {
             Debug.LogError($"Não tem navigation manager referenciado no dialogo {gameObject.name}");

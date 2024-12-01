@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,7 +8,7 @@ public class Checkpoint : MonoBehaviour
     private JogadorReference player;
 
     [SerializeField] private bool activateHintScreen = true;
-    [SerializeField] private GameObject hintScreen;
+    [SerializeField] private TextMeshProUGUI hintScreen;
 
     public Transform checkpointTransform;
     public bool isActive;
@@ -25,7 +26,10 @@ public class Checkpoint : MonoBehaviour
         if (!other.gameObject.CompareTag("Player")) return;
 
         if (activateHintScreen && !isActive)
-            hintScreen.SetActive(true);
+        {
+            hintScreen.text = "Ajoelhe-se para confessar.";
+            hintScreen.gameObject.SetActive(true);
+        }
 
         other.GetComponent<ContagemRegressivaVidaJogador>().isCountDownActive = false;
         Entrada.Instance.OnKneelButtonDown += Pray;
@@ -36,7 +40,7 @@ public class Checkpoint : MonoBehaviour
         if (!other.gameObject.CompareTag("Player")) return;
 
         if (activateHintScreen)
-            hintScreen.SetActive(false);
+            hintScreen.gameObject.SetActive(false);
 
         other.GetComponent<ContagemRegressivaVidaJogador>().isCountDownActive = true;
         Entrada.Instance.OnKneelButtonDown -= Pray;
@@ -45,6 +49,12 @@ public class Checkpoint : MonoBehaviour
     private void Pray()
     {
         isActive = true;
+
+        if(activateHintScreen && hintScreen.gameObject.activeSelf)
+        {
+            hintScreen.text = "<color = green>A confissão atual foi registrada.</color>";
+        }
+
         OnPrayed?.Invoke(this);
         OnInteracted?.Invoke();
     }

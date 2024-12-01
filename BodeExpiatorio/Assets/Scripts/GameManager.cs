@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
 
     public void SetCurrentRoom(int scene)
     {
-        Debug.Log($"A cena atual é a {scene}");
+        //Debug.Log($"A cena atual é a {scene}");
         currentRoom = rooms[scene];
         ResetCheckpointsOver(scene);
         PlayerPrefs.SetInt(currentRoomPref, scene);
@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour
 
     public void SetCurrentFirstFromAct(int scene)
     {
-        Debug.Log($"A cena atual é a {scene}");
+        //Debug.Log($"A cena atual é a {scene}");
         currentFirstRoomFromAct = rooms[scene];
         ResetCheckpointsOver(scene);
         PlayerPrefs.SetInt(currentFirstRoomPref, scene);
@@ -396,8 +396,12 @@ public class GameManager : MonoBehaviour
 
         EventSystem.current.SetSelectedGameObject(selectedObj);
 
-        if (!loadingNextLevel) Time.timeScale = 1;
-        
+        if (!loadingNextLevel || FindAnyObjectByType<Confessionario>().InConfessionRoom) 
+        {
+            EndLoading();
+            Time.timeScale = 1; 
+        }
+
         else
         {
             buffScreen.SetActive(true);
@@ -584,8 +588,8 @@ public class GameManager : MonoBehaviour
     public void CloseBuffScreen() 
     { 
         if(buffScreen) buffScreen.SetActive(false); 
-        Time.timeScale = 1; 
-        isLoadingScene = false;
+        Time.timeScale = 1;
+        EndLoading();
     }
 
     private void SetBuffButtonValues(float lastRoomTorment, float lastRoomDmgThreshold)

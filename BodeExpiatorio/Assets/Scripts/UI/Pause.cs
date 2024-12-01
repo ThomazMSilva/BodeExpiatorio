@@ -9,6 +9,7 @@ public class Pause : MonoBehaviour
     public static bool Pausado;
     private Entrada input;
     [SerializeField] private UINavigationManager navigationManager;
+    private Coroutine closingPauseRoutine;
 
     //private void Start() => pauseScreen.SetActive(false);
 
@@ -28,7 +29,9 @@ public class Pause : MonoBehaviour
     {
         Time.timeScale = 1f;   
         Pausado = false;
-        navigationManager.CloseAllPanels();
+        if(closingPauseRoutine != null) StopCoroutine(closingPauseRoutine);
+        closingPauseRoutine = StartCoroutine(ClosePauseScreen());
+        //navigationManager.CloseAllPanels();
         /*StopAllCoroutines();
         StartCoroutine(ClosePauseScreen());*/
         //pauseScreen.SetActive(false);
@@ -65,11 +68,14 @@ public class Pause : MonoBehaviour
 
     private IEnumerator ClosePauseScreen() 
     {
-        while (pauseScreen.activeSelf)
+        while (navigationManager.UIPanelsStack.Peek() != gameObject)
         {
             navigationManager.ClosePanel();
             yield return null;
         }
+
+        if(navigationManager.UIPanelsStack.Peek() == gameObject)
+            navigationManager.ClosePanel();
     }
 
 
