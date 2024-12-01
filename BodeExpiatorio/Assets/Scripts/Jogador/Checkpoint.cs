@@ -52,7 +52,7 @@ public class Checkpoint : MonoBehaviour
 
         if(activateHintScreen && hintScreen.gameObject.activeSelf)
         {
-            hintScreen.text = "<color = green>A confissão atual foi registrada.</color>";
+            hintScreen.text = "<color=green>A confissão atual foi registrada.</color>";
         }
 
         OnPrayed?.Invoke(this);
