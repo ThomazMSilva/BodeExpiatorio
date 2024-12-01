@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 
@@ -35,7 +36,7 @@ public class Dialogue
     public CharacterPosition characterPosition;
 }
 
-public class DialogueBehaviour : MonoBehaviour
+public class DialogueBehaviour : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICancelHandler
 {
     [SerializeField] CharacterContainer characterManager;
 
@@ -48,13 +49,31 @@ public class DialogueBehaviour : MonoBehaviour
     private TextMeshProUGUI textMeshPro;
     private UnityEngine.UI.Image characterA_IMG;
     private UnityEngine.UI.Image characterB_IMG;
+    private UnityEngine.UI.Image background_IMG;
     private ImageFade imageFade;
     private ImageFade imageFadeB;
+    private ImageFade imageFadeC;
     private AudioSource audioSource;
     public bool disablesSelfOTF;
     public bool hidesImageOnDisable;
     public UnityEvent OnTextFinished;
     public bool LevelUpAfter;
+
+    public void OnSubmit(BaseEventData eventData)
+    {
+        ChangeText();
+    }
+
+    //eu nao entendi pq isso funciona e o OnMouseDown nao, mas n conheco mt de EventSystems, achei essa interface na internet
+    public void OnPointerClick(PointerEventData pointerEventData)
+    {
+        ChangeText();
+    }
+
+    public void OnCancel(BaseEventData eventData)
+    {
+        ChangeText();
+    }
 
 
     private void Awake()
@@ -63,18 +82,21 @@ public class DialogueBehaviour : MonoBehaviour
         textMeshPro = reference.tmp;
         characterA_IMG = reference.image;
         characterB_IMG = reference.imageB;
+        background_IMG = reference.imageBackground;
         imageFade = characterA_IMG.GetComponent<ImageFade>();
         imageFadeB = characterB_IMG.GetComponent<ImageFade>();
+        imageFadeC = background_IMG.GetComponent<ImageFade>();
         audioSource = reference.audioSource;
     }
 
     private void OnEnable()
     {
-        TextMeshProHandler.OnTextClickedEvent += ChangeText;
+        //TextMeshProHandler.OnTextClickedEvent += ChangeText;
 
         textMeshPro.gameObject.SetActive(true);
         characterA_IMG.gameObject.SetActive(true);
         characterB_IMG.gameObject.SetActive(true);
+        background_IMG.gameObject.SetActive(true);
 
         currentIndex = 0;
         //Debug.Log($"Chamou {gameObject.name}");
@@ -85,7 +107,7 @@ public class DialogueBehaviour : MonoBehaviour
 
     private void OnDisable()
     {
-        TextMeshProHandler.OnTextClickedEvent -= ChangeText;
+        //TextMeshProHandler.OnTextClickedEvent -= ChangeText;
 
         //textMeshPro.gameObject.SetActive(false);
         textMeshPro.text = "";
@@ -95,6 +117,7 @@ public class DialogueBehaviour : MonoBehaviour
         {
             imageFade.DisableImage();
             imageFadeB.DisableImage();
+            imageFadeC.DisableImage();
         }
 
         //if (LevelUpAfter) OnTextFinished.RemoveListener(GameManager.Instance.LevelManager.IncreaseLevel);

@@ -75,7 +75,7 @@ public class JogadorReference : MonoBehaviour
 
     public void ApplyCure(float cureAmount) => life.CureHealth(cureAmount);
 
-    public void SetPosition(Vector3 position) => movement.EnterWarp(position);
+    public void SetPosition(Vector3 position, bool moveZ = true) => movement.EnterWarp(position, moveZ);
 
     public void StopCreepingDamage() => life.StopCreepingDamage();
 

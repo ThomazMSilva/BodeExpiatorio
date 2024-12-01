@@ -538,7 +538,7 @@ public class MovimentoJogador : MonoBehaviour
         if(!isStuckInWire) SetDamageType(0);
     }
 
-    public void EnterWarp(Vector3 position)
+    public void EnterWarp(Vector3 position, bool moveZ = true)
     {
         rb.velocity = Vector3.zero;
 
@@ -547,7 +547,9 @@ public class MovimentoJogador : MonoBehaviour
         SetPlayerClimbing(false);
         SetWiredState(false, true);
 
-        position.Set(position.x, position.y, rb.position.z);
+        if(!moveZ)
+            position.Set(position.x, position.y, rb.position.z);
+
         transform.position = position;
 
         StartCoroutine(ExitWarp());
