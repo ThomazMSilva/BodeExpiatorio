@@ -9114,17 +9114,25 @@ PrefabInstance:
       value: Audio
       objectReference: {fileID: 0}
     - target: {fileID: 3167398236168538613, guid: d7da0d93737681f48b04252c215179e5, type: 3}
+      propertyPath: itemsToMonitor.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167398236168538613, guid: d7da0d93737681f48b04252c215179e5, type: 3}
       propertyPath: itemsToMonitor.Array.data[0]
       value: 
-      objectReference: {fileID: 1021424724}
+      objectReference: {fileID: 1277541457}
     - target: {fileID: 3167398236168538613, guid: d7da0d93737681f48b04252c215179e5, type: 3}
       propertyPath: itemsToMonitor.Array.data[1]
       value: 
-      objectReference: {fileID: 360575687}
+      objectReference: {fileID: 628612268}
     - target: {fileID: 3167398236168538613, guid: d7da0d93737681f48b04252c215179e5, type: 3}
       propertyPath: itemsToMonitor.Array.data[2]
       value: 
-      objectReference: {fileID: 628612268}
+      objectReference: {fileID: 360575687}
+    - target: {fileID: 3167398236168538613, guid: d7da0d93737681f48b04252c215179e5, type: 3}
+      propertyPath: itemsToMonitor.Array.data[3]
+      value: 
+      objectReference: {fileID: 1021424724}
     - target: {fileID: 7483435828678013484, guid: d7da0d93737681f48b04252c215179e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
