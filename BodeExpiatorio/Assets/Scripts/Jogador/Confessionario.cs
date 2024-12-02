@@ -165,7 +165,13 @@ public class Confessionario : MonoBehaviour
     public float FervorTakenRoom() => player.Vida.FervorTakenInRoom;
 
     public float FervorTakenRun() => player.Vida.FervorTakenInRun;
-
+    /// <summary>
+    /// x = damage in room
+    /// y = damage in run
+    /// z = fervor in room
+    /// w = fervor in run
+    /// </summary>
+    /// <returns></returns>
     public Vector4 TotalTorment() => new(DamageTakenRoom(), DamageTakenRun(), FervorTakenRoom(), FervorTakenRun());
 }
 

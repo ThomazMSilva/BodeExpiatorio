@@ -198,6 +198,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8137c588755519645bf07ca6f97454bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onDeathEventReference:
+    Guid:
+      Data1: 870420835
+      Data2: 1171777274
+      Data3: -650967653
+      Data4: 1760732591
+    Path: event:/Penitente/Morte
+  onSavedEventReference:
+    Guid:
+      Data1: 69658318
+      Data2: 1197733939
+      Data3: 535569536
+      Data4: -1825381928
+    Path: event:/Penitente/Cura
   baseMaxHealth: 100
   currentMaxHealth: 100
   currentHealth: 0
@@ -285,11 +299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f5b3e8e2683614a83b60b3a03176c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalAxis: Horizontal
-  verticalAxis: Vertical
-  jumpAxis: Jump
-  kneelAxis: Kneel
-  pauseAxis: Pause
 --- !u!95 &5920615976259816849
 Animator:
   serializedVersion: 5

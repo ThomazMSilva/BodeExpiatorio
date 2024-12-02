@@ -10,6 +10,9 @@ using UnityEditor;
 
 public class VidaJogador : MonoBehaviour
 {
+    [field: SerializeField] public FMODUnity.EventReference onDeathEventReference;
+    [field: SerializeField] public FMODUnity.EventReference onSavedEventReference;
+
     [SerializeField]
     private float baseMaxHealth = 100f;
     public float BaseHealth { get { return baseMaxHealth; } private set { baseMaxHealth = value; } }
@@ -136,7 +139,8 @@ public class VidaJogador : MonoBehaviour
         CurrentHealth = GameManager.Instance.GetCurrentHealth();
         CurrentFrontHealth = currentHealth;
         startingMaxHealth = CurrentMaxHealth;
-        OnPlayerSaved += () => Debug.Log("Se safou de dano, por um fio!");
+        OnPlayerSaved += () => AudioManager.Instance.PlayerOneShot(onSavedEventReference, transform.position);
+        OnPlayerDeath += () => AudioManager.Instance.PlayerOneShot(onDeathEventReference, transform.position);
         startingLife += $"starting life: {currentHealth}\nstarting fervor: {currentMaxHealth}";
     }
 

@@ -64,18 +64,18 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T)) ResetCheckpointsOver();
         if (Input.GetKeyDown(KeyCode.R)) LoadLastCheckpoint();
 
-        if (Input.GetKeyDown(KeyCode.F1)) SceneManager.LoadScene("Menu 1");
-        if (Input.GetKeyDown(KeyCode.F2)) SceneManager.LoadScene("Desejo1");
-        if (Input.GetKeyDown(KeyCode.F3)) StartCoroutine(LoadScreen("Desejo2"));//SceneManager.LoadScene("Desejo 2");
-        if (Input.GetKeyDown(KeyCode.F4)) SceneManager.LoadScene("Traicao 1");
-        if (Input.GetKeyDown(KeyCode.F5)) SceneManager.LoadScene("Brutal 1 Modelos Novos");
-        if (Input.GetKeyDown(KeyCode.F6)) SceneManager.LoadScene("Brutal 2 Mobiliada");
-        if (Input.GetKeyDown(KeyCode.F7)) SceneManager.LoadScene("Brutal 3");
-        if (Input.GetKeyDown(KeyCode.F8)) SceneManager.LoadScene("TestesMAluk05");
-        if (Input.GetKeyDown(KeyCode.F9)) SceneManager.LoadScene("TestesMAluk05 1");
+        if (Input.GetKeyDown(KeyCode.F1)) SceneManager.LoadScene(0);
+        if (Input.GetKeyDown(KeyCode.F2)) SceneManager.LoadScene(1);
+        if (Input.GetKeyDown(KeyCode.F3)) SceneManager.LoadScene(2);//SceneManager.LoadScene("Desejo 2");
+        if (Input.GetKeyDown(KeyCode.F4)) SceneManager.LoadScene(3);
+        if (Input.GetKeyDown(KeyCode.F5)) SceneManager.LoadScene(4);
+        if (Input.GetKeyDown(KeyCode.F6)) SceneManager.LoadScene(5);
+        if (Input.GetKeyDown(KeyCode.F7)) SceneManager.LoadScene(6);
+        if (Input.GetKeyDown(KeyCode.F8)) SceneManager.LoadScene(7);
+        if (Input.GetKeyDown(KeyCode.F9)) SceneManager.LoadScene(8);
         //if (Input.GetKeyDown(KeyCode.F10)) SceneManager.LoadScene("Teste Momentum 2");
-        if (Input.GetKeyDown(KeyCode.F10)) SceneManager.LoadScene("Teste Semeltr");
-        if (Input.GetKeyDown(KeyCode.F11)) SceneManager.LoadScene("Teste Arame");
+        if (Input.GetKeyDown(KeyCode.F10)) SceneManager.LoadScene(9);
+        if (Input.GetKeyDown(KeyCode.F11)) SceneManager.LoadScene(10);
         if (Input.GetKeyDown(KeyCode.F12)) LoadDeathScene();
         if (Input.GetKeyDown(KeyCode.PageDown)) ResetPlayerConfigs();
         //Debug.Log(Time.timeScale);
@@ -576,6 +576,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject buffScreen;
     [SerializeField] private TextMeshProUGUI descriptionTMP;
+    [SerializeField] private TextMeshProUGUI pathTMP;
     [SerializeField] private BuffButton buffButtonA;
     [SerializeField] private BuffButton buffButtonB;
     [SerializeField] private BuffButton buffButtonC;
@@ -594,7 +595,9 @@ public class GameManager : MonoBehaviour
 
     private void SetBuffButtonValues(float lastRoomTorment, float lastRoomDmgThreshold)
     {
-        bool isOnSalvationPath = lastRoomTorment < lastRoomDmgThreshold;
+        bool isOnSalvationPath = lastRoomTorment > lastRoomDmgThreshold;
+
+        pathTMP.text = isOnSalvationPath ? "Sua alma está se fortalecendo." : "Você encontra mais sentido.";
 
         var buffA = GetRandomBuff(isOnSalvationPath); 
         buffButtonA.buffButton.SetValues(buffA);
@@ -607,8 +610,17 @@ public class GameManager : MonoBehaviour
     private BuffButtonValues GetRandomBuff(bool salvation, BuffButtonValues excludedBuff = null)
     {
         var buffList = salvation ? salvationBuffs : reluctanceBuffs;
-        var filteredList = excludedBuff != null ? buffList.Where(buff => buff != excludedBuff) : buffList;
-        return buffList[UnityEngine.Random.Range(0, buffList.Count)];
+        var filteredList = excludedBuff != null
+                            ? buffList.Where(buff => buff != excludedBuff).ToList()
+                            : buffList;
+
+        if (filteredList.Count == 0)
+        {
+            Debug.LogWarning("Lista filtrada pra não repetir acabou ficando vazia. Pegando um buff aleatorio da lista sem filtrar.");
+            return buffList[UnityEngine.Random.Range(0, buffList.Count)];
+        }
+
+        return filteredList[UnityEngine.Random.Range(0, filteredList.Count)];
     }
     
     public void SetScreenSelected() => EventSystem.current.SetSelectedGameObject(buffButtonA.gameObject);

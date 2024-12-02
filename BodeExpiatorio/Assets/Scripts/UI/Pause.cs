@@ -68,13 +68,13 @@ public class Pause : MonoBehaviour
 
     private IEnumerator ClosePauseScreen() 
     {
-        while (navigationManager.UIPanelsStack.Peek() != gameObject)
+        while (navigationManager.UIPanelsStack.Peek() != pauseScreen)
         {
             navigationManager.ClosePanel();
             yield return null;
         }
 
-        if(navigationManager.UIPanelsStack.Peek() == gameObject)
+        if (navigationManager.UIPanelsStack.Peek() == pauseScreen)
             navigationManager.ClosePanel();
     }
 

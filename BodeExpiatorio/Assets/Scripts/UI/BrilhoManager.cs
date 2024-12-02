@@ -31,9 +31,9 @@ public class BrilhoManager : MonoBehaviour
         }
         //else { Debug.Log("Tem ColorAdjustments"); }
 
-        brightnessSlider.value = PlayerPrefs.GetFloat(brightnessKey);
-        SetBrightness(Mathf.Lerp(minimumIntensity, maximumIntensity, brightnessSlider.value));
         brightnessSlider.onValueChanged.AddListener(SetBrightness);
+        brightnessSlider.value = PlayerPrefs.GetFloat(brightnessKey);
+        //SetBrightness(Mathf.Lerp(minimumIntensity, maximumIntensity, brightnessSlider.value));
     }
 
     public void SetBrightness(float intensity)
