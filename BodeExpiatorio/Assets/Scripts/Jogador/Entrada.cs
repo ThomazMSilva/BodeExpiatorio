@@ -19,7 +19,9 @@ public class Entrada : MonoBehaviour
     private InputAction jumpAction;
     private InputAction pauseAction;
 
-    /*[Space(8f), Header("Old Input System")]
+    [Space(8f), Header("Old Input System")]
+    [SerializeField] private bool isOldInputActive;
+
     [SerializeField] private string horizontalAxis = "Horizontal";
 
     [SerializeField] private string verticalAxis = "Vertical";
@@ -28,7 +30,7 @@ public class Entrada : MonoBehaviour
 
     [SerializeField] private string kneelAxis = "Kneel";
 
-    [SerializeField] private string pauseAxis = "Pause";*/
+    [SerializeField] private string pauseAxis = "Pause";
 
     private Vector2 movementInput;
     private float horizontalInput;
@@ -113,8 +115,12 @@ public class Entrada : MonoBehaviour
     {
         if (GameManager.Instance.IsLoading || Pause.Pausado) return;
 
+        if (Input.GetKeyDown(KeyCode.G)) isOldInputActive = !isOldInputActive;
+
+
         movementInput = movementAction.ReadValue<Vector2>();
-        horizontalInput = movementInput.x;
+
+        horizontalInput = isOldInputActive ? Input.GetAxis(horizontalAxis) : movementInput.x;
         verticalInput = movementInput.y;
     }
 

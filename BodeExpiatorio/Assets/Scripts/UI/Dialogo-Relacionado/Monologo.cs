@@ -74,8 +74,14 @@ public class Monologo : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICa
             AvancaDialogo();
     }
 
-    private void OnEnable()
+    /*private void OnDisable()
     {
+        Debug.Log("Disabled");
+    }*/
+
+    private void OnEnable()
+    { 
+        //Debug.Log("Enabled");
         indiceAtual = 0;
 
         if (canFade)
@@ -148,9 +154,11 @@ public class Monologo : MonoBehaviour, IPointerClickHandler, ISubmitHandler, ICa
                     alpha => TMPTexto.color = new(TMPTexto.color.r, TMPTexto.color.g, TMPTexto.color.b, alpha),
                     0,
                     fadeOutTime
-            ).OnComplete(navigationManager.ClosePanel);
+            ).OnComplete(ClosePanel);
         //TMPTexto.material.DOFade(0, fadeOutTime).OnComplete(navigationManager.ClosePanel);
         //gameObject.SetActive(false);
     }
+
+    private void ClosePanel() => navigationManager.ClosePanel(this);
 
 }

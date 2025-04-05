@@ -20,7 +20,7 @@ public class ResolutionControl : MonoBehaviour
 
     
         float currentRefreshRate = Screen.currentResolution.refreshRate;
-        Debug.Log("Taxa de Atualização Atual: " + currentRefreshRate);
+        //Debug.Log("Taxa de Atualização Atual: " + currentRefreshRate);
 
     
         for (int i = 0; i < resolutions.Length; i++)
@@ -28,7 +28,7 @@ public class ResolutionControl : MonoBehaviour
             if (resolutions[i].refreshRate == currentRefreshRate)
             {
                 filteredResolutions.Add(resolutions[i]);
-                Debug.Log("Resolução Filtrada: " + resolutions[i].width + " x " + resolutions[i].height);
+                //Debug.Log("Resolução Filtrada: " + resolutions[i].width + " x " + resolutions[i].height);
             }
         }
 
@@ -64,7 +64,7 @@ public class ResolutionControl : MonoBehaviour
     private void OnResolutionChange(int resolutionIndex)
     {
         SetResolution(resolutionIndex); 
-        Debug.Log("Resolução Alterada para: " + filteredResolutions[resolutionIndex].width + " x " + filteredResolutions[resolutionIndex].height);
+        //Debug.Log("Resolução Alterada para: " + filteredResolutions[resolutionIndex].width + " x " + filteredResolutions[resolutionIndex].height);
     }
 
    
@@ -76,7 +76,7 @@ public class ResolutionControl : MonoBehaviour
   
         PlayerPrefs.SetInt("ResolutionIndex", resolutionIndex);
         PlayerPrefs.Save();
-        Debug.Log("Resolução Salva: " + resolution.width + " x " + resolution.height);
+        //Debug.Log("Resolução Salva: " + resolution.width + " x " + resolution.height);
     }
 
     
@@ -88,7 +88,7 @@ public class ResolutionControl : MonoBehaviour
             resolutionDropdown.value = savedResolutionIndex; 
             resolutionDropdown.RefreshShownValue();
             SetResolution(savedResolutionIndex); 
-            Debug.Log("Resolução Carregada: " + filteredResolutions[savedResolutionIndex].width + " x " + filteredResolutions[savedResolutionIndex].height);
+            //Debug.Log("Resolução Carregada: " + filteredResolutions[savedResolutionIndex].width + " x " + filteredResolutions[savedResolutionIndex].height);
         }
     }
 }
